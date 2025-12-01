@@ -104,7 +104,7 @@ The growing presence of P2P lending markets, especially during economic crises, 
 
 ### Objectives
 
-This project aims to develop **advanced, interpretable credit risk models** tailored specifically to the needs of P2P lending markets. These models will address the unique challenges of P2P lending, such as:
+This project aims to develop <strong>advanced, interpretable credit risk models</strong> tailored specifically to the needs of P2P lending markets. These models will address the unique challenges of P2P lending, such as:
 
 - Higher information asymmetry
 - Less regulation compared to traditional banking
@@ -114,11 +114,11 @@ The ultimate goal is to enhance trust between investors and P2P platforms by pro
 
 ### Methods
 
-The project develops credit risk models using **network-based approaches**, analyzing the connections between borrowers and lenders to identify patterns that indicate heightened risk. These models incorporate:
+The project develops credit risk models using <strong>network-based approaches</strong>, analyzing the connections between borrowers and lenders to identify patterns that indicate heightened risk. These models incorporate:
 
-- **Static factors**: Established risk indicators
-- **Dynamic factors**: Real-time data for adaptive risk assessment
-- **Network topology**: Graph-based features capturing borrower-lender relationships
+- <strong>Static factors</strong>: Established risk indicators
+- <strong>Dynamic factors</strong>: Real-time data for adaptive risk assessment
+- <strong>Network topology</strong>: Graph-based features capturing borrower-lender relationships
 
 ### Expected Impact
 
@@ -140,7 +140,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 *Auto-updated from [OpenAlex.org](https://openalex.org) - {{ site.data.publications | size }} publications*
 
 <div class="publication-list">
-{% for pub in site.data.publications limit:20 %}
+{% for pub in site.data.publications %}
 <div class="pub-item">
   <div class="pub-title">{{ pub.title }}</div>
   <div class="pub-meta">{{ pub.authors }} ({{ pub.year }}) - <em>{{ pub.journal }}</em></div>
@@ -152,10 +152,6 @@ By providing more reliable credit risk models, this project will strengthen the 
 </div>
 {% endfor %}
 </div>
-
-{% if site.data.publications.size > 20 %}
-<p class="text-center"><em>Showing 20 of {{ site.data.publications | size }} publications. <a href="https://openalex.org/authors/A5047295072">View all on OpenAlex</a></em></p>
-{% endif %}
 
 </section>
 
@@ -171,7 +167,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ### 8th Bern Conference 2024
 
-**September 29th, 2024** - Dr. Hadji-Misheva was invited as a speaker at an inaugural research conference on Fintech and AI in Finance at the Department of Business, Bern University of Applied Science. The talk titled *"Leveraging Network Topology for Credit Risk Assessment"* explored graph-theoretical concepts and their applications for research initiatives, advancements, and innovations in credit risk scoring.
+<strong>September 29th, 2024</strong> - Dr. Hadji-Misheva was invited as a speaker at an inaugural research conference on Fintech and AI in Finance at the Department of Business, Bern University of Applied Science. The talk titled <em>"Leveraging Network Topology for Credit Risk Assessment"</em> explored graph-theoretical concepts and their applications for research initiatives, advancements, and innovations in credit risk scoring.
 
 </section>
 
@@ -190,12 +186,12 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ### Research Networks
 
-**COST Action CA19130 - Fintech and Artificial Intelligence in Finance**
+<strong>COST Action CA19130 - Fintech and Artificial Intelligence in Finance</strong>
 - Action Chair: Joerg Osterrieder
 - In-depth constructive exchanges on approaches, methods, and results
 - Joint publications and personnel exchange
 
-**MSCA Industrial Doctoral Network on Digital Finance**
+<strong>MSCA Industrial Doctoral Network on Digital Finance</strong>
 - Coordinator: Joerg Osterrieder
 - Cross-institutional research collaboration
 - Doctoral training and knowledge transfer
