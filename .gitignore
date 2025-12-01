@@ -1,0 +1,20 @@
+# Utility scripts (not needed in repo)
+scrape_webpage.py
+create_wiki.py
+push_wiki.py
+wiki_content.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
