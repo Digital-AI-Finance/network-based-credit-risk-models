@@ -1,11 +1,12 @@
 title: Network-Based Credit Risk Models
-description: SNSF Research Project - Peer-to-Peer Lending Credit Risk Assessment
+description: SNSF Research Project - Advanced Credit Risk Assessment for Peer-to-Peer Lending Markets using Network Analysis and Machine Learning
 theme: jekyll-theme-cayman
 remote_theme: pages-themes/cayman@v0.2.0
 
 # Site settings
 baseurl: "/network-based-credit-risk-models"
 url: "https://digital-ai-finance.github.io"
+logo: /assets/images/logos/favicon.ico
 
 # Build settings
 markdown: kramdown
@@ -16,32 +17,80 @@ plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
 
-# SEO
-author: Joerg Osterrieder
+# SEO & Social
+author: Prof. Dr. Joerg Osterrieder
+locale: en_US
 twitter:
-  card: summary
+  card: summary_large_image
+  username: Digital_AI_Fin
+og_image: /images/Osterrieder.jpg
+
 social:
-  name: Digital AI Finance
+  name: Digital AI Finance Research Group
   links:
     - https://github.com/Digital-AI-Finance
+    - https://www.digital-finance-msca.com
 
-# Navigation
-nav:
+# Open Graph defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /images/Osterrieder.jpg
+
+# Navigation menu items
+navigation:
   - title: Home
-    url: /
+    url: "#home"
   - title: Team
-    url: "#our-team"
+    url: "#team"
+  - title: Research
+    url: "#research"
   - title: Publications
-    url: "#scientific-publications"
+    url: "#publications"
+  - title: Events
+    url: "#events"
   - title: Collaborations
     url: "#collaborations"
   - title: Funding
-    url: "#third-party-funds"
+    url: "#funding"
+  - title: Contact
+    url: "#contact"
+
+# Project metadata
+project:
+  name: Network-Based Credit Risk Models in P2P Lending Markets
+  funder: Swiss National Science Foundation (SNSF)
+  grant_number: "100018E_205487"
+  total_funding: "90,000 CHF"
+  publications: 2
+  collaborations: 6
+  team_size: 4
 
 # Footer
 footer:
+  copyright: "2024 Digital AI Finance Research Group"
   links:
     - title: GitHub
       url: https://github.com/Digital-AI-Finance/network-based-credit-risk-models
     - title: Wiki
       url: https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki
+    - title: Original Source
+      url: https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf
+
+# Exclude from processing
+exclude:
+  - "*.py"
+  - "*.md.bak"
+  - WIKI_CONTENT_TO_PASTE.md
+  - wiki_content.md
+  - create_wiki.py
+  - push_wiki.py
+  - setup_wiki.py
+  - scrape_webpage.py
+  - auto_create_wiki.py
+  - create_wiki_v2.py
+  - create_wiki_playwright.py
+  - create_wiki_final.py
+  - download_logos.py
+  - create_favicon.py

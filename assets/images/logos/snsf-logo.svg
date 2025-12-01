@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <rect width="200" height="60" fill="#e30613"/>
+  <text x="100" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Swiss National</text>
+  <text x="100" y="42" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Science Foundation</text>
+  <rect x="5" y="5" width="10" height="50" fill="white"/>
+</svg>
