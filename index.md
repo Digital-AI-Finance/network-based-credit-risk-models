@@ -19,8 +19,8 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
 <section id="home">
 
 <div class="logo-banner">
-  <img src="assets/images/logos/snsf-logo.svg" alt="Swiss National Science Foundation" style="height: 50px;">
-  <img src="assets/images/logos/bfh-logo.svg" alt="Bern University of Applied Sciences" style="height: 50px;">
+  <img src="assets/images/logos/snsf-logo.svg" alt="Swiss National Science Foundation">
+  <img src="assets/images/logos/bfh-logo.svg" alt="Bern University of Applied Sciences">
 </div>
 
 <div class="stats-banner">
@@ -29,7 +29,7 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
     <span class="stat-label">CHF Funding</span>
   </div>
   <div class="stat-item">
-    <span class="stat-number">2</span>
+    <span class="stat-number">{{ site.data.publications | size }}</span>
     <span class="stat-label">Publications</span>
   </div>
   <div class="stat-item">
@@ -137,19 +137,25 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ## Scientific Publications
 
-<div class="publication-card">
-  <h3>1. Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics</h3>
-  <p class="citation">Liu, Y., Baals, L. J., Osterrieder, J., & Hadji-Misheva, B. (2024). <em>Finance Research Letters</em>, 63, 105308.</p>
-  <p class="abstract">This letter analyzes credit risk assessment in the Peer-to-Peer (P2P) lending domain by leveraging a comprehensive dataset from Bondora, a leading European P2P platform. Through combining traditional credit features with network topological features, namely the degree centrality, we showcase the crucial role of a borrower's position and connectivity within the P2P network in determining loan default probabilities. Our findings are bolstered by robustness checks using shuffled centrality features, which further underscore the significance of integrating both financial and network attributes in credit risk evaluation.</p>
-  <a href="https://doi.org/10.1016/j.frl.2024.105308" class="doi-badge" target="_blank">DOI: 10.1016/j.frl.2024.105308</a>
+*Auto-updated from [OpenAlex.org](https://openalex.org) - {{ site.data.publications | size }} publications*
+
+<div class="publication-list">
+{% for pub in site.data.publications limit:20 %}
+<div class="pub-item">
+  <div class="pub-title">{{ pub.title }}</div>
+  <div class="pub-meta">{{ pub.authors }} ({{ pub.year }}) - <em>{{ pub.journal }}</em></div>
+  <div class="pub-badges">
+    {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}" class="doi-link" target="_blank">DOI</a>{% endif %}
+    {% if pub.citations > 0 %}<span class="citations-badge">{{ pub.citations }} citations</span>{% endif %}
+    {% if pub.open_access %}<span class="citations-badge">Open Access</span>{% endif %}
+  </div>
+</div>
+{% endfor %}
 </div>
 
-<div class="publication-card">
-  <h3>2. Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning</h3>
-  <p class="citation">Liu, Y., Baals, L. J., Osterrieder, J., & Hadji-Misheva, B. (2024). <em>Expert Systems with Applications</em>, 252, 124100.</p>
-  <p class="abstract">This study proposes an enhanced two-step modeling approach for Machine Learning (ML) that utilizes insights from network analysis and subsequently combines derived network centrality metrics with traditional credit risk factors to improve the prediction accuracy in the credit default prediction process. Through a comparative analysis of three classical ML models (Elastic Net, Random Forest, and Multi-Layer Perceptron), we showcase novel evidence that the systematic inclusion of network topology features in the credit scoring process can significantly improve the prediction accuracy of the scoring models.</p>
-  <a href="https://doi.org/10.1016/j.eswa.2024.124100" class="doi-badge" target="_blank">DOI: 10.1016/j.eswa.2024.124100</a>
-</div>
+{% if site.data.publications.size > 20 %}
+<p class="text-center"><em>Showing 20 of {{ site.data.publications | size }} publications. <a href="https://openalex.org/authors/A5047295072">View all on OpenAlex</a></em></p>
+{% endif %}
 
 </section>
 
@@ -300,7 +306,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 <footer class="site-footer">
   <div class="footer-content">
     <div>
-      <p>&copy; 2024 Digital AI Finance Research Group</p>
+      <p>&copy; 2025 Digital AI Finance Research Group</p>
       <p>Source: <a href="https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf">digital-finance-msca.com</a></p>
     </div>
     <div class="footer-links">
