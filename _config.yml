@@ -1,0 +1,47 @@
+title: Network-Based Credit Risk Models
+description: SNSF Research Project - Peer-to-Peer Lending Credit Risk Assessment
+theme: jekyll-theme-cayman
+remote_theme: pages-themes/cayman@v0.2.0
+
+# Site settings
+baseurl: "/network-based-credit-risk-models"
+url: "https://digital-ai-finance.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+# SEO
+author: Joerg Osterrieder
+twitter:
+  card: summary
+social:
+  name: Digital AI Finance
+  links:
+    - https://github.com/Digital-AI-Finance
+
+# Navigation
+nav:
+  - title: Home
+    url: /
+  - title: Team
+    url: "#our-team"
+  - title: Publications
+    url: "#scientific-publications"
+  - title: Collaborations
+    url: "#collaborations"
+  - title: Funding
+    url: "#third-party-funds"
+
+# Footer
+footer:
+  links:
+    - title: GitHub
+      url: https://github.com/Digital-AI-Finance/network-based-credit-risk-models
+    - title: Wiki
+      url: https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki
