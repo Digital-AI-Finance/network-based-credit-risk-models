@@ -1,0 +1,366 @@
+{
+  "project": {
+    "title": "Network-based credit risk models in P2P lending markets",
+    "grant_number": "205487",
+    "funding_scheme": "Weave/Lead Agency",
+    "call": "Project funding in humanities and social sciences (Division II) 2021 - October",
+    "approved_amount_chf": 207028,
+    "duration": {
+      "start": "2022-10-01",
+      "end": "2025-08-31"
+    },
+    "status": "Active",
+    "research_institution": "Bern University of Applied Sciences - BFH",
+    "institute": "Berner Fachhochschule BFH Bern",
+    "disciplines": ["Economics"],
+    "keywords": ["P2P", "graph theory", "credit scoring", "ML", "Network Analysis", "Credit Risk", "Machine Learning", "Peer-to-Peer Lending"]
+  },
+  "persons": {
+    "responsible_applicant": {
+      "name": "Prof. Dr. Joerg Osterrieder",
+      "department": "Department Wirtschaft",
+      "institution": "Berner Fachhochschule BFH",
+      "country": "Switzerland",
+      "role": "Principal Investigator",
+      "orcid": "0000-0003-0189-8636"
+    },
+    "co_applicants": [
+      {
+        "name": "Blanka-Email Stadler",
+        "institution": "Prague University of Finance and Commerce Studies, Faculty of Economics and Administration, Masaryk University",
+        "country": "Czech Republic"
+      },
+      {
+        "name": "Peter Hartmann",
+        "institution": "Institut fur Wealth & Asset Management, School of Management and Law, ZHAW",
+        "country": "Switzerland"
+      }
+    ],
+    "employees": [
+      {
+        "name": "Lennart John Baals",
+        "role": "PhD Researcher",
+        "institution": "Bern University of Applied Sciences / University of Twente",
+        "research_focus": "Credit risk assessment through graph-based models and network analysis"
+      },
+      {
+        "name": "Yiting Liu",
+        "role": "PhD Researcher",
+        "institution": "Bern University of Applied Sciences / University of Twente",
+        "research_focus": "P2P lending risk modeling, network topology for credit risk",
+        "background": "Statistics and quantitative finance from Alliance Manchester Business School and Fudan University"
+      }
+    ],
+    "collaborators": [
+      {
+        "name": "Prof. Dr. Branka Hadji Misheva",
+        "institution": "ZHAW Zurich University of Applied Sciences",
+        "department": "Institute of Data Analysis and Process Design (IDP)",
+        "role": "Senior Researcher"
+      },
+      {
+        "name": "Prof. Dr. Stephen Chan",
+        "institution": "American University of Sharjah",
+        "country": "UAE"
+      },
+      {
+        "name": "Prof. Dr. Jeffrey Chu",
+        "institution": "Renmin University of China",
+        "country": "China"
+      },
+      {
+        "name": "Dr. Yuanyuan Zhang",
+        "institution": "University of Manchester",
+        "country": "UK"
+      }
+    ]
+  },
+  "research": {
+    "scientific_abstract": "The proposed research project focuses on the development of new credit risk models for P2P credit markets enhanced by features from networks. We will test and compare the usefulness of new models with several real data sets from P2P credit markets worldwide. For a credit risk model to be useful, we also need to consider the interpretability of our models. The research project has both methodological and empirical features with practical implications.",
+    "background": "Peer-to-peer (P2P) lending has become an increasingly popular alternative to traditional bank lending, allowing individuals and businesses to borrow money directly from investors through online platforms without involving banks. While this method offers advantages such as higher returns for investors and greater access to credit for borrowers, it also brings unique risks. The decentralized nature of P2P lending means that loans are funded entirely by investors, without the safeguards of bank intermediation. In times of economic downturn, the risk is heightened as more borrowers who may not qualify for traditional bank loans turn to P2P platforms.",
+    "rationale": "The growing presence of P2P lending markets, especially during economic crises, exposes these platforms to significant risks, including adverse selection and moral hazard. Unlike traditional banks that use long-term relationships and extensive data to evaluate borrowers, P2P platforms have less detailed information and face higher levels of uncertainty. Traditional banks possess richer data through long-term relationships, whereas P2P platforms must develop alternative mechanisms to establish investor trust.",
+    "objectives": [
+      "Develop advanced, interpretable credit risk models tailored to P2P lending markets",
+      "Test and compare usefulness of network-enhanced models with real P2P datasets",
+      "Address higher information asymmetry in P2P platforms",
+      "Incorporate inter-entity relationships to assess risk transmission",
+      "Create state-of-the-art models for P2P platforms characterized by loose regulation",
+      "Enhance trust between investors and P2P platforms"
+    ],
+    "methods": [
+      "Network-based approaches analyzing connections between borrowers and lenders",
+      "Graph theory and network topology analysis",
+      "Machine learning models (Elastic Net, Random Forest, Multi-Layer Perceptron, XGBoost)",
+      "Network centrality metrics (degree centrality)",
+      "Two-step ML approach combining network features with traditional credit factors",
+      "Explainable AI techniques (LIME, SHAP)"
+    ],
+    "expected_impact": "The research will produce new, cutting-edge credit risk models that can be applied directly to P2P lending platforms. These models will improve the ability of investors to assess borrower risk, leading to more accurate loan pricing, reduced default rates, and greater confidence in the P2P lending ecosystem."
+  },
+  "output_data": {
+    "scientific_publications": 3,
+    "datasets": 1,
+    "collaborations": 3,
+    "academic_events": 8,
+    "public_communications": 3,
+    "use_inspired_outputs": 2
+  },
+  "scientific_publications": [
+    {
+      "title": "Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning",
+      "authors": ["Liu, Yiting", "Baals, Lennart John", "Osterrieder, Jorg", "Hadji-Misheva, Branka"],
+      "journal": "Expert Systems with Applications",
+      "year": 2024,
+      "volume": 252,
+      "part": "B",
+      "article_number": 124100,
+      "doi": "10.1016/j.eswa.2024.124100",
+      "citations_scopus": 14,
+      "downloads": 214,
+      "open_access": true,
+      "abstract": "Peer-to-Peer (P2P) lending markets have witnessed remarkable growth, revolutionizing the way borrowers and lenders interact. Despite their increasing popularity, P2P lending poses significant challenges related to credit risk assessment and default prediction with meaningful implications for financial stability. Traditional credit risk models have been widely employed in the field of P2P lending; however, they may not be capable to capture latent factor information inherent to a loan network. This paper develops a two-step ML approach combining network centrality metrics with traditional credit risk factors to enhance default prediction.",
+      "keywords": ["Machine Learning", "Network centrality", "Peer-to-Peer lending", "Credit default prediction"]
+    },
+    {
+      "title": "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics",
+      "authors": ["Liu, Yiting", "Baals, Lennart John", "Osterrieder, Jorg", "Hadji-Misheva, Branka"],
+      "journal": "Finance Research Letters",
+      "year": 2024,
+      "volume": 63,
+      "article_number": 105308,
+      "doi": "10.1016/j.frl.2024.105308",
+      "citations": 11,
+      "open_access": true,
+      "abstract": "This letter analyzes credit risk assessment within the Peer-to-Peer (P2P) lending domain by leveraging a comprehensive dataset from Bondora, a leading European P2P platform. Through combining traditional credit features with network topological features, namely the degree centrality, we showcase the crucial role of a borrower's position and connectivity within the P2P network in determining loan default probabilities. Our findings are bolstered by robustness checks using shuffled centrality features.",
+      "keywords": ["P2P-lending", "Credit-Default Prediction", "Machine Learning", "Network Centrality"]
+    },
+    {
+      "title": "Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms",
+      "authors": ["Bauernstein, Eduard", "Lyocsa, Stefan", "Vasanicova, Petra"],
+      "journal": "International Review of Financial Analysis",
+      "year": 2024,
+      "volume": 93,
+      "pages": "103149",
+      "doi": "10.1016/j.irfa.2024.103149"
+    }
+  ],
+  "datasets": [
+    {
+      "name": "Bondora P2P Lending Dataset",
+      "repository": "Bondora Public Reports",
+      "description": "European P2P lending platform data comprising demographic and financial information of borrowers and loan transactions, including both defaulted and non-defaulted loans",
+      "date_range": "2009-03-01 to 2020-01-27",
+      "url": "https://www.bondora.com/en/public-reports",
+      "additional_sources": [
+        {
+          "name": "IEEE DataPort",
+          "url": "https://ieee-dataport.org/open-access/bondora-peer-peer-lending-data",
+          "doi": "10.21227/33kz-0s65",
+          "format": "CSV (33.82 MB)",
+          "license": "Creative Commons Attribution 4.0"
+        },
+        {
+          "name": "Kaggle",
+          "url": "https://www.kaggle.com/datasets/sid321axn/bondora-peer-to-peer-lending-loan-data",
+          "date_range": "2009 to 2021"
+        }
+      ],
+      "attributes": "112 attributes including demographic and financial information",
+      "curator": "Liu, Yiting"
+    }
+  ],
+  "collaborations": [
+    {
+      "institution": "Masaryk University",
+      "country": "Czech Republic",
+      "activities": ["In-depth/constructive exchanges on approaches, methods or results", "Publications"]
+    },
+    {
+      "institution": "Columbia University in the City of New York",
+      "country": "United States",
+      "activities": ["In-depth/constructive exchanges on approaches, methods or results", "Exchange of personnel"]
+    },
+    {
+      "institution": "Renmin University of China",
+      "country": "China",
+      "activities": ["In-depth/constructive exchanges on approaches, methods or results", "Exchange of personnel"]
+    },
+    {
+      "institution": "American University of Sharjah",
+      "country": "UAE",
+      "contact": "Prof. Dr. Stephen Chan",
+      "activities": ["Publications", "Personnel exchange"]
+    },
+    {
+      "institution": "University of Manchester",
+      "country": "UK",
+      "contact": "Dr. Yuanyuan Zhang",
+      "activities": ["Publications"]
+    }
+  ],
+  "academic_events": [
+    {
+      "name": "COST FinAI PhD School on Fintech and AI in Finance 2024",
+      "date": "2024-05-13",
+      "location": "Treviso, Italy",
+      "type": "Self-organized"
+    },
+    {
+      "name": "AI Finance Insights: Pioneering the Future of Fintech",
+      "date": "2024-09-20",
+      "location": "ITU, Istanbul, Turkey",
+      "type": "Talk given at a conference",
+      "contribution": "Network-Based Prediction of Loan Default Risk in P2P Lending: An Edge Pruning Approach to Network Simplification for Improved Default Prediction in P2P Lending"
+    },
+    {
+      "name": "COST FinAI Brussels",
+      "date": "2024-05-14",
+      "location": "Brussels, Belgium",
+      "type": "Self-organized"
+    },
+    {
+      "name": "16th International Conference of the ERCIM WG on Computational and Methodological Statistics and 17th International Conference on Computational and Financial Econometrics",
+      "date": "2023-12-16",
+      "location": "Berlin, Germany",
+      "type": "Talk given at a conference",
+      "contribution": "Leveraging network topology for credit risk assessment in P2P lending"
+    },
+    {
+      "name": "COST Action FinAI Fintech and AI in Finance - 8th European COST Conference on Artificial Intelligence in Finance",
+      "date": "2023-09-27",
+      "location": "Bern, Switzerland",
+      "type": "Self-organized",
+      "presentation": "Predicting Loan Default in P2P lending: A Comparative Analysis"
+    },
+    {
+      "name": "European Summer School in Financial Mathematics",
+      "date": "2023-09-04",
+      "location": "Delft, Netherlands",
+      "type": "Poster"
+    },
+    {
+      "name": "COST Action FinAI Fintech and AI in Finance - Training School",
+      "date": "2023-06-12",
+      "location": "Enschede, Netherlands",
+      "type": "Self-organized"
+    },
+    {
+      "name": "COST Action FinAI meets Brussels - AI in Finance-Policy Implications",
+      "date": "2023-05-15",
+      "location": "Brussels, Belgium",
+      "type": "Self-organized"
+    },
+    {
+      "name": "8th Bern Conference on Fintech and AI in Finance",
+      "date": "2024-09-29",
+      "location": "Bern, Switzerland",
+      "presentation": "Leveraging Network Topology for Credit Risk Assessment",
+      "speaker": "Dr. Branka Hadji-Misheva"
+    }
+  ],
+  "knowledge_transfer_events": [
+    {
+      "name": "Expert Day",
+      "date": "2024-05-15",
+      "type": "Workshop",
+      "location": "FINMA Campus, Bern, Switzerland",
+      "organizer": "BFH Wirtschaft, Bern, Switzerland"
+    },
+    {
+      "name": "International Week, Shenzhen Technology University",
+      "date": "2022-06-17",
+      "type": "Talk"
+    }
+  ],
+  "public_communication": [
+    {
+      "title": "Shenzhen Technology University International Week",
+      "year": 2024,
+      "type": "Talk/lecture/oral contribution"
+    },
+    {
+      "title": "MSCA Digital Finance",
+      "year": 2024,
+      "type": "New media, online blogs, podcasts, news feeds etc.",
+      "media": "Webpage"
+    },
+    {
+      "title": "Shenzhen Technology University - International Week",
+      "year": 2022,
+      "type": "Talk/lecture/oral contribution",
+      "location": "International"
+    }
+  ],
+  "use_inspired_outputs": [
+    {
+      "title": "REA (Research Executive Agency) under the power delegated by the European Commission",
+      "year": 2021,
+      "type": "Expert/advisory/review activity",
+      "sector": "Other administrative / public sector",
+      "description": "Expert reviewer for REA under European Commission in the context of EISMEA (European Innovation Council and SMEs Executive Agency) programme"
+    },
+    {
+      "title": "European Commission's European Innovation Council Accelerator Pilot program",
+      "year": 2023,
+      "type": "Expert/advisory/review activity",
+      "sector": "Other administrative / public sector",
+      "description": "EIC Work Programme"
+    }
+  ],
+  "funding_grants": [
+    {
+      "title": "SNSF Project Funding - Main Grant",
+      "amount_chf": 207028,
+      "proposal_number": "205487",
+      "grant_period": "2022-10-01 to 2025-08-31",
+      "funding_scheme": "Weave/Lead Agency"
+    },
+    {
+      "title": "Leading House Asia: 2023 Call for Applied Research Partnerships, ETH",
+      "amount_chf": 50000,
+      "proposal_number": "FRG24-E-S25",
+      "grant_period": "2024-06-01 to 2025-05-31",
+      "project_title": "From Digits to Dollars: The Evolution of Price Impact in Digital Assets",
+      "pi": "Yiting Liu",
+      "co_pi": "Joerg Osterrieder"
+    },
+    {
+      "title": "SNSF Mobility Grant 2024 / 1",
+      "amount_chf": 20000,
+      "proposal_number": "100018E_205487 / 3",
+      "grant_period": "2024-02-01 to 2024-08-31",
+      "pi": "Lennart John Baals",
+      "co_pi": "Joerg Osterrieder"
+    },
+    {
+      "title": "SNSF Mobility Grant 2024 / 2",
+      "amount_chf": 20000,
+      "proposal_number": "100018E_205487 / 2",
+      "grant_period": "2024-02-01 to 2024-08-31",
+      "pi": "Yiting Liu",
+      "co_pi": "Joerg Osterrieder"
+    }
+  ],
+  "research_networks": [
+    {
+      "name": "COST Action CA19130 - Fintech and Artificial Intelligence in Finance",
+      "role": "Action Chair: Joerg Osterrieder",
+      "activities": ["In-depth exchanges on approaches, methods, and results", "Joint publications", "Personnel exchange"],
+      "website": "https://www.ai-in-finance.eu"
+    },
+    {
+      "name": "MSCA Industrial Doctoral Network on Digital Finance",
+      "role": "Coordinator: Joerg Osterrieder",
+      "activities": ["Cross-institutional research collaboration", "Doctoral training", "Knowledge transfer"],
+      "website": "https://www.digital-finance-msca.com"
+    }
+  ],
+  "sources": [
+    "https://data.snf.ch/grants/grant/205487",
+    "https://www.bfh.ch/en/research/research-projects/2022-979-388-864/",
+    "https://www.ai-in-finance.eu/The-Digital-Finance-Research-Programme/SNSF/Network-based-Credit-Risk-Modelling/",
+    "https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf",
+    "https://research.utwente.nl/en/publications/leveraging-network-topology-for-credit-risk-assessment-in-p2p-len",
+    "https://ieee-dataport.org/open-access/bondora-peer-peer-lending-data"
+  ]
+}

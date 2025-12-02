@@ -29,7 +29,7 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
 
 <div class="stats-banner">
   <div class="stat-item">
-    <span class="stat-number">90,000</span>
+    <span class="stat-number">297,028</span>
     <span class="stat-label">CHF Funding</span>
   </div>
   <div class="stat-item">
@@ -37,11 +37,11 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
     <span class="stat-label">Publications</span>
   </div>
   <div class="stat-item">
-    <span class="stat-number">6</span>
+    <span class="stat-number">5</span>
     <span class="stat-label">Collaborations</span>
   </div>
   <div class="stat-item">
-    <span class="stat-number">4</span>
+    <span class="stat-number">6</span>
     <span class="stat-label">Researchers</span>
   </div>
 </div>
@@ -272,6 +272,23 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <strong>September 29th, 2024</strong> - Dr. Hadji-Misheva was invited as a speaker at an inaugural research conference on Fintech and AI in Finance at the Department of Business, Bern University of Applied Science. The talk titled <em>"Leveraging Network Topology for Credit Risk Assessment"</em> explored graph-theoretical concepts and their applications for research initiatives, advancements, and innovations in credit risk scoring.
 
+<h3>Additional Conference Presentations</h3>
+
+<table>
+  <thead>
+    <tr><th>Event</th><th>Date</th><th>Location</th><th>Contribution</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>AI Finance Insights: Pioneering the Future of Fintech</strong></td><td>Sep 2024</td><td>Istanbul, Turkey</td><td>Network-Based Prediction of Loan Default Risk</td></tr>
+    <tr><td><strong>COST FinAI PhD School 2024</strong></td><td>May 2024</td><td>Treviso, Italy</td><td>Workshop Organization</td></tr>
+    <tr><td><strong>COST FinAI Brussels</strong></td><td>May 2024</td><td>Brussels, Belgium</td><td>Conference Organization</td></tr>
+    <tr><td><strong>16th ERCIM WG / 17th CFE Conference</strong></td><td>Dec 2023</td><td>Berlin, Germany</td><td>Leveraging network topology for credit risk</td></tr>
+    <tr><td><strong>8th European COST Conference on AI in Finance</strong></td><td>Sep 2023</td><td>Bern, Switzerland</td><td>Predicting Loan Default in P2P Lending</td></tr>
+    <tr><td><strong>European Summer School in Financial Mathematics</strong></td><td>Sep 2023</td><td>Delft, Netherlands</td><td>Poster Presentation</td></tr>
+    <tr><td><strong>COST Action Training School</strong></td><td>Jun 2023</td><td>Enschede, Netherlands</td><td>Workshop Organization</td></tr>
+  </tbody>
+</table>
+
 </section>
 
 ---
@@ -285,10 +302,11 @@ By providing more reliable credit risk models, this project will strengthen the 
     <tr><th>Institution</th><th>Contact</th><th>Activities</th></tr>
   </thead>
   <tbody>
+    <tr><td><strong>Columbia University, USA</strong></td><td>Prof. Ali Hirsa</td><td>Constructive exchanges, Publications, Personnel exchange</td></tr>
     <tr><td><strong>American University of Sharjah, UAE</strong></td><td>Prof. Dr. Stephen Chan</td><td>Constructive exchanges, Publications, Personnel exchange</td></tr>
+    <tr><td><strong>Renmin University, China</strong></td><td>Prof. Dr. Jeffrey Chu</td><td>Constructive exchanges, Publications, Personnel exchange</td></tr>
     <tr><td><strong>University of Manchester, UK</strong></td><td>Dr. Yuanyuan Zhang</td><td>Constructive exchanges, Publications</td></tr>
-    <tr><td><strong>Renmin University, China</strong></td><td>Prof. Dr. Jeffrey Chu</td><td>Constructive exchanges, Publications</td></tr>
-    <tr><td><strong>Bern Business School, Switzerland</strong></td><td>Prof. Dr. Branka Hadji Misheva</td><td>Constructive exchanges, Publications, Personnel exchange</td></tr>
+    <tr><td><strong>Masaryk University, Czech Republic</strong></td><td>Dr. Blanka Stadler</td><td>Constructive exchanges, Publications</td></tr>
   </tbody>
 </table>
 
@@ -313,6 +331,25 @@ By providing more reliable credit risk models, this project will strengthen the 
 <h2>Third-Party Funds</h2>
 
 <em>The team has acquired research funds from national and international organizations, including the Swiss National Science Foundation and Horizon Europe.</em>
+
+<div class="funding-card">
+  <h3>SNSF Project Funding - Network-based Credit Risk Models (Main Grant)</h3>
+  <span class="funding-amount">207,028 CHF</span>
+  <dl class="funding-details">
+    <dt>Grant Number</dt>
+    <dd>205487</dd>
+    <dt>Funding Scheme</dt>
+    <dd>Weave/Lead Agency</dd>
+    <dt>Grant Period</dt>
+    <dd>1 October 2022 - 31 August 2025</dd>
+    <dt>Institution</dt>
+    <dd>Bern University of Applied Sciences (BFH)</dd>
+    <dt>Title</dt>
+    <dd>Network-based credit risk models in P2P lending markets</dd>
+    <dt>Team</dt>
+    <dd>Joerg Osterrieder (PI); Lennart Baals, Yiting Liu (Researchers)</dd>
+  </dl>
+</div>
 
 <div class="funding-card">
   <h3>Leading House Asia: 2023 Call for Applied Research Partnerships, ETH</h3>
@@ -362,7 +399,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 </div>
 
 <div class="text-center mt-2">
-  <h3>Total Funding Secured: 90,000 CHF</h3>
+  <h3>Total Funding Secured: 297,028 CHF</h3>
 </div>
 
 </section>
