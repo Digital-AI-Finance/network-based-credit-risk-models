@@ -1,12 +1,74 @@
 ---
 layout: default
 title: Network-Based Credit Risk Models in P2P Lending Markets
+description: SNSF-funded research project developing advanced credit risk models for Peer-to-Peer lending using network analysis and machine learning. Led by Prof. Dr. Joerg Osterrieder at Bern Business School.
+image: /images/Osterrieder.jpg
 ---
 
-<nav class="sidebar-nav">
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchProject",
+  "name": "Network-Based Credit Risk Models in P2P Lending Markets",
+  "description": "SNSF-funded research project developing advanced credit risk models for Peer-to-Peer lending using network analysis and machine learning.",
+  "url": "https://digital-ai-finance.github.io/network-based-credit-risk-models/",
+  "funder": {
+    "@type": "Organization",
+    "name": "Swiss National Science Foundation",
+    "url": "https://www.snf.ch"
+  },
+  "funding": {
+    "@type": "MonetaryGrant",
+    "identifier": "205487",
+    "amount": {
+      "@type": "MonetaryAmount",
+      "value": 297028,
+      "currency": "CHF"
+    }
+  },
+  "member": [
+    {
+      "@type": "Person",
+      "name": "Joerg Osterrieder",
+      "jobTitle": "Principal Investigator",
+      "affiliation": "Bern University of Applied Sciences"
+    },
+    {
+      "@type": "Person",
+      "name": "Lennart John Baals",
+      "jobTitle": "Researcher"
+    },
+    {
+      "@type": "Person",
+      "name": "Branka Hadji Misheva",
+      "jobTitle": "Researcher"
+    },
+    {
+      "@type": "Person",
+      "name": "Yiting Liu",
+      "jobTitle": "Researcher"
+    }
+  ],
+  "startDate": "2022-10-01",
+  "endDate": "2025-08-31"
+}
+</script>
+
+<!-- Mobile Menu Toggle -->
+<button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+  <span class="hamburger-icon"></span>
+</button>
+
+<nav class="sidebar-nav" id="sidebarNav">
   <div class="sidebar-header">
     <div class="sidebar-title">SNSF Project</div>
     <div class="sidebar-subtitle">Credit Risk Models</div>
+  </div>
+  <!-- Search Box -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="performSearch(this.value)">
+    <div id="searchResults" class="search-results"></div>
   </div>
   <ul>
     <li><a href="#home">Home</a></li>
@@ -23,6 +85,12 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
     <li><a href="#funding">Funding</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <!-- Dark Mode Toggle -->
+  <div class="theme-toggle-container">
+    <button class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+      <span class="theme-icon">&#9790;</span> Dark Mode
+    </button>
+  </div>
 </nav>
 
 <nav class="nav-container">
@@ -44,8 +112,9 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
 <section id="home">
 
 <div class="logo-banner">
-  <img src="assets/images/logos/snsf-logo.svg" alt="Swiss National Science Foundation">
-  <img src="assets/images/logos/bfh-logo.svg" alt="Bern University of Applied Sciences">
+  <img src="assets/images/logos/snsf-logo.svg" alt="Swiss National Science Foundation" loading="lazy">
+  <img src="assets/images/logos/bfh-logo.svg" alt="Bern University of Applied Sciences" loading="lazy">
+  <button onclick="toggleDarkMode()" class="btn-theme" aria-label="Toggle dark mode">&#9790;</button>
   <button onclick="window.print()" class="btn-pdf">Print / Save PDF</button>
 </div>
 
@@ -57,6 +126,10 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
   <div class="stat-item">
     <span class="stat-number">{{ site.data.publications | size }}</span>
     <span class="stat-label">Publications</span>
+  </div>
+  <div class="stat-item" id="totalCitations">
+    <span class="stat-number">--</span>
+    <span class="stat-label">Total Citations</span>
   </div>
   <div class="stat-item">
     <span class="stat-number">5</span>
@@ -82,17 +155,17 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
 
 <div class="team-grid">
 {% for member in site.data.team %}
-<div class="team-card">
-  <img src="{{ member.image }}" alt="{{ member.name }}">
+<div class="team-card" itemscope itemtype="https://schema.org/Person">
+  <img src="{{ member.image }}" alt="{{ member.name }}" loading="lazy" itemprop="image">
   <span class="role-badge">{{ member.role }}</span>
-  <h4>{{ member.name }}</h4>
-  <p class="institution">{{ member.institution }}{% if member.institution2 %}<br>{{ member.institution2 }}{% endif %}</p>
-  <p class="bio">{{ member.bio }}</p>
+  <h4 itemprop="name">{{ member.name }}</h4>
+  <p class="institution" itemprop="affiliation">{{ member.institution }}{% if member.institution2 %}<br>{{ member.institution2 }}{% endif %}</p>
+  <p class="bio" itemprop="description">{{ member.bio }}</p>
   <div class="profile-links">
-    {% if member.orcid %}<a href="https://orcid.org/{{ member.orcid }}" target="_blank" title="ORCID" class="orcid-link"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID"> ORCID</a>{% endif %}
-    {% if member.google_scholar %}<a href="{{ member.google_scholar }}" target="_blank" title="Google Scholar">Scholar</a>{% endif %}
-    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" title="LinkedIn">LinkedIn</a>{% endif %}
-    {% if member.website %}<a href="{{ member.website }}" target="_blank" title="Website">Web</a>{% endif %}
+    {% if member.orcid %}<a href="https://orcid.org/{{ member.orcid }}" target="_blank" rel="noopener" title="ORCID" class="orcid-link external-link"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" loading="lazy"> ORCID</a>{% endif %}
+    {% if member.google_scholar %}<a href="{{ member.google_scholar }}" target="_blank" rel="noopener" title="Google Scholar" class="external-link">Scholar</a>{% endif %}
+    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" rel="noopener" title="LinkedIn" class="external-link">LinkedIn</a>{% endif %}
+    {% if member.website %}<a href="{{ member.website }}" target="_blank" rel="noopener" title="Website" class="external-link">Web</a>{% endif %}
   </div>
 </div>
 {% endfor %}
@@ -149,21 +222,70 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <h2>Scientific Publications</h2>
 
-<em>Auto-updated from <a href="https://openalex.org">OpenAlex.org</a> - {{ site.data.publications | size }} publications</em>
+<em>Auto-updated from <a href="https://openalex.org" target="_blank" rel="noopener" class="external-link">OpenAlex.org</a> - {{ site.data.publications | size }} publications</em>
+
+<!-- Citation Metrics Summary -->
+<div class="citation-metrics" id="citationMetrics">
+  <div class="metric-card">
+    <span class="metric-value" id="metricTotalPubs">{{ site.data.publications | size }}</span>
+    <span class="metric-label">Publications</span>
+  </div>
+  <div class="metric-card">
+    <span class="metric-value" id="metricTotalCitations">--</span>
+    <span class="metric-label">Total Citations</span>
+  </div>
+  <div class="metric-card">
+    <span class="metric-value" id="metricAvgCitations">--</span>
+    <span class="metric-label">Avg. Citations</span>
+  </div>
+  <div class="metric-card">
+    <span class="metric-value" id="metricOpenAccess">--</span>
+    <span class="metric-label">Open Access</span>
+  </div>
+</div>
+
+<!-- Publication Filters -->
+<div class="pub-filters">
+  <div class="filter-group">
+    <label for="yearFilter">Year:</label>
+    <select id="yearFilter" onchange="filterPublications()">
+      <option value="all">All Years</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label for="topicFilter">Topic:</label>
+    <select id="topicFilter" onchange="filterPublications()">
+      <option value="all">All Topics</option>
+      <option value="credit">Credit Risk</option>
+      <option value="network">Network Analysis</option>
+      <option value="machine">Machine Learning</option>
+      <option value="p2p">P2P Lending</option>
+      <option value="crypto">Cryptocurrency</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label for="accessFilter">Access:</label>
+    <select id="accessFilter" onchange="filterPublications()">
+      <option value="all">All</option>
+      <option value="open">Open Access</option>
+    </select>
+  </div>
+  <button onclick="resetFilters()" class="btn-reset">Reset</button>
+</div>
 
 <div class="pub-actions">
   <button onclick="downloadAllBibtex()" class="btn-download">Download All BibTeX (.bib)</button>
 </div>
 
-<div class="publication-list">
+<div class="publication-list" id="publicationList">
 {% for pub in site.data.publications %}
-<div class="pub-item">
+<div class="pub-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-open="{{ pub.open_access }}">
   <div class="pub-title">{{ pub.title }}</div>
   <div class="pub-meta">{{ pub.authors }} ({{ pub.year }}) - <em>{{ pub.journal }}</em></div>
   <div class="pub-badges">
-    {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}" class="doi-link" target="_blank">DOI</a>{% endif %}
+    {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}" class="doi-link external-link" target="_blank" rel="noopener">DOI</a>{% endif %}
     {% if pub.citations > 0 %}<span class="citations-badge">{{ pub.citations }} citations</span>{% endif %}
-    {% if pub.open_access %}<span class="citations-badge">Open Access</span>{% endif %}
+    {% if pub.open_access %}<span class="oa-badge">Open Access</span>{% endif %}
     <button onclick="copyBibtex({{ forloop.index0 }})" data-bibtex-index="{{ forloop.index0 }}" class="btn-bibtex">BibTeX</button>
     {% if pub.abstract and pub.abstract != "" %}<button onclick="toggleAbstract({{ forloop.index0 }})" data-abstract-btn="{{ forloop.index0 }}" class="btn-abstract">Show Abstract</button>{% endif %}
   </div>
@@ -201,17 +323,31 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <div class="timeline">
   <div class="timeline-item">
-    <span class="timeline-date">2022</span>
+    <span class="timeline-date">Oct 2022</span>
     <div class="timeline-content">
       <strong>Project Launch</strong>
-      <p>SNSF-funded research project initiated at Bern Business School</p>
+      <p>SNSF grant 205487 awarded - CHF 207,028 for network-based credit risk research</p>
     </div>
   </div>
   <div class="timeline-item">
     <span class="timeline-date">2023</span>
     <div class="timeline-content">
       <strong>Network Analysis Framework</strong>
-      <p>Development of graph-based credit risk assessment methodology</p>
+      <p>Development of graph-based credit risk assessment methodology using Bondora P2P data</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <span class="timeline-date">Feb 2024</span>
+    <div class="timeline-content">
+      <strong>Mobility Grants</strong>
+      <p>Two SNSF mobility grants (CHF 40,000 total) for international collaboration</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <span class="timeline-date">Jun 2024</span>
+    <div class="timeline-content">
+      <strong>Leading House Asia Grant</strong>
+      <p>ETH funding (CHF 50,000) for digital assets research partnership</p>
     </div>
   </div>
   <div class="timeline-item">
@@ -222,10 +358,10 @@ By providing more reliable credit risk models, this project will strengthen the 
     </div>
   </div>
   <div class="timeline-item">
-    <span class="timeline-date">2025</span>
+    <span class="timeline-date">Aug 2025</span>
     <div class="timeline-content">
-      <strong>Ongoing Research</strong>
-      <p>Continued development of network-based models and industry collaborations</p>
+      <strong>Project Completion</strong>
+      <p>Final deliverables and knowledge transfer to industry partners</p>
     </div>
   </div>
 </div>
@@ -242,19 +378,48 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <div class="resource-grid">
   <div class="resource-card">
-    <h4>P2P Lending Network Analysis</h4>
-    <p>Python code for network feature extraction and credit risk modeling using Bondora dataset</p>
-    <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" class="resource-link" target="_blank">GitHub Repository</a>
+    <h4>P2P Network Analysis Code</h4>
+    <p>Python implementation of network feature extraction and credit risk modeling</p>
+    <div class="resource-links">
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" class="resource-link external-link" target="_blank" rel="noopener">GitHub Repository</a>
+    </div>
   </div>
   <div class="resource-card">
     <h4>Bondora P2P Dataset</h4>
-    <p>European P2P lending platform data used in our research publications</p>
-    <a href="https://www.bondora.com/en/public-reports" class="resource-link" target="_blank">Data Source</a>
+    <p>European P2P lending platform data (2009-2023) with loan performance metrics</p>
+    <div class="resource-links">
+      <a href="https://www.bondora.com/en/public-reports" class="resource-link external-link" target="_blank" rel="noopener">Data Source</a>
+      <a href="https://doi.org/10.1016/j.frl.2024.105308" class="resource-link external-link" target="_blank" rel="noopener">Documentation</a>
+    </div>
   </div>
   <div class="resource-card">
-    <h4>Network Centrality Metrics</h4>
-    <p>Implementation of degree centrality and network topology features for credit scoring</p>
-    <a href="https://doi.org/10.1016/j.frl.2024.105308" class="resource-link" target="_blank">Related Paper</a>
+    <h4>Network Centrality Toolkit</h4>
+    <p>Implementation of degree, betweenness, and eigenvector centrality for credit scoring</p>
+    <div class="resource-links">
+      <a href="https://doi.org/10.1016/j.eswa.2024.124100" class="resource-link external-link" target="_blank" rel="noopener">Related Paper</a>
+    </div>
+  </div>
+  <div class="resource-card">
+    <h4>LendingClub Dataset</h4>
+    <p>US P2P lending data for comparative analysis and model validation</p>
+    <div class="resource-links">
+      <a href="https://www.kaggle.com/datasets/wordsforthewise/lending-club" class="resource-link external-link" target="_blank" rel="noopener">Kaggle Dataset</a>
+    </div>
+  </div>
+  <div class="resource-card">
+    <h4>Publications Data (JSON)</h4>
+    <p>Auto-updated publication metadata from OpenAlex API</p>
+    <div class="resource-links">
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/blob/main/_data/publications.json" class="resource-link external-link" target="_blank" rel="noopener">View JSON</a>
+      <button onclick="downloadAllBibtex()" class="resource-link">Download BibTeX</button>
+    </div>
+  </div>
+  <div class="resource-card">
+    <h4>Project Documentation</h4>
+    <p>Wiki with detailed methodology, results, and supplementary materials</p>
+    <div class="resource-links">
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki" class="resource-link external-link" target="_blank" rel="noopener">Project Wiki</a>
+    </div>
   </div>
 </div>
 
@@ -266,13 +431,15 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <h2>News & Updates</h2>
 
+<p class="rss-link"><a href="{{ site.baseurl }}/feed.xml" class="external-link" target="_blank" rel="noopener">Subscribe via RSS</a></p>
+
 <div class="news-list">
 {% for item in site.data.news %}
-<div class="news-item">
-  <span class="news-date">{{ item.date }}</span>
+<div class="news-item" itemscope itemtype="https://schema.org/NewsArticle">
+  <span class="news-date" itemprop="datePublished">{{ item.date }}</span>
   <div class="news-content">
-    <strong>{{ item.title }}</strong>
-    <p>{{ item.description }}</p>
+    <strong itemprop="headline">{{ item.title }}</strong>
+    <p itemprop="description">{{ item.description }}</p>
   </div>
 </div>
 {% endfor %}
@@ -288,7 +455,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <em>The team has received invitations to numerous international conferences, serving roles as keynote speakers, session chairs, or organizing events.</em>
 
-<img src="images/WhatsApp_20Image_202023-09-29_20at_2015_45_edited.jpg" alt="8th Bern Conference 2024" class="event-image">
+<img src="images/WhatsApp_20Image_202023-09-29_20at_2015_45_edited.jpg" alt="8th Bern Conference 2024" class="event-image" loading="lazy">
 
 <h3>8th Bern Conference 2024</h3>
 
@@ -470,16 +637,23 @@ By providing more reliable credit risk models, this project will strengthen the 
   <div class="footer-content">
     <div>
       <p>&copy; 2025 Digital AI Finance Research Group</p>
-      <p>Source: <a href="https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf">digital-finance-msca.com</a></p>
+      <p>Source: <a href="https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf" target="_blank" rel="noopener" class="external-link">digital-finance-msca.com</a></p>
     </div>
     <div class="footer-links">
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models">GitHub</a>
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki">Wiki</a>
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" target="_blank" rel="noopener" class="external-link">GitHub</a>
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki" target="_blank" rel="noopener" class="external-link">Wiki</a>
+      <a href="{{ site.baseurl }}/feed.xml" target="_blank" rel="noopener">RSS Feed</a>
     </div>
   </div>
 </footer>
 
+<!-- Back to Top Button -->
+<button id="backToTop" class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
+  &#8593;
+</button>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/visualizations.js"></script>

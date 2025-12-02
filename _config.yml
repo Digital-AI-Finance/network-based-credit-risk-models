@@ -16,6 +16,8 @@ highlighter: rouge
 plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
 
 # SEO & Social
 author: Prof. Dr. Joerg Osterrieder
