@@ -54,7 +54,7 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
 
 <section id="team">
 
-## Our Team
+<h2>Our Team</h2>
 
 <em>International cooperation between Bern Business School (Switzerland) and partner institutions</em>
 
@@ -82,17 +82,17 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
 
 <section id="research">
 
-## Research Project
+<h2>Research Project</h2>
 
-### Background
+<h3>Background</h3>
 
 Peer-to-peer (P2P) lending has become an increasingly popular alternative to traditional bank lending, allowing individuals and businesses to borrow money directly from investors through online platforms without involving banks. While this method offers advantages such as higher returns for investors and greater access to credit for borrowers, it also brings unique risks. The decentralized nature of P2P lending means that loans are funded entirely by investors, without the safeguards of bank intermediation.
 
-### Rationale
+<h3>Rationale</h3>
 
 The growing presence of P2P lending markets, especially during economic crises, exposes these platforms to significant risks, including adverse selection and moral hazard. Unlike traditional banks that use long-term relationships and extensive data to evaluate borrowers, P2P platforms have less detailed information and face higher levels of uncertainty. There is a critical need for robust credit risk models that can accurately assess the creditworthiness of borrowers in these markets.
 
-### Objectives
+<h3>Objectives</h3>
 
 This project aims to develop <strong>advanced, interpretable credit risk models</strong> tailored specifically to the needs of P2P lending markets. These models will address the unique challenges of P2P lending, such as:
 
@@ -102,7 +102,7 @@ This project aims to develop <strong>advanced, interpretable credit risk models<
 
 The ultimate goal is to enhance trust between investors and P2P platforms by providing accurate tools for evaluating and mitigating credit risk.
 
-### Methods
+<h3>Methods</h3>
 
 The project develops credit risk models using <strong>network-based approaches</strong>, analyzing the connections between borrowers and lenders to identify patterns that indicate heightened risk. These models incorporate:
 
@@ -110,7 +110,7 @@ The project develops credit risk models using <strong>network-based approaches</
 - <strong>Dynamic factors</strong>: Real-time data for adaptive risk assessment
 - <strong>Network topology</strong>: Graph-based features capturing borrower-lender relationships
 
-### Expected Impact
+<h3>Expected Impact</h3>
 
 By providing more reliable credit risk models, this project will strengthen the P2P lending market, making it a more secure and viable alternative to traditional bank lending. The results will be valuable to:
 
@@ -125,7 +125,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <section id="publications">
 
-## Scientific Publications
+<h2>Scientific Publications</h2>
 
 <em>Auto-updated from <a href="https://openalex.org">OpenAlex.org</a> - {{ site.data.publications | size }} publications</em>
 
@@ -162,7 +162,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <section id="analytics">
 
-## Research Analytics
+<h2>Research Analytics</h2>
 
 <div class="analytics-section">
   <div class="chart-container">
@@ -175,7 +175,7 @@ By providing more reliable credit risk models, this project will strengthen the 
   </div>
 </div>
 
-### Project Timeline
+<h3>Project Timeline</h3>
 
 <div class="timeline">
   <div class="timeline-item">
@@ -214,7 +214,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <section id="resources">
 
-## Datasets & Code
+<h2>Datasets & Code</h2>
 
 <em>Research materials and code repositories from our project</em>
 
@@ -242,7 +242,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <section id="news">
 
-## News & Updates
+<h2>News & Updates</h2>
 
 <div class="news-list">
 {% for item in site.data.news %}
@@ -262,13 +262,13 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <section id="events">
 
-## Academic Events
+<h2>Academic Events</h2>
 
 <em>The team has received invitations to numerous international conferences, serving roles as keynote speakers, session chairs, or organizing events.</em>
 
 <img src="images/WhatsApp_20Image_202023-09-29_20at_2015_45_edited.jpg" alt="8th Bern Conference 2024" class="event-image">
 
-### 8th Bern Conference 2024
+<h3>8th Bern Conference 2024</h3>
 
 <strong>September 29th, 2024</strong> - Dr. Hadji-Misheva was invited as a speaker at an inaugural research conference on Fintech and AI in Finance at the Department of Business, Bern University of Applied Science. The talk titled <em>"Leveraging Network Topology for Credit Risk Assessment"</em> explored graph-theoretical concepts and their applications for research initiatives, advancements, and innovations in credit risk scoring.
 
@@ -278,7 +278,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <section id="collaborations">
 
-## Collaborations
+<h2>Collaborations</h2>
 
 <table>
   <thead>
@@ -292,7 +292,7 @@ By providing more reliable credit risk models, this project will strengthen the 
   </tbody>
 </table>
 
-### Research Networks
+<h3>Research Networks</h3>
 
 <strong>COST Action CA19130 - Fintech and Artificial Intelligence in Finance</strong>
 - Action Chair: Joerg Osterrieder
@@ -310,7 +310,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <section id="funding">
 
-## Third-Party Funds
+<h2>Third-Party Funds</h2>
 
 <em>The team has acquired research funds from national and international organizations, including the Swiss National Science Foundation and Horizon Europe.</em>
 
@@ -371,7 +371,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <section id="contact">
 
-## Contact Us
+<h2>Contact Us</h2>
 
 <div class="contact-section">
 
