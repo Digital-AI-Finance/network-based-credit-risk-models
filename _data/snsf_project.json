@@ -1,0 +1,180 @@
+{
+  "project": {
+    "title": "Network-based credit risk models in P2P lending markets",
+    "funding_agency": "SNSF (Swiss National Science Foundation)",
+    "proposal_numbers": [
+      "100018E_205487 / 2",
+      "100018E_205487 / 3"
+    ],
+    "duration": {
+      "start": "2022-10-01",
+      "end": "2025-09-30"
+    },
+    "total_funding_chf": 90000,
+    "keywords": ["Credit Risk", "Network Analysis", "P2P Lending", "Machine Learning"]
+  },
+  "team": {
+    "principal_investigator": {
+      "name": "Prof. Dr. Joerg Osterrieder",
+      "institution": "Bern University of Applied Sciences (BFH)",
+      "department": "Business School",
+      "institute": "Institute for Applied Data Science & Finance"
+    },
+    "project_staff": [
+      {
+        "name": "Prof. Dr. Branka Hadji Misheva",
+        "role": "Senior Researcher"
+      },
+      {
+        "name": "Yiting Liu",
+        "role": "Researcher"
+      },
+      {
+        "name": "Lennart John Baals",
+        "role": "Researcher"
+      }
+    ]
+  },
+  "funding_details": [
+    {
+      "title": "Leading House Asia: 2023 Call for Applied Research Partnerships, ETH",
+      "amount_chf": 50000,
+      "grant_period": "2024-06-01 to 2025-05-31",
+      "proposal_number": "FRG24-E-S25",
+      "project_title": "From Digits to Dollars: The Evolution of Price Impact in Digital Assets",
+      "pi": "Yiting Liu",
+      "co_pi": "Joerg Osterrieder"
+    },
+    {
+      "title": "SNSF Mobility Grant 2024 / 1",
+      "amount_chf": 20000,
+      "grant_period": "2024-02-01 to 2024-08-31",
+      "proposal_number": "100018E_205487 / 3",
+      "project_title": "Network-based credit risk models in P2P lending markets",
+      "pi": "Lennart John Baals",
+      "co_pi": "Joerg Osterrieder"
+    },
+    {
+      "title": "SNSF Mobility Grant 2024 / 2",
+      "amount_chf": 20000,
+      "grant_period": "2024-02-01 to 2024-08-31",
+      "proposal_number": "100018E_205487 / 2",
+      "project_title": "Network-based credit risk models in P2P lending markets",
+      "pi": "Yiting Liu",
+      "co_pi": "Joerg Osterrieder"
+    }
+  ],
+  "research": {
+    "background": "Peer-to-peer (P2P) lending has become an increasingly popular alternative to traditional bank lending, allowing individuals and businesses to borrow money directly from investors through online platforms without involving banks. While this method offers advantages such as higher returns for investors and greater access to credit for borrowers, it also brings unique risks. The decentralized nature of P2P lending means that loans are funded entirely by investors, without the safeguards of bank intermediation.",
+    "rationale": "The growing presence of P2P lending markets, especially during economic crises, exposes these platforms to significant risks, including adverse selection and moral hazard. Unlike traditional banks that use long-term relationships and extensive data to evaluate borrowers, P2P platforms have less detailed information and face higher levels of uncertainty. There is a critical need for robust credit risk models that can accurately assess the creditworthiness of borrowers in these markets.",
+    "objectives": [
+      "Develop advanced, interpretable credit risk models tailored to P2P lending markets",
+      "Address higher information asymmetry in P2P platforms",
+      "Improve risk assessment during economic downturns",
+      "Enhance trust between investors and P2P platforms"
+    ],
+    "methods": [
+      "Network-based approaches analyzing connections between borrowers and lenders",
+      "Static factors: Established risk indicators",
+      "Dynamic factors: Real-time data for adaptive risk assessment",
+      "Network topology: Graph-based features capturing borrower-lender relationships"
+    ]
+  },
+  "key_publications": [
+    {
+      "title": "Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning",
+      "authors": "Liu, Y., Baals, L. J., Osterrieder, J., & Hadji-Misheva, B.",
+      "journal": "Expert Systems with Applications",
+      "year": 2024,
+      "volume": 252,
+      "article": 124100,
+      "doi": "10.1016/j.eswa.2024.124100"
+    },
+    {
+      "title": "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics",
+      "authors": "Liu, Y., Baals, L. J., Osterrieder, J., & Hadji-Misheva, B.",
+      "journal": "Finance Research Letters",
+      "year": 2024,
+      "doi": "10.1016/j.frl.2024.105308"
+    }
+  ],
+  "conferences": [
+    {
+      "name": "8th European COST Conference on AI in Finance",
+      "location": "Bern, Switzerland",
+      "year": 2023,
+      "presentation": "Predicting Loan Default in P2P lending: A Comparative Analysis"
+    },
+    {
+      "name": "International Conference on Computational and Financial Econometrics",
+      "location": "Berlin, Germany",
+      "year": 2023
+    },
+    {
+      "name": "COST FinAI Istanbul Conference",
+      "location": "Istanbul, Turkey",
+      "year": 2024
+    },
+    {
+      "name": "COST Action Training School",
+      "location": "Enschede, Netherlands",
+      "year": 2024
+    },
+    {
+      "name": "8th Bern Conference on Fintech and AI in Finance",
+      "location": "Bern, Switzerland",
+      "year": 2024,
+      "presentation": "Leveraging Network Topology for Credit Risk Assessment"
+    }
+  ],
+  "collaborations": [
+    {
+      "institution": "American University of Sharjah, UAE",
+      "contact": "Prof. Dr. Stephen Chan",
+      "activities": ["Constructive exchanges", "Publications", "Personnel exchange"]
+    },
+    {
+      "institution": "University of Manchester, UK",
+      "contact": "Dr. Yuanyuan Zhang",
+      "activities": ["Constructive exchanges", "Publications"]
+    },
+    {
+      "institution": "Renmin University, China",
+      "contact": "Prof. Dr. Jeffrey Chu",
+      "activities": ["Constructive exchanges", "Publications"]
+    },
+    {
+      "institution": "Bern Business School, Switzerland",
+      "contact": "Prof. Dr. Branka Hadji Misheva",
+      "activities": ["Constructive exchanges", "Publications", "Personnel exchange"]
+    }
+  ],
+  "research_networks": [
+    {
+      "name": "COST Action CA19130 - Fintech and Artificial Intelligence in Finance",
+      "role": "Action Chair: Joerg Osterrieder",
+      "activities": ["In-depth exchanges on approaches, methods, and results", "Joint publications", "Personnel exchange"]
+    },
+    {
+      "name": "MSCA Industrial Doctoral Network on Digital Finance",
+      "role": "Coordinator: Joerg Osterrieder",
+      "activities": ["Cross-institutional research collaboration", "Doctoral training", "Knowledge transfer"]
+    }
+  ],
+  "data_sources": {
+    "primary_dataset": {
+      "name": "Bondora P2P Dataset",
+      "description": "European P2P lending platform data",
+      "url": "https://www.bondora.com/en/public-reports"
+    },
+    "code_repository": {
+      "name": "GitHub - Network-based Credit Risk Models",
+      "url": "https://github.com/Digital-AI-Finance/network-based-credit-risk-models"
+    }
+  },
+  "sources": [
+    "https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf",
+    "https://www.bfh.ch/en/research/research-projects/2022-979-388-864/",
+    "https://www.ai-in-finance.eu/The-Digital-Finance-Research-Programme/SNSF/Network-based-Credit-Risk-Modelling/"
+  ]
+}
