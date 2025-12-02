@@ -162,7 +162,42 @@ $font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 600;
     margin-bottom: 0.2rem;
   }
-  .institution { color: $text-light; font-size: 0.65rem; line-height: 1.3; }
+  .institution { color: $text-light; font-size: 0.65rem; line-height: 1.3; margin-bottom: 0.3rem; }
+  .bio {
+    font-size: 0.6rem;
+    color: $text-dark;
+    line-height: 1.4;
+    margin: 0.3rem 0;
+    text-align: left;
+  }
+  .profile-links {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.15rem;
+      padding: 0.15rem 0.3rem;
+      border-radius: 3px;
+      font-size: 0.55rem;
+      text-decoration: none;
+      background: $bg-light;
+      color: $navy-primary;
+      border: 1px solid $border-color;
+      transition: all 0.2s ease;
+      &:hover { background: $navy-primary; color: $bg-white; }
+      img { width: 12px; height: 12px; }
+    }
+    .orcid-link {
+      background: #a6ce39;
+      color: white;
+      border-color: #a6ce39;
+      &:hover { background: #8fb82e; }
+    }
+  }
 }
 
 // Publication List - COMPACT
@@ -208,6 +243,48 @@ $font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     color: $text-dark;
     border: 1px solid $border-color;
   }
+  .btn-bibtex, .btn-abstract {
+    display: inline-block;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    border: 1px solid $border-color;
+    background: $bg-white;
+    color: $text-dark;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover { background: $gold-accent; color: $navy-dark; border-color: $gold-accent; }
+  }
+  .pub-abstract {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: $bg-light;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: $text-dark;
+    border-left: 3px solid $gold-accent;
+  }
+}
+
+// Publication Actions
+.pub-actions {
+  margin: 0.5rem 0;
+  text-align: right;
+}
+
+.btn-download {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  background: $navy-primary;
+  color: $bg-white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover { background: $gold-accent; color: $navy-dark; }
 }
 
 // Publication Cards (legacy) - COMPACT
@@ -328,6 +405,132 @@ table {
   }
 }
 
+// Analytics Section
+.analytics-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+  @media screen and (max-width: 42em) { grid-template-columns: 1fr; }
+}
+
+.chart-container {
+  background: $bg-white;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  padding: 0.75rem;
+  h3 { font-size: 0.85rem; margin: 0 0 0.5rem 0; color: $navy-primary; }
+  canvas, #networkGraph { width: 100% !important; height: 200px !important; }
+}
+
+// Timeline
+.timeline {
+  position: relative;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0.4rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: $gold-accent;
+  }
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 0.75rem;
+  &::before {
+    content: '';
+    position: absolute;
+    left: -1.1rem;
+    top: 0.2rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $navy-primary;
+    border: 2px solid $gold-accent;
+  }
+}
+
+.timeline-date {
+  display: inline-block;
+  background: $navy-primary;
+  color: $bg-white;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.timeline-content {
+  strong { font-size: 0.8rem; color: $navy-primary; }
+  p { font-size: 0.7rem; color: $text-light; margin: 0.2rem 0 0; }
+}
+
+// Resources Section
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+  @media screen and (max-width: 42em) { grid-template-columns: 1fr; }
+}
+
+.resource-card {
+  background: $bg-white;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  padding: 0.75rem;
+  transition: all 0.2s ease;
+  &:hover { border-color: $gold-accent; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  h4 { font-size: 0.8rem; color: $navy-primary; margin: 0 0 0.3rem 0; }
+  p { font-size: 0.7rem; color: $text-light; margin: 0 0 0.5rem 0; }
+}
+
+.resource-link {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background: $navy-primary;
+  color: $bg-white;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  text-decoration: none;
+  &:hover { background: $gold-accent; color: $navy-dark; }
+}
+
+// News Section
+.news-list {
+  margin: 0.5rem 0;
+}
+
+.news-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $border-color;
+  &:last-child { border-bottom: none; }
+}
+
+.news-date {
+  flex-shrink: 0;
+  background: $bg-light;
+  color: $navy-primary;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  height: fit-content;
+}
+
+.news-content {
+  strong { font-size: 0.8rem; color: $navy-primary; }
+  p { font-size: 0.7rem; color: $text-light; margin: 0.2rem 0 0; }
+}
+
 // Footer - COMPACT
 .site-footer {
   background: $navy-dark;
@@ -375,4 +578,78 @@ section[id] { scroll-margin-top: 50px; }
   .stat-item .stat-number { font-size: 1rem; }
   .funding-card .funding-details { grid-template-columns: 1fr; }
   .nav-menu a { font-size: 0.65rem; padding: 0.25rem 0.4rem; }
+}
+
+// Print Styles
+@media print {
+  // Hide interactive elements
+  .nav-container,
+  .site-footer,
+  .contact-form,
+  .btn-bibtex,
+  .btn-abstract,
+  .btn-download,
+  .pub-actions,
+  .profile-links,
+  #networkGraph,
+  #pubsChart,
+  .analytics-section {
+    display: none !important;
+  }
+
+  // Reset backgrounds
+  .page-header,
+  .stats-banner {
+    background: none !important;
+    color: #000 !important;
+    padding: 0.5rem !important;
+  }
+
+  .stat-item .stat-number,
+  .stat-item .stat-label {
+    color: #000 !important;
+  }
+
+  // Compact text
+  body, .main-content {
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 { font-size: 16pt !important; }
+  h2 { font-size: 14pt !important; }
+  h3 { font-size: 12pt !important; }
+
+  // Show full content
+  .pub-abstract { display: block !important; }
+
+  // Page breaks
+  section { page-break-inside: avoid; }
+  .team-card, .funding-card, .pub-item { page-break-inside: avoid; }
+
+  // Links
+  a { color: #000 !important; text-decoration: underline; }
+  a[href^="http"]:after { content: " (" attr(href) ")"; font-size: 8pt; }
+
+  // Remove shadows and borders
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+// PDF Download Button
+.btn-pdf {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  background: $gold-accent;
+  color: $navy-dark;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
+  &:hover { background: $navy-primary; color: $bg-white; }
 }

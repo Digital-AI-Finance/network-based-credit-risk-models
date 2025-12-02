@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Prof. Dr. Joerg Osterrieder",
+    "role": "Principal Investigator",
+    "institution": "Bern Business School, Switzerland",
+    "institution2": "University of Twente, Netherlands",
+    "image": "images/Osterrieder.jpg",
+    "orcid": "0000-0003-0189-8636",
+    "bio": "Professor of Finance and AI with 15+ years in quantitative finance. Chair of COST Action Fintech and AI in Finance. Coordinator of the MSCA Digital Finance doctoral network.",
+    "google_scholar": "https://scholar.google.com/citations?user=ocRaXoIAAAAJ",
+    "linkedin": "https://www.linkedin.com/in/joergosterrieder/",
+    "website": "https://www.joergosterrieder.com/"
+  },
+  {
+    "name": "Lennart John Baals",
+    "role": "Researcher",
+    "institution": "Bern Business School, Switzerland",
+    "institution2": "University of Twente, Netherlands",
+    "image": "images/Baals_JPG.jpg",
+    "orcid": "",
+    "bio": "PhD researcher in Quantitative Finance focusing on credit risk assessment through graph-based models and network analysis in P2P lending markets.",
+    "google_scholar": "",
+    "linkedin": "https://www.linkedin.com/in/lennart-john-baals-a621aa193/",
+    "website": "https://www.bfh.ch/en/about-bfh/people/6ib6u54jtggl/"
+  },
+  {
+    "name": "Prof. Dr. Branka Hadji Misheva",
+    "role": "Researcher",
+    "institution": "Bern Business School, Switzerland",
+    "institution2": "",
+    "image": "images/Hadji_20Misheva.jpg",
+    "orcid": "0000-0001-7020-3469",
+    "bio": "Professor of Applied Data Science and Finance. Expert in AI applications in finance, XAI methods, network models and fintech risk management.",
+    "google_scholar": "https://scholar.google.com/citations?user=drpfTlkAAAAJ",
+    "linkedin": "https://www.linkedin.com/in/hadjimisheva/",
+    "website": "https://www.bfh.ch/en/about-bfh/people/w76zvjktchs5/"
+  },
+  {
+    "name": "Dr. Yiting Liu",
+    "role": "Researcher",
+    "institution": "Bern Business School, Switzerland",
+    "institution2": "University of Twente, Netherlands",
+    "image": "images/Liu_20Yiting.jpg",
+    "orcid": "",
+    "bio": "PhD researcher specializing in P2P lending risk modelling using graph-based approaches. Research interests include credit risk, digital finance, and network theory.",
+    "google_scholar": "",
+    "linkedin": "https://www.linkedin.com/in/yiting-liu-313587266/",
+    "website": "https://people.utwente.nl/yiting.liu"
+  }
+]

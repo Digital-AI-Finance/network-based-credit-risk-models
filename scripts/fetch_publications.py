@@ -89,6 +89,33 @@ def format_authors(authorships):
 
     return ", ".join(authors)
 
+def extract_abstract(work):
+    """Extract abstract from OpenAlex inverted index format"""
+    abstract_index = work.get("abstract_inverted_index")
+    if not abstract_index:
+        return ""
+
+    # Convert inverted index to text
+    # Format: {"word": [position1, position2, ...], ...}
+    try:
+        # Build list of (position, word) tuples
+        words = []
+        for word, positions in abstract_index.items():
+            for pos in positions:
+                words.append((pos, word))
+
+        # Sort by position and join
+        words.sort(key=lambda x: x[0])
+        abstract = " ".join(word for _, word in words)
+
+        # Limit to 500 chars for display
+        if len(abstract) > 500:
+            abstract = abstract[:497] + "..."
+
+        return abstract
+    except Exception:
+        return ""
+
 def process_work(work):
     """Extract relevant fields from a work"""
     # Get journal/source
@@ -115,6 +142,7 @@ def process_work(work):
         "openalex_id": work.get("id", "").replace("https://openalex.org/", ""),
         "type": work.get("type", ""),
         "open_access": work.get("open_access", {}).get("is_oa", False),
+        "abstract": extract_abstract(work),
     }
 
 def fetch_all_publications():

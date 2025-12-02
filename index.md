@@ -9,6 +9,9 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#publications">Publications</a></li>
+    <li><a href="#analytics">Analytics</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#news">News</a></li>
     <li><a href="#events">Events</a></li>
     <li><a href="#collaborations">Collaborations</a></li>
     <li><a href="#funding">Funding</a></li>
@@ -21,6 +24,7 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
 <div class="logo-banner">
   <img src="assets/images/logos/snsf-logo.svg" alt="Swiss National Science Foundation">
   <img src="assets/images/logos/bfh-logo.svg" alt="Bern University of Applied Sciences">
+  <button onclick="window.print()" class="btn-pdf">Print / Save PDF</button>
 </div>
 
 <div class="stats-banner">
@@ -52,38 +56,24 @@ title: Network-Based Credit Risk Models in P2P Lending Markets
 
 ## Our Team
 
-*International cooperation between Bern Business School (Switzerland) and partner institutions*
+<em>International cooperation between Bern Business School (Switzerland) and partner institutions</em>
 
 <div class="team-grid">
-
+{% for member in site.data.team %}
 <div class="team-card">
-  <img src="images/Osterrieder.jpg" alt="Joerg Osterrieder">
-  <span class="role-badge">Principal Investigator</span>
-  <h4>Prof. Dr. Joerg Osterrieder</h4>
-  <p class="institution">Bern Business School, Switzerland<br>University of Twente, Netherlands</p>
+  <img src="{{ member.image }}" alt="{{ member.name }}">
+  <span class="role-badge">{{ member.role }}</span>
+  <h4>{{ member.name }}</h4>
+  <p class="institution">{{ member.institution }}{% if member.institution2 %}<br>{{ member.institution2 }}{% endif %}</p>
+  <p class="bio">{{ member.bio }}</p>
+  <div class="profile-links">
+    {% if member.orcid %}<a href="https://orcid.org/{{ member.orcid }}" target="_blank" title="ORCID" class="orcid-link"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID"> ORCID</a>{% endif %}
+    {% if member.google_scholar %}<a href="{{ member.google_scholar }}" target="_blank" title="Google Scholar">Scholar</a>{% endif %}
+    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" title="LinkedIn">LinkedIn</a>{% endif %}
+    {% if member.website %}<a href="{{ member.website }}" target="_blank" title="Website">Web</a>{% endif %}
+  </div>
 </div>
-
-<div class="team-card">
-  <img src="images/Baals_JPG.jpg" alt="Lennart John Baals">
-  <span class="role-badge">Researcher</span>
-  <h4>Lennart John Baals</h4>
-  <p class="institution">Bern Business School, Switzerland<br>University of Twente, Netherlands</p>
-</div>
-
-<div class="team-card">
-  <img src="images/Hadji_20Misheva.jpg" alt="Branka Hadji Misheva">
-  <span class="role-badge">Researcher</span>
-  <h4>Prof. Dr. Branka Hadji Misheva</h4>
-  <p class="institution">Bern Business School, Switzerland</p>
-</div>
-
-<div class="team-card">
-  <img src="images/Liu_20Yiting.jpg" alt="Yiting Liu">
-  <span class="role-badge">Researcher</span>
-  <h4>Dr. Yiting Liu</h4>
-  <p class="institution">Bern Business School, Switzerland<br>University of Twente, Netherlands</p>
-</div>
-
+{% endfor %}
 </div>
 
 </section>
@@ -137,7 +127,11 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ## Scientific Publications
 
-*Auto-updated from [OpenAlex.org](https://openalex.org) - {{ site.data.publications | size }} publications*
+<em>Auto-updated from <a href="https://openalex.org">OpenAlex.org</a> - {{ site.data.publications | size }} publications</em>
+
+<div class="pub-actions">
+  <button onclick="downloadAllBibtex()" class="btn-download">Download All BibTeX (.bib)</button>
+</div>
 
 <div class="publication-list">
 {% for pub in site.data.publications %}
@@ -148,6 +142,115 @@ By providing more reliable credit risk models, this project will strengthen the 
     {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}" class="doi-link" target="_blank">DOI</a>{% endif %}
     {% if pub.citations > 0 %}<span class="citations-badge">{{ pub.citations }} citations</span>{% endif %}
     {% if pub.open_access %}<span class="citations-badge">Open Access</span>{% endif %}
+    <button onclick="copyBibtex({{ forloop.index0 }})" data-bibtex-index="{{ forloop.index0 }}" class="btn-bibtex">BibTeX</button>
+    {% if pub.abstract and pub.abstract != "" %}<button onclick="toggleAbstract({{ forloop.index0 }})" data-abstract-btn="{{ forloop.index0 }}" class="btn-abstract">Show Abstract</button>{% endif %}
+  </div>
+  {% if pub.abstract and pub.abstract != "" %}
+  <div class="pub-abstract" data-abstract-index="{{ forloop.index0 }}" style="display: none;">{{ pub.abstract }}</div>
+  {% endif %}
+</div>
+{% endfor %}
+</div>
+
+<script>
+  publicationsData = {{ site.data.publications | jsonify }};
+</script>
+
+</section>
+
+---
+
+<section id="analytics">
+
+## Research Analytics
+
+<div class="analytics-section">
+  <div class="chart-container">
+    <h3>Publications by Year</h3>
+    <canvas id="pubsChart"></canvas>
+  </div>
+  <div class="chart-container">
+    <h3>Co-authorship Network</h3>
+    <div id="networkGraph"></div>
+  </div>
+</div>
+
+### Project Timeline
+
+<div class="timeline">
+  <div class="timeline-item">
+    <span class="timeline-date">2022</span>
+    <div class="timeline-content">
+      <strong>Project Launch</strong>
+      <p>SNSF-funded research project initiated at Bern Business School</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <span class="timeline-date">2023</span>
+    <div class="timeline-content">
+      <strong>Network Analysis Framework</strong>
+      <p>Development of graph-based credit risk assessment methodology</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <span class="timeline-date">2024</span>
+    <div class="timeline-content">
+      <strong>Key Publications</strong>
+      <p>Papers published in Finance Research Letters and Expert Systems with Applications</p>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <span class="timeline-date">2025</span>
+    <div class="timeline-content">
+      <strong>Ongoing Research</strong>
+      <p>Continued development of network-based models and industry collaborations</p>
+    </div>
+  </div>
+</div>
+
+</section>
+
+---
+
+<section id="resources">
+
+## Datasets & Code
+
+<em>Research materials and code repositories from our project</em>
+
+<div class="resource-grid">
+  <div class="resource-card">
+    <h4>P2P Lending Network Analysis</h4>
+    <p>Python code for network feature extraction and credit risk modeling using Bondora dataset</p>
+    <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" class="resource-link" target="_blank">GitHub Repository</a>
+  </div>
+  <div class="resource-card">
+    <h4>Bondora P2P Dataset</h4>
+    <p>European P2P lending platform data used in our research publications</p>
+    <a href="https://www.bondora.com/en/public-reports" class="resource-link" target="_blank">Data Source</a>
+  </div>
+  <div class="resource-card">
+    <h4>Network Centrality Metrics</h4>
+    <p>Implementation of degree centrality and network topology features for credit scoring</p>
+    <a href="https://doi.org/10.1016/j.frl.2024.105308" class="resource-link" target="_blank">Related Paper</a>
+  </div>
+</div>
+
+</section>
+
+---
+
+<section id="news">
+
+## News & Updates
+
+<div class="news-list">
+{% for item in site.data.news %}
+<div class="news-item">
+  <span class="news-date">{{ item.date }}</span>
+  <div class="news-content">
+    <strong>{{ item.title }}</strong>
+    <p>{{ item.description }}</p>
   </div>
 </div>
 {% endfor %}
@@ -161,7 +264,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ## Academic Events
 
-*The team has received invitations to numerous international conferences, serving roles as keynote speakers, session chairs, or organizing events.*
+<em>The team has received invitations to numerous international conferences, serving roles as keynote speakers, session chairs, or organizing events.</em>
 
 <img src="images/WhatsApp_20Image_202023-09-29_20at_2015_45_edited.jpg" alt="8th Bern Conference 2024" class="event-image">
 
@@ -177,12 +280,17 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ## Collaborations
 
-| Institution | Contact | Activities |
-|-------------|---------|------------|
-| **American University of Sharjah, UAE** | Prof. Dr. Stephen Chan | Constructive exchanges, Publications, Personnel exchange |
-| **University of Manchester, UK** | Dr. Yuanyuan Zhang | Constructive exchanges, Publications |
-| **Renmin University, China** | Prof. Dr. Jeffrey Chu | Constructive exchanges, Publications |
-| **Bern Business School, Switzerland** | Prof. Dr. Branka Hadji Misheva | Constructive exchanges, Publications, Personnel exchange |
+<table>
+  <thead>
+    <tr><th>Institution</th><th>Contact</th><th>Activities</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>American University of Sharjah, UAE</strong></td><td>Prof. Dr. Stephen Chan</td><td>Constructive exchanges, Publications, Personnel exchange</td></tr>
+    <tr><td><strong>University of Manchester, UK</strong></td><td>Dr. Yuanyuan Zhang</td><td>Constructive exchanges, Publications</td></tr>
+    <tr><td><strong>Renmin University, China</strong></td><td>Prof. Dr. Jeffrey Chu</td><td>Constructive exchanges, Publications</td></tr>
+    <tr><td><strong>Bern Business School, Switzerland</strong></td><td>Prof. Dr. Branka Hadji Misheva</td><td>Constructive exchanges, Publications, Personnel exchange</td></tr>
+  </tbody>
+</table>
 
 ### Research Networks
 
@@ -204,7 +312,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ## Third-Party Funds
 
-*The team has acquired research funds from national and international organizations, including the Swiss National Science Foundation and Horizon Europe.*
+<em>The team has acquired research funds from national and international organizations, including the Swiss National Science Foundation and Horizon Europe.</em>
 
 <div class="funding-card">
   <h3>Leading House Asia: 2023 Call for Applied Research Partnerships, ETH</h3>
@@ -312,4 +420,7 @@ By providing more reliable credit risk models, this project will strengthen the 
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/visualizations.js"></script>

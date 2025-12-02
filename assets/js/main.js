@@ -1,3 +1,61 @@
+// Publication data will be injected by Jekyll
+let publicationsData = [];
+
+// Generate BibTeX for a publication
+function generateBibtex(pub) {
+  const key = pub.openalex_id || 'pub' + Math.random().toString(36).substr(2, 9);
+  const authors = pub.authors ? pub.authors.replace(/, et al\./g, ' and others').replace(/, /g, ' and ') : '';
+  const type = pub.type === 'article' ? 'article' : 'misc';
+
+  return `@${type}{${key},
+  title = {${pub.title || ''}},
+  author = {${authors}},
+  journal = {${pub.journal || ''}},
+  year = {${pub.year || ''}},
+  doi = {${pub.doi || ''}}
+}`;
+}
+
+// Copy BibTeX to clipboard
+function copyBibtex(index) {
+  if (publicationsData[index]) {
+    const bibtex = generateBibtex(publicationsData[index]);
+    navigator.clipboard.writeText(bibtex).then(() => {
+      const btn = document.querySelector(`[data-bibtex-index="${index}"]`);
+      if (btn) {
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = original; }, 1500);
+      }
+    });
+  }
+}
+
+// Download all BibTeX
+function downloadAllBibtex() {
+  const allBibtex = publicationsData.map(generateBibtex).join('\n\n');
+  const blob = new Blob([allBibtex], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'publications.bib';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Toggle abstract visibility
+function toggleAbstract(index) {
+  const abstract = document.querySelector(`[data-abstract-index="${index}"]`);
+  const btn = document.querySelector(`[data-abstract-btn="${index}"]`);
+  if (abstract && btn) {
+    const isHidden = abstract.style.display === 'none' || !abstract.style.display;
+    abstract.style.display = isHidden ? 'block' : 'none';
+    btn.textContent = isHidden ? 'Hide Abstract' : 'Show Abstract';
+  }
+}
+
 // Smooth scroll for navigation links
 document.addEventListener('DOMContentLoaded', function() {
   // Smooth scroll for anchor links
