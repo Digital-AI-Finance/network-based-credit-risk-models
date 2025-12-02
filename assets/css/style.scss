@@ -22,7 +22,10 @@ $font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 .page-header {
   background: linear-gradient(135deg, $navy-primary 0%, $navy-dark 100%);
   padding: 1rem;
-  @media screen and (min-width: 64em) { padding: 1.5rem 2rem; }
+  @media screen and (min-width: 64em) {
+    padding: 1.5rem 2rem;
+    margin-left: 180px; // Make room for sidebar
+  }
 }
 
 .project-name {
@@ -40,7 +43,7 @@ $font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   margin: 0 auto;
 }
 
-// Sticky Navigation - COMPACT
+// Top Navigation - COMPACT
 .nav-container {
   position: sticky;
   top: 0;
@@ -48,6 +51,9 @@ $font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   background: $bg-white;
   box-shadow: 0 1px 5px rgba(0,0,0,0.1);
   border-bottom: 2px solid $gold-accent;
+  @media screen and (min-width: 64em) {
+    margin-left: 180px; // Make room for sidebar
+  }
 }
 
 .nav-menu {
@@ -74,13 +80,98 @@ $font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   &:hover, &.active { background: $navy-primary; color: $bg-white; }
 }
 
+// Left Sidebar Navigation
+.sidebar-nav {
+  display: none; // Hidden on mobile
+  @media screen and (min-width: 64em) {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 180px;
+    height: 100vh;
+    background: linear-gradient(180deg, $navy-primary 0%, $navy-dark 100%);
+    padding: 1rem 0;
+    z-index: 1001;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.15);
+  }
+
+  .sidebar-header {
+    padding: 0.5rem 1rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 0.5rem;
+    text-align: center;
+
+    .sidebar-title {
+      color: $gold-accent;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+    .sidebar-subtitle {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.6rem;
+      margin-top: 0.25rem;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(255,255,255,0.1);
+      color: $bg-white;
+      border-left-color: $gold-accent;
+    }
+
+    &.active {
+      background: rgba(255,255,255,0.15);
+      color: $gold-accent;
+      border-left-color: $gold-accent;
+      font-weight: 600;
+    }
+  }
+
+  .nav-section {
+    padding: 0.75rem 1rem 0.25rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+}
+
 // Main content - COMPACT
 .main-content {
   font-family: $font-body;
   max-width: 1100px;
   padding: 1rem 0.75rem;
   font-size: 0.9rem;
-  @media screen and (min-width: 64em) { padding: 1.5rem 2rem; }
+  @media screen and (min-width: 64em) {
+    padding: 1.5rem 2rem;
+    margin-left: 180px; // Make room for sidebar
+  }
 
   h1, h2, h3, h4 { font-family: $font-heading; color: $navy-primary; }
   h1 { font-size: 1.4rem; border-bottom: 2px solid $gold-accent; padding-bottom: 0.3rem; margin-bottom: 0.5rem; }
@@ -538,6 +629,9 @@ table {
   padding: 1rem;
   margin-top: 1.5rem;
   font-size: 0.8rem;
+  @media screen and (min-width: 64em) {
+    margin-left: 180px; // Make room for sidebar
+  }
 
   .footer-content {
     max-width: 1100px;
@@ -584,6 +678,7 @@ section[id] { scroll-margin-top: 50px; }
 @media print {
   // Hide interactive elements
   .nav-container,
+  .sidebar-nav,
   .site-footer,
   .contact-form,
   .btn-bibtex,
@@ -597,7 +692,14 @@ section[id] { scroll-margin-top: 50px; }
     display: none !important;
   }
 
-  // Reset backgrounds
+  // Reset backgrounds and margins
+  .page-header,
+  .nav-container,
+  .main-content,
+  .site-footer {
+    margin-left: 0 !important;
+  }
+
   .page-header,
   .stats-banner {
     background: none !important;

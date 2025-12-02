@@ -72,9 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Highlight active navigation on scroll
+  // Highlight active navigation on scroll (both top nav and sidebar)
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-menu a');
+  const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
 
   function highlightNav() {
     let scrollPos = window.scrollY + 100;
@@ -85,7 +86,15 @@ document.addEventListener('DOMContentLoaded', function() {
       const id = section.getAttribute('id');
 
       if (scrollPos >= top && scrollPos < top + height) {
+        // Highlight top nav
         navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + id) {
+            link.classList.add('active');
+          }
+        });
+        // Highlight sidebar nav
+        sidebarLinks.forEach(link => {
           link.classList.remove('active');
           if (link.getAttribute('href') === '#' + id) {
             link.classList.add('active');

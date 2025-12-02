@@ -3,6 +3,28 @@ layout: default
 title: Network-Based Credit Risk Models in P2P Lending Markets
 ---
 
+<nav class="sidebar-nav">
+  <div class="sidebar-header">
+    <div class="sidebar-title">SNSF Project</div>
+    <div class="sidebar-subtitle">Credit Risk Models</div>
+  </div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#analytics">Analytics</a></li>
+    <div class="nav-section">Resources</div>
+    <li><a href="#resources">Datasets & Code</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#events">Events</a></li>
+    <div class="nav-section">Network</div>
+    <li><a href="#collaborations">Collaborations</a></li>
+    <li><a href="#funding">Funding</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
 <nav class="nav-container">
   <ul class="nav-menu">
     <li><a href="#home">Home</a></li>
