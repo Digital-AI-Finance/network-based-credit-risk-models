@@ -36,3 +36,21 @@ This research project focuses on developing advanced, interpretable credit risk 
 See the [Wiki](https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki) for complete project information.
 
 **Source:** [digital-finance-msca.com](https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf)
+
+## Description
+
+Network-Based Credit Risk Models in P2P Lending Markets - SNSF Research Project
+
+
+## Installation
+
+```bash
+git clone https://github.com/Digital-AI-Finance/network-based-credit-risk-models.git
+cd network-based-credit-risk-models
+pip install -r requirements.txt
+```
+
+
+## Usage
+
+See the repository contents for usage examples.
