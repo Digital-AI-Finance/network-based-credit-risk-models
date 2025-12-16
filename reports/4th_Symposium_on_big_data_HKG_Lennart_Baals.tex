@@ -1,0 +1,436 @@
+\documentclass[9pt, aspectratio=169, compress]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{courier}
+\usepackage{natbib}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\usetheme{Warsaw}
+\usecolortheme{default}
+\useoutertheme{miniframes}
+
+\definecolor{lightgray}{gray}{0.75} 
+
+% Table of Contents at beginning of each section
+\AtBeginSection[]{}
+
+% Header and footer
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=1.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+      \usebeamerfont{author in head/foot}%
+      \insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=1.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      \usebeamerfont{title in head/foot}%
+      \hfill\insertframenumber/\inserttotalframenumber%
+    \end{beamercolorbox}%
+  }%
+}
+
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[ht=0.8em,dp=0.8ex,wd=\paperwidth]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}
+}
+
+\title[A Systematic Literature Review on Graph-Based Models]{A Systematic Literature Review on Graph-Based Models in Credit Risk Assessment}
+\author[Lennart J. Baals, Yiting Liu, Jörg Osterrieder, Branka Hadji-Misheva]{Lennart J. Baals, Yiting Liu, Jörg Osterrieder, Branka Hadji-Misheva \\
+\vspace{0.25cm}
+\small{Department of High-Tech Business and Entrepreneurship, Faculty of Industrial Engineering and Business Information Systems, University of Twente, Enschede, Netherlands} \\
+\small{Bern Business School, Bern University of Applied Science, Bern, Switzerland}}
+\institute{2024 4th International Symposium on Big Data and Artificial Intelligence, Hong Kong}
+\date{\today}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Table of Contents Slide
+\begin{frame}{Overview}
+  \tableofcontents
+\end{frame}
+
+% Introduction Section
+\section{Introduction}
+
+% Motivation Slide
+\begin{frame}{Motivation for the Use of Graph-Based Models in Credit Risk Assessment}
+\begin{itemize}
+    \item \textbf{Current Limitations of Traditional Models:}
+    \begin{itemize}
+        \item Rely on static borrower-specific features (e.g., credit scores, financial ratios).
+        \item Assume independence among borrowers, neglecting interconnectedness.
+        \item Fail to address systemic risks and contagion in financial networks.
+    \end{itemize}
+    \item \textbf{Advantages of Graph-Based Models:}
+    \begin{itemize}
+        \item Capture latent relationships (e.g., social, economic, and transactional ties).
+        \item Identify systemic vulnerabilities and propagation of financial distress.
+        \item Enable dynamic analysis of evolving networks (e.g., P2P lending, interbank markets).
+    \end{itemize}
+    \item \textbf{Increasing Adoption in Finance:}
+    \begin{itemize}
+        \item Applications in P2P lending, SME credit scoring, and systemic risk management.
+        \item Growing interest due to advancements in Graph Neural Networks (GNNs) and network analytics.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+% Research Questions Slide
+\begin{frame}{Research Questions}
+\begin{itemize}
+    \item \textbf{Primary Research Question:}
+    \begin{itemize}
+        \item How do different graph-based models compare in enhancing credit risk assessment?
+    \end{itemize}
+    \item \textbf{Sub-Questions:}
+    \begin{itemize}
+        \item What types of graph-based models (e.g., GNNs, centrality measures, community detection) are most commonly used?
+        \item What specific applications (e.g., default prediction, systemic risk analysis) benefit from these models?
+        \item What challenges and opportunities exist for future adoption in credit risk assessment?
+    \end{itemize}
+    \item \textbf{Broader Objective:}
+    \begin{itemize}
+        \item Bridge the gap between traditional risk assessment techniques and network-driven methodologies.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+% Contributions Slide
+\begin{frame}{Contributions of the Study}
+\begin{itemize}
+    \item \textbf{Systematic Literature Review (SLR):}
+    \begin{itemize}
+        \item Comprehensive review of a final selection of 78 scholarly articles from top databases (Scopus, Web of Science).
+        \item Application of structured coding to identify trends, methods, and key insights.
+    \end{itemize}
+    \item \textbf{Mapping the Research Landscape:}
+    \begin{itemize}
+        \item Analysis of temporal trends (e.g., significant growth since 2018).
+        \item Insights into journal coverage (e.g., focus on finance, computer science, and economics).
+        \item Keyword analysis to highlight interdisciplinary themes.
+    \end{itemize}
+    \item \textbf{Insights into Applications:}
+    \begin{itemize}
+        \item Utility in diverse settings:
+        \begin{itemize}
+            \item P2P lending: Improved credit scoring and borrower profiling.
+            \item SME credit scoring: Integration of transactional and relational data.
+            \item Systemic risk: Understanding contagion in interbank networks.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Explore Future Directions:}
+    \begin{itemize}
+        \item Identified gaps in hybrid model integration and real-time credit scoring.
+        \item Recommendations for expanding functionality (e.g., predictive modeling in decentralized finance).
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+% Methodology Section
+\section{Methodology}
+
+\begin{frame}{Systematic Review Process}
+\textbf{Objective:} Conduct a comprehensive review of scholarly literature on graph-based models in credit risk assessment.
+\vspace{0.4cm}
+
+\textbf{Framework of \cite{varsha_p_s_how_2024}:}
+\begin{itemize}
+    \item 1. Define review goals by chosen research questions.
+    \item 2. Develop a detailed review methodology to guide the approach.
+    \item 3. Conduct an extensive literature search.
+    \item 4. Apply inclusion and exclusion criteria.
+    \item 5. Assess study quality and extract/code data.
+    \item 6. Synthesize and analyze findings.
+    \item 7. Report results systematically.
+\end{itemize}
+\vspace{0.4cm}
+
+\textbf{Databases Used:} Scopus and Web of Science (broad coverage and robust search features).
+\end{frame}
+
+
+% Search and Inclusion Criteria Slide
+\begin{frame}{Search and Inclusion Criteria}
+\textbf{Search Query:} 
+\begin{itemize}
+    \item Keywords: "graph," "network models," "credit risk," "P2P lending," etc.
+    \item Boolean Operators: AND/OR to refine results.
+\end{itemize}
+\vspace{0.3cm}
+\textbf{Inclusion Criteria:}
+\begin{itemize}
+    \item Articles in scientific journals, written in English.
+    \item Articles including predefined keywords in the title, abstract, or keywords.
+\end{itemize}
+\vspace{0.3cm}
+\textbf{Exclusion Criteria:}
+\begin{itemize}
+    \item Publications before 1993, or from publishers like MDPI or Hindawi.
+    \item Irrelevant abstracts, titles, or unavailable online.
+\end{itemize}
+\vspace{0.3cm}
+\textbf{Outcome:}
+\begin{itemize}
+    \item From 1,066 retrieved articles, 78 were included after quality and relevance checks.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Coding Framework}
+\textbf{Purpose:}
+\begin{itemize}
+    \item Organize and analyze data systematically from reviewed articles.
+    \item We applied a double-blind peer review process for the article coding.
+\end{itemize}
+\vspace{0.3cm}
+\textbf{Criteria for Coding:}
+\begin{itemize}
+    \item Graph Type: Directed, undirected, weighted, etc.
+    \item Application Situation: Credit scoring, systemic risk, etc.
+    \item Research Questions: Goals of each study.
+    \item Methodology: Types of graph-based models used.
+    \item Data Source: P2P platforms, banking data, etc.
+    \item Task Type: Classification, prediction, clustering, etc.
+    \item Performance Metrics: AUC, F1-score, etc.
+    \item Validation: Cross-validation, hold-out tests, etc.
+\end{itemize}
+\end{frame}
+
+
+\section{Findings}
+
+% Temporal Distribution Slide
+\begin{frame}{Temporal Distribution of Literature}
+\textbf{Key Insights:}
+\begin{itemize}
+    \item First study on graph-based credit risk assessment published in 2012 (Hu et al.).
+    \item Significant growth in publications since 2018, with a peak in 2024.
+\end{itemize}
+\vspace{-0.3cm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Graphics/Literature Review/Temporal distribution of literature.png} % Replace with actual figure file
+    \caption{Temporal Distribution of Literature}
+    \label{fig:temporal-distribution}
+\end{figure}
+\end{frame}
+
+% Journal and Topic Distribution Slide
+\begin{frame}{Journal and Topic Distribution}
+\textbf{Key Insights:}
+\begin{itemize}
+    \item Top-cited papers are predominantly published in journals covering Business \& Economics, Computer Science, and Operations Research.
+    \item Reflects interdisciplinary nature of the field.
+    \item Significant presence in applied journals for practical methodologies.
+\end{itemize}
+\vspace{0.4cm}
+\textbf{Visualization:}
+\begin{itemize}
+    \item Next slide.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Journal and Topic Distribution}
+\textbf{Key Insights:}
+\begin{itemize}
+    \item \textbf{Top Journals:}
+    \begin{itemize}
+        \item \textit{Journal of Financial Stability}, \textit{Expert Systems with Applications}, \textit{MIS Quarterly}.
+    \end{itemize}
+    \item \textbf{Top Topics:}
+    \begin{itemize}
+        \item Business \& Economics (45\%), Computer Science (30\%), Operations Research (15\%), Others (10\%).
+    \end{itemize}
+\end{itemize}
+\vspace{0.3cm}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{l l l}
+\hline
+\textbf{Journal}                   & \textbf{Focus Areas}                          & \textbf{Top-Cited Papers (\#)} \\ \hline
+\textit{Journal of Financial Stability} & Business \& Economics                      & 2                              \\
+\textit{Expert Systems with Applications} & Computer Science; Operations Research     & 4                              \\
+\textit{MIS Quarterly}             & Computer Science; Business \& Economics      & 1                              \\
+\textit{Applied Soft Computing}    & Computer Science                             & 2                              \\
+\textit{Physica A}                 & Physics                                      & 1                              \\
+Others (e.g., Omega, JME, EJOR)    & Interdisciplinary                            & 10                             \\ \hline
+\end{tabular}
+\caption{Summary of Top Journals and Topics}
+\end{table}
+\end{frame}
+
+
+% Keyword Analysis Slide
+\begin{frame}{Keyword Analysis}
+\textbf{Key Insights:}
+\begin{itemize}
+    \item Most frequent keywords include "credit risk," "credit scoring," and "peer-to-peer lending."
+    \item Emerging topics: "machine learning," "graph neural networks," and "financial stability."
+\end{itemize}
+\vspace{-0.8cm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Graphics/Literature Review/Word Cloud.png} % Replace with actual figure file
+    \caption{Keyword Analysis}
+    \label{fig:keyword-analysis}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Application of Graph-based Models in P2P Lending and SME Credit Scoring}
+\textbf{Key Insights:}
+\begin{itemize}
+    \item \textbf{P2P Lending:}
+    \begin{itemize}
+        \item Network-derived variables significantly improve default prediction \citep{giudici_network_2019, ahelegbey_latent_2019}.
+        \item Studies show the role of borrower connectivity in influencing risk assessments \citep{liu_leveraging_2024}.
+        \item Advanced techniques like latent factor models reveal clustering patterns \citep{ahelegbey_factorial_2019}.
+    \end{itemize}
+    \item \textbf{SME Credit Scoring:}
+    \begin{itemize}
+        \item Inter-firm relationships captured through transactional networks \citep{kou_bankruptcy_2021, vinciotti_effect_2019}.
+        \item Enhanced credit scoring models using graph-based centrality measures \citep{giudici_network_2020, rishehchi_fayyaz_data-driven_2020}.
+        \item Frameworks like GNNs outperform traditional scoring methods \citep{lee_graph_2021}.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Application of Graph-based Models in Systemic Risk Assessment in Banking}
+\textbf{Key Insights:}
+\begin{itemize}
+    \item \textbf{Study Focus:}
+    \begin{itemize}
+        \item Interbank lending, cross-border credit networks, and systemic contagion \citep{poledna_multi-layer_2015}.
+        \item Quantifying risk propagation across interconnected banking systems \citep{tonzer_cross-border_2015, cheng_regulating_2022}.
+    \end{itemize}
+    \item \textbf{Techniques Used:}
+    \begin{itemize}
+        \item Multi-layer networks to capture interbank dependencies \citep{poledna_multi-layer_2015}.
+        \item Graphical Gaussian Models (GGMs) to model systemic risks \citep{cerchiello_conditional_2016}.
+        \item Dynamic multi-layer networks for real-time risk monitoring \citep{jin_financial_2024}.
+    \end{itemize}
+    \item \textbf{Applications:}
+    \begin{itemize}
+        \item Identifying vulnerable nodes and key contagion pathways \citep{chen_network_2020}.
+        \item Supporting macroprudential policy development for risk containment \citep{lin_roles_2022}.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Emerging Techniques: GNNs and Hypergraphs}
+\textbf{Graph Neural Networks (GNNs):}
+\begin{itemize}
+    \item Combine node features with graph structure for advanced predictions \citep{liu_leveraging_2024}.
+    \item Applications in credit risk prediction and fraud detection \citep{shi_enhancing_2023}.
+    \item E.g., hierarchical GNNs capturing borrower-supplier relationships \citep{song_enhancing_2024}.
+\end{itemize}
+\vspace{0.3cm}
+\textbf{Hypergraphs:}
+\begin{itemize}
+    \item Extend traditional graphs to model higher-order relationships \citep{shi_improved_2024}.
+    \item Useful for capturing complex interactions in SME lending and P2P platforms.
+    \item Show promise in systemic risk modeling with multi-entity transactions \citep{zhao_cross-border_2023}.
+\end{itemize}
+\end{frame}
+
+\section{Challenges and Future Directions}
+
+% Challenges Slide
+\begin{frame}{Challenges in Graph-Based Credit Risk Assessment}
+\textbf{Key Challenges:}
+\begin{itemize}
+    \item \textbf{Data Availability and Quality:}
+    \begin{itemize}
+        \item Limited access to detailed datasets, especially in real-world financial networks \citep{munoz-cancino_combination_2023}.
+        \item Incomplete or noisy data impacts the robustness of graph-based models \citep{hu_network-based_2012}.
+    \end{itemize}
+    \item \textbf{Scalability and Computational Complexity:}
+    \begin{itemize}
+        \item High computational resources required for processing large and dynamic networks \citep{wu_cdgat_2023, yildirim_big_2021}.
+        \item Difficulty in scaling models for real-time risk monitoring in volatile credit markets.
+    \end{itemize}
+    \item \textbf{Integration with Traditional Models:}
+    \begin{itemize}
+        \item Lack of established frameworks for combining graph-based and statistical methods \citep{dastile_statistical_2020}.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Future Directions in Graph-Based Credit Risk Assessment}
+\begin{itemize}
+    \item \textbf{Real-Time Credit Scoring:}
+    \begin{itemize}
+        \item Leverage graph-based models for dynamic monitoring of financial networks.
+        \item Enhance predictive accuracy of these models in volatile credit markets.
+    \end{itemize}
+    \item \textbf{Decentralized Finance (DeFi) Applications:}
+    \begin{itemize}
+        \item Adapt graph models to assess credit risk in blockchain-based lending and DeFi platforms.
+        \item Identify risks in smart contracts and lending pools using network patterns.
+    \end{itemize}
+    \item \textbf{Hybrid Frameworks for Risk Assessment:}
+    \begin{itemize}
+        \item Integrate graph-based methods with traditional models to create more robust systems.
+        \item Develop frameworks for seamless adoption in financial institutions.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Conclusion}
+\begin{itemize}
+    \item \textbf{Summary of Key Findings:}
+    \begin{itemize}
+        \item Graph-based models enhance credit risk assessment by capturing complex interdependencies.
+        \item Significant applications in P2P lending, SME credit scoring, and systemic risk assessment.
+    \end{itemize}
+    \item \textbf{Implications for Research and Practice:}
+    \begin{itemize}
+        \item Need for broader adoption of graph-based techniques in dynamic and decentralized contexts.
+        \item Potential to improve financial stability and risk management in evolving markets.
+    \end{itemize}
+    \item \textbf{Limitations and Recommendations:}
+    \begin{itemize}
+        \item Challenges in data availability, scalability, and integration with traditional frameworks.
+        \item Future research to focus on hybrid systems, real-time scoring, and applications in DeFi.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Acknowledgment}
+\begin{itemize}
+    \item We extend our sincere thanks to the \textit{Swiss National Science Foundation} for its financial backing of our project 100018E\_205487, which focuses on network-based credit risk models in P2P lending markets.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+\footnotesize
+\bibliographystyle{apalike} % Choose your preferred bibliography style
+\bibliography{references_SLR_2024} % Ensure your .bib file is named "references.bib"
+\end{frame}
+
+\end{document}

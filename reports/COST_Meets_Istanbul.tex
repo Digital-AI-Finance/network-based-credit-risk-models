@@ -1,0 +1,589 @@
+\documentclass[9pt, aspectratio=169, compress]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{courier}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+%\usepackage[absolute]{textpos}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{mathtools}
+%\usetheme{Madrid}
+\usetheme{Warsaw}
+%\usetheme{Antibes}
+\usecolortheme{default}
+\usepackage{underscore}
+\usepackage{comment}
+%\usetheme{progressbar}
+%\progressbaroptions{headline=sections}\
+\usepackage{caption} % 确保已经导入了caption包
+\setbeamertemplate{caption}[numbered]
+\definecolor{lightgray}{gray}{0.75} 
+
+\useoutertheme{miniframes}
+
+\AtBeginSection[]{
+\begin{frame}{Table of Contents}
+  \setlength{\columnsep}{10pt} % Adjust the spacing between columns
+  \setlength{\parskip}{-0pt} % Adjust the vertical spacing between items
+  \vspace{1em} % Adjust the overall vertical spacing (previously -4.5em
+  \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=hide]
+\end{frame}
+}
+
+\setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
+
+
+\setbeamertemplate{headline}{%
+  \begin{beamercolorbox}[ht=4ex,dp=2ex]{section in head/foot}
+        \vspace*{0.5ex}
+        \insertsectionnavigationhorizontal{0.5\paperwidth}{\hfill}{\hfill}
+  \end{beamercolorbox}
+}
+
+
+\usepackage{multicol}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=1.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+      \usebeamerfont{author in head/foot}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=1.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      \usebeamerfont{title in head/foot}%
+      \hfill\insertframenumber/\inserttotalframenumber%
+    \end{beamercolorbox}%
+  }%
+}
+
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[ht=0.8em,dp=0.8ex,wd=\paperwidth]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}
+}
+
+\title{\Huge Leveraging Network Topology for Credit Risk Assessment in P2P Lending}
+\subtitle{\scriptsize COST FinAI Meets Istanbul}
+\author{
+  Yiting Liu \\
+  Lennart John Baals \\
+  Branka Hadji Misheva\\
+  Joerg Osterrieder
+}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\section{Introduction to P2P Lending and the Bondora Dataset}
+\begin{frame}{Introduction to P2P Lending - Overview}
+\begin{block}{Definition of P2P Lending}
+Peer-to-peer (P2P) lending is a method of debt financing that enables individuals to borrow and lend money without the use of an financial institution as an intermediary.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.32\textwidth}
+\textbf{Online Platform Character}
+\begin{itemize}
+\item P2P lending occurs through online platforms that pair lenders with potential borrowers.
+\item These platforms used to offer more inclusiveness and better funding efficiency than banks.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Benefits for Lenders}
+\begin{itemize}
+\item Lenders can earn higher returns compared to traditional savings and investment products.
+\item Lenders can choose which borrowers to invest in.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Benefits for Borrowers}
+\begin{itemize}
+\item Borrowers can access financing faster and often with less stringent credit checks.
+\item This makes it beneficial for personal loan seeking.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{Growing Importance}
+With the power of technology and the internet, P2P lending has grown in popularity since it started in the early 2000s. Today, P2P lending platforms have facilitated billions of dollars in loans \textcolor{blue}{\textit{(Chen, Huang, and Shaban 2022)}}.
+\end{block}
+\end{frame}
+
+\begin{frame}{Advantages of P2P Lending Platforms}
+
+\begin{block}{An Overview}
+Peer-to-peer (P2P) lending platforms have reshaped the financial landscape.
+\end{block}
+
+\begin{columns}[T]
+\begin{column}{.32\textwidth}
+\textbf{Micro Perspective}
+\begin{itemize}
+\item \myuline{\textit{Accessibility:}} Simplified loan access for individuals without strigent credit checks.
+\item \myuline{\textit{Potential Returns:}} Can offers higher returns for investors.
+\item \myuline{\textit{Flexibility:}} More customizable loan terms based on borrower needs.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Macro Perspective}
+\begin{itemize}
+\item \myuline{\textit{Economic Growth:}} Stimulates economy through capital flow.
+\item \myuline{\textit{Financial Inclusion:}} Serves borrowers in areas that are underserved by banks.
+\item \myuline{\textit{Innovation:}} Disrupts traditional banking and lending, thus driving innovation.
+\end{itemize}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\newcommand{\myulinered}[1]{
+    \tikz[baseline=(node.base)]{
+        \node[inner sep=1pt,outer sep=0pt] (node) {#1};
+        \draw[red,thick] ([yshift=-2pt]node.south west) -- ([yshift=-2pt]node.south east);
+    }
+}
+
+\begin{frame}{Disadvantages of P2P Lending Platforms}
+
+\begin{block}{An Overview}
+While beneficial, P2P lending platforms also have drawbacks and risks for lenders and borrowers.
+\end{block}
+
+\begin{columns}[T]
+\begin{column}{.32\textwidth}
+\textbf{Micro Perspective}
+\begin{itemize}
+\item \myulinered{\textit{Credit Risk:}} Higher default risk due to relaxed credit checks.
+\item \myulinered{\textit{Limited Insurance:}} Most P2P loans are uninsured, increasing risk for lenders.
+\item \myulinered{\textit{Liquidity Risk:}} Difficulty in withdrawing investment before loan matures if no buyback guarantee established.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Macro Perspective}
+\begin{itemize}
+\item \myulinered{\textit{Regulatory Uncertainty:}} New financial model with sparse regulatory frameworks.
+\item \myulinered{\textit{Systemic Risk:}} With platform growth the systemic risk component increases.
+\item \myulinered{\textit{Uneven Market:}} May exacerbate inequality by favoring certain demographic groups.
+\end{itemize}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Introduction to P2P Lending - Overview Part 2}
+\begin{block}{Challenges in P2P Lending}
+In this context, P2P lending also imposes challenges to creditors as issued loans are usually unsecured which results in higher default rates, and a lower number of recovery options.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.32\textwidth}
+\textbf{Need for Regulation}
+\begin{itemize}
+\item Given its nature, there's also a need for regulation to protect both borrowers and lenders from increased default risk.
+\item Thus, governments and regulatory bodies are increasingly focusing on P2P lending platforms.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Need for Efficient Credit Scoring}
+\begin{itemize}
+\item Credit scoring is an important part of P2P lending.
+\item It is used to assess the risk associated with a given borrower.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Integration of Machine Learning}
+\begin{itemize}
+\item Machine learning is now being used to enhance credit scoring processes.
+\item The potential to improve loan default predictions is immense but yet sparsely investigated.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{Summary}
+In summary, P2P lending is an innovative and growing field, but one that requires careful risk management. The use of machine learning could be a key to improving these risk assessments.
+\end{block}
+\end{frame}
+
+
+\subsection{P2P Lending and Network-Based Modeling}
+\begin{frame}{Traditional vs P2P Lending}
+\begin{block}{Overview}
+In comparison, Peer-to-Peer (P2P) lending represents a significant shift from traditional lending practices.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Traditional Lending}
+\begin{itemize}
+\item Centralized: Banks act as intermediaries and guide the lending process.
+\item Risk Assessment: Banks use internal credit scoring models that have rich debtor information at hand.
+\item Interest Rates: Determined by the bank, often opaque.
+\item Regulation: Subject to extensive regulation.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{P2P Lending}
+\begin{itemize}
+\item Decentralized: Platform connects borrowers and lenders directly.
+\item Risk Assessment: Focus on publicly available credit ratings and alternative data sources to apply innovative methods.
+\item Interest Rates: Determined by the P2P lending platform based on credit scoring.
+\item Regulation: Less regulated, but increasing.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{Significance}
+The unique characteristics of P2P lending, such as its decentralized nature and publicly available credit information, open up new opportunities for credit risk modeling based on network analysis.
+\end{block}
+\end{frame}
+
+\begin{frame}{P2P Lending: Forms and Risk Ownership}
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Traditional Lending}
+\begin{itemize}
+\item \textbf{Risk Ownership:} The institution (bank) that provides the credit score also takes on the risk of the loan defaulting.
+\item \textbf{Incentives:} Banks have an inherent interest in providing accurate credit scoring due to the direct risk they bear.
+\begin{figure}
+\includegraphics[width=0.9\textwidth,height=1.2\textheight,keepaspectratio]{Graphics/Paper 1/Risk_ownership_bank.png}
+\end{figure}
+\end{itemize}
+\end{column}
+\begin{column}{.48\textwidth}
+\textbf{P2P Lending}
+\begin{itemize}
+\item \textbf{Risk Ownership:} The platform provides the credit score, but the credit risk is borne by the investors.
+\item \textbf{Incentives:} The platform's primary interest lies in increasing lending volumes, which may compromise the accuracy of credit scoring.
+\includegraphics[width=0.90\textwidth,height=1.2\textheight,keepaspectratio]{Graphics/Paper 1/Risk_ownership_platform.png}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bondora: Platform and Dataset Processing}
+
+\begin{block}{The Platform}
+Bondora (\url{https://www.bondora.com/en}) is a peer-to-peer (P2P) lending platform:
+\begin{itemize}
+  \item Established in Estonia in 2008; Serving over 226,696 customers;
+  \item Over €902 million invested; More than €113 million paid out in interest 
+  \item (all data collected on December 7th, 2023).
+\end{itemize}
+\end{block}
+%\textbf{Dataset:}
+%\item In the initial dataset, each row is a loan containg information relevant to this loan.
+\item Clean the data:
+\begin{itemize}
+\item Select loan records only in Estonian; Delete records with NA values.
+\item Drop variables:
+\begin{itemize}
+\item Irrelevant variables: \texttt{date.start}, \texttt{date.end}
+\item Variables unknown before a loan ends: \texttt{return}, \texttt{RR1}, \texttt{RR2.Mean}, \texttt{RR2.Median}, \texttt{RR2.WMean}, \texttt{NPRP}, \texttt{NPRA}, \texttt{FVCI}, \texttt{FVCI.Mean}, \texttt{FVCI.Median}, \texttt{FVCI.WMean}
+\item Transformed variable: \texttt{inc.l}
+\item Dummy variables: \texttt{AA}, \texttt{educ.6}, \texttt{em.dur.5p}, \texttt{use.m}, \texttt{ver.2}, \texttt{Mining}, \texttt{Utilities}
+\item For two highly correlated variables, keep one and delete the other one: \texttt{time2}, \texttt{time3}, \texttt{FreeCash.d}, \texttt{previous.loan.l}
+\end{itemize}
+\end{itemize}
+\item Data Sampling: After data cleaning, we have 12228 positive (default) and 20241 negative (non-default) records. We randomly select 12000 positive and 12000 negative records to construct the sample.
+\end{frame}
+
+
+\begin{frame}{An Overview on Features in Cleaned Dataset}
+After data cleaning, 155 features remain. Here we give an overview.
+    \begin{table}
+    \centering
+    
+    \begin{tabular}{p{0.1\textwidth} p{0.16\textwidth} p{0.25\textwidth} l}
+      \toprule
+      Group & Example & Explanation & Other variable in this group \\
+      \midrule
+      Dependent variable & \texttt{Default} &  1 - loan defaulted, 0 - otherwise & \\
+      \hline
+      Demographic information & \texttt{Age} & The age of the loan applicant  & \texttt{Gender}, \texttt{Marital status}, \texttt{Kids}, \cdots  \\
+      \hline
+      Borrower's financial information & \texttt{DebtToIncome} &  Ratio of borrower's monthly gross income that goes toward paying loans & \texttt{Salary}, \texttt{Current debt}, \cdots  \\
+      \hline
+      Relevant to the specific loan & \texttt{Loan amount} &  Estimated amount the borrower has to pay every month & \texttt{Interest rate}, \texttt{Loan duration}, \cdots \\
+      \hline
+      Relevant to the application process& \texttt{Hour of application} &  Application hour & \texttt{Monday}, \texttt{After midnight}, \cdots\\
+      \hline
+      Information from platform & \texttt{A} & Bondora rating - A  & \texttt{B}, \texttt{C} \\
+      \hline
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+
+\begin{frame}{Notation}
+  \begin{table}
+    \centering
+    \begin{tabular}{l p{0.6\textwidth}}
+      \toprule
+      Notation & Explanation \\
+      \midrule
+      \( \texttt{variable} \) & This font indicates variables in the initial dataset. \\
+      \hline
+      \( \colorbox{lightgray}{\texttt{variable}} \) & This font indicates parameters in the supervised model. \\
+      \hline
+      \( (N, g) \) & The graph. \\
+      \hline
+      \( N=\{1, 2, \cdots, i, j, \cdots, n\} \) & The nodes set. \\
+      \hline
+      \( g=\{ij: i, j \in N\} \) & Edges in graph \( (N, g) \). \\
+      \hline
+      \( x_p \) & The \(p\)th feature in the cleaned dataset. \\
+      \hline
+      \( d_{ij} \) & The Gowers' distance between node \(i\) and node \(j\). \\
+      \hline
+      \( w_{ij} \) & The weight of edge \(ij\). \\
+      \hline
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\subsection{Build up the Graph}
+\begin{frame}{Build up the Graph}
+\begin{columns}
+
+\begin{column}{0.4\textwidth}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Graphics/Paper 1/A Graph Example.png}
+    \caption{A Graph Example}
+  \end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{Nodes and edges:}
+  \begin{itemize}
+    \item[\textbullet] Each node in the graph is a loan;
+    \item[\textbullet] We use Gower's distances \textsuperscript{[1]} between two nodes as the weight of edge \(ij\) (\(w_{ij}\)).
+  \end{itemize}
+\begin{equation*}
+d_{ij} = w_{ij} =\sum_{p=1}^{P} \frac{1}{P} \times {\frac{d^p_{ij}}{\text{max}(x_{\cdot p}) - \text{min}(x_{\cdot p})}}, \\
+\text{where} d^p_{ij} = \left\{
+  \begin{array}{ll}
+    |x_{ip} - x_{jp}| & \text{if } x_p \text{ is a continuous variable}, \\
+    1 & \text{if } x_p \text{ is a categorical variable and } x_{ip} \neq x_{jp}, \\
+    0 & \text{if } x_p \text{ is a categorical variable and } x_{ip} = x_{jp}.
+  \end{array}
+\right.
+\end{equation*}
+\end{column}
+\end{columns}
+\vspace{20}
+\footnotesize{[1] Gower, J. C. (1971). A General Coefficient of Similarity and Some of Its Properties. Biometrics, 27(4), 857–871. https://doi.org/10.2307/2528823}
+\end{frame}
+
+\begin{frame}{Minimum Spanning Tree (MST)}
+\begin{block}{Definition}
+A Minimum Spanning Tree (MST) \textsuperscript{[1]} is a subset of the edges of a connected, edge-weighted graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight.
+\end{block}
+\item After the calculation of Gower's distance, we know the weights of all edges in a complete graph. We calculate the MST of this complete graph.
+\item Reasons for using MST rather than complete graph:
+\begin{itemize}
+\item \textbf{Extract information efficiently:} On a complete graph, some centrality measures independent to edges' weights will be very close or identical. For example, degree centrality.
+\item \textbf{Keep a connected graph:} Centrality measures based on different component of the graph are not comparable.
+\item \textbf{Reduce computational cost:} Calculation of centrality measures are easier on MST.
+\end{itemize}
+\vspace{20}
+\footnotesize{[1] Prim, R. C. (1957). Shortest connection networks and some generalizations. The Bell System Technical Journal, 36(6), 1389-1401.}
+\end{frame}
+
+
+\section{Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics}
+\subsection{Publication}
+\begin{frame}{Publication}
+\begin{center}
+        \includegraphics[width=0.8\textwidth]{Degree Relevant Presentation/Yiting/Qualifier/2nd paper.png}
+\end{center}
+\href{https://doi.org/10.1016/j.frl.2024.105308}{https://doi.org/10.1016/j.frl.2024.105308}
+
+    
+\end{frame}
+
+\subsection{Notation}
+\begin{frame}{Notation}
+  \begin{table}
+    \centering
+    \begin{tabular}{l p{0.6\textwidth}}
+      \toprule
+      Notation & Explanation \\
+      \midrule
+      \( \texttt{variable} \) & This font indicates that the variable is in the original data set. \\
+      \hline
+      \( G(V, E) \) & A graph. \\
+      \hline
+      \( I \) & The total number of nodes. \\
+      \hline
+      \( deg(i) \) & The degree centrality of node \(i\). \\
+      \hline
+      \( d_{j} \) & The distance between the ith node and the jth node. \\
+      \hline
+      \( \deg^{\text{neg}}(i)\) & The non-defaulted group degree centrality for node i. \\
+      \hline
+      \( \deg^{\text{pos}}(i)\) & The defaulted group degree centrality for node i. \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\subsection{Data Pre-Processing}
+\begin{frame}{Data Pre-Processing: from Initial Data to MST in Distance Matrix Form}
+\vspace{-0.3cm}
+\item Clean the data:
+\begin{itemize}
+\item Select loan records only in Estonian; Delete records with NA values;
+\item Drop columns:
+\begin{itemize}
+\item Irrelevant variables: \texttt{date.start}, \texttt{date.end}
+\item Variables cannot be known before a loan ends: \texttt{return}, \texttt{RR1}, \texttt{RR2.Mean}, \texttt{RR2.Median}, \texttt{RR2.WMean}, \texttt{NPRP}, \texttt{NPRA}, \texttt{FVCI}, \texttt{FVCI.Mean}, \texttt{FVCI.Median}, \texttt{FVCI.WMean}
+\item Repeated income variables, as they express income in a transformed way: \texttt{inc.*\\.l}
+\item Dummy variables: \texttt{AA}, \texttt{educ.6}, \texttt{em.dur.5p}, \texttt{use.m}, \texttt{ver.2}, \texttt{Mining}, \texttt{Utilities}
+\item For two highly correlated variables, keep one and delete the other one: \texttt{time2}, \texttt{time3}, \texttt{FreeCash.d}, \texttt{previous.loan.l}
+\end{itemize}
+\end{itemize}
+\item Data Sampling: After data cleaning, we have 12228 positive (defaulted) and 20241 negative (non-defaulted) records. We randomly select 6000 positive and 10000 negative records to construct the sample.
+\item Calculate Gower's Distance: Gower's distance is not affected by different scales of variables, and is applicable to a combination of continuous data and categorical data.
+\item Calculate Minimum Spanning Tree (MST) and express MST in distance matrix form: We use \texttt{Inf} in the matrix if two nodes do not have an edge in the MST.
+\item Data Segment: We segment the data into training set and testing set.
+\end{frame}
+
+
+\subsection{Degree Centrality: Defaulted Group and Non-Defaulted Group}
+\begin{frame}{Degree Centrality: Defaulted Group and Non-Defaulted group}
+\begin{definition}[Degree Centrality]
+The Degree Centrality of a node \( i \) in a graph \( G(V, E) \) is defined as:
+\[
+\deg(i) = \sum_{j=1, j\ne i}^{I}Indicator[\text{node } j \text{ is connected to node } i]
+\]
+\end{definition}
+
+\begin{itemize}
+\item \textbf{What it measures}: Degree Centrality quantifies the immediate influence or connectivity of a node within the network. A higher value indicates that the node is connected to a larger number of other nodes, thereby serving as a major junction or hub in the network. This metric is particularly useful for identifying nodes that serve as key connectors or influencers within the network topology.
+\end{itemize}
+\end{frame}
+
+
+% Slide 1: Delete the ith column
+\begin{frame}{Degree Centrality: Defaulted Group and Non-Defaulted Group}
+\textbf{Operation: Delete the \(i\)th column}
+\[
+\text{ith row: } d_1, d_2, d_3 = \texttt{Inf}, d_4 = \texttt{Inf}, \cdots, \cancel{d_i}, \cdots, d_{J-2}, d_{J-1}, d_{J}
+\]
+\begin{itemize}
+\item We delete the \(i\)th column because we do not consider the defaulted/non-defaulted status of the node itself.
+\end{itemize}
+\end{frame}
+
+% Slide 2: Delete columns not in training set
+\begin{frame}{Degree Centrality: Defaulted Group and Non-Defaulted Group}
+\textbf{Operation: Delete columns not in the training set}
+\[
+\text{ith row: } d_1, d_2, d_3 = \texttt{Inf}, d_4 = \texttt{Inf}, \cdots, \cancel{d_i}, \cdots, \cancel{d_{J-2}}, \cancel{d_{J-1}}, \cancel{d_{J}}
+\]
+\begin{itemize}
+\item We delete columns not in the training set because we do not know whether a point is defaulted or non-defaulted in the testing set.
+\end{itemize}
+\end{frame}
+
+% Slide 3: Delete Inf elements
+\begin{frame}{Degree Centrality: Defaulted Group and Non-Defaulted Group}
+\textbf{Operation: Delete \texttt{Inf} elements}
+\[
+\text{ith row: } d_1, d_2, \cancel{d_3 = \texttt{Inf}}, \cancel{d_4 = \texttt{Inf}}, \cdots, \cancel{d_i}, \cdots, \cancel{d_{J-2}}, \cancel{d_{J-1}}, \cancel{d_{J}}
+\]
+\begin{itemize}
+\item We delete \texttt{Inf} elements because the node is not connected to these points in the MST.
+\end{itemize}
+\end{frame}
+
+% Slide 4: Count in the remaining columns
+\begin{frame}{Degree Centrality: Defaulted Group and Non-Defaulted Group}
+\textbf{Operation: Count in the remaining columns}
+\[
+\text{ith row: } \textcolor{red}{d_1}, \textcolor{green}{d_2}, \cancel{d_3 = \texttt{Inf}}, \cancel{d_4 = \texttt{Inf}}, \cdots, \cancel{d_i}, \cdots, \cancel{d_{J-2}}, \cancel{d_{J-1}}, \cancel{d_{J}}
+\]
+\begin{itemize}
+\item For the remaining columns, they indicate that the \(i\)-th node is connected to this in-training-set point in the MST. We count in the remaining columns, how many are matched with defaulted loans and how many are matched with non-defaulted loans.
+\item We use \(\deg^{\text{neg}}(i)\) to denote the non-defaulted group degree centrality for node i; we use \(\deg^{\text{pos}}(i)\) to denote the defaulted group degree centrality for node i.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Degree Centrality: Defaulted Group and Non-Defaulted Group}
+\textbf{An example}
+
+\begin{minipage}{0.75\textwidth}
+  \includegraphics[width=\textwidth]{Graphics/Paper 2/Example.png}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Node & \(\deg^{\text{pos}}\) & \(\deg^{\text{neg}}\) \\
+    \hline
+    1 & 0 & 2 \\
+    2 & 1 & 0 \\
+    3 & 1 & 0 \\
+    4 & 0 & 1 \\
+    5 & 0 & 1 \\
+    \hline
+  \end{tabular}
+\end{minipage}
+\end{frame}
+
+
+\subsection{Logistic Regression}
+\begin{frame}{Logistic Regression and Performance Analysis}
+\item We add \(\deg^{\text{neg}}(v)\) and \(\deg^{\text{pos}}(v)\) back to initial data set as two additional graph features;
+\item We normalize the data by subtracting the mean and dividing by the standard deviation;
+\item We identify the top 20 features based on their Mean Decrease Gini scores in the Random Forest model;
+\item We run the logistics regression with step wise. This step continues to select features during regression.
+\item We conduct DeLong test to compare the regression model based on data with two extra degree centrality measures and without.
+\item We shuffle the two extra degree centrality measures and fit the model again. If the improvement disappears, it means our improvement in regression model brought by two extra degree centrality measures is robust.
+\end{frame}
+
+
+\subsection{Result}
+\begin{frame}{Feature Importance}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Graphics/Paper 3/feature_importance_with.pdf}
+\end{frame}
+
+\begin{frame}{ROC and DeLong Test}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Graphics/Paper 3/ROC.pdf}
+\end{frame}
+
+\begin{frame}{Robustness Check - Feature Impotence}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Graphics/Paper 3/feature_importance_with_shuffle.pdf}
+\end{frame}
+
+\begin{frame}{Robustness Check - ROC and DeLong Test}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Graphics/Paper 3/ROC_compare_with_shuffle.pdf}
+\end{frame}
+
+
+\end{document}

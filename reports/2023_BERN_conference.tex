@@ -1,0 +1,1136 @@
+\documentclass[9pt, aspectratio=169, compress]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{courier}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+%\usepackage[absolute]{textpos}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{mathtools}
+%\usetheme{Madrid}
+\usetheme{Warsaw}
+%\usetheme{Antibes}
+\usecolortheme{default}
+\usepackage{underscore}
+\usepackage{comment}
+%\usetheme{progressbar}
+%\progressbaroptions{headline=sections}
+
+\useoutertheme{miniframes}
+
+\AtBeginSection[]{
+\begin{frame}{Table of Contents}
+  \setlength{\columnsep}{10pt} % Adjust the spacing between columns
+  \setlength{\parskip}{-0pt} % Adjust the vertical spacing between items
+  \vspace{1em} % Adjust the overall vertical spacing (previously -4.5em
+  \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=hide]
+\end{frame}
+}
+
+\setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
+
+
+\setbeamertemplate{headline}{%
+  \begin{beamercolorbox}[ht=4ex,dp=2ex]{section in head/foot}
+        \vspace*{0.5ex}
+        \insertsectionnavigationhorizontal{0.5\paperwidth}{\hfill}{\hfill}
+  \end{beamercolorbox}
+}
+
+
+\usepackage{multicol}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=1.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+      \usebeamerfont{author in head/foot}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=1.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      \usebeamerfont{title in head/foot}%
+      \hfill\insertframenumber/\inserttotalframenumber%
+    \end{beamercolorbox}%
+  }%
+}
+
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[ht=0.8em,dp=0.8ex,wd=\paperwidth]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}
+}
+
+\title{Leveraging Network Topology for Credit Risk Assessment in P2P Lending: A Comparative Study under the Lens of Machine Learning}
+\author{Yiting Liu, Lennart John Baals, Jörg Osterrieder, Branka Hadji-Misheva}
+
+\begin{document}
+
+
+\frame{\titlepage}
+
+\section[Intro]{Introduction}
+\subsection{Introduction to P2P Lending}
+\begin{frame}{Introduction to P2P Lending - Overview}
+\begin{block}{The emergence of FINTECH}
+Digital innovation brought major improvements in connectivity of systems, computing power, storage, newly created and usable data which in turn lead to the emergence of many new business models and entrants. 
+\end{block}
+
+\begin{block}{Fintech Credit}
+All credit activity facilitated by platforms that match borrowers with lenders (FSB, 2020).
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Global investment activity in fintech companies}
+\begin{figure}
+\includegraphics[width=0.85\textwidth,height=1.2\textheight,keepaspectratio]{Graphics/Paper 1/Global_investment_fintech.png}
+\end{figure}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{European Online Alternative Finance Market Volumes 2013-2018 in € billions (Including the UK) }
+\begin{figure}
+\includegraphics[width=0.95\textwidth,height=1.2\textheight,keepaspectratio]{Graphics/Paper 1/Fintech_market.png}
+\end{figure}
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
+
+% \section[Intro]{Introduction}
+% \subsection{Introduction to P2P Lending}
+% \begin{frame}{Introduction to P2P Lending - Overview}
+% \begin{block}{Definition of P2P Lending}
+% Peer-to-peer (P2P) lending is a method of debt financing that enables individuals to borrow and lend money without the use of an financial institution as an intermediary.
+% \end{block}
+
+% \begin{columns}[T] % align columns
+% \begin{column}{.32\textwidth}
+% \textbf{Online Platform Character}
+% \begin{itemize}
+% \item P2P lending occurs through online platforms that pair lenders with potential borrowers.
+% \item These platforms used to offer more inclusiveness and better funding efficiency than banks.
+% \end{itemize}
+% \end{column}
+
+% \begin{column}{.32\textwidth}
+% \textbf{Benefits for Lenders}
+% \begin{itemize}
+% \item Lenders can earn higher returns compared to traditional savings and investment products.
+% \item Lenders can choose which borrowers to invest in.
+% \end{itemize}
+% \end{column}
+
+% \begin{column}{.32\textwidth}
+% \textbf{Benefits for Borrowers}
+% \begin{itemize}
+% \item Borrowers can access financing faster and often with less stringent credit checks.
+% \item This makes it beneficial for personal loan seeking.
+% \end{itemize}
+% \end{column}
+% \end{columns}
+
+% \begin{block}{Growing Importance}
+% With the power of technology and the internet, P2P lending has grown in popularity since it started in the early 2000s. Today, P2P lending platforms have facilitated billions of dollars in loans \textcolor{blue}{\textit{(Chen, Huang, and Shaban 2022)}}.
+% \end{block}
+% \end{frame}
+
+\newcommand{\myuline}[1]{
+    \tikz[baseline=(node.base)]{
+        \node[inner sep=1pt,outer sep=0pt] (node) {#1};
+        \draw[green,thick] ([yshift=-2pt]node.south west) -- ([yshift=-2pt]node.south east);
+    }
+}
+
+\begin{frame}{Advantages of P2P Lending Platforms}
+
+\begin{block}{An Overview}
+Peer-to-peer (P2P) lending platforms have reshaped the financial landscape, removing traditional financial intermediaries.
+\end{block}
+
+\begin{columns}[T]
+\begin{column}{.32\textwidth}
+\textbf{Micro Perspective}
+\begin{itemize}
+\item \myuline{\textit{Accessibility:}} Simplified loan access for individuals without strigent credit checks.
+\item \myuline{\textit{Potential Returns:}} Can offers higher returns for investors.
+\item \myuline{\textit{Flexibility:}} More customizable loan terms based on borrower needs.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Macro Perspective}
+\begin{itemize}
+\item \myuline{\textit{Economic Growth:}} Stimulates economy through capital flow.
+\item \myuline{\textit{Financial Inclusion:}} Serves borrowers in areas that are underserved by banks.
+\item \myuline{\textit{Innovation:}} Disrupts traditional banking and lending, thus driving innovation.
+\end{itemize}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\newcommand{\myulinered}[1]{
+    \tikz[baseline=(node.base)]{
+        \node[inner sep=1pt,outer sep=0pt] (node) {#1};
+        \draw[red,thick] ([yshift=-2pt]node.south west) -- ([yshift=-2pt]node.south east);
+    }
+}
+
+\begin{frame}{Disadvantages of P2P Lending Platforms}
+
+\begin{block}{An Overview}
+While beneficial, P2P lending platforms also have drawbacks and risks for lenders and borrowers.
+\end{block}
+
+\begin{columns}[T]
+\begin{column}{.32\textwidth}
+\textbf{Micro Perspective}
+\begin{itemize}
+\item \myulinered{\textit{Credit Risk:}} Higher default risk due to relaxed credit checks.
+\item \myulinered{\textit{Limited Insurance:}} Most P2P loans are uninsured, increasing risk for lenders.
+\item \myulinered{\textit{Liquidity Risk:}} Difficulty in withdrawing investment before loan matures if no buyback guarantee established.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Macro Perspective}
+\begin{itemize}
+\item \myulinered{\textit{Regulatory Uncertainty:}} New financial model with sparse regulatory frameworks.
+\item \myulinered{\textit{Systemic Risk:}} With platform growth the systemic risk component increases.
+\item \myulinered{\textit{Uneven Market:}} May exacerbate inequality by favoring certain demographic groups.
+\end{itemize}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Risk Ownership}
+\begin{block}{Overview}
+A critical difference between traditional financial intermediation and P2P lending systems is the nature of risk ownership, which carries distinct implications for the accumulation of bad debt.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Traditional Lending}
+\begin{itemize}
+\item \textbf{Risk Ownership:} The institution (bank) that provides the credit score also takes on the risk of the loan defaulting.
+\item \textbf{Incentives:} Banks have an inherent interest in providing accurate credit scoring due to the direct risk they bear.
+\begin{figure}
+\includegraphics[width=0.9\textwidth,height=1.2\textheight,keepaspectratio]{Graphics/Paper 1/Risk_ownership_platform.png}
+\end{figure}
+
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{P2P Lending}
+\begin{itemize}
+\item \textbf{Risk Ownership:} The platform provides the credit score, but the credit risk is borne by the investors.
+\item \textbf{Incentives:} The platform's primary interest lies in increasing lending volumes, which may compromise the accuracy of credit scoring.
+\includegraphics[width=0.60\textwidth,height=1.2\textheight,keepaspectratio]{Graphics/Paper 1/Risk_ownership_platform.png}
+
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+% \begin{frame}{Traditional vs P2P Lending}
+% \begin{block}{Overview}
+% A critical difference between traditional financial intermediation and P2P lending systems is the nature of risk ownership, which carries distinct implications for the accumulation of bad debt.
+% \end{block}
+
+% \begin{columns}[T] % align columns
+% \begin{column}{.48\textwidth}
+% \textbf{Traditional Lending}
+% \begin{itemize}
+% \item \textbf{Risk Ownership:} The institution (bank) that provides the credit score also takes on the risk of the loan defaulting.
+% \item \textbf{Incentives:} Banks have an inherent interest in providing accurate credit scoring due to the direct risk they bear.
+% \item \textbf{Outcome:} This potentially leads to more accurate credit risk assessment and lower levels of bad debt.
+% \end{itemize}
+% \end{column}
+
+% \begin{column}{.48\textwidth}
+% \textbf{P2P Lending}
+% \begin{itemize}
+% \item \textbf{Risk Ownership:} The platform provides the credit score, but the credit risk is borne by the investors.
+% \item \textbf{Incentives:} The platform's primary interest lies in increasing lending volumes, which may compromise the accuracy of credit scoring.
+% \item \textbf{Outcome:} This could potentially lead to higher levels of bad debt due to misaligned incentives.
+% \end{itemize}
+% \end{column}
+% \end{columns}
+
+% \begin{block}{Significance}
+% These dissimilarities highlight the importance of understanding and accurately assessing credit risk in P2P lending.
+% \end{block}
+% \end{frame}
+   
+\begin{frame}{P2P Lending and Network-Based Modeling - Network-based Approach to P2P Lending}
+\begin{block}{Overview}
+We apply a network-based modelling approach because it allows us to visualize relationships among borrowers and lenders, which is particularly relevant in the context of P2P lending through its decentralized nature and publicly available credit information.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Key Components}
+\begin{itemize}
+\item \textbf{Nodes:} Represent individual borrowers and lenders.
+\item \textbf{Edges:} Represent lending transactions or relationships.
+\item \textbf{Weights:} Can represent the size of loans, interest rates, or default probabilities.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Advantages}
+\begin{itemize}
+\item Captures complex interdependencies and contagion effects, providing understanding of risk dynamics in a decentralized lending environment.
+\item The approach also facilitates the assessment of network centrality that could help in evaluating risk dynamics within P2P lending.
+\item Enables the identification of key nodes (borrowers/lenders) and potential hotspots of credit risk.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Research Motivation}
+
+\begin{columns}[T] % align columns
+\begin{column}{.32\textwidth}
+\textbf{Overlooking Network Structures}
+\begin{itemize}
+\item We see it critical to overlook intricate network structures inherent in P2P lending platforms.
+\item The relative importance of various risk factors in predicting loan defaults is a topic of ongoing debate that triggers our research.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Innovative Modelling Technique}
+\begin{itemize}
+\item Our study is motivated to invent an advanced machine learning method to improve the accuracy of credit scoring in P2P lending.
+\item We investigate if incorporating information on the interconnections between borrowers can improve the predictive utility of scoring models. 
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Incorporating Graph Theory-Based Features}
+\begin{itemize}
+\item We do this by: 
+\item - Integrating graph theory-based features with conventional credit risk factors to enhance the prediction accuracy.
+\item - Capturing the network structure of P2P lending platforms in terms of lender/borrower clustering.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section[Literature Review]{Literature Review}
+
+\subsection{Network Models and Risk Estimation}
+\begin{frame}
+\frametitle{Literature Review: Network Models and Risk Estimation}
+\begin{itemize}
+\item The relevance of network models in risk assessment and loan default prediction within complex financial systems is increasingly recognized \textcolor{blue}{\textit{(Allen et al. 2009; Angelini et al. 2008; Battiston et al. 2012)}}.
+\item Previous research also utilized machine learning, including neural networks, to predict consumer credit risk and default, demonstrating superior performance compared to traditional methods \textcolor{blue}{\textit{(Khandani, Kim, and Lo 2010; Berg et al. 2020)}}.
+\item In P2P lending, network models have recently been adopted, granting improved accuracy in default prediction under the use of topological information \textcolor{blue}{\textit{(Giudici and Hadji-Misheva 2019)}} and the incorporation of network centrality features \textcolor{blue}{\textit{(Giudici, Hadji-Misheva, and Spelta 2020)}}. Scholars recently further utilized network effects for loan default prediction thereby extrapolating the importance of network centrality in risk estimation. \textcolor{blue}{\textit{(Chen et al. 2022a,b)}}.
+\item There are still numerous uncharted areas in the incorporation of network models in credit risk modeling, which presents unique opportunities for future research.
+\end{itemize}
+\end{frame}
+
+\subsection[Contribution]{Contribution of the Study}
+\begin{frame}{Contribution of the Study}
+\begin{block}{Study Context}
+Our study contributes to the field of P2P lending by integrating traditional credit risk factors with graph theory-based features for more accurate loan default prediction.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.32\textwidth}
+\textbf{Two-Step Machine Learning Methodology}
+\begin{itemize}
+\item We introduce an enhanced two-step machine learning methodology that improves prediction accuracy and offers practical insights for effective risk management and decision-making.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Comparative Evaluation}
+\begin{itemize}
+\item Our research provides a comparative analysis of various machine learning techniques. This guides practitioners in model selection for specific needs, contributing to the discourse on effective machine learning in finance.
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Laying Ground for Future Research}
+\begin{itemize}
+\item Our findings provide a stepping stone for future research in exploring additional informative features, alternative machine learning models, and extending the methodology to other financial domains.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\section[Data]{Data}
+
+\subsection{Bondora: A Peer-to-Peer Lending Platform}
+\begin{frame}{Bondora: A Leading European Peer-to-Peer Lending Platform}
+
+\begin{block}{Overview}
+Bondora (\url{https://www.bondora.com/en}) is a peer-to-peer (P2P) lending platform established in Estonia. The platform's operational design allows lenders and borrowers to transact directly between each other.
+\end{block}
+
+\begin{columns}[T]
+    \begin{column}{.48\textwidth}
+        \textbf{Diverse Participant Base}
+        \begin{itemize}
+            \item Bondora boasts a diverse user base, encompassing 225,837 individual lenders.
+            \item Lenders lend funds to borrowers with varied demographic and credit backgrounds.
+        \end{itemize}
+    \end{column}
+    \begin{column}{.48\textwidth}
+        \textbf{Rich Data}
+        \begin{itemize}
+            \item The platform has issued €867.5 Mio. in loans and is operating in Estonia, Finland, Spain, and Slovakia.
+            \item It offers rich data on loan listings, bidding records, and payment histories.
+        \end{itemize}
+    \end{column}
+\end{columns}
+
+\end{frame}
+
+
+\subsection{Data Used for This Study}
+\begin{frame}{Data Set Characteristics}
+
+\begin{block}{Dataset Details}
+Our study leverages a dataset of 32,469 individual loans before the data pre-processing steps. Within the loan sample 12,228 loans are defaulted and 20,241 are non-defaulted loans.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Variables and Metrics}
+\begin{itemize}
+\item The dataset includes $155$ variables relating to the borrower's demographics, financial history, and loan characteristics. 
+\item Of these variables the most informative features are 'liab.1', 'inc.total', 'MonthlyPayment', 'log.amount', 'time', 'Interest', 'Amt. of Prev. Loans Bef. Loan', 'No. Prev. Loans', and 'Age'.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Descriptive Statistics of the Most Informative Loan Features on the Cleaned, Unbalanced Data Set}
+\begin{figure}
+\includegraphics[width=1.15\textwidth,height=1.2\textheight,keepaspectratio]{Graphics/Paper 1/descriptive_stats_inf_feat_raw.png}
+\end{figure}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+
+
+
+
+
+\section[Methodology]{Methodology}
+
+\subsection{Data Preprocessing}
+\begin{frame}
+\frametitle{Data Preprocessing}
+\begin{itemize}
+\item Cleaned the data by:
+\begin{itemize}
+\item Dropping rows with missing values.
+\item Removing unnecessary date columns and irrelevant variables.
+\item Removing forward-looking biased variables, like "return", "RR1", and "FVCI".
+\item Handling dummy variables.
+\item Dealing with multicollinearity by checking the correlation matrix and dropping columns with a correlation greater than 0.95.
+\end{itemize}
+\item Created a balanced sample, ensuring an equal number of instances for each class:
+\begin{itemize}
+\item Randomly selecting 5000 observations from default loans and 5000 observations from non-default loans to create a balanced data set.
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+
+\subsection{Two-Step Model: Step 1 - Build a Graph on Data}
+
+\begin{frame}{Two-step Model: Step 1 - Build a Graph on Data}
+
+\begin{block}{An Explanation}
+Graph theory offers a robust framework for analyzing complex relational data, including financial networks. These networks encapsulate financial entities as nodes and relationships as edges, providing valuable insights into risk dynamics \textcolor{blue}{\textit{(Biggs, Lloyd, and Wilson 1986; Newman 2010; DeMarzo 2003)}}.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Key Concepts}
+\begin{itemize}
+\item \textbf{Graph:} A set of nodes (vertices) and edges (links).
+\item \textbf{Degree:} Number of edges connected to a node.
+\item \textbf{Path:} Sequence of nodes in which each node is connected to the next by an edge.
+\item \textbf{Cycle:} Path whose first and last nodes are the same.
+\end{itemize}
+\end{column}
+
+\begin{column}{.4\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{Graphics/Paper 1/example of graph.png}
+\caption{An example of graph}
+\end{figure}
+\end{column}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Two-Step Model: Step 1 - Build a Graph on Data}
+\begin{block}{Overview}
+Centrality measures are important tools in network analysis, used to identify the most important nodes within a network. In the context of P2P lending, these nodes could represent key borrowers or lenders.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Key Measures}
+\begin{itemize}
+\item \textbf{Degree Centrality:} Number of connections a node has.
+\item \textbf{Closeness Centrality:} How fast information can spread from a given node to other reachable nodes in the network.
+\item \textbf{Betweenness Centrality:} A node's centrality.
+\item \textbf{Eigenvector Centrality:} A node is considered important if it is connected to other important nodes.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Mathematical Formulation}
+\begin{itemize}
+\item Formula for Degree Centrality: $C_D(v) = \text{deg}(v)$
+\item Formula for Closeness Centrality: $C(x) = \frac{1}{\sum_{y} d(y, x)}$
+\item Formula for Betweenness Centrality: $C_B(v) = \sum_{s,t \in V} \frac{\sigma(s, t | v)}{\sigma(s, t)}$
+\item Formula for Eigenvector Centrality: $PR(p) = (1 - d) + d \sum_{i \in M(p)}\frac{PR(i)}{L(i)}$
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Two-Step Model: Step 1 - Build a Graph on Data (cont.)}
+\begin{block}{Overview}
+Other centrality measures like Katz Centrality, Hub Centrality, and PageRank could provide valuable insights about key participants in P2P lending.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Additional Measures}
+\begin{itemize}
+\item \textbf{PageRank:} More important websites are likely to receive more links from other websites.
+\item \textbf{Katz Centrality:} Takes into account the total number of walks between a node and all others.
+\item \textbf{Hub Centrality (HITS):} The HITS (Hyperlink-Induced-Topic-Search) algorithm is an analysis tool to rate links between nodes.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Mathematical Formulation}
+\begin{itemize}
+\item Formula for PageRank: $PR(p) = (1 - d) + d \sum_{i \in M(p)}\frac{PR(i)}{L(i)}$
+\item Formula for Katz Centrality: $C_{\text{Katz}}(i) = \sum_{j=1}^{n} \beta A_{ij} C_{\text{Katz}}(j) + \alpha$
+\item \item Formulas for Hub Centrality (HITS):
+    \begin{itemize}
+    \item Authority Score: $a(i) = \sum_{j \in M(i)} h(j)$
+    \item Hub Score: $h(i) = \sum_{j \in N(i)} a(j)$
+    \end{itemize}
+\end{itemize}
+\end{column}
+\end{columns}
+\begin{block}{Significance}
+Centrality measures can identify potential hotspots of credit risk in P2P lending.
+\end{block}
+\end{frame}
+
+
+\subsection{Two-Step Model: Step 2 - Supervised Models based on Graph Features}
+
+\begin{frame}{Two-Step Model: Step 2 - Supervised Models based on Graph Features}
+\begin{block}{Introduction to Elastic Net}
+The Elastic Net Logistic Regression model integrates the strengths of both L1 (Lasso) and L2 (Ridge) penalties, providing an effective balance between bias and variance to ensure model generalizability.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.4\textwidth}
+\textbf{Model Implementation}
+\begin{itemize}
+\begin{align*}
+\beta = \arg\min_{\beta} \Bigg( & \frac{1}{2} ||y - X\beta||^2_2 + \\
+& \lambda ((1 - \alpha)||\beta||^2_2 + \alpha||\beta||_1) \Bigg)
+\end{align*}
+\item Here, $||\cdot||_2$ is the L2 norm, $||\cdot||_1$ is the L1 norm, $\lambda$ is the regularization parameter, and $\alpha$ is the mixing parameter that ranges between 0 and 1.
+\end{itemize}
+\end{column}
+
+\begin{column}{.4\textwidth}
+\textbf{Model Configuration}
+\begin{itemize}
+\item The alpha and lambda parameters are varied, with alpha ranging from 0 (Ridge penalty) to 1 (Lasso penalty) and $\lambda \in [1e-4, 1e-3, 1e-2, 1e-1, 1, 10, 100]$, enabling different degrees of regularization and feature selection.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Two-Step Model: Step 2 - Supervised Models based on Graph Features}
+
+\begin{block}{Introduction to Random Forest}
+Random Forests, due to their nonparametric nature, are effective in handling high-dimensional spaces and complex interactions, making them a strong tool for default prediction in credit risk modeling.
+\end{block}
+
+\vspace{-1em} % Reduce the vertical space
+
+\begin{columns}[T, totalwidth=\textwidth] % align columns
+\begin{column}{.45\textwidth}
+
+\textbf{Model Implementation}
+\begin{figure}
+\includegraphics[width=\textwidth]{Graphics/Paper 1/a decision tree.png} % replace 'your_image_file' with your image file name
+\caption{A decision tree}
+\end{figure}
+
+\end{column}
+
+\begin{column}{.45\textwidth}
+\textbf{Model Configuration}
+\begin{itemize}
+\item The model is configured with varying 'ntrees' (50-250) and 'max-depth' (5-20), to explore and determine the most suitable model configuration for the dataset in use.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{-1em} % Reduce the vertical space
+
+\end{frame}
+
+
+\begin{frame}{Two-Step Model: Step 2 - Supervised Models based on Graph Features}
+\begin{block}{Introduction to Deep Neural Network}
+Deep learning methods such as Multi-Layer Perceptron (MLP) enable models to automatically learn representations of data through neural networks with multiple layers, accommodating the complexity of credit risk data \textcolor{blue}{\textit{(LeCun 2015)}}.
+\end{block}
+\begin{columns}[T] % align columns
+\begin{column}{.45\textwidth}
+\textbf{Model Implementation}
+\begin{figure}
+\includegraphics[width=\textwidth]{Graphics/Paper 1/neural network.png} % replace 'your_image_file' with your image file name
+\caption{Artificial neural network}
+\end{figure}
+\end{column}
+\begin{column}{.48\textwidth}
+\textbf{Model Configuration}
+\begin{itemize}
+\item The model consists of various configurations of hidden layers, using the rectified linear unit (ReLU) activation function. The hyperparameter 'epochs' denotes the number of complete passes through the entire training dataset.
+\end{itemize}
+\end{column}
+\end{columns}
+\begin{block}{Objective}
+In line with the predictive power of deep learning models reported in the literature, the MLP model aims to offer meaningful insights and improved prediction accuracy in the context of credit risk modeling.
+\end{block}
+\end{frame}
+
+
+
+\section[Results]{Results}
+
+\begin{frame}{Models Description and Representation}
+
+In our study, we utilized six different models. These models were differentiated based on the types of features they incorporated:
+
+\begin{itemize}
+\item \textbf{Model 1}: Initial features (informative and uninformative). Python representation: {\tikz{\draw[blue, solid, line width=1pt] (0,0) -- (2,0);}}.
+\item \textbf{Model 2}: Initial features (informative and uninformative), and graph features. Python representation: {\tikz{\draw[blue, dashed, line width=1pt] (0,0) -- (2,0);}}.
+\item \textbf{Model 3}: Only initial features (informative). Python representation: {\tikz{\draw[orange, solid, line width=1pt] (0,0) -- (2,0);}}.
+\item \textbf{Model 4}: Initial features (informative), and graph features. Python representation: {\tikz{\draw[orange, dashed, line width=1pt] (0,0) -- (2,0);}}.
+\item \textbf{Model 5}: Initial features (informative and uninformative). Python representation: {\tikz{\draw[green, solid, line width=1pt] (0,0) -- (2,0);}}.
+\item \textbf{Model 6}: Initial features (informative and uninformative), and shuffled graph features. Python representation: {\tikz{\draw[green, dashed, line width=1pt] (0,0) -- (2,0);}}.
+\end{itemize}
+
+Each model is represented in Python using a specific color and linestyle. 
+
+\end{frame}
+
+\subsection{ROC and AUC}
+\begin{frame}{ROC and AUC: GLM}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/glm_roc_auc.pdf}
+\caption{ROC and AUC for Generalized Linear Model (GLM)}
+\end{figure}
+\end{frame}
+
+\begin{frame}{ROC and AUC: RF}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/rf_roc_auc.pdf}
+\caption{ROC and AUC for Random Forest (RF)}
+\end{figure}
+\end{frame}
+
+\begin{frame}{ROC and AUC: DL}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/dl_roc_auc.pdf}
+\caption{ROC and AUC for Deep Learning (DL)}
+\end{figure}
+\end{frame}
+
+\subsection{Feature Importance}
+\begin{frame}{Feature Importance: GLM}
+\begin{figure}
+\centering
+\begin{adjustbox}{center}
+\includegraphics[width=1.3\textwidth]{Graphics/Paper 1/glm_feature_importance.pdf}
+\end{adjustbox}
+\caption{Feature Importance for Generalized Linear Model (GLM)}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Feature Importance: RF}
+\begin{figure}
+\centering
+\begin{adjustbox}{center}
+\includegraphics[width=1.3\textwidth]{Graphics/Paper 1/rf_feature_importance.pdf}
+\end{adjustbox}
+\caption{Feature Importance for Random Forest (RF)}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Feature Importance: DL}
+\begin{figure}
+\centering
+\begin{adjustbox}{center}
+\includegraphics[width=1.3\textwidth]{Graphics/Paper 1/dl_feature_importance.pdf}
+\end{adjustbox}
+\caption{Feature Importance for Deep Learning Neural Network (DL)}
+\end{figure}
+\end{frame}
+
+
+\section[Acknowledgements]{Acknowledgements}
+\begin{frame}{Acknowledgments}
+This document is based upon work from the COST Action CA19130, supported by COST (European Cooperation in Science and Technology).
+
+\vspace{1em}
+
+The authors are grateful to management committee and working group members of the COST (Cooperation in Science and Technology) Action CA19130 Fintech and Artificial Intelligence in Finance.
+
+\vspace{1em}
+
+Financial support by the Swiss National Science Foundation within the project Mathematics and Fintech - the next revolution in the digital transformation of the Finance industry (IZCNZ$0-174853$) is gratefully acknowledged.
+\end{frame}
+
+\section[References]{List of References}
+\begin{frame}{References}
+
+\footnotesize
+
+\begin{itemize}
+    \item Allen, F., A. Babus, P. R. Kleindorfer, and Y. Wind (2009). The network challenge: strategy, profit, and risk in an interlinked world. PR Kleindorfer, Y. Wind, \& RE Gunther (Eds.), 367–382.
+    \item Angelini, E., G. Di Tollo, and A. Roli (2008). A neural network approach for credit risk evaluation. The quarterly review of economics and finance 48(4), 733–755.
+    \item Battiston, S., M. Puliga, R. Kaushik, P. Tasca, and G. Caldarelli (2012). Debtrank: Too central to fail? financial networks, the fed and systemic risk. Scientific reports 2(1), 1–6.
+    \item Berg, T., Burg, V., Gombović, A. and Puri, M., 2020. On the rise of fintechs: Credit scoring using digital footprints. The Review of Financial Studies, 33(7), 2845-2897.
+    \item  Biggs, N., E. Lloyd, and R. Wilson (1986). Graph Theory, 1736-1936. Oxford University Press.
+    \item Chen, X., Z. Chong, P. Giudici, and B. Huang (2022a). Network centrality effects in peer to peer lending. Physica A: Statistical Mechanics and its Applications 600, 127546.
+    \item Chen, X., Huang, B. and Shaban, M. (2022b). Naïve or sophisticated? Information disclosure and investment decisions in peer to peer lending. Journal of Corporate Finance.
+    \item DeMarzo, P. (2003). The pooling and tranching of securities: A model of informed intermediation. The Review of Financial Studies 18 (1), 1–35
+\end{itemize}
+\end{frame}
+
+\begin{frame}{References cont.}
+
+\footnotesize
+
+\begin{itemize}
+    \item Giudici, P., B. Hadji-Misheva, and A. Spelta (2019). Network based scoring models to improve credit risk management in peer to peer lending platforms. Frontiers in artificial intelligence 2, 3.
+    \item Giudici, P., B. Hadji-Misheva, and A. Spelta (2020). Network based credit risk models. Quality
+    Engineering 32 (2), 199–211.
+    \item Huang, Z., H. Chen, C.-J. Hsu, W.-H. Chen, and S. Wu (2004). Credit rating analysis with support vector machines and neural networks: a market comparative study. Decision support systems 37(4), 543–558.
+    \item Jagtiani, J., T. Vermilyea, and L. D. Wall (2018). The roles of big data and machine learning in bank supervision. Forthcoming, Banking Perspectives.
+    \item Jagtiani, J. and C. Lemieux (2018). Fintech: The impact on consumers and regulatory responses. Journal of Economics and Business 100, 1–6.
+    \item Khandani, A. E., A. J. Kim, and A. W. Lo (2010). Consumer credit-risk models via machine-learning algorithms. Journal of Banking \& Finance 34(11), 2767–2787.
+    \item LeCun, Y., Y. Bengio, and G. Hinton (2015). Deep learning. nature 521 (7553), 436–444.
+    \item Newman, M. (2010). Networks: An Introduction. Oxford University Press.
+    
+\end{itemize}
+\end{frame}
+
+\section{Appendix}
+
+\begin{frame}{Understanding Credit Risk - Types of Credit Risks}
+\begin{block}{Overview}
+Credit risk can be classified into various types, each with distinct characteristics and implications for lenders and borrowers.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.32\textwidth}
+\textbf{Default Risk}
+\begin{itemize}
+\item Risk of borrower failing to repay the loan
+\item Quantified by default probability
+\item Central to credit risk modeling
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Concentration Risk}
+\begin{itemize}
+\item Risk arising from a lack of diversification
+\item Can result from exposure to a single borrower or sector
+\item Mitigated through diversification strategies
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Systemic Risk}
+\begin{itemize}
+\item Risk of widespread defaults impacting the entire financial system
+\item Can result from network effects or contagion
+\item Difficult to mitigate, often requires regulatory measures
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{Significance}
+Understanding the different types of credit risks is essential for effective risk management in P2P lending markets. Identifying and managing these risks can help maintain the stability and sustainability of the market.
+\end{block}
+\end{frame}
+
+\begin{frame}{Understanding Credit Risk - Basic Principles}
+\begin{block}{Definition}
+Credit risk is the risk of loss due to a borrower's failure to make payments on any type of debt.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Key Elements}
+\begin{itemize}
+\item Default probability: The likelihood of a borrower not meeting debt obligations.
+\item Exposure at default: The total value a lender is exposed to at the time of default.
+\item Loss given default: The proportion of the exposure that will be lost if a default occurs.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Mathematical Formulation}
+\begin{itemize}
+\item Credit risk is often quantified as Expected Loss (EL), which is a product of the before mentioned elements: $EL = PD * EAD * LGD$
+\item Each of these elements can be estimated using various statistical and mathematical models.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+   
+   
+\begin{frame}{Understanding Credit Risk - Credit Scoring and Rating}
+\begin{block}{Definition}
+Credit scoring and rating are systematic approaches used by lenders to assess the creditworthiness of borrowers, involving a variety of statistical and mathematical techniques.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Credit Scoring}
+\begin{itemize}
+\item Quantitative method for predicting default risk by using statistical models like logistic regression
+\item Produces a numerical score representing creditworthiness
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Credit Rating}
+\begin{itemize}
+\item More comprehensive, includes qualitative factors
+\item Often used for firms, sovereign states, or specific securities
+\item Results in a rating class, e.g., AAA, AA, A, BBB, etc.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Credit Risk Models in P2P Lending - Introduction to Network-Based Credit Risk Models}
+\begin{block}{Overview}
+Network-based credit risk models capture the interconnectedness in financial systems and can provide a more comprehensive understanding of systemic risk in P2P lending markets.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Key Concepts}
+\begin{itemize}
+\item \textbf{Network Representation:} Borrowers and lenders are represented as nodes, and credit relationships as edges.
+\item \textbf{Systemic Risk:} Risk of default can spread through the network due to interconnected exposures.
+\item \textbf{Centrality Measures:} Nodes with high centrality can play significant roles in spreading risk.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Advantages over Conventional Models}
+\begin{itemize}
+\item Capturing contagion effects within clustered networks.
+\item Incorporating network structure in risk assessment.
+\item Identifying key nodes based relative position in the network with implications for borrowing dynamics.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{Significance}
+Network-based credit risk models offer a powerful tool for understanding and managing credit risk in P2P lending markets, particularly due to their ability to capture systemic risk and contagion effects.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{Two-step Model: Step 1 - Build a Graph on Data}
+\begin{block}{Overview}
+Conventional credit risk models are primarily based on individual borrower's characteristics and financial health, often ignoring the networked nature of credit risk in P2P lending.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Key Models}
+\begin{itemize}
+\item \textbf{Credit Scoring Models:} Use borrower data (credit history, income, etc.) to assign credit scores.
+\item \textbf{Structural Models:} Based on firm's asset value and its volatility.
+\item \textbf{Reduced Form Models:} Use statistical or machine learning methods to predict default probabilities.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Limitations in P2P Context}
+\begin{itemize}
+\item Lack of comprehensive borrower data.
+\item Inadequate for capturing network effects.
+\item Limited ability to capture systemic risk.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{Significance}
+While traditional models provide a starting point, the unique characteristics of P2P lending require the development of novel, network-based credit risk models that can effectively capture the systemic nature of credit risk in these markets.
+\end{block}
+\end{frame}
+
+\begin{frame}{Credit Risk Models in P2P Lending - Strengths and Limitations of Network-Based Models}
+\begin{block}{Overview}
+While network-based models provide unique insights into systemic credit risk, they also come with certain limitations that need to be acknowledged for effective application in P2P lending markets.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Strengths}
+\begin{itemize}
+\item \textbf{Systemic Risk:} Can capture systemic risk and contagion effects.
+\item \textbf{Network Structure:} Incorporates network structure in risk assessment.
+\item \textbf{Identification:} Identifies key nodes influencing systemic risk.
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{Limitations}
+\begin{itemize}
+\item \textbf{Data Requirements:} Requires detailed network data, which might not always be available.
+\item \textbf{Computational Complexity:} Can be computationally intensive for large networks.
+\item \textbf{Model Assumptions:} Based on certain assumptions (e.g., network structure, default correlations) that may not hold in all scenarios.
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{Significance}
+Understanding the strengths and limitations of network-based models is crucial for their effective application in credit risk assessment and management in P2P lending markets.
+\end{block}
+\end{frame}
+
+\begin{frame}{Understanding Centrality Measures}
+\begin{block}{Overview}
+Centrality measures are techniques used in network analysis to identify the most important nodes in a network. There are several types, each with distinct characteristics and computational formulas.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.32\textwidth}
+\textbf{Degree Centrality}
+\begin{itemize}
+\item Number of edges connected to a node
+\item In directed networks, distinguishes between in-degree and out-degree centralities
+\item Formula for undirected graph: $C_D(v) = \text{deg}(v)$
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Closeness Centrality}
+\begin{itemize}
+\item Measures speed of information spread from a given node to others
+\item Formula: $C(x) = \frac{1}{\sum_{y} d(y, x)}$
+\end{itemize}
+\end{column}
+
+\begin{column}{.32\textwidth}
+\textbf{Betweenness Centrality}
+\begin{itemize}
+\item Number of shortest paths from all vertices to all others passing through the node
+\item Formula: $C_B(v) = \sum_{s,t \in V} \frac{\sigma(s, t | v)}{\sigma(s, t)}$
+\end{itemize}
+\end{column}
+\end{columns}
+\begin{block}{Reference}
+Freeman, L. C. (2002). Centrality in social networks: Conceptual clarification. Social network: critical concepts in sociology. Londres: Routledge, 1, 238-263.
+\end{block}
+\end{frame}
+
+\begin{frame}{Understanding Centrality Measures (Continued)}
+\begin{block}{Overview}
+We continue to discuss other important centrality measures such as Eigenvector Centrality and PageRank. These measures highlight the importance of nodes based on their connections and influence in the network.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Eigenvector Centrality}
+\begin{itemize}
+\item Importance of a node if it is connected to other important nodes
+\item Iteratively calculated, based on the centrality of the neighboring nodes
+\item Formula: $C_E(v) = \frac{1}{\lambda}\sum_{t \in M(v)}C_E(t)$
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{PageRank}
+\begin{itemize}
+\item Algorithm to rank web pages in search engine results
+\item Counts the number and quality of links to a page
+\item Formula: $PR(p) = (1 - d) + d \sum_{i \in M(p)}\frac{PR(i)}{L(i)}$
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{References}
+Bonacich, P. (1987). Power and centrality: A family of measures. American journal of sociology, 92(5), 1170-1182.
+\\
+Lawrence, P. (1999). The pagerank citation ranking: Bringing order to the web.
+\end{block}
+\end{frame}
+
+\begin{frame}{Understanding Further Centrality Measures}
+\begin{block}{Overview}
+Katz Centrality and HITS Algorithm (Hub and Authority scores) offer unique perspectives on node importance in a network. Their formulations consider both direct and indirect influence in the network.
+\end{block}
+
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+\textbf{Katz Centrality}
+\begin{itemize}
+\item Considers both the direct and indirect influence of a node's neighbors
+\item Iteratively calculated, based on the centrality of the neighboring nodes
+\item Formula: $C_{\text{Katz}}(i) = \sum_{j=1}^{n} \beta A_{ij}C_{\text{Katz}}(j) + \alpha$
+\end{itemize}
+\end{column}
+
+\begin{column}{.48\textwidth}
+\textbf{HITS Algorithm (Hub and Authority scores)}
+\begin{itemize}
+\item Each node has two scores: an authority score and a hub score
+\item Calculated iteratively until convergence
+\item Formulas: 
+    \begin{itemize}
+    \item Authority Score: $a(i) = \sum_{j \in M(i)} h(j)$
+    \item Hub Score: $h(i) = \sum_{j \in N(i)} a(j)$
+    \end{itemize}
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{block}{References}
+Katz, L. (1953). A new status index derived from sociometric analysis. Psychometrika, 18(1), 39-43.
+\\
+Kleinberg, J. M. (1999). Authoritative sources in a hyperlinked environment. Journal of the ACM (JACM), 46(5), 604-632.
+\end{block}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (liab.l) 2.pdf}
+\caption{Histogramm of loan feature liab.l}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (inc.total) 2.pdf}
+\caption{Histogramm of loan feature inc.total}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (MonthlyPayment).pdf}
+\caption{Histogramm of loan feature MonthlyPayment}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (log.amount) 2.pdf}
+\caption{Histogramm of loan feature log.amount}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (time) 2.pdf}
+\caption{Histogramm of loan feature time}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (time) 2.pdf}
+\caption{Histogramm of loan feature time}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (Interest).pdf}
+\caption{Histogramm of loan feature interest}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (Amount.Prev.Loans.Before.Loan) 2.pdf}
+\caption{Histogramm of loan feature Amt. of Prev. Loans Bef. Loan}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (No.Prev.Loans ) 2.pdf}
+\caption{Histogramm of loan feature No. Prev. Loans}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Histogramms of Most Important Loan Features}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{Graphics/Paper 1/descriptive_stats_raw_data (Age).pdf}
+\caption{Histogramm of loan feature Age}
+\end{figure}
+\end{frame}
+
+\end{document}

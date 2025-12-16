@@ -1,0 +1,627 @@
+\documentclass[9pt, aspectratio=169, compress]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{courier}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+% \usepackage[absolute]{textpos}
+\usepackage{tikz}
+% \usepackage{enumitem} % Commented out
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{mathtools}
+% \usetheme{Madrid}
+\usetheme{Warsaw}
+% \usetheme{Antibes}
+\usecolortheme{default}
+\usepackage{underscore}
+\usepackage{comment}
+% \usetheme{progressbar}
+% \progressbaroptions{headline=sections}
+
+\useoutertheme{miniframes}
+
+
+\AtBeginSection[]{
+\begin{frame}{Table of Contents}
+  \setlength{\columnsep}{10pt} % Adjust the spacing between columns
+  \setlength{\parskip}{-0pt} % Adjust the vertical spacing between items
+  \vspace{1em} % Adjust the overall vertical spacing (previously -4.5em)
+  \tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded]
+\end{frame}
+}
+
+\setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
+
+
+\setbeamertemplate{headline}{%
+  \begin{beamercolorbox}[ht=4ex,dp=2ex]{section in head/foot}
+        \vspace*{0.5ex}
+        \insertsectionnavigationhorizontal{0.5\paperwidth}{\hfill}{\hfill}
+  \end{beamercolorbox}
+}
+
+
+\usepackage{multicol}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=1.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm]{author in head/foot}%
+      \usebeamerfont{author in head/foot}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=1.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      \usebeamerfont{title in head/foot}%
+      \hfill\insertframenumber/\inserttotalframenumber%
+    \end{beamercolorbox}%
+  }%
+}
+
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[ht=0.8em,dp=0.8ex,wd=\paperwidth]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle
+  \end{beamercolorbox}
+}
+
+\title{A Ph.D. Qualifier Report}
+\author{by Lennart John Baals}
+\date{26.01.2024} 
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Ph.D. Progress}
+\subsection{Framing the Doctoral Thesis}
+\begin{frame}{The Big Picture of My Doctoral Thesis}
+    \textbf{Research Focus on FinTech and Digital Finance}
+
+    \begin{itemize}
+        \item \textbf{Context:} With rapid technological advancements, the financial industry is experiencing a profound digital transformation (Milian et al., 2019). The emergence of digital assets like NFTs, DeFi, and the rise of novel P2P lending practices have created new research paths to investigate value creation and risk assessment within these emerging markets.
+\vspace{0.25cm}
+        \item \textbf{Objectives:} The thesis seeks to:
+        \begin{enumerate}
+            \item Analyze the price dynamics of blockchain-based digital assets.
+            \item Enhance risk assessment approaches in P2P lending with network topology and machine learning.
+            \item Improve financial model transparency and interpretability using XAI methods.
+        \end{enumerate}
+\vspace{0.25cm}
+        \item \textbf{Impact:} The insights and methodologies crafted in this thesis aim to empower investors, policymakers, and institutions in adapting to the digital finance era, ensuring informed and strategic decision-making.
+    \end{itemize}
+\end{frame}
+
+
+\subsection{Research Output}
+\begin{frame}{Research Output: Published \& Under Review}
+    \item \textbf{Published Paper:} 
+    \begin{itemize}
+        \item Wang, Y., Horky, F., \textbf{Baals, L. J.}, Lucey, B. M., \& Vigne, S. A. (2022). Bubbles all the way down? Detecting and date-stamping bubble behaviours in NFT and DeFi markets. \textit{Journal of Chinese Economic and Business Studies, 20}(4), 415-436.
+    \end{itemize}
+
+    \item \textbf{Under Review:} 
+    \begin{itemize}
+        \item \textbf{Baals, L. J.}, Liu, Y., Osterrieder, J., \& Hadji-Misheva, B. (2023). Leveraging Network Topology for Credit Risk Assessment in P2P Lending: A Comparative Study under the Lens of Machine Learning. Manuscript submitted for publication to \textit{Expert Systems with Applications}.
+        \item \textbf{Baals, L. J.}, Liu, Y., Osterrieder, J., \& Hadji-Misheva, B. (2023). Network Centrality and Credit Risk: A Comprehensive Analysis of Peer-to-Peer Lending Dynamics. Manuscript submitted for publication to \textit{Finance Research Letters}.
+        \item \textbf{Baals, L. J.}, et al., Mitigating Digital Asset Risks (2023).
+        Manuscript submitted for publication to \textit{Financial Innovation}. Available at SSRN: https://ssrn.com/abstract=4594467
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Research Output: Working Papers}
+    \item \textbf{Working Papers:} 
+    \begin{itemize}
+        \item \textbf{Baals, L. J.} et al. Towards a Research Agenda on the Financial Economics of NFT’s (2022). Available at SSRN: https://ssrn.com/abstract=4070710
+        \item \textbf{Baals, L. J.}, et al. Art and NFT. Drafting process. Planned submission to the \textit{Journal of Corporate Finance}.
+        \item \textbf{Baals, L. J.}, Liu, Y., Osterrieder, J., \& Hadji-Misheva, B. Drafting process. Alpha Threshold Tuning: An Edge Pruning Approach to Network Simplification for Improved Default Prediction in P2P Lending.
+    \end{itemize}
+\end{frame}
+
+
+
+\subsection{Thesis Structure}
+\begin{frame}{Thesis Chapter Structure}
+\begin{center}
+\Large \textbf{Thesis Title: Essays in FinTech and Digital Finance}
+\end{center}
+\begin{center} % This additional center environment is usually not necessary, but can be used to reinforce centering
+\begin{table}
+\centering
+\begin{tabular}{|p{1cm}|p{2cm}|p{10.5cm}|}
+\hline
+\textbf{Chapter} & \textbf{Title} & \textbf{Content Description} \\ \hline
+1 & Blockchain-based Finance: Pricing Digital Assets & 
+Two studies focusing on the NFT and DeFi markets. The \textbf{first study} employs SADF and GSADF tests to detect speculative bubbles, revealing their frequency and correlation with market sentiments. The \textbf{second study} pioneers the use of the Repeat-Sales Regression (RSR) model for NFT art valuation, proposing a pricing index that factors in collection reputation, thereby offering a novel pricing benchmark for this new market domain. \\ \hline
+2 & Network-Topological Credit Risk Modeling in P2P Lending & Studies focused on the application of network topology in P2P lending credit risk assessment. The \textbf{first study} introduces a machine learning (ML) framework that integrates network centrality metrics, such as degree centrality, with conventional credit risk factors to refine default prediction models. The \textbf{second study} advances this approach by employing a supervised ML method to differentiate between defaulted and non-defaulted loan networks, proposing two centrality-based indicator variables to assess loan default likelihood. \\ \hline
+\end{tabular}
+\end{table}
+\end{center} % End the reinforcing center environment
+\end{frame}
+
+\begin{frame}{Thesis Chapter Structure (Cont'd)}
+\begin{center}
+\begin{table}
+\centering
+\begin{tabular}{|p{1cm}|p{2cm}|p{10cm}|}
+\hline
+\textbf{Chapter} & \textbf{Title} & \textbf{Content Description} \\ \hline
+3 & XAI Methods for Finance & 
+Studies focused on the integration of eXplainable Artificial Intelligence (XAI) methods in finance. The \textbf{first study} plans to evaluate credit risk models by introducing an 'explanatory distance measure' that seeks to measure the robustness of explanations provided by AI models in P2P lending. The \textbf{second study} is planned to address the applicability of XAI in the operational environment of financial institutions, highlighting constraints and proposing further solutions for model transparency. \\ \hline
+% Add additional chapters or content here if necessary
+\end{tabular}
+\end{table}
+\end{center}
+\end{frame}
+
+\begin{frame}{Academic Cohesion within the Thesis}
+
+\begin{itemize}
+  \item \textbf{From Digital Assets to Credit Risk:}
+  \begin{itemize}
+    \item The thesis begins by exploring the speculative dynamics and systematic valuation in \textit{blockchain-based finance}, particularly focusing on DeFi and NFTs as novel asset classes within digital markets.
+  \end{itemize}
+
+  \item \textbf{Bridging Markets and Methodology:}
+  \begin{itemize}
+    \item Transitioning from asset pricing to risk assessment, the thesis then connects the speculative aspects of digital finance to more traditional financial practices, applying \textit{network-topological models} to P2P lending. This signifies a shift from market analysis to risk management using innovative ML techniques.
+  \end{itemize}
+
+  \item \textbf{Enhancing Interpretability and Decision-making:}
+  \begin{itemize}
+    \item Finally, the thesis shifts to an in-depth exploration of \textit{XAI methods for finance}, enhancing the transparency and interpretability of complex ML models used in credit risk assessment. This chapter not only complements the technical methodologies but also addresses the need for clarity and accountability in FinTech applications.
+  \end{itemize}
+
+  \item \textbf{Thematic Continuity:}
+  \begin{itemize}
+    \item Throughout the chapters, there is a thematic continuity that reflects the evolution of FinTech from a niche market to a pivotal component of modern financial systems, emphasizing the integration of innovative technologies with financial practices to improve accuracy, transparency, and trust.
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Ph.D. Research Events}
+\begin{frame}{Participation in Events \& Conferences (1/2)}
+    \begin{itemize}
+        \item \textbf{Crypto Assets and Digital Asset Investment Conference:}
+        \begin{itemize}
+            \item Rennes Business School, April 7-8, 2022.
+            \item Paper entitled “Towards a Research Agenda on the Financial Economics of NFTs.”
+        \end{itemize}
+\vspace{0.25cm}        
+        \item \textbf{1st Conference on International Finance, Sustainable and Climate Finance and Growth (CINSC):}
+        \begin{itemize}
+            \item Universitá degli Studi di Napoli ‘Parthenope’, June 12-14, 2022.
+            \item Presentation of “Towards a Research Agenda on the Financial Economics of NFTs.”
+        \end{itemize}
+\vspace{0.25cm}
+        \item \textbf{COST Action FinAI: FinTech and AI in Finance - Training School:}
+        \begin{itemize}
+            \item University of Twente.
+            \item June 12, 2023 - June 16, 2023.
+            \item Presented preliminary results from the first co-authored working paper with Ph.D. colleague Yiting Liu.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Participation in Events \& Conferences (2/2)}
+    \begin{itemize}
+        \item \textbf{COST Action FinAI meets Brussels: AI in Finance - Policy Implications Conference:}
+        \begin{itemize}
+            \item May 15, 2023 - May 16, 2023.
+        \end{itemize}
+\vspace{0.25cm}
+        \item \textbf{Shenzhen Technology University - International Week:} 
+        \begin{itemize}
+            \item September 11 - 15, 2023; Shenzhen, China.
+            \item An Introduction to Asset Management.
+        \end{itemize}
+\vspace{0.25cm}
+         \item \textbf{8th European COST Conference on Artificial Intelligence in Finance:}
+        \begin{itemize}
+            \item September 29, 2023.
+            \item Support in the Organisation and Conference Execution. 
+            \item Paper entitled "Leveraging Network Topology for Credit Risk Assessment in P2P Lending: A Comparative Study under the Lens of Machine Learning" with Yiting Liu and Dr. Branka Hadji-Misheva.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 3: Twente PhD Curriculum Milestones & Timeline
+\subsection{Timeline and Near-term Progression of Studies}
+\begin{frame}{Ph.D. Curriculum Milestones}
+    \begin{itemize}
+        
+        \item \textbf{Structural Ph.D. Component - Research Modules:}
+        \begin{itemize}
+            \item 50 ECTS achieved at Ph.D. level from my first year in the Ph.D. programme at Trinity College Dublin.
+        \end{itemize}
+        
+        % Inserting the graphic here
+        \begin{center}
+            \includegraphics[width=0.5\textwidth]{Degree Relevant Presentation/UT_PhD_Promoter_presentations/LB_PhD_modules.png} % <-- Update the path to your graphic
+        \end{center}
+        \item \textbf{Upcoming Courses at the University of Twente:}
+        \begin{itemize}
+            \item TGS Introductory Workshop + Academic Integrity on the 30.05.2024.
+            \item TGS Academic publishing course, Date (TBD).
+            \item Data Management bootcamp on 01.10.2024.
+            \item Scientific Information bootcamp on 12.09.2024.
+            \item TGS Pilot Presentation skill course, Date (TBD).
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+% Slide 4: Future Plans
+
+\begin{frame}{Ph.D. Timeline}
+\textbf{Timeline and plan for the forthcoming Ph.D. completion is structured as follows:}
+\vspace{0.25cm}
+\begin{itemize}
+    \item \textbf{01.09.2021 - 01.11.2022:} Completion of 10 modules at Ph.D. level at the Doctoral programme of the University of Dublin, Trinity College. Research conducted on the first chapter of the thesis.
+    \item \textbf{01.12.2022 - 31.12.2023:} Transition to the SNF-based research project on network-based credit risk modelling. Research conducted on the second chapter of the thesis. 
+    \item \textbf{01.01.2024 - 01.08.2024:} Commencement of work on the third working paper (\( \alpha \) threshold network approach). Complete the draft of the first and second chapter. Moreover, conceptualisation and preliminary work on the third chapter about XAI methods for finance.
+    \item \textbf{01.08.2024 - 28.02.2025:} Analysis and writing up of the first research paper for the third chapter on XAI methods in finance.
+    \item \textbf{01.03.2025 - 31.08.2025:} Planned research stay at the Columbia University in the city of New York, USA, collaborating on the final chapter of the thesis with Prof. Dr. Ali Hirsa (Director of Financial Engineering, IEOR, Columbia University).
+    \item \textbf{01.09.2025 - 31.10.2025:} Revisions and finalization of the third chapter, and initiation of the synthesis for the overarching thesis narrative.
+    \item \textbf{01.11.2025 - 30.11.2025:} Completion of any remaining research, final thesis writing, and preparation for the oral defense.
+\end{itemize}
+\end{frame}
+
+
+%\begin{frame}{Ph.D. Timeline}
+%    \begin{itemize}
+%        \item \textbf{Upcoming Courses at the University of Twente:}
+%        \begin{itemize}
+%            \item TGS Introductory Workshop + Academic Integrity on the 30.05.2024.
+%            \item TGS Academic publishing course, Date (TBD).
+%            \item Data Management bootcamp on 01.10.2024.
+%            \item Scientific Information bootcamp on 12.09.2024.
+%            \item TGS Pilot Presentation skill course, Date (TBD).
+%        \end{itemize}
+\vspace{0.25cm}
+%        \item \textbf{Short-term Future Outlook:}
+%        \begin{itemize}
+%            \item Commencement of work on the third working paper (01.01.2024 - 31.03.2024), which:
+%            \begin{itemize}
+%                \item Explores to optimize an \( \alpha \) threshold network approach with $\alpha$ as a hyperparameter, optimized through \( k \)-fold cross-validation. The study plans to explore the \( \alpha \) network that will lead to the highest difference between the centrality feature distributions of defaulted and non-defaulted loans within the domain of P2P lending.
+%            \end{itemize}
+%        \end{itemize}
+%    \end{itemize}
+%\end{frame}
+
+
+\section{Details on the Current Research Methodology}
+
+\subsection{Ideas from the proposal}
+
+\begin{frame}{Idea of \( \alpha \) Threshold}
+\textbf{Idea from proposal:} 
+\begin{itemize}
+    \item The \( \alpha \) of a threshold network is a hyperparameter that we plan to optimize through \( k \)-fold cross-validation.
+    \item Various threshold networks have been used before in finance (Billio et al., 2012; Onnela et al., 2004), where the threshold is a random variable but the number of retained edges was not optimized.
+    \item Our research idea is similar to scholarly work where network percolation is studied; i.e., the set of edges is expanded by adding edges starting with the smallest distance \( d_1 < d_2 < \ldots \) until a certain topological property of the network changes.
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Graphics/Paper 2/alpha.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Idea of \( \alpha \) Threshold}
+\textbf{Research path in P2P lending:}
+  \begin{itemize}
+    \item We could explore the \( \alpha \) network that will lead to the highest difference between the centrality distribution of defaulted and non-defaulted loans.
+    \item Several centrality measures, including closeness, betweenness, eigenvector centrality, and PageRank, can be explored.
+    \item To quantify the difference in centrality distributions between defaulted and non-defaulted loans, the two-sample Kolmogorov-Smirnov (K-S) test can be employed. This non-parametric test measures the maximum distance between the empirical distribution functions of two samples.
+  \end{itemize}
+\end{frame}
+
+\subsection{Notation}
+\begin{frame}{Notation}
+  \begin{table}
+    \centering
+    \begin{tabular}{l p{0.6\textwidth}}
+      \toprule
+      Notation & Explanation \\
+      \midrule
+      \( N_{\text{edges}} \) & Total number of edges in a fully connected graph. \\
+      \hline
+      \( \alpha \) & \( \alpha \in [\alpha_{\text{min}}, 1] \). Keep the shortest \( \alpha \cdot N_{\text{edges}} \) to build a sub-graph. \\
+      \hline
+      \( \alpha_{min} \) & The smallest \( \alpha \) to keep the graph connected. \\
+      \hline
+      \( \alpha_{left}, \alpha_{right} \) & The left and right endpoints of interval during binary search of \alpha_{\text{min}}. \\
+      \hline
+      \(d_{\alpha}\) & Length of the threshold edge. $\frac{|\{ij: d_{ij}\le d_{\alpha}\}|}{N}=\alpha$. \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}{Mathematical Background}
+
+\subsection{\(\alpha\) Threshold}
+The \(\alpha\) threshold concept is a methodology employed to extract a subgraph from a fully connected graph. In network theory, especially when considering large graphs, it's occasionally necessary to concentrate on a subset of edges more informative or relevant to a particular application.\par
+\vspace{0.25cm}
+Method:
+Given a fully connected graph with \(N_{\text{edges}}\), these edges can be ranked or ordered based on a criterion, typically their weights. 
+\begin{itemize}
+    \item The \(\alpha\) threshold thus determines the proportion of the shortest edges retained to construct the subgraph.
+\end{itemize}
+\vspace{0.25cm}
+Mathematically, if edges are ranked in ascending order by weight and if \( e_i \) represents the i-th edge, then an \(\alpha\) threshold would retain the first \( \alpha \times N_{\text{edges}} \) to form the subgraph.
+
+\begin{itemize}
+    \item \( \alpha = 1 \): All edges are retained, resulting in the original fully connected graph.
+    \item \( \alpha_{\text{min}} \): The smallest threshold where the subgraph remains connected.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Range of \( \alpha\)}
+\begin{frame}{\( \alpha_{\text{min}} \)}
+\begin{itemize}
+    \item \( \alpha \in [\alpha_{\text{min}},1] \)
+    \item \( \alpha = 1\) is the maximum value of \( \alpha\), which  will result in a fully connected graph.
+    \item \( \alpha_{\text{min}} \) is the minimum value of \( \alpha \) to keep the graph connected. We use binary search to find the value of \( \alpha_{\text{min}} \).
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{Graphics/Paper 2/binary search.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Necessity for a Connected Graph}
+\textbf{Importance of Graph Connectivity}
+\begin{itemize}
+    \item Within the alpha threshold framework, a connected graph ensures that each loan is comparable to another loan, enabling a comprehensive analysis of similarity patterns.
+    \item Graph connectivity is essential and crucial for the precise computation of centrality measures, which presuppose the existence of paths between all loan pairs in the network.
+\end{itemize}
+
+\textbf{Implications for P2P Lending}
+\begin{itemize}
+    \item A connected graph facilitates the assessment of the network's structure and the associated information.
+    \item It offers a holistic perspective on the interconnectedness and relative positioning of loans within the network.
+    \item By setting \( \alpha \) to \( \alpha_{\text{min}} \), the network is pruned to its essential structure, highlighting the most significant loan similarities and disregarding weaker connections.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Finding \( \alpha_{\text{min}} \): Binary Search Algorithm}
+    Binary search, a fundamental algorithm in computer science, is efficient for finding a value in a sorted array. For determining \( \alpha_{\text{min}} \), we adapt this algorithm:
+
+    \begin{enumerate}
+        \item \textbf{Initialization:} Begin with an interval for \( \alpha \), where \( \alpha_{\text{left}} = 0 \) (no edges retained) and \( \alpha_{\text{right}} \) includes edges up to the longest edge in the MST for efficient searching space. The rationale for this lies in the fact that by removing the MST's longest edge, the resulting graph might be disconnected, making it a suitable starting point for efficient search.
+        \item \textbf{Middle Point:} Compute a midpoint value \( \alpha_{\text{mid}} \) as the average of \( \alpha_{\text{left}} \) and \( \alpha_{\text{right}} \).
+        \item \textbf{Check Connectivity:} Generate a subgraph using the \( \alpha_{\text{mid}} \) threshold and verify its connectivity.
+        \item \textbf{Update Interval:}
+            \begin{itemize}
+                \item If connected, \( \alpha_{\text{min}} \) might be smaller. Set \( \alpha_{\text{right}} \) to \( \alpha_{\text{mid}} \).
+                \item If not, \( \alpha_{\text{min}} \) is larger than \( \alpha_{\text{mid}} \). Adjust \( \alpha_{\text{left}} \) to \( \alpha_{\text{mid}} \).
+            \end{itemize}
+        \item \textbf{Loop:} Repeat steps 2-4. 
+        \item \textbf{Termination:} Continue until the interval between \( \alpha_{\text{left}} \) and \( \alpha_{\text{right}} \) becomes negligible or the subgraph's connectivity remains unchanged.
+    \end{enumerate}
+\end{frame}
+
+%\begin{frame}{Finding \( \alpha_{\text{min}} \)}
+  %When we randomly sample 5000 negative (non-default) and 3000 positive (default) samples, we find \( \alpha_{\text{min}} \) is 0.6070, with cutting edge weight 0.1353.
+
+  %\begin{figure}
+    %\centering
+%    \includegraphics[width=0.7\textwidth]{Graphics/Paper 2/histogram of edge weights.png}
+%    \caption{Histogram of edge weights and location of cutting edge}
+%  \end{figure}
+%\end{frame}
+
+\subsection{Step 2: Supervised Model}
+
+\begin{frame}{\( \alpha\) as a Hyperparameter}
+  \begin{itemize}
+    \item We choose an \( \alpha \in [\alpha_{\text{min}}, 1]\). Then we eliminate edges beyond \( \alpha\) in the fully connected graph.
+    \item We calculate the centrality measures.
+    \item Supervised models.
+    \item \( \alpha\) will be a hyperparameter to tune.
+  \end{itemize}
+\end{frame}
+
+\section{Appendix}
+\subsection{References}
+\begin{frame}{References}
+\frametitle{References}
+\footnotesize % Makes the font smaller to fit the references
+
+\begin{thebibliography}{}
+
+\bibitem{billio2012}
+Billio, M., Getmansky, M., Lo, A. W., \& Pelizzon, L. (2012).
+\newblock Econometric measures of connectedness and systemic risk in the finance and insurance sectors.
+\newblock \emph{Journal of financial economics, 104}(3), 535-559.
+
+\bibitem{kruskal1956}
+Kruskal, J. B. (1956). 
+\newblock On the shortest spanning subtree of a graph and the traveling salesman problem. \newblock \emph{Proceedings of the American Mathematical society, 7(1), 48-50.}
+
+\bibitem{milian2019}
+Milian, E. Z., Spinola, M. D. M., \& de Carvalho, M. M. (2019).
+\newblock Fintechs: A literature review and research agenda.
+\newblock \emph{Electronic Commerce Research and Applications, 34}, 100833.
+
+\bibitem{onnela2004}
+Onnela, J. P., Kaski, K., \& Kertész, J. (2004).
+\newblock Clustering and information in correlation based financial networks.
+\newblock \emph{The European Physical Journal B, 38}(2), 353-362.
+\end{thebibliography}
+\end{frame}
+
+\subsection{Alternative Consideration: \( d_{\alpha_{\mathit{min}}} \)}
+\begin{frame}{Alternative Consideration: \( d_{\alpha_{\mathit{min}}} \) can be no shorter than the longest edge in the MST}
+  \textbf{Proof:} 
+  \begin{itemize}
+    \item [\textbullet] Consider the Kruskal's Algorithm (Kruskal, 1956), which grows a MST by arranging edges from shortest to longest. Edges are added to the tree if they are acyclic with the existing nodes in the tree (two nodes connected by this edge are not in the same disjoint set).
+    \item [\textbullet] Initially, there are $n$ disjoint sets for all nodes. The edges are sorted from the shortest to the longest edge. For the \( i \)-th edge, there are two situations:
+    \begin{itemize}
+    \item Two nodes connected by the \( i \)-th edge are not in the same disjoint sets. Then, both algorithms add this edge. The number of disjoint sets decreases by 1. 
+    \item Two nodes connected by the \( i \)-th edge are in the same disjoint set. Then, Kruskal's Algorithm will not add this edge, while the $\alpha$ threshold method will add.
+    \end{itemize}
+    \item [\textbullet] In both cases, both algorithms will make the same changes to the number of disjoint sets for all nodes (-1 or unchanged).
+    \item [\textbullet] This process continues until the number of disjoint sets decreases to 1, i.e., all nodes are in the same disjoint set, and the MST is found. Thus, both algorithms will stop at the same edge, which is the longest edge in the MST.
+    \item [\textbullet] \textbf{Therefore, the $\alpha$ threshold method will have edges equal or more to the MST. The longest edge in graphs generated by both algorithms will have the same length.}
+  \end{itemize}
+
+\end{frame}
+
+\subsection{Research Question}
+\begin{frame}{Overarching Research Question}
+  \textbf{Research Question:} \textit{"How are emerging FinTech innovations reshaping financial market dynamics and risk assessment strategies?"}
+
+  This study investigates the impact of blockchain-based digital assets and network-based credit risk models on the financial industry. It aims to bridge the gap in literature by connecting technological advancements with their financial implications, serving the interests of stakeholders and informing policy and strategy in the digital economy.
+\end{frame}
+
+\begin{frame}{Hypotheses}
+  \begin{itemize}
+    \item \textbf{H1: Digital Asset Dynamics} - Blockchain assets, like NFTs and DeFi, create new market behaviors, challenging established financial theories.
+    \item \textbf{H2: Network-based Credit Risk} - Network topology improves predictive accuracy and risk stratification in P2P lending over traditional methods.
+    \item \textbf{H3: FinTech Integration} - FinTech's integration into finance will fundamentally shift risk management and asset valuation strategies.
+  \end{itemize}
+\end{frame}
+
+\subsection{Network Centrality Measures}
+\begin{frame}{Centrality Measures}
+\vspace{-0.5cm}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item [\textbullet] \textbf{Degree Centrality} ($C_D(i) = \sum_{j=1, j \ne i}^n I[i \text{ and } j \text{ are connected}]$) quantifies the number of direct connections a node has in the network.
+\item [\textbullet] \textbf{Closeness Centrality}\\ ($C(i)=\frac{1}{\sum_{j=1, j \ne i}^n d(i, j)}$, where $d(i, j)$ is the shortest-path distance between $i$ and $j$) captures how quickly information can propagate from a given node to others.
+\item [\textbullet] \textbf{Betweenness Centrality} ($C_B(i)=\sum_{j,k \in \{1,2,\cdots, n\}}\frac{\sigma(j,k|i)}{\sigma(j, k)}$, where $\sigma(j, k)$ is the total number of shortest paths from node $j$ to node $k$, and $\sigma(j,k|i)$ is the number of those paths passing through node $i$) captures the influence of a node over the flow of information between other nodes in the network.
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item [\textbullet] \textbf{PageRank}\\ ($PR(i)=(1-d)+d\sum_{j \in M(i)}\frac{PR(j)}{L(j)}$, where $M(i)$ is the set of pages that link to $i$, $L(j)$ is the number of outbound links on page $j$, and $d$ is a damping factor) evaluates the importance of nodes based on the quality of incoming links.
+\item [\textbullet] \textbf{Katz Centrality} ($C_{\text{Katz}}(i)=\sum_{j=1}^{n}\beta A_{ij}C_{\text{Katz}}(j)+\alpha$, where $A_{ij}$ denotes the adjacency matrix element, $\beta$ is a scaling factor, and $\alpha$ is a constant term representing the node's intrinsic centrality) considers both direct and indirect influence of a node's neighbors.
+\item [\textbullet] \textbf{Authority Score and Hub Score} ($a(i)=\sum_{j \in M(i)}h(j)$, where $M(i)$ is the set of nodes that point to $i$; $h(i)=\sum_{j \in N(i)}a(j)$, where $N(i)$ is the set of nodes that $i$ points to).
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+%\begin{frame}{Binary Search and \( \alpha \) Parameters}
+  %\begin{itemize}
+    %\item Binary search is an efficient algorithm for finding an item from a sorted list of items. It works by repeatedly dividing in half the portion of the list that could contain the item and then comparing the middle element to the target value. This process continues until the target value is found or the subarray reduces to zero.
+    %\item \( \alpha_{\text{left}} \) is set to 0 at the beginning.
+    %\item \textbf{The longest edge in the MST must be equal or longer than the cutting edge.} Then, at the initial stage, we set \( \alpha_{\text{right}} \) for the binary %search interval as the longest edge in the MST. This can decrease the computational %workload.
+%  \end{itemize}
+%\end{frame}
+
+\subsection{Abstract Overview}
+\begin{frame}{Abstract Overview}
+\begin{itemize}
+        \item \textbf{Title:}
+            \begin{itemize}
+                \item \textit{Bubbles all the way down? Detecting and date-stamping bubble behaviours in NFT and DeFi markets} 
+            \end{itemize}
+\vspace{0.25cm}
+\end{itemize}        
+\begin{itemize}
+    \item \textbf{Abstract:}
+    \begin{itemize}
+        \item Amid rising market values and regulatory debates, NFT and DeFi markets are often viewed as mere speculative domains. 
+        \item Using Supremum Augmented Dickey-Fuller (SADF) and Generalized Supremum Augmented Dickey-Fuller (GSADF) tests, we identify and date price bubbles in these markets. 
+        \item Both markets show speculative bubbles, but NFTs display more frequent and intense bursts. 
+        \item These bubbles correlate strongly with market buzz and broader cryptocurrency volatility. 
+        \item However, bubble-free periods indicate underlying intrinsic value in these markets, opposing the view of them as purely speculative instruments.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Abstract Overview}
+\begin{itemize}
+        \item \textbf{Title:}
+            \begin{itemize}
+                \item \textit{Mitigating Digital Asset Risks} 
+            \end{itemize}
+\vspace{0.25cm}
+\end{itemize}        
+\begin{itemize}
+    \item \textbf{Abstract:}
+    \begin{itemize}
+        \item Digital assets, encompassing cryptocurrencies, tokenized securities, stablecoins, NFTs, and CBDCs, promise to revolutionize financial markets with new business models and efficient transactions.
+        \item However, they bring challenges like fraud, market manipulation, and regulatory ambiguities. 
+        \item This paper delves into the digital asset landscape, discussing their classifications, technological underpinnings like blockchain and DeFi, and regulatory scenarios.
+        \item Key recommendations include crafting regulations that balance innovation with consumer protection, fostering global regulatory alignment, and utilizing regulatory sandboxes for continuous adaptation.
+        \item Effective regulation, in collaboration with stakeholders, can optimize the potential of digital assets while minimizing risks.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Abstract Overview}
+\begin{itemize}
+        \item \textbf{Title:}
+            \begin{itemize}
+                \item \textit{Leveraging Network Topology for Credit Risk Assessment in P2P Lending: A Comparative Study under the Lens of Machine Learning} 
+            \end{itemize}
+\vspace{0.25cm}
+\end{itemize}        
+\begin{itemize}
+    \item \textbf{Abstract:}
+    \begin{itemize}
+        \item Peer-to-Peer (P2P) lending markets have witnessed remarkable growth, changing how borrowers and lenders interact.
+        \item Despite its popularity, P2P lending presents challenges in credit risk assessment and default prediction.
+        \item Traditional credit risk models, used in P2P lending, might not capture the loan networks complexity and borrower behavior nuances.
+        \item This study introduces a two-step machine learning approach, which begins with network analysis insights.
+        \item It combines network centrality metrics with traditional credit risk factors, aiming to enhance prediction accuracy in credit risk modelling.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Abstract Overview}
+\begin{itemize}
+        \item \textbf{Title:}
+            \begin{itemize}
+                \item \textit{Network Centrality and Credit Risk: A Comprehensive Analysis of Peer-to-Peer Lending Dynamics} 
+            \end{itemize}
+\vspace{0.25cm}
+\end{itemize}        
+\begin{itemize}
+    \item \textbf{Abstract:}
+    \begin{itemize}
+        \item This study explores credit risk assessment in the Peer-to-Peer (P2P) lending field using a dataset from Bondora, a top European P2P platform.
+        \item Combining traditional credit features with network topological features, especially degree centrality, reveals the importance of a borrower's position in the P2P network for loan default probabilities.
+        \item Robustness checks with shuffled centrality features emphasize the value of integrating financial and network traits in credit risk assessments.
+        \item The findings provide fresh insights into credit risk determinants in P2P lending and assist investors in gleaning valuable information from P2P loan networks.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Abstract Overview}
+\begin{itemize}
+        \item \textbf{Title:}
+            \begin{itemize}
+                \item \textit{Art and NFT} 
+            \end{itemize}
+\vspace{0.25cm}
+\end{itemize}        
+\begin{itemize}
+    \item \textbf{Abstract:}
+    \begin{itemize}
+        \item As digital art gains prominence with the rise of Non-Fungible Tokens (NFTs), the need for systematic valuation methods becomes imperative.
+        \item This study introduces the application of the Repeat-Sales Regression (RSR) model, typically used in physical asset markets, to the digital world of NFTs.
+        \item Through this approach, we aim to construct a pricing index for digital art NFTs, shedding light on the interplay between collection reputation, valuation, and evidence of a "masterpiece" effect in NFT art collections.
+        \item This paper delves into the dynamics of various NFT art genres, providing insights for artists, investors, and the wider NFT community.
+        \item By leveraging the RSR model, the research strives to set a benchmark for future pricing methodologies in the rapidly evolving NFT art market.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+
+\end{document}
