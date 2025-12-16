@@ -1,0 +1,285 @@
+\documentclass[10pt]{elsarticle}
+\linespread{1.25}
+
+\makeatletter
+\def\ps@pprintTitle{%
+ \let\@oddhead\@empty
+ \let\@evenhead\@empty
+ \def\@oddfoot{\reset@font\hfil\thepage\hfil}
+ \let\@evenfoot\@oddfoot
+}
+\makeatother
+
+\usepackage[dvipsnames]{xcolor}
+\bibliographystyle{chicago}
+%\bibliographystyle{spmpsci}
+\usepackage{natbib}
+\setcitestyle{authoryear}
+\usepackage{graphicx}
+\usepackage{comment} 
+\usepackage{amsmath}
+\usepackage{lscape}
+\usepackage{natbib}
+\usepackage{placeins}
+\usepackage{breqn}
+\usepackage{threeparttable}
+\usepackage{longtable,threeparttablex}
+\usepackage{amsfonts}
+\usepackage{eurosym}
+\usepackage{colortbl}
+\usepackage{numprint}
+\usepackage{lipsum}
+\usepackage{rotfloat}
+\usepackage[tableposition=top]{caption}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{float} % control with {H} optin in tabular environment
+\restylefloat{table}
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+%%\usepackage{authblk}
+\usepackage{rotfloat}
+\usepackage[T1]{fontenc}
+\usepackage{afterpage}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage[tableposition=top]{caption}
+\usepackage{longtable}
+%\usepackage{booktabs} - tables aestehtics
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{pdflscape} % or {lscape}}
+\usepackage{subcaption}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{breqn}
+\usepackage{threeparttable}
+\usepackage{stackengine}
+\usepackage{lineno}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,bookmarks=false,hypertexnames=true]{hyperref} 
+\usepackage{rotating}
+\usepackage{hvfloat}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{lscape}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\AtBeginDocument{
+    \renewcommand{\sectionautorefname}{Section} % change s to S in section
+    \renewcommand{\subsectionautorefname}{Subsection} % change s to S in subsection
+    \renewcommand{\subsubsectionautorefname}{Subsection} % change s to S in subsection
+}
+
+\geometry{footskip=120pt}  % Adjust the value as needed
+\geometry{left=0.75in, right=0.75in}
+\captionsetup[table]{position=below}
+
+
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{A Ph.D Qualifier Report} % Add your report title here
+\author{by Lennart John Baals} % Add your name here
+\address{%
+  Faculty of Industrial Engineering and Business Information Systems \\
+  Department of High Tech Business and Entrepreneurship, \\
+  University of Twente \\
+  \vspace{0.75cm} % Adds vertical space between the affiliation and the committee line
+  Qualifier Committee: Prof. Dr. Martijn Mes\footnote{Promoter; Faculty of Behavioural Management and Social Science, Department of High-tech Business and Entrepreneurship, University of Twente, Enschede, The Netherlands.}, Prof. Dr. Jörg Osterrieder\footnote{Co-Promoter; Faculty of Industrial Engineering and Business Information Systems, Department of High-tech Business and Entrepreneurship, University of Twente, Enschede, The Netherlands.}, Prof. Dr. Branka Hadji-Misheva\footnote{Daily Supervisor; Institute of Applied Data Science \& Finance, Bern University of Applied Science, Bern, Switzerland.}, Prof. Dr. Ali Hirsa\footnote{External Supervisor; Department of Industrial Engineering and Operations Research, Columbia University, New York, United States of America.}
+}
+
+\date{18.01.2024} % Add the submission date here
+
+\end{frontmatter}
+\vspace{-0.25cm}
+\section{Introduction}
+% Purpose of the report
+% Brief introduction to the PhD project title and overarching research objective
+\vspace{-0.25cm}
+This qualifier report serves as a formal outline of the research progress achieved for my doctoral thesis focused on the domain of blockchain-based finance and financial technology (FinTech) at the University of Twente. The objective of this report is to provide a concise overview of the academic research undertaken for this doctoral thesis, outline the research milestones achieved, and describe the methodical approach towards the future objectives of this Ph.D. project titled "\textit{Essays in FinTech and Digital Finance}".
+
+This thesis is anchored in the interdisciplinary study of financial markets and technology, aiming to contribute to the literature by addressing the complex interplay between financial innovation and market dynamics. The scope of the research encompasses the analysis of novel digital assets in form of Non-Fungible Token (NFTs) and Decentralised Financial Instruments (DeFi), the application of network topology in peer-to-peer (P2P) lending, and the integration of explainable artificial intelligence (XAI) within financial practices for profound risk management. The following sections of this report will detail the planned scholarly contributions through published and ongoing research, delineate the participation in scientific conferences, and outline the planned research activities to showcase the academic rigour of this work to the Ph.D. committee.
+
+The report will proceed to detail the academic milestones achieved thus far, and the projected timeline for the completion of the thesis. It will present a structured outline of the envisaged chapters and publications that comprise the doctoral thesis.
+
+\vspace{-0.25cm}
+\section{Research Question and Hypotheses}
+\subsection{Overarching Research Question}
+My proposed research question \textit{"How do emerging FinTech innovations, specifically blockchain-based digital assets and network-based credit risk models, transform traditional financial market dynamics and risk assessment strategies?"} aims to explore the broader implications of FinTech innovations on financial markets and risk assessment.
+The research will investigate the transformative impact that FinTech innovations —specifically blockchain-based digital assets such as NFTs and DeFi, alongside network-based credit risk models— have on traditional financial market dynamics and risk assessment strategies. By bridging technological advancements in FinTech with practical financial implications, this study attempts to fill a perceived gap in existing literature \citep{gomber_digital_2017,gomber_fintech_2019,chen_how_2019,zhou_impact_2022}. The significance of this work can serve the interests of various financial stakeholders, from policymakers to investors and financial institutions. By providing a comprehensive understanding of new market dynamics and improving risk assessment through the integration of network-based models, this thesis is positioned to inform the development of regulatory frameworks, investment strategies, and the strategic evolution of financial services in a digital economy. Thus, the primary contribution of this work lies in its empirical insights and methodological advancements, aiming to enrich academic discourse and practical application in the rapidly evolving field of FinTech research.
+
+
+\subsection{Hypotheses}
+\begin{enumerate}
+    \item \textbf{Hypothesis 1 (Digital Asset Dynamics)}: \textit{"Blockchain-based digital assets, including NFTs and DeFi, introduce new pricing dynamics and speculative behaviors that challenge traditional financial market theories."} 
+    This hypothesis relates to my study of NFT and DeFi markets in chapter 1 of this thesis, investigating how these new asset classes challenge conventional market behavior and pricing factors.
+
+    \item \textbf{Hypothesis 2 (Network-based Credit Risk Modeling)}: \textit{"Incorporating network topology into credit risk assessment models significantly enhances the predictive accuracy and risk stratification in peer-to-peer lending, compared to traditional credit scoring methods."} 
+    This hypothesis aligns with my research on credit risk modelling in P2P lending, focusing on the efficacy of network-based models in providing superior risk assessment to conventional credit scoring models.
+
+    \item \textbf{Hypothesis 3 (Integration of FinTech Innovations)}: \textit{"The integration of FinTech innovations, such as blockchain-based assets and network-based modeling, into mainstream financial practices, will lead to a paradigm shift in risk management and asset valuation strategies."} 
+    This hypothesis bridges the two primary areas of research in the first two chapters of my thesis, postulating a broader impact of these technologies on the financial sector.
+\end{enumerate}
+
+\vspace{-0.25cm}
+\section{Summary of Achievements}
+% Overview of research outputs thus far
+\vspace{-0.25cm}
+The academic achievements detailed herein demonstrate a productive period of research activity for the first two years of my Ph.D. studies at the Bern University of Applied Science / University of Twente and Trinity College Dublin\footnote{The Ph.D. candidate was enrolled at the Trinity Business School (TBS) doctoral program of the University of Dublin, Trinity College from 01.09.2021 - 30.11.2022.}. The foundation of these accomplishments is built upon both published and ongoing work. The manuscripts represent not only my progression of the doctoral research but also the acceptance of my findings within the academic community.
+\vspace{-0.25cm}
+\subsection{Publications} 
+The following publication has been successfully published in a peer-reviewed journal, contributing to the scholarly discourse on financial technology and pricing mechanisms in digital asset markets. In the study the authors employ Supremum Augmented Dickey-Fuller (SADF) \citep{phillips_dating_2011} and Generalized Supremum Augmented Dickey-Fuller (GSADF) \citep{phillips_testing_2015} tests to detect and date-stamp bubble behaviours in markets for non-fungible token (NFT) and decentralised financial instruments (DeFi). The study documents that NFT and DeFi markets both exhibit speculative bubbles, with NFT bubbles being more recurrent and having higher average explosive magnitudes than DeFi bubbles. The price bubbles in the NFT and DeFi markets are highly correlated with market hype and with more general cryptocurrency market uncertainty. There are also periods found where bubbles are not detected, suggesting that these markets do have some intrinsic value and should not be dismissed as simply bubbles.
+\vspace{-0.25cm}
+\begin{itemize}
+    \item Wang, Y., Horky, F., Baals, L. J., Lucey, B. M., \& Vigne, S. A. (2022). "Bubbles all the way down? Detecting and date-stamping bubble behaviours in NFT and DeFi markets." \textit{Journal of Chinese Economic and Business Studies, 20}(4), 415-436.
+\end{itemize}
+\vspace{-0.25cm}
+\subsubsection{Manuscripts Under Review}
+I have also co-authored a manuscript that is currently under review, where we propose an enhanced two-step machine learning (ML) approach that first utilises insights from network analysis as in \citep{ahelegbey_latent_2019,giudici_network_2020,chen_network_2022,lyocsa2022default} and subsequently combines derived network centrality metrics with traditional credit risk factors to improve the prediction accuracy in the credit risk modelling process. The inclusion of topological features coupled with conventional credit features significantly improves the scoring accuracy in the loan default classification process. Specifically, we examine the predictive power of six network-derived centrality metrics, which under the inclusion of a network structure, offer a nuanced perspective on borrower behavior in P2P lending.
+\vspace{-0.25cm}
+\begin{itemize}
+    \item Baals, L. J., Liu, Y., Osterrieder, J., \& Hadji-Misheva, B. "Leveraging Network Topology for Credit Risk Assessment in P2P Lending: A Comparative Study under the Lens of Machine Learning." Manuscript submitted for publication to \textit{Expert Systems with Applications}.
+\end{itemize}
+\vspace{-0.25cm}
+\subsubsection{Working Papers}
+In addition to published and under-review works, I am actively engaged in the drafting process of the following working papers, which are intended for submission to high-impact journals:
+\vspace{-0.25cm}
+\begin{itemize}
+    \item Baals, L. J., et al. "Art and NFT." Drafting process. Planned submission to the \textit{Journal of Corporate Finance}.
+    \item Baals, L. J., Liu, Y., Osterrieder, J., \& Hadji-Misheva, B. "Network Centrality and Credit Risk: A Comprehensive Analysis of Peer-to-Peer Lending Dynamics." Manuscript to be submitted for publication to \textit{Finance Research Letters}.
+    \item Baals, L. J., et al., Mitigating Digital Asset Risks (October 13, 2023). \\ Available at SSRN: https://ssrn.com/abstract=4594467
+    \item Baals, L. J. and Lucey, B. M. and Vigne, S. A. and Long, S., Towards a Research Agenda on the Financial Economics of NFT’s (March 30, 2022). Available at SSRN: https://ssrn.com/abstract=4070710
+\end{itemize}
+
+These academic endeavors are complemented by a sustained engagement in coursework and training essential for the development of a well-rounded research expertise. I have achieved 50 ECTS at PhD level from a previously enrolled program at Trinity College Dublin, which have been instrumental in enriching my research capabilities and methodological skill sets.
+Collectively, these academic achievements not only reflect my commitment to rigorous scientific inquiry but also establish a solid foundation for the continued exploration of FinTech and Digital Finance as I progress towards the completion of my doctoral thesis.
+\vspace{-0.25cm}
+\subsection{Conferences and Events}
+% List participations and presentations
+
+Engagement with the academic community through conferences and events is a vital component of PhD research, offering opportunities for dissemination of research findings, networking, and gaining insights into the latest developments in the field. The following are key conferences and events I have participated in, which have significantly contributed to the advancement of my research:
+\vspace{-0.25cm}
+\begin{itemize}
+    \item \textbf{Crypto Assets and Digital Asset Investment Conference \& 1st Conference on International Finance, Sustainable and Climate Finance and Growth (CINSC):} 
+    At the Rennes Business School from April 7-8, 2022, and the Universitá degli Studi di Napoli ‘Parthenope’ from June 12-14, 2022, I presented the paper “Towards a Research Agenda on the Financial Economics of NFTs.” These presentations provided a forum to discuss the evolving role of NFTs in the financial landscape, attracting interest from both academic and industry participants.
+\vspace{-0.25cm}
+    \item \textbf{COST Action FinAI: FinTech and AI in Finance - Training School:} 
+    At the University of Twente, from June 12 to June 16, 2023, I presented preliminary results from my co-authored working paper with PhD colleague Yiting Liu, which was well-received and sparked constructive discussions on the integration of network topology in credit risk assessment.
+\vspace{-0.25cm}
+    \item \textbf{COST Action FinAI meets Brussels: AI in Finance - Policy Implications Conference:}
+    This event, held from May 15 to May 16, 2023, provided a platform to explore the policy implications of AI in finance, where I actively participated in policy dialogues and seminar sessions with other scholars and representatives from the European Commission.
+\vspace{-0.25cm}
+    \item \textbf{Shenzhen Technology University - International Week:} 
+    During the week of September 11-15, 2023, in Shenzhen, China, I delivered a lecture for undergraduate students in the discipline of computer science titled "An Introduction to Asset Management," which focused on various financial theories and concepts immanent to traditional asset management practices.
+\vspace{-0.25cm}
+    \item \textbf{8th European COST Conference on Artificial Intelligence in Finance:} 
+    On September 29, 2023, I had the privilege to present the working paper "Leveraging Network Topology for Credit Risk Assessment in P2P Lending: A Comparative Study under the Lens of Machine Learning," co-authored with Yiting Liu and Dr. Branka Hadji-Misheva. Our presentation highlighted the potential of machine learning in transforming traditional credit risk models and stimulated engaging discussions with other researchers in the field.
+\end{itemize}
+
+Through these exchanges I was able to not only enhance the visibility of my research but also gain additional feedback and advice to further refine my research- and methodological approach. The insights gained from these events have been integrated into my work, thereby improving the academic quality and relevance of my doctoral thesis. I am planning to further participate in such events for the upcoming academic year and further connect with peers and thought leaders at these forums.
+\vspace{-0.25cm}
+\section{Research Progress and Planning}
+% Detailed account of completed research phases
+% Description of the current stage of research and immediate forthcoming steps
+% Plans for addressing potential future disruptions
+\vspace{-0.25cm}
+This section elaborates on the research progress made to date and outline the strategic planning that will guide the completion of my PhD thesis by the target date of November 30, 2025. A thoughtful approach has been employed to sequence the research activities, ensuring that each phase logically builds upon the last, reaching in a coherent and comprehensive body of work.
+
+\vspace{-0.25cm}
+\subsection{Research Objectives}
+The main objective of this Ph.D. thesis is to advance our understanding of fintech and its application by focusing on two novel fintech-induced markets: Blockchain-based NFT/DeFi and digital P2P-credit lending. 
+%A shared characteristic common to these otherwise dissimilar markets is the heterogeneity in exchanged goods, be it in form of individual NFTs/DeFi instruments or tailored credit issuance unique to an individual lender in P2P lending transactions. 
+Here, the research aims to design and advance methodological approaches to enable a closer investigation of pricing dynamics and risk modeling practices in the respective markets. 
+
+Concretely, this thesis will derive new insights from established asset pricing tools to assess the volatility and pricing dynamics of NFT and DeFi markets. It further aims to design new credit risk models for P2P lending markets, which will be improved by features extracted from networks. Subsequently, in order to improve the usefulness of the newly developed credit risk models, the research will also focus on the interpretability of the designed models via XAI methods. Thus, the outlined research incorporates attributes of a methodological and empirical project with practical impact.         
+
+\vspace{-0.25cm}
+\subsection{Current Stage of Research}
+The current phase of the research involves the continued work on the two existing working papers that will contribute to the first and second chapters of the thesis. The study on digital asset pricing and the financial economics of NFT art is at an advanced stage with the methodology and data analysis being developed. The current work is focused on the extrapolation of the Repeat-Sales Regression (RSR) model for different sub-samples and an extended investigation of a potential "masterpiece" effect \citep{hulst_market_2017,ashenfelter_auctions_2003,mei_art_2002} evident in NFT art. The second working paper related to network-topological credit risk modeling in P2P lending is at an advanced stage, with the methodology solidified and the analysis executed. The study is close to being submitted for peer-review to an academic journal for potential publication and feedback report. Concurrently, preliminary work on the third chapter, which explores XAI methods for finance, has started. The first research paper introduces an 'explanatory distance measure' to refine credit risk model evaluation in P2P lending. This metric addresses the limitations of traditional distance metrics in analyzing complex financial data, employing advanced machine learning models for feature selection from numerical attributes in loan contracts. Utilizing spatial distance measures, such as Euclidean and HEOM, a fully connected graph is first constructed and then simplified into a minimum spanning tree (MST). Through this process the primary relationships between loans are highlighted, focusing on the closest data point neighbors. The methodology then incorporates SHAP values to compute the explanation difference, examining the top 10 features between similar nodes. The 'explanatory distance measure', thus derived, investigates the interplay between spatial and explanation distances, ultimately quantifying the stability and consistency of AI model explanations.
+\vspace{-0.25cm}
+\subsection{Forthcoming Steps and Timeline}
+The plan for the forthcoming research phases is structured as follows:
+
+\begin{itemize}
+\vspace{-0.25cm}
+    \item 01.01.2024 - 1.05.2024: Completion of data analysis and draft of the second chapter.
+\vspace{-0.25cm}
+    \item 01.06.2024 - 28.02.2025: Conceptualisation, Analysis and preliminary work on the third chapter about XAI Methods for Finance.
+\vspace{-0.25cm}
+    \item 01.03.2025 - 31.08.2025: Planned research stay at the Columbia University in the city of New York, USA, collaborating on the final chapter of the thesis with Prof. Dr. Ali Hirsa.
+\vspace{-0.25cm}
+    \item 01.09.2025 - 31.10.2025: Revisions and finalization of the third chapter, and initiation of the synthesis for the overarching thesis narrative.
+\vspace{-0.25cm}
+    \item 01.11.2025 - 30.11.2025: Completion of any remaining research, final thesis writing, and preparation for the defense.
+\end{itemize}
+
+\vspace{-0.25cm}
+
+\section{Envisioned Chapters/Publications for the Thesis}
+% Detailed list or table of the planned chapters/publications
+\vspace{-0.25cm}
+The doctoral thesis, titled "Essays in FinTech and Digital Finance," is structured into a series of comprehensive chapters, each aimed at addressing key facets of financial technology and its impact on the financial sector. The thesis will consist of the following chapters:
+\vspace{-0.15cm}
+\begin{enumerate}
+    \item \textbf{Chapter 1: Blockchain-based Finance: Pricing Digital Assets}
+    This chapter comprises two pivotal studies on the NFT and DeFi markets. The first study employs Sequential ADF and Generalized SADF tests to detect speculative bubbles and their correlation with market sentiments. The second study introduces the RSR model for NFT art valuation, incorporating collection reputation and the investigation of a "masterpiece" effect for expansive digital art to provide a new benchmark for pricing in this novel market.
+
+    \item \textbf{Chapter 2: Network-Topological Credit Risk Modeling in P2P Lending}
+    The second chapter presents an in-depth analysis of the application of network topology to credit risk assessment in P2P lending. It begins with a machine learning framework that includes network centrality metrics alongside traditional credit risk factors for enhanced prediction accuracy in P2P credit scoring. A semi-supervised approach is subsequently employed to further utilize network topological information. This method involves computing degree centrality measures separately using grouped sub-samples of defaulted and non-defaulted loans.
+
+    \item \textbf{Chapter 3: XAI Methods for Finance}
+    The focus of the third chapter is the integration of Explainable Artificial Intelligence (XAI) within financial practices. It addresses the operational applicability of XAI in financial institutions, evaluating model transparency and the robustness of XAI methods. In addition, the chapter also applies network theory to ensure consistent interpretability across similar financial contracts.
+\end{enumerate}
+\vspace{-0.15cm}
+Each chapter is envisioned to lead to a publication that contributes to the scholarly understanding of digital finance. The thesis chapters are linked to each other through the common research theme of fin-tech-induced market transformation \citep{bollaert_fintech_2021,buchak_fintech_2018} and its effect on risk management practices, thereby creating a cohesive body of work that not only provides academic insights but also offers practical applications. The planning for these chapters aligns with the projected completion timeline, ensuring a structured and focused approach to the thesis development.
+
+%\section{Methodology}
+% Summary of research methodologies
+\vspace{-0.25cm}
+\section{Future Work and Goals}
+% Immediate plans leading up to the qualifier
+% Long-term objectives for completing the PhD
+% Expected impact and applications of the research
+\vspace{-0.25cm}
+As my Ph.D studies progress towards the qualifier and beyond, the following sections outline my immediate plans, long-term objectives, and the anticipated impact of the research.
+\vspace{-0.25cm}
+\subsection{Immediate Plans Leading to the Qualifier}
+
+In preparation for the PhD qualifier, the immediate focus is on:
+\vspace{-0.25cm}
+\begin{itemize}
+    \item Finalizing the draft of the current working papers on pricing digital art NFTs  and  modeling credit risk under incorporation of network centrality in P2P lending.
+\vspace{-0.25cm}
+    \item Strengthening the theoretical framework and empirical analysis in anticipation of discussions during the qualifier.
+\vspace{-0.25cm}
+    \item Submission of the SNF Mobility Grant application, which will facilitate a research stay at Columbia University under the supervision of Prof. Dr. Ali Hirsa, providing an opportunity to delve deeper into the application of artificial intelligence in finance for the benefit of this Ph.D. thesis.
+\end{itemize}
+\vspace{-0.25cm}
+\subsection{Long-term Objectives for Completing the Ph.D.}
+The overarching goals for completing the Ph.D. include:
+\vspace{-0.25cm}
+\begin{itemize}
+    \item Contributing to new knowledge within the domain of FinTech and Digital Finance through high-quality, publishable research outputs.
+\vspace{-0.25cm}
+    \item Establishing a robust network of academic and industry partnerships that will enrich the research and foster collaborative opportunities.
+\vspace{-0.25cm}
+    \item Ensuring that the thesis presents a balance of rigorous academic research and practical relevance, particularly in the application of AI in financial contexts.
+\vspace{-0.25cm}
+    \item Targeting the completion of the thesis by November 30, 2025, with all chapters drafted and revised.
+\end{itemize}
+\vspace{-0.15cm}
+The proposed research stay at Columbia University, subject to the approval of the SNF Mobility Grant, is expected to yield additional empirical research and foster the output of academic publications under the guidance of Prof. Dr. Ali Hirsa.
+
+\newpage
+\footnotesize
+\bibstyle{harvard}
+\bibliography{references}
+
+\end{document}
