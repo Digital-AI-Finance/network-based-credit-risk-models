@@ -1,0 +1,279 @@
+---
+title: "Mispriced_loans_paper (1)"
+format: pdf
+editor: visual
+---
+
+# Mispriced_loans_paper: Data Cleaning and Curation
+
+## Libraries and Environment
+
+```{r}
+rm(list = ls())
+```
+
+```{r}
+load_or_install_packages <- function(package_names) {
+  # R
+  #
+  #
+  # - package_names (vector):
+  #
+  # 
+  # 
+  #
+  # 
+  # load_or_install_packages(c('ggplot2', 'dplyr', 'tidyr'))
+
+  failed_packages <- c()
+
+  for (package_name in package_names) {
+    if (!requireNamespace(package_name, quietly = TRUE)) {
+      message(paste0("Attempting to install ", package_name, " package from CRAN..."))
+      tryCatch({
+        install.packages(package_name, repos = 'http://cran.rstudio.com/')
+        library(package_name, character.only = TRUE)
+        message(paste0(package_name, " package has been successfully installed and loaded."))
+      }, error = function(e) {
+        message(paste0("Failed to install ", package_name, ": ", e$message))
+        failed_packages <- c(failed_packages, package_name)
+      })
+    } else {
+      library(package_name, character.only = TRUE)
+      message(paste0(package_name, " package is already installed and has been loaded."))
+    }
+  }
+
+  if (length(failed_packages) > 0) {
+    stop(paste0("Failed to install the following packages: ", paste(failed_packages, collapse = ", ")))
+  }
+}
+
+```
+
+```{r}
+package_list <- c("igraph", "gower", "lmtest", "arrow", "ggplot2", "lime", "iml","igraph","knitr","arrow","car","dplyr","feather","cluster","parallelDist")
+load_or_install_packages(package_list)
+```
+
+## Functions
+
+### File IO
+
+```{r}
+# Setup chunk (at the start of the document)
+# Explicitly set the working directory
+setwd("/Users/bal8/Desktop/mispriced_loans_paper")
+
+# Now check the working directory
+cwd <- getwd()
+print(cwd)
+
+
+```
+
+```{r}
+generate_file_path <- function(file_name) {
+  # This function now simply joins the current working directory (cwd) with the file name.
+  
+  # Create the full file path by joining the current working directory with the file name
+  file_path <- file.path(cwd, file_name)
+  
+  return(file_path)
+}
+
+```
+
+### Data Cleaning
+
+Pre-processing
+
+```{r}
+clean_data <- function(df) {
+  # Replace NA with 0 for credit risk metrics, considering both defaulted and non-defaulted loans
+  df <- df %>%
+    mutate(
+      across(
+        c(
+          "LossGivenDefault", 
+          "ExpectedLoss", 
+          "PrincipalRecovery", 
+          "InterestRecovery",
+          "EAD1",
+          "EAD2",
+          "PrincipalWriteOffs",
+          "InterestAndPenaltyWriteOffs"
+        ), 
+        ~ ifelse(is.na(.), 0, .)
+      )
+    ) %>%
+    filter(`lang.1` == 1) %>%
+    dplyr::select(-starts_with("lang")) %>%
+    dplyr::select(
+      -matches(
+        "^(return|RR1|RR2.Mean|RR2.Median|RR2.WMean|NPRP|NPRA|FVCI|FVCI.Mean|FVCI.Median|FVCI.WMean)$"
+      )
+    ) %>%
+    dplyr::select(-matches("inc.*\\.no")) %>%
+    dplyr::select(-all_of(
+      c(
+        "AA",
+        "educ.6",
+        "em.dur.5p",
+        "use.m",
+        "ver.2",
+        "Mining",
+        "Utilities",
+        "RecoveryStage",
+        "DebtOccuredOn",
+        #"DefaultDate",
+        "InterestAndPenaltyBalance",
+        "CreditScoreEsMicroL",
+        "CreditScoreEsEquifaxRisk",
+        "CreditScoreFiAsiakasTietoRiskGrade",
+        "CreditScoreEeMini",
+        "Restructured"
+      )
+    )) %>%
+    # Drop rows with NA in MonthlyPayment or MonthlyPayment == 0
+    filter(!is.na(LoanId) & !is.na(MonthlyPayment) & MonthlyPayment != 0) %>%
+    # Keep only rows where 'A', 'B', or 'C' equals 1
+    filter(A == 1 | B == 1 | C == 1) %>%
+    # Remove loans where ALL duration indicators are 0 or NA
+    filter(if_any(starts_with("duration."), ~ . == 1)) %>%
+    # Exclude loans where time span exceeds 70 months
+    mutate(
+      time_span_months = as.numeric(difftime(date.end, date.start, units = "days")) / 30.4375
+    ) %>%
+    filter(time_span_months <= 70) %>%
+    dplyr::select(-time_span_months)  # Remove temporary column
+
+  # Exclude non-numeric columns for correlation calculation
+  numeric_cols <- df %>% select(where(is.numeric))
+
+  # Generate a correlation matrix of numeric columns only
+  corr_matrix <- cor(numeric_cols, use = "complete.obs")
+
+  # Select upper triangle of correlation matrix
+  upper <- corr_matrix
+  upper[lower.tri(upper, diag = TRUE)] <- NA
+
+  # Find columns with correlation greater than 0.95
+  to_drop <- colnames(upper)[apply(upper, 2, function(x) any(abs(x) > 0.95, na.rm = TRUE))]
+
+  # Drop these columns from the original dataframe
+  df <- df %>% dplyr::select(-all_of(to_drop))
+
+  return(df)
+}
+```
+
+Deal with binary variables
+
+```{r}
+convert_to_factor_if_binary <- function(df) {
+  for (col_name in names(df)) {
+    unique_values <- unique(df[[col_name]])
+    if (length(unique_values) == 2) {
+      df[[col_name]] <- as.factor(df[[col_name]])
+      cat("Converted", col_name, "to factor\\n")
+    }
+  }
+  return(df)
+}
+```
+
+### Data Sampling
+
+```{r}
+data_sampling <- function(df, total_sample_size) {
+  # Count the number of positive and negative samples in the original dataset
+  n_pos_original <- sum(df$default == 1)
+  n_neg_original <- sum(df$default == 0)
+  total_original <- n_pos_original + n_neg_original
+
+  # Calculate proportions based on the original dataset
+  pos_ratio <- n_pos_original / total_original
+  neg_ratio <- n_neg_original / total_original
+
+  # Determine sample size for each class based on the desired total sample size
+  n_pos <- round(total_sample_size * pos_ratio)
+  n_neg <- total_sample_size - n_pos
+
+  # Print the original counts and calculated sample sizes
+  cat("Original dataset: Positive samples =", n_pos_original, ", Negative samples =", n_neg_original, "\n")
+  cat("Sampled dataset: Positive samples =", n_pos, ", Negative samples =", n_neg, "\n")
+
+  # Sample without replacement for each class
+  set.seed(1234)
+  sample_rows <- c(
+    sample(which(df$default == 1), size = n_pos),
+    sample(which(df$default == 0), size = n_neg)
+  )
+  df_sample <- df[sample_rows,]
+
+  return(df_sample)
+}
+```
+
+## Data Pre-processing
+
+### Load the dataset and cleaning
+
+```{r}
+# Load original dataset
+file_path <- generate_file_path("Bondora_Mis_Pric.feather")
+print(file_path)
+```
+
+```{r}
+# Load the dataset
+df <- read_feather(file_path)
+```
+
+```{r}
+#apply(df[,-c(1,2)],2,function(x) sum(is.na(x)))
+```
+
+```{r}
+# Clean data
+df_clean <- clean_data(df)
+```
+
+```{r}
+# Compute the maximum time span in months
+df_clean %>%
+  mutate(time_span_months = as.numeric(difftime(date.end, date.start, units = "days")) / 30.4375) %>%
+  summarise(
+    max_time_span = max(time_span_months, na.rm = TRUE)
+  )
+```
+
+```{r}
+#apply(df_clean[,-c(1,2)],2,function(x) sum(is.na(x)))
+```
+
+Have a look on the cleaned data
+
+```{r}
+colnames(df_clean)
+```
+
+```{r}
+dim(df_clean)
+table(df_clean$default)
+```
+
+### Sampling
+
+```{r}
+df_sample <- data_sampling(df_clean, total_sample_size = 22000)
+```
+
+```{r}
+# Compute loan_amount from log.amount and add to df_sample
+df_sample$loan_amount <- exp(df_sample$log.amount)
+
+df_sample <- df_sample %>%
+  filter(loan_amount > 0)
+```

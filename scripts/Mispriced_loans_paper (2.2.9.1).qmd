@@ -1,0 +1,2024 @@
+---
+title: "Mispriced_loans_paper: Network Construction for Bondora"
+format: pdf
+editor: visual
+---
+
+# Mispriced_loans_paper: Network Construction and Clustering
+
+## Libraries and Environment
+
+```{r}
+#rm(list = ls())
+```
+
+```{r}
+load_or_install_packages <- function(package_names) {
+  # 加载或安装 R 包
+  #
+  # 参数:
+  # - package_names (vector): 要加载或安装的包名列表
+  #
+  # 返回值:
+  # - 无
+  #
+  # 示例用法:
+  # load_or_install_packages(c('ggplot2', 'dplyr', 'tidyr'))
+
+  failed_packages <- c()  # 用于存储未能成功安装的包名
+
+  for (package_name in package_names) {
+    if (!requireNamespace(package_name, quietly = TRUE)) {
+      message(paste0("Attempting to install ", package_name, " package from CRAN..."))
+      tryCatch({
+        install.packages(package_name, repos = 'http://cran.rstudio.com/')
+        library(package_name, character.only = TRUE)
+        message(paste0(package_name, " package has been successfully installed and loaded."))
+      }, error = function(e) {
+        message(paste0("Failed to install ", package_name, ": ", e$message))
+        failed_packages <- c(failed_packages, package_name)
+      })
+    } else {
+      library(package_name, character.only = TRUE)
+      message(paste0(package_name, " package is already installed and has been loaded."))
+    }
+  }
+
+  if (length(failed_packages) > 0) {
+    stop(paste0("Failed to install the following packages: ", paste(failed_packages, collapse = ", ")))
+  }
+}
+
+```
+
+```{r}
+package_list <- c("igraph", "gower", "lmtest", "arrow", "ggplot2", "lime", "iml", "knitr", "car", "dplyr", "feather", "cluster", "parallelDist", "mclust", "pbapply", "ggraph", "tidyr", "sandwich","pscl", "readr", "glmnet", "ggnetwork", "ggforce", "caret", "randomForest", "lubridate")
+load_or_install_packages(package_list)
+```
+
+## Functions
+
+### Random Forest Feature Selection
+
+```{r}
+# Function to select top risk factors using Random Forest
+select_top_risk_factors <- function(df_sample, 
+                                    target_var = NULL, 
+                                    exclude_vars = NULL, 
+                                    top_n = 20) {
+  
+  # Prepare data
+  if (!is.null(exclude_vars)) {
+    predictor_vars <- setdiff(names(df_sample), c(target_var, exclude_vars))
+  } else {
+    predictor_vars <- setdiff(names(df_sample), target_var)
+  }
+  
+  # Ensure target variable is a factor
+  df_sample[[target_var]] <- as.factor(df_sample[[target_var]])
+  
+  # Split data into training and testing sets
+  set.seed(123)
+  train_index <- createDataPartition(df_sample[[target_var]], p = 0.7, list = FALSE)
+  train_data <- df_sample[train_index, ]
+  
+  # Train Random Forest model
+  rf_model <- randomForest(
+    as.formula(paste(target_var, "~ .")), 
+    data = train_data[, c(target_var, predictor_vars)],
+    importance = TRUE, 
+    ntree = 500
+  )
+  
+  # Get variable importance
+  importance_scores <- importance(rf_model, type = 1) # Type=1 => MeanDecreaseAccuracy
+  importance_df <- data.frame(
+    Feature    = rownames(importance_scores),
+    Importance = importance_scores[, 1]
+  )
+  # Sort by descending importance
+  importance_df <- importance_df[order(-importance_df$Importance), ]
+  
+  # Select top N features
+  top_features <- importance_df$Feature[1:top_n]
+  
+  # IMPORTANT: Return both 'top_features' and the entire 'importance_df'
+  return(
+    list(
+      top_features      = top_features,
+      rf_importance_df  = importance_df
+    )
+  )
+}
+```
+
+### Compute summary stats on top20 risk factors
+
+```{r}
+# Function to summarize top risk factors
+summarize_top_risk_factors <- function(df_sample, top_risk_factors) {
+  # Select top risk factors
+  df_selected <- df_sample %>%
+    select(all_of(top_risk_factors))
+  
+  # Identify binary variables (0 or 1) and continuous numeric variables
+  binary_vars <- names(df_selected)[sapply(df_selected, function(x) {
+    is.numeric(x) && all(na.omit(unique(x)) %in% c(0, 1))
+  })]
+  
+  numeric_vars <- names(df_selected)[sapply(df_selected, function(x) {
+    is.numeric(x) && !all(na.omit(unique(x)) %in% c(0, 1))
+  })]
+  
+  # Summarize binary variables
+  binary_summary <- df_selected %>%
+    select(all_of(binary_vars)) %>%
+    summarize_all(list(
+      Proportion = ~ mean(., na.rm = TRUE),
+      Count = ~ sum(!is.na(.))
+    )) %>%
+    pivot_longer(
+      everything(),
+      names_to = c("Feature", "Statistic"),
+      names_pattern = "^(.*)_(.*)$"  # Split at the last underscore
+    ) %>%
+    pivot_wider(names_from = Statistic, values_from = value)
+  
+  # Summarize numeric variables
+  numeric_summary <- df_selected %>%
+    select(all_of(numeric_vars)) %>%
+    summarize_all(list(
+      Mean = ~ mean(., na.rm = TRUE),
+      SD = ~ sd(., na.rm = TRUE),
+      Min = ~ min(., na.rm = TRUE),
+      Max = ~ max(., na.rm = TRUE)
+    )) %>%
+    pivot_longer(
+      everything(),
+      names_to = c("Feature", "Statistic"),
+      names_pattern = "^(.*)_(.*)$"  # Split at the last underscore
+    ) %>%
+    pivot_wider(names_from = Statistic, values_from = value)
+  
+  # Combine the summaries
+  combined_summary <- bind_rows(binary_summary, numeric_summary)
+  
+  # Return the summary statistics
+  return(combined_summary)
+}
+```
+
+### Compute Risk Factor Similarities
+
+```{r}
+# Function to compute risk factor similarities using selected features
+# Now includes an optional 'weights_vector' argument.
+compute_risk_factor_similarity <- function(df_sample,
+                                           risk_factor_vars,
+                                           weights_vector = NULL) {
+  library(cluster) # For daisy
+  
+  # Extract risk factors from df
+  risk_factors <- df_sample[, risk_factor_vars]
+  
+  # Ensure that character variables are factors
+  risk_factors[] <- lapply(risk_factors, function(x) {
+    if (is.character(x)) as.factor(x) else x
+  })
+  
+  # <--- UPDATED CODE: If no weights provided, default to equal weighting
+  if (is.null(weights_vector)) {
+    weights_vector <- rep(1, length(risk_factor_vars))
+  }
+  
+  # Compute Gower distance matrix using (optional) weights
+  # daisy automatically handles numeric/factor differences
+  risk_factor_dist <- daisy(risk_factors, metric = "gower", weights = weights_vector)
+  
+  # Convert distance matrix to similarity matrix
+  risk_factor_similarity <- 1 - as.matrix(risk_factor_dist)
+  
+  return(risk_factor_similarity)
+}
+```
+
+### Calculate Edge Weights
+
+```{r}
+# Function to calculate edge weights using risk factor similarity
+calculate_edge_weights <- function(risk_factor_similarity) {
+  # Edge weight matrix is the risk factor similarity
+  edge_weight_matrix <- risk_factor_similarity
+  
+  return(edge_weight_matrix)
+}
+```
+
+### Apply Threshold
+
+#### Thresholding
+
+```{r}
+apply_threshold <- function(distance_matrix, threshold) {
+  distance_matrix_thresholded <- distance_matrix
+  distance_matrix_thresholded[distance_matrix > threshold] <- 0
+  return(distance_matrix_thresholded)
+}
+```
+
+### Create Network Graph
+
+```{r}
+create_network_graph <- function(adjacency_matrix) {
+  message("Creating network graph...")
+  start_time <- Sys.time()
+  
+  g <- graph.adjacency(adjacency_matrix, mode = "undirected", weighted = TRUE, diag = FALSE)
+  
+  end_time <- Sys.time()
+  duration <- difftime(end_time, start_time, units = "secs")
+  message(sprintf("Network graph created in %.2f seconds.", as.numeric(duration)))
+  
+  return(g)
+}
+```
+
+### Analyze Cluster Characteristics
+
+```{r}
+analyze_cluster_characteristics <- function(df_sample) {
+  cluster_summary <- df_sample %>%
+    group_by(community) %>%
+    summarize(
+      total_loan_amount = sum(loan_amount),
+      avg_interest = weighted.mean(Interest, w = loan_amount),
+      avg_default = weighted.mean(default, w = loan_amount),
+      count = n()
+    )
+  return(cluster_summary)
+}
+```
+
+### Perform ANOVA Analysis on Clusters
+
+```{r}
+perform_anova_on_clusters <- function(data, variable, cluster_var = "community") {
+  # Ensure the cluster variable is a factor
+  data[[cluster_var]] <- as.factor(data[[cluster_var]])
+  
+  # Construct the formula for ANOVA
+  formula <- as.formula(paste(variable, "~", cluster_var))
+  
+  # Perform ANOVA
+  anova_result <- aov(formula, data = data)
+  
+  # Perform Tukey's HSD post-hoc test
+  tukey_result <- TukeyHSD(anova_result)
+  
+  # Assumption Checks
+  
+  # 1. Normality of residuals
+  residuals_anova <- residuals(anova_result)
+  
+  if (length(residuals_anova) > 5000) {
+    # For large datasets, sample residuals
+    set.seed(123)  # Ensure reproducibility
+    sampled_residuals <- sample(residuals_anova, size = 5000, replace = FALSE)
+    shapiro_test <- shapiro.test(sampled_residuals)
+    message("Shapiro-Wilk test performed on a random sample of 5000 residuals.")
+  } else {
+    shapiro_test <- shapiro.test(residuals_anova)
+  }
+  
+  # 2. Homogeneity of variances
+  library(car)
+  levene_test <- leveneTest(formula, data = data)
+  
+  # Print results
+  cat("\nANOVA Summary:\n")
+  print(summary(anova_result))
+  
+  cat("\nTukey's HSD Post-Hoc Test:\n")
+  print(tukey_result)
+  
+  cat("\nShapiro-Wilk Test for Normality of Residuals:\n")
+  print(shapiro_test)
+  
+  cat("\nLevene's Test for Homogeneity of Variances:\n")
+  print(levene_test)
+  
+  # Return all results
+  return(list(
+    anova_result = anova_result,
+    tukey_result = tukey_result,
+    shapiro_test = shapiro_test,
+    levene_test = levene_test
+  ))
+}
+```
+
+### Identify Potentially Mispriced Loans
+
+```{r}
+identify_mispriced_loans <- function(df_sample) {
+  # Initialize an empty dataframe to store mispriced loans
+  mispriced_loans <- data.frame()
+  
+  # Loop through each community
+  for (comm in unique(df_sample$community)) {
+    # Subset data for the community
+    df_comm <- df_sample %>% filter(community == comm)
+    
+    # Ensure there are enough loans in the community to calculate quantiles
+    if (nrow(df_comm) >= 5) {
+      # Calculate the 25th and 75th percentiles of the interest rate within the community
+      interest_25 <- quantile(df_comm$Interest, 0.25, na.rm = TRUE)
+      interest_75 <- quantile(df_comm$Interest, 0.75, na.rm = TRUE)
+      
+      # Calculate delta for underpriced loans
+      underpriced_loans <- df_comm %>%
+        filter(Interest < interest_25 & default == 1) %>%
+        mutate(
+          Mispricing = "Underpriced",
+          Delta = Interest - interest_25,  # Distance to 25th percentile
+          community = as.character(community)  # Ensure type consistency
+        )
+      
+      # Calculate delta for overpriced loans
+      overpriced_loans <- df_comm %>%
+        filter(Interest > interest_75 & default == 0) %>%
+        mutate(
+          Mispricing = "Overpriced",
+          Delta = Interest - interest_75,  # Distance to 75th percentile
+          community = as.character(community)  # Ensure type consistency
+        )
+      
+      # Combine underpriced and overpriced loans for the community
+      mispriced_loans_comm <- bind_rows(underpriced_loans, overpriced_loans)
+      
+      # Append to mispriced_loans dataframe
+      mispriced_loans <- bind_rows(mispriced_loans, mispriced_loans_comm)
+    } else {
+      message("Community ", comm, " has fewer than 5 loans. Skipping mispricing identification for this community.")
+    }
+  }
+  
+  # Ensure consistent column types in the final dataframe
+  mispriced_loans <- mispriced_loans %>%
+    mutate(
+      community = as.character(community),  # Ensure community is character
+      LoanId = as.character(LoanId)        # Ensure LoanId is character
+    )
+  
+  return(mispriced_loans)
+}
+```
+
+Removing ex post variables from sample data frame:
+
+```{r}
+# List of ex-post variables to separate
+ex_post_vars <- c(
+  "PrincipalBalance",
+  "PrincipalPaymentsMade",
+  "InterestAndPenaltyPaymentsMade",
+  "PrincipalWriteOffs",
+  "InterestAndPenaltyWriteOffs",
+#  "PrincipalRecovery",
+#  "InterestRecovery",
+  "EAD1",
+  "ExpectedLoss",
+  "LossGivenDefault",
+#  "ExpectedReturn",
+  "ProbabilityOfDefault",
+  "log.amount"# due to correlation with loan_amount
+)
+
+# Create a new dataframe with ex-post variables
+df_sample_ex_post <- df_sample[, ex_post_vars]
+
+# Remove ex-post variables from the original df_sample
+df_sample <- df_sample[, !(names(df_sample) %in% ex_post_vars)]
+```
+
+## Network Construction (Proceeded with Threshold)
+
+```{r}
+# Main script for network construction on smaller sample
+
+# Step 0: Define target variable and exclude variables
+target_var <- "default"
+exclude_vars <- c("default", "A", "B", "C", "Bondora_Rating", "Interest",
+                  "LoanId","date.start", "date.end", "PrincipalRecovery", "InterestRecovery", "DefaultDate", "ExpectedReturn")  # Add any other variables to exclude
+
+
+# Step 1: Select Top Risk Factors using RF
+top_n <- 20
+rf_result <- select_top_risk_factors(
+  df_sample, target_var = target_var,
+  exclude_vars = exclude_vars,
+  top_n = top_n
+)
+top_risk_factors <- rf_result$top_features
+rf_importance_df <- rf_result$rf_importance_df
+
+message("Top Risk Factors Selected:")
+print(top_risk_factors)
+
+# <--- UPDATED CODE: Create normalized weights for the top 20 features
+# 1) Subset importance_df to only the top 20 features
+top_importance_df <- rf_importance_df[rf_importance_df$Feature %in% top_risk_factors, ]
+
+# 2) Reorder so that row order matches 'top_risk_factors'
+top_importance_df <- top_importance_df[match(top_risk_factors, top_importance_df$Feature), ]
+
+# 3) Normalize to sum to 1
+weights_vector <- top_importance_df$Importance / sum(top_importance_df$Importance)
+
+# Step 2: Compute Weighted Risk Factor Similarity
+risk_factor_similarity <- compute_risk_factor_similarity(
+  df_sample         = df_sample,
+  risk_factor_vars  = top_risk_factors,
+  weights_vector    = weights_vector  # <--- UPDATED CODE: passing weights
+)
+
+# Step 3: Calculate Edge Weights (using only risk factor similarity)
+edge_weight_matrix <- calculate_edge_weights(risk_factor_similarity)
+
+# Convert composite similarity matrix to distance matrix
+distance_matrix <- 1 - edge_weight_matrix
+
+# Plot distance distribution
+hist(edge_weight_matrix[upper.tri(edge_weight_matrix)], breaks = 50, main = "Edge Weight Distribution", xlab = "Edge Weight")
+
+# Remove large objects that are no longer needed
+rm(risk_factor_similarity, edge_weight_matrix)
+gc()
+```
+
+```{r}
+hist(distance_matrix[upper.tri(distance_matrix)], breaks = 50, main = "Distance Distribution", xlab = "Distance")
+```
+
+```{r}
+# Summary statistics for the top 20 risk factors in the data set
+# Assuming `top_risk_factors` is the character vector of selected features
+# and `df_sample` contains the dataset
+summary_statistics <- summarize_top_risk_factors(df_sample, top_risk_factors)
+
+# Display the summary
+print(summary_statistics)
+```
+
+```{r}
+# Step 4: Apply Threshold
+# Define distance threshold
+distance_threshold <- 0.1  # Adjust threshold as needed (since distances range from 0 to 1)
+
+# Apply threshold to the distance matrix
+adjacency_matrix <- ifelse(distance_matrix <= distance_threshold, distance_matrix, 0)
+
+# Map LoanId to numeric identifiers
+loan_id_map <- data.frame(LoanId = df_sample$LoanId, node_id = seq_len(nrow(df_sample)))
+
+# Update adjacency matrix row and column names to numeric node IDs
+rownames(adjacency_matrix) <- loan_id_map$node_id
+colnames(adjacency_matrix) <- loan_id_map$node_id
+
+```
+
+```{r}
+# Step 5) Remove fully isolated nodes
+# (row-sum=0 => no edges after threshold)
+#-----------------------------------------
+row_sums <- rowSums(adjacency_matrix)
+isolated_nodes <- which(row_sums == 0)
+
+if (length(isolated_nodes) > 0) {
+  cat("Dropping", length(isolated_nodes), "isolated loans.\n")
+  
+  keep_nodes <- setdiff(seq_len(nrow(adjacency_matrix)), isolated_nodes)
+  
+  # Subset adjacency & distance
+  adjacency_matrix <- adjacency_matrix[keep_nodes, keep_nodes, drop = FALSE]
+  distance_matrix  <- distance_matrix[keep_nodes, keep_nodes, drop = FALSE]
+  
+  # Subset df_sample
+  df_sample <- df_sample[keep_nodes, , drop = FALSE]
+}
+```
+
+```{r}
+# Remove distance_matrix if no longer needed
+rm(distance_matrix)
+gc()
+
+# Update loan_id_map
+loan_id_map <- loan_id_map[rownames(adjacency_matrix), ]
+```
+
+```{r}
+# Create a single connected subgraph for Louvain, through bridging:
+# Step 3) Build your single graph
+#-------------------------------
+g <- graph_from_adjacency_matrix(adjacency_matrix, mode = "undirected", 
+                     weighted = TRUE, diag = FALSE)
+
+# Add LoanId as a vertex/name attribute
+# V(g)$LoanId <- loan_id_map$LoanId
+V(g)$name <- loan_id_map$LoanId
+
+comp_info <- components(g)
+cat("Number of connected components:", comp_info$no, "\n")
+
+#------------------------------------------------------
+# Step 3b) (Optional) Bridge any disconnected components
+# so that the final subgraph is connected. We do this
+# by editing 'adjacency_matrix' in-place, then rebuild 'g'.
+#------------------------------------------------------
+if (comp_info$no > 1) {
+  cat("Bridging disconnected components...\n")
+  comp_ids <- unique(comp_info$membership)
+  
+  for (i in seq_along(comp_ids)) {
+    for (j in seq_along(comp_ids)) {
+      if (j <= i) next
+      nodes_i <- which(comp_info$membership == comp_ids[i])
+      nodes_j <- which(comp_info$membership == comp_ids[j])
+      
+      # Among i & j, find min distance
+      subdist <- distance_matrix[nodes_i, nodes_j, drop = FALSE]
+      min_val <- suppressWarnings(min(subdist))  # can be Inf
+      if (is.infinite(min_val)) {
+        cat("  WARNING: No finite distance between comps", 
+            comp_ids[i], "and", comp_ids[j], "=> skipping.\n")
+        next
+      }
+      
+      # Grab any one pair that attains that min dist
+      min_idx <- which(subdist == min_val, arr.ind = TRUE)[1, ]
+      u_global <- nodes_i[min_idx[1]]
+      v_global <- nodes_j[min_idx[2]]
+      
+      cat(sprintf("  Bridging comps via nodes %d-%d (dist=%.3f)\n",
+                  u_global, v_global, min_val))
+      
+      adjacency_matrix[u_global, v_global] <- min_val
+      adjacency_matrix[v_global, u_global] <- min_val
+    }
+  }
+  
+  # Now discard old 'g' to save memory & rebuild
+  rm(g)
+  
+  g <- graph.adjacency(adjacency_matrix, mode="undirected", 
+                       weighted=TRUE, diag=FALSE)
+  comp_info <- components(g)
+  cat("Number of comps after bridging:", comp_info$no, "\n")
+}
+```
+
+```{r}
+#-----------------------
+# Step 6) Run Louvain
+#-----------------------
+cat("Running Louvain...\n")
+louvain_comm <- cluster_louvain(g)
+membership_vec <- membership(louvain_comm)
+
+df_sample$community <- membership_vec  # same row order as adjacency
+```
+
+```{r}
+#---------------------------------------------
+# Step 7) If any leftover node is missing
+# a community label, drop it from df_sample
+#---------------------------------------------
+missing_community <- which(is.na(df_sample$community))
+if (length(missing_community) > 0) {
+  cat("Dropping", length(missing_community), 
+      "loans that have no valid community.\n")
+  df_sample <- df_sample[-missing_community, , drop=FALSE]
+}
+
+cat("Done. Final df_sample has", nrow(df_sample), 
+    "loans with assigned communities.\n")
+```
+
+## Visualizing the communities by network and across the sample
+
+```{r}
+# Visualize the network by community
+
+# Set a seed for reproducibility
+set.seed(42)  # Any fixed number
+
+# Ensure LoanId is assigned to V(g)$name
+if (!"name" %in% names(vertex.attributes(g))) {
+  stop("Vertex attribute 'name' not found. Ensure LoanId is assigned to V(g)$name.")
+}
+
+# Generate Fruchterman-Reingold layout
+layout_fr <- layout_with_fr(g)
+
+# Convert to ggnetwork format with layout
+g_ggnetwork <- ggnetwork(g, layout = layout_fr)
+
+# Verify that 'name' is present in g_ggnetwork (since 'name' == LoanId)
+if (!"name" %in% colnames(g_ggnetwork)) {
+  stop("'name' column not found in g_ggnetwork. Ensure LoanId was set as V(g)$name.")
+}
+
+# Create a data frame of 'name' (LoanId) and their community membership
+node_community_df <- data.frame(
+  name = V(g)$name,  # Use 'name' instead of 'LoanId'
+  community = as.factor(membership_vec)  # Community labels from Louvain algorithm
+)
+
+# Merge community information directly into g_ggnetwork using 'name'
+g_ggnetwork <- g_ggnetwork %>%
+  left_join(node_community_df, by = "name")
+
+# Ensure the 'community' column exists
+if (!"community" %in% colnames(g_ggnetwork)) {
+  stop("Community column not successfully added to g_ggnetwork.")
+}
+
+# Plot each community
+for (comm in unique(g_ggnetwork$community)) {
+  cat(sprintf("Visualizing community %s\n", comm))
+  
+  # Filter for the current community
+  comm_plot <- g_ggnetwork[g_ggnetwork$community == comm, ]
+  
+  # Create the plot
+  p <- ggplot(comm_plot, aes(x = x, y = y)) +
+    geom_edges(aes(xend = xend, yend = yend), color = "gray", alpha = 0.5) +
+    geom_nodes(aes(color = community), size = 3) +
+    theme_void() +
+    labs(title = sprintf("Community %s", comm)) +
+    theme(legend.position = "none")
+  
+  print(p)
+}
+```
+
+### Calculate Centroids to identify loan outliers per community
+
+```{r}
+# -------------------------------
+# Step 1: Compute Centroids Based on Adjacency Matrix
+# -------------------------------
+
+community_distances <- data.frame()
+
+for (comm in unique(membership_vec)) {
+  
+  # Extract nodes belonging to the current community
+  comm_nodes <- which(membership_vec == comm)
+  
+  # Subset the adjacency matrix for this community
+  adjacency_submatrix <- adjacency_matrix[comm_nodes, comm_nodes, drop = FALSE]
+  
+  # Compute the centroid as the mean of non-zero distances in the adjacency submatrix
+  community_centroid <- colMeans(adjacency_submatrix, na.rm = TRUE)
+  
+  # Compute Euclidean distances from each loan to the centroid
+  for (node in seq_along(comm_nodes)) {
+    dist_to_centroid <- sqrt(sum((adjacency_submatrix[node, ] - community_centroid)^2, na.rm = TRUE))
+    
+    community_distances <- rbind(community_distances, data.frame(
+      LoanId = df_sample$LoanId[comm_nodes[node]],
+      community = comm,
+      distance_to_centroid = dist_to_centroid
+    ))
+  }
+}
+
+# Compute outlier thresholds per community (95th percentile)
+thresholds <- community_distances %>%
+  group_by(community) %>%
+  summarise(
+    upper_threshold = quantile(distance_to_centroid, 0.95, na.rm = TRUE)
+  )
+
+# Flag outliers based on adjacency matrix distances
+community_distances <- community_distances %>%
+  left_join(thresholds, by = "community") %>%
+  mutate(
+    is_outlier = distance_to_centroid > upper_threshold
+  )
+```
+
+```{r}
+# Remove adjacency-based outliers from df_sample
+df_sample <- df_sample %>%
+  filter(!LoanId %in% community_distances$LoanId[community_distances$is_outlier])
+
+# Compute max distances for visualization
+community_thresholds <- community_distances %>%
+  group_by(community) %>%
+  summarise(
+    max_distance = quantile(distance_to_centroid, 0.95, na.rm = TRUE)
+  )
+```
+
+```{r}
+# -------------------------------
+# Step 2: Prepare Node Data for FR Layout
+# -------------------------------
+
+node_df <- data.frame(
+  LoanId    = V(g)$name,
+  x         = layout_fr[,1], 
+  y         = layout_fr[,2], 
+  community = factor(membership_vec)
+)
+
+# -------------------------------
+# Step 3: Compute Centroids and Outliers Based on FR Layout for Visualization
+# -------------------------------
+
+fr_centroids <- node_df %>%
+  group_by(community) %>%
+  summarise(
+    centroid_x = mean(x, na.rm = TRUE),
+    centroid_y = mean(y, na.rm = TRUE)
+  )
+
+# Compute distances from FR centroids
+node_df <- node_df %>%
+  left_join(fr_centroids, by = "community") %>%
+  mutate(
+    fr_distance = sqrt((x - centroid_x)^2 + (y - centroid_y)^2)
+  )
+
+# Compute FR-based outlier thresholds
+fr_thresholds <- node_df %>%
+  group_by(community) %>%
+  summarise(
+    upper_threshold = quantile(fr_distance, 0.95, na.rm = TRUE)
+  )
+
+# Flag outliers based on FR layout distances
+node_df <- node_df %>%
+  left_join(fr_thresholds, by = "community") %>%
+  mutate(
+    fr_is_outlier = fr_distance > upper_threshold,
+    node_status = case_when(
+      fr_is_outlier ~ "Outlier",
+      TRUE ~ "Inlier"
+    )
+  )
+```
+
+```{r}
+# -------------------------------
+# Step 4: Prepare Edge Data
+# -------------------------------
+
+edges_df <- igraph::as_data_frame(g, what = "edges") %>%
+  rename(from_loanid = from, to_loanid = to) %>%
+  left_join(
+    node_df %>% select(LoanId, x, y, community), 
+    by = c("from_loanid" = "LoanId"), suffix = c("", "_src")
+  ) %>%
+  rename(x_src = x, y_src = y, c1 = community) %>%
+  left_join(
+    node_df %>% select(LoanId, x, y, community), 
+    by = c("to_loanid" = "LoanId"), suffix = c("", "_tgt")
+  ) %>%
+  rename(x_tgt = x, y_tgt = y, c2 = community)
+```
+
+```{r}
+# -------------------------------
+# Step 5: Loop Through Communities and Generate Plots
+# -------------------------------
+
+for (comm in sort(unique(node_df$community))) {
+  cat(sprintf("\nPlotting community %s...\n", comm))
+  
+  # Extract nodes in the current community
+  comm_nodes <- node_df %>% filter(community == comm)
+  if (nrow(comm_nodes) <= 1) next  # Skip empty communities
+  
+  # Extract edges within the community
+  comm_edges <- edges_df %>% filter(c1 == comm & c2 == comm)
+  
+  # Compute centroid based on FR layout
+  centroid_x <- mean(comm_nodes$x, na.rm = TRUE)
+  centroid_y <- mean(comm_nodes$y, na.rm = TRUE)
+  
+  # Get the visualization radius from FR-based outlier thresholding
+  circle_radius <- fr_thresholds %>%
+    filter(community == comm) %>%
+    pull(upper_threshold)
+  
+  # Generate the plot
+  p <- ggplot() +
+    # Draw edges
+    geom_segment(
+      data = comm_edges,
+      aes(x = x_src, y = y_src, xend = x_tgt, yend = y_tgt),
+      color = "gray70", alpha = 0.5
+    ) +
+    # Draw nodes
+    geom_point(
+      data = comm_nodes,
+      aes(x = x, y = y, color = node_status),
+      size = 3
+    ) +
+    # Draw centroid
+    geom_point(
+      aes(x = centroid_x, y = centroid_y),
+      shape = 4, size = 5, color = "black"
+    ) +
+    # Draw circular boundary for FR-based outlier detection
+    annotate(
+      "path",
+      x = centroid_x + circle_radius * cos(seq(0, 2*pi, length.out = 200)),
+      y = centroid_y + circle_radius * sin(seq(0, 2*pi, length.out = 200)),
+      color = "black", linetype = "dashed"
+    ) +
+    # Define color scale for node status
+    scale_color_manual(
+      values = c("Inlier" = "red", "Outlier" = "blue"),
+      na.translate = FALSE
+    ) +
+    theme_void() +
+    theme(legend.position = "bottom") +
+    labs(
+      title = paste("Community", comm, "(FR Layout)"),
+      color = "Node Status"
+    )
+  
+  print(p)
+}
+```
+
+### Summarize Cluster information
+
+```{r}
+# Summarize Community Characteristics
+community_summary <- df_sample %>%
+  group_by(community) %>%
+  summarize(
+    avg_interest_rate = mean(Interest, na.rm = TRUE),
+    avg_default_rate = mean(default, na.rm = TRUE) * 100,  # Convert to percentage
+    total_loan_amount = sum(loan_amount, na.rm = TRUE),
+    community_size = n()
+  )
+
+# Convert community to a factor
+community_summary$community <- as.factor(community_summary$community)
+```
+
+```{r}
+# Visualize Community Characteristics with ordered size legend
+ggplot(community_summary, aes(x = avg_interest_rate, y = avg_default_rate)) +
+  geom_point(aes(size = community_size, color = factor(community)), alpha = 0.7) +
+  scale_size_continuous(
+    name = "Community Size (Loans)",    # Legend title
+    breaks = sort(unique(community_summary$community_size)),  # Order the sizes
+    range = c(3, 8),                   # Adjust point sizes for better visual differentiation
+    labels = scales::comma_format()    # Format loan counts with commas
+  ) +
+  scale_color_viridis_d(name = "Community") +
+  labs(
+    title = "Communities by Average Interest Rate and Default Rate",
+    x = "Average Interest Rate (%)",
+    y = "Average Default Rate (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "right"
+  )
+```
+
+## Comparative Analysis
+
+```{r}
+# Analyze Community Characteristics
+cluster_summary <- analyze_cluster_characteristics(df_sample)
+print(cluster_summary)
+```
+
+```{r}
+print(community_summary)
+```
+
+```{r}
+# Count number of points per cluster
+community_counts <- table(df_sample$community)
+print(community_counts)
+```
+
+```{r}
+# Create scatter plot with annotations inline
+ggplot(df_sample, aes(x = factor(default), y = Interest, color = factor(default))) + 
+  geom_jitter(alpha = 0.3, width = 0.2) +  # Jitter to reduce overplotting
+  geom_text(
+    aes(
+      x = factor(default), 
+      y = max(df_sample$Interest, na.rm = TRUE) * 1.05,  # Compute max Interest externally
+      label = paste0("N = ", n)
+    ), 
+    data = df_sample %>% count(default) %>% 
+      mutate(y_pos = max(df_sample$Interest, na.rm = TRUE) * 1.05), 
+    color = "black", size = 5, fontface = "bold"
+  ) + 
+  labs(
+    title = "Scatterplot: Interest Rate vs. Default Status",
+    subtitle = "Number of observations per category added",
+    x = "Default Status (0 = No Default, 1 = Default)",
+    y = "Interest Rate (%)"
+  ) + 
+  theme_minimal() + 
+  scale_color_manual(values = c("0" = "blue", "1" = "red"))  # Non-default: blue, Default: red
+```
+
+```{r}
+# Box plots for each cluster
+ggplot(df_sample, aes(x = factor(community), y = Interest, fill = factor(community))) +
+  geom_boxplot() +
+  labs(title = "Interest Rate Distribution by Community",
+       x = "Community",
+       y = "Interest Rate (%)",
+       fill = "Community") +
+  theme_minimal()
+```
+
+```{r}
+# For interest rate distribution for communities 1-4
+ggplot(
+  df_sample %>%
+    pivot_longer(
+      cols = c("duration.06", "duration.09", "duration.12",
+               "duration.18", "duration.24", "duration.36",
+               "duration.48", "duration.60"),
+      names_to = "duration",
+      values_to = "is_selected"
+    ) %>%
+    filter(is_selected == 1, community %in% 1:4) %>%
+    mutate(
+      duration = factor(
+        duration,
+        levels = c("duration.06", "duration.09", "duration.12",
+                   "duration.18", "duration.24", "duration.36",
+                   "duration.48", "duration.60"),
+        labels = c("6", "9", "12", "18", "24", "36", "48", "60")
+      )
+    ),
+  aes(x = Interest, color = duration)
+) +
+  geom_density(linewidth = 0.8) +  # Slightly thinner lines
+  facet_wrap(~ community, ncol = 2) +
+  labs(
+    title  = "Interest Rate Distribution by Community and Loan Duration",
+    x      = "Interest Rate (%)",
+    y      = "Density",
+    color  = "Loan Duration (Months)"
+  ) +
+  scale_color_brewer(palette = "Dark2") +  # A subdued color palette
+  theme_classic(base_size = 11) +          # Classic theme for many journals
+  theme(
+    plot.title      = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.text      = element_text(size = 10),
+    legend.text     = element_text(size = 9),
+    legend.title    = element_text(size = 10, face = "bold"),
+    legend.position = "bottom",      # Legend at the bottom
+    panel.spacing   = unit(1, "lines"),
+    axis.text.x     = element_text(size = 9),
+    axis.text.y     = element_text(size = 9),
+    plot.margin     = unit(c(10, 10, 10, 10), "pt")  # margin in 'points'
+  )
+```
+
+```{r}
+# Plot for communities 5-7
+ggplot(
+  df_sample %>%
+    pivot_longer(
+      cols = c("duration.06", "duration.09", "duration.12",
+               "duration.18", "duration.24", "duration.36",
+               "duration.48", "duration.60"),
+      names_to = "duration",
+      values_to = "is_selected"
+    ) %>%
+    filter(is_selected == 1, community %in% 5:7) %>%
+    mutate(
+      duration = factor(
+        duration,
+        levels = c("duration.06", "duration.09", "duration.12",
+                   "duration.18", "duration.24", "duration.36",
+                   "duration.48", "duration.60"),
+        labels = c("6", "9", "12", "18", "24", "36", "48", "60")
+      )
+    ),
+  aes(x = Interest, color = duration)
+) +
+  geom_density(linewidth = 0.8) +  # Slightly thinner lines
+  facet_wrap(~ community, ncol = 2) +
+  labs(
+    title  = "Interest Rate Distribution by Community and Loan Duration",
+    x      = "Interest Rate (%)",
+    y      = "Density",
+    color  = "Loan Duration (Months)"
+  ) +
+  scale_color_brewer(palette = "Dark2") +  # A subdued color palette
+  theme_classic(base_size = 11) +          # Classic theme for many journals
+  theme(
+    plot.title      = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.text      = element_text(size = 10),
+    legend.text     = element_text(size = 9),
+    legend.title    = element_text(size = 10, face = "bold"),
+    legend.position = "bottom",      # Legend at the bottom
+    panel.spacing   = unit(1, "lines"),
+    axis.text.x     = element_text(size = 9),
+    axis.text.y     = element_text(size = 9),
+    plot.margin     = unit(c(10, 10, 10, 10), "pt")  # margin in 'points'
+  )
+```
+
+```{r}
+# Entire sample
+# Create the stacked bar plot for the entire loan sample
+ggplot(
+  df_sample %>%
+    mutate(
+      Rating = case_when(
+        A == 1 ~ "A",
+        B == 1 ~ "B",
+        C == 1 ~ "C",
+        TRUE   ~ NA_character_
+      )
+    ) %>%
+    filter(!is.na(Rating)) %>%
+    group_by(Rating, default) %>%
+    summarise(count = n(), .groups = "drop") %>%
+    group_by(Rating) %>%
+    mutate(percentage = count / sum(count) * 100),  # Convert to percentages
+  aes(x = Rating, y = percentage, fill = factor(default))
+) +
+  geom_bar(stat = "identity", position = "stack") +  # Stack bars to show proportions
+  labs(
+    title = "Default Percentage by Credit Rating",
+    x     = "Credit Rating",
+    y     = "Percentage of Loans",
+    fill  = "Default Status"
+  ) +
+  scale_fill_manual(values = c("0" = "#66c2a5", "1" = "#fc8d62"),  # Green = Non-Default, Orange = Default
+                    labels = c("0" = "Non-Default", "1" = "Default")) +
+  theme_classic(base_size = 11) +
+  theme(
+    plot.title      = element_text(size = 12, face = "bold", hjust = 0.5),
+    legend.position = "bottom",
+    legend.title    = element_text(size = 10, face = "bold"),
+    legend.text     = element_text(size = 9),
+    axis.text.x     = element_text(size = 9),
+    axis.text.y     = element_text(size = 9),
+    plot.margin     = unit(c(10, 10, 10, 10), "pt")
+  )
+
+```
+
+```{r}
+# Visualizing default rates per cluster (community 1-4)
+# Make sure you have a variable for rating label, say 'Credit_Rating' or similar
+# with values A, B, C in df_sample.
+
+ggplot(
+  df_sample %>%
+    filter(community %in% 1:4) %>%
+    mutate(
+      Rating = case_when(
+        A == 1 ~ "A",
+        B == 1 ~ "B",
+        C == 1 ~ "C",
+        TRUE   ~ NA_character_
+      )
+    ) %>%
+    filter(!is.na(Rating)) %>%
+    group_by(community, Rating, default) %>%
+    summarise(count = n(), .groups = "drop") %>%
+    group_by(community, Rating) %>%
+    mutate(percentage = count / sum(count) * 100),  # Convert to percentages
+  aes(x = Rating, y = percentage, fill = factor(default))
+) +
+  geom_bar(stat = "identity", position = "stack") +  # Stack bars to show proportions
+  facet_wrap(~ community, ncol = 2) +
+  labs(
+    title = "Default Percentage by Community & Credit Rating",
+    x     = "Credit Rating",
+    y     = "Percentage of Loans",
+    fill  = "Default Status"
+  ) +
+  scale_fill_manual(values = c("0" = "#66c2a5", "1" = "#fc8d62"),  # Green = Non-Default, Orange = Default
+                    labels = c("0" = "Non-Default", "1" = "Default")) +
+  theme_classic(base_size = 11) +
+  theme(
+    plot.title      = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.text      = element_text(size = 10),
+    legend.position = "bottom",
+    legend.title    = element_text(size = 10, face = "bold"),
+    legend.text     = element_text(size = 9),
+    panel.spacing   = unit(1, "lines"),
+    axis.text.x     = element_text(size = 9),
+    axis.text.y     = element_text(size = 9),
+    plot.margin     = unit(c(10, 10, 10, 10), "pt")
+  )
+```
+
+```{r}
+# For communities 5-8
+
+ggplot(
+  df_sample %>%
+    filter(community %in% 5:7) %>%
+    mutate(
+      Rating = case_when(
+        A == 1 ~ "A",
+        B == 1 ~ "B",
+        C == 1 ~ "C",
+        TRUE   ~ NA_character_
+      )
+    ) %>%
+    filter(!is.na(Rating)) %>%
+    group_by(community, Rating, default) %>%
+    summarise(count = n(), .groups = "drop") %>%
+    group_by(community, Rating) %>%
+    mutate(percentage = count / sum(count) * 100),  # Convert to percentages
+  aes(x = Rating, y = percentage, fill = factor(default))
+) +
+  geom_bar(stat = "identity", position = "stack") +  # Stacked bars to show proportions
+  facet_wrap(~ community, ncol = 2) +
+  labs(
+    title = "Default Percentage by Community & Credit Rating (Communities 5-7)",
+    x     = "Credit Rating",
+    y     = "Percentage of Loans",
+    fill  = "Default Status"
+  ) +
+  scale_fill_manual(values = c("0" = "#66c2a5", "1" = "#fc8d62"),  # Green = Non-Default, Orange = Default
+                    labels = c("0" = "Non-Default", "1" = "Default")) +
+  theme_classic(base_size = 11) +
+  theme(
+    plot.title      = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.text      = element_text(size = 10),
+    legend.position = "bottom",
+    legend.title    = element_text(size = 10, face = "bold"),
+    legend.text     = element_text(size = 9),
+    panel.spacing   = unit(1, "lines"),
+    axis.text.x     = element_text(size = 9),
+    axis.text.y     = element_text(size = 9),
+    plot.margin     = unit(c(10, 10, 10, 10), "pt")
+  )
+```
+
+### Visualize all clusters on interest rate vs. default
+
+```{r}
+# Convert default rate to percentage
+cluster_summary <- cluster_summary %>%
+  mutate(
+    avg_default_percent = avg_default * 100,
+    avg_interest = avg_interest,  # Already in percentage
+    community = factor(community)  # Convert community number to factor
+  )
+```
+
+```{r}
+
+# Create the scatterplot with adjusted scale
+ggplot(cluster_summary, aes(x = avg_interest, y = avg_default_percent)) +
+  geom_point(aes(size = total_loan_amount, color = community), alpha = 0.7) +
+  geom_text(aes(label = community), vjust = -1, hjust = 0.5, size = 4, color = "black") +
+  scale_size_continuous(
+    name = "Total Loan Amount",
+    labels = scales::dollar_format(prefix = "$", suffix = "M", scale = 1e-6)
+  ) +
+  scale_color_discrete(name = "Community") +
+  labs(
+    title = "Communities by Wtd. Avg. Interest Rate and Default Rate",
+    x = "Weighted Average Interest Rate (%)",
+    y = "Weighted Average Default Rate (%)"
+  ) +
+  scale_x_continuous(
+    limits = c(min(cluster_summary$avg_interest) - 1, max(cluster_summary$avg_interest) + 1), 
+    expand = c(0, 0)
+  ) +
+  scale_y_continuous(
+    limits = c(min(cluster_summary$avg_default_percent) - 1, max(cluster_summary$avg_default_percent) + 5), 
+    expand = c(0, 0)
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5),
+    legend.title = element_text(size = 8),
+    legend.text = element_text(size = 7),
+    legend.key.size = unit(0.5, "lines")
+  )
+```
+
+### ANOVA on Clusters
+
+```{r}
+# Run ANOVA on Interest Rate
+anova_interest <- perform_anova_on_clusters(df_sample, "Interest", cluster_var = "community")
+```
+
+```{r}
+# Testing the significance of variation in default rates across clusters
+# Logistic regression to model probability of default as a function of community membership
+
+# Ensure community is a factor
+df_sample$community <- as.factor(df_sample$community)
+
+# Fit the logistic regression model
+logistic_model <- glm(default ~ community, data = df_sample, family = binomial)
+
+# Compute robust standard errors (HC type)
+robust_vcov_log <- vcovHC(logistic_model, type = "HC1")  # HC1 is the default
+coeftest(logistic_model, vcov = robust_vcov_log)
+```
+
+### Identifying Mispriced Loans Ex Post
+
+```{r}
+# Creating a factor variable for credit ratings
+df_sample <- df_sample %>%
+  mutate(
+    Credit_Rating = case_when(
+      A == 1 ~ "A",
+      B == 1 ~ "B",
+      C == 1 ~ "C",
+      TRUE ~ NA_character_  # Assign NA for cases that don't fall into A/B/C
+    )
+  ) %>%
+  mutate(Credit_Rating = factor(Credit_Rating))  # Drop unused levels
+```
+
+```{r}
+# Convert loan maturity into a numeric variable
+df_sample <- df_sample %>%
+  mutate(
+    Maturity = case_when(
+      duration.06 == 1 ~ 6,
+      duration.09 == 1 ~ 9,
+      duration.12 == 1 ~ 12,
+      duration.18 == 1 ~ 18,
+      duration.24 == 1 ~ 24,
+      duration.36 == 1 ~ 36,
+      duration.48 == 1 ~ 48,
+      duration.60 == 1 ~ 60,
+      TRUE ~ NA_real_  # Assign NA if no match is found
+    )
+  )
+
+# Check the distribution of Maturity
+summary(df_sample$Maturity)
+```
+
+```{r}
+# Identify Potentially Mispriced Loans Ex Post with Differentiation
+mispriced_loans <- identify_mispriced_loans(df_sample)
+print(mispriced_loans)
+
+```
+
+```{r}
+
+# Step 1: Join Delta and Mispricing back to df_sample
+df_sample <- df_sample %>%
+  left_join(
+    mispriced_loans %>% select(LoanId, Mispricing, Delta),
+    by = "LoanId"
+  ) %>%
+  mutate(
+    Mispricing = ifelse(is.na(Mispricing), "Properly Priced", Mispricing),  # Assign "Properly Priced" to unmatched loans
+    Delta = ifelse(is.na(Delta), 0, Delta)  # Properly Priced loans get Delta = 0
+  )
+
+# Visualize Delta before filtering to confirm
+ggplot(df_sample, aes(x = Delta)) +
+  geom_histogram(bins = 50, fill = "blue", alpha = 0.7) +
+  labs(title = "Distribution of Delta After Excluding Extreme Observations",
+       x = "Delta", y = "Count") +
+  theme_minimal()
+```
+
+```{r}
+# Step 2: Calculate Windsorization thresholds
+windsor_thresholds <- quantile(df_sample$Delta, probs = c(0.01, 0.99), na.rm = TRUE)
+lower_threshold <- windsor_thresholds[1]
+upper_threshold <- windsor_thresholds[2]
+
+# Print thresholds
+cat("Windsorization thresholds:\n")
+cat("Lower threshold (1st percentile):", lower_threshold, "\n")
+cat("Upper threshold (99th percentile):", upper_threshold, "\n")
+
+# Step 3: Exclude extreme observations based on Windsorization thresholds
+# Filter out extreme values in both df_sample and mispriced_loans
+mispriced_loans <- mispriced_loans %>%
+  filter(Delta >= lower_threshold, Delta <= upper_threshold)
+
+# Exclude the same LoanIds from df_sample
+df_sample <- df_sample %>%
+  filter(LoanId %in% mispriced_loans$LoanId | Mispricing == "Properly Priced")
+
+# Step 4: Optional - Verify distributions of Delta after exclusion
+# Visualize Delta after filtering to confirm
+ggplot(df_sample, aes(x = Delta)) +
+  geom_histogram(bins = 50, fill = "blue", alpha = 0.7) +
+  labs(title = "Distribution of Delta After Excluding Extreme Observations",
+       x = "Delta", y = "Count") +
+  theme_minimal()
+```
+
+```{r}
+# Filter to include only properly priced loans
+properly_priced_data <- df_sample %>%
+  filter(Mispricing == "Properly Priced")
+```
+
+```{r}
+properly_priced_data %>%
+  summarise(
+    total_loans = n(),
+    defaulted_loans = sum(default == 1, na.rm = TRUE),
+    non_defaulted_loans = sum(default == 0, na.rm = TRUE),
+    default_ratio = defaulted_loans / (non_defaulted_loans + defaulted_loans)
+  )
+
+```
+
+### Visualize proportion of mispriced loans in clusters
+
+```{r}
+# Calculate average Delta and counts for underpriced and overpriced loans in each community
+mispriced_counts <- mispriced_loans %>%
+  group_by(community, Mispricing) %>%
+  summarize(
+    mispriced_count = n(),
+    avg_delta = mean(Delta, na.rm = TRUE),  # Average Delta for mispriced loans
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
+    names_from = Mispricing,
+    values_from = c(mispriced_count, avg_delta),
+    values_fill = list(mispriced_count = 0, avg_delta = 0)  # Fill missing values with 0
+  )
+
+# Ensure columns for Underpriced and Overpriced exist
+mispriced_counts <- mispriced_counts %>%
+  mutate(
+    total_mispriced = mispriced_count_Underpriced + mispriced_count_Overpriced,
+    underpriced_proportion = (mispriced_count_Underpriced / total_mispriced) * 100,
+    overpriced_proportion = (mispriced_count_Overpriced / total_mispriced) * 100
+  )
+
+# Merge with cluster_summary
+cluster_summary <- cluster_summary %>%
+  left_join(mispriced_counts, by = "community") %>%
+  mutate(
+    total_mispriced = ifelse(is.na(total_mispriced), 0, total_mispriced),
+    underpriced_proportion = ifelse(is.na(underpriced_proportion), 0, underpriced_proportion),
+    overpriced_proportion = ifelse(is.na(overpriced_proportion), 0, overpriced_proportion)
+  )
+```
+
+```{r}
+
+# Create the updated scatterplot
+ggplot(cluster_summary, aes(x = avg_interest, y = avg_default_percent)) +
+  # Underpriced loans as circles
+  geom_point(aes(size = total_loan_amount, color = avg_delta_Underpriced), alpha = 0.7) +
+  # Overpriced loans as triangles
+  geom_point(aes(size = total_loan_amount, color = avg_delta_Overpriced), shape = 17, alpha = 0.7) +
+  geom_text(aes(label = community), vjust = -1, size = 4, color = "black") +
+  scale_size_continuous(
+    name = "Total Loan Amount",
+    labels = scales::dollar_format(prefix = "$", suffix = "M", scale = 1e-6)
+  ) +
+  scale_color_gradient(
+    name = "Avg. Delta (Mispricing)",
+    low = "blue",
+    high = "red"
+  ) +
+  scale_x_continuous(
+    limits = c(min(cluster_summary$avg_interest) - 1, max(cluster_summary$avg_interest) + 1),
+    expand = c(0, 0)
+  ) +
+  scale_y_continuous(
+    limits = c(min(cluster_summary$avg_default_percent) - 1, max(cluster_summary$avg_default_percent) + 5),
+    expand = c(0, 0)
+  ) +
+  labs(
+    title = "Communities by Avg. Interest Rate and Default Rate",
+    subtitle = "Underpriced loans shown as circles, overpriced loans as triangles",
+    x = "Weighted Average Interest Rate (%)",
+    y = "Weighted Average Default Rate (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5),
+    legend.title = element_text(size = 8),
+    legend.text = element_text(size = 7),
+    legend.key.size = unit(0.5, "lines")
+  )
+
+```
+
+```{r}
+colnames(df_sample)
+```
+
+## Regression Default (Bondora) on Interest Rate + Credit Rating and key variables (found by RF)
+
+```{r}
+# scatter plot / box plot default vs interest rate
+
+ggplot(df_sample, aes(x = default, y = Interest)) +
+  geom_point(alpha = 0.3, color = "blue") +  # Scatter points with transparency
+  geom_smooth(method = "lm", se = TRUE, color = "red", linetype = "dashed") +  # Add linear regression line
+  labs(
+    title = "Scatterplot: Default vs. Interest",
+    subtitle = "Examining the relationship between default (binary) and interest rate",
+    x = "default (binary)",
+    y = "Interest (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 12)
+  )
+```
+
+```{r}
+# Investigate in spirit of Di Maggio and Yao (2021) whether variation in the default variable is better explained by Credit Rating plus key variables (discovered by RF) for properly priced loans versus mispriced loans.
+```
+
+```{r}
+# Investigate in spirit of Di Maggio and Yao (2021) whether variation in the Default variable is explained by the interest rate plus credit rating plus key continues variables (discovered by RF) for measuring the effect of  on the default likelihood. (Are loans with underpricing or overpricing more prone to effect the expected return of Bondora?)
+# Focus on interaction terms between credit rating, delta, and community.
+```
+
+```{r}
+# treat community variable as factor in df_sample
+df_sample <- df_sample %>%
+  mutate(community = as.factor(community))
+```
+
+```{r}
+
+# Convert date.start to a Date if not already
+# df_sample$date.start <- as.Date(df_sample$date.start)
+
+# EXAMPLE: Grouped boxplots of issuance date by community, differentiated by Credit Rating
+ggplot(
+  df_sample, 
+  aes(
+    x   = factor(community), 
+    y   = date.start,
+    fill = Credit_Rating
+  )
+) +
+  geom_boxplot(
+    position = position_dodge(width = 0.7),
+    outlier.size = 0.8,
+    outlier.alpha = 0.6
+  ) +
+  scale_y_date(date_breaks = "1 year", date_labels = "%Y") +
+  scale_fill_brewer(palette = "Dark2") +  # a subdued palette for clarity
+  labs(
+    title = "Distribution of Loan Issuance Dates by Community and Credit Rating",
+    x = "Community",
+    y = "Issuance Date",
+    fill = "Credit Rating"
+  ) +
+  theme_classic(base_size = 11) +
+  theme(
+    plot.title      = element_text(size = 12, face = "bold", hjust = 0.5),
+    axis.text.x     = element_text(size = 9),
+    axis.text.y     = element_text(size = 9),
+    panel.spacing   = unit(1, "lines"),
+    plot.margin     = unit(c(10, 10, 10, 10), "pt"),
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+# Filter to communities 1--4, then group by year & rating
+df_sample %>%
+  filter(community %in% 1:4) %>%
+  mutate(issue_year = year(date.start)) %>%
+  group_by(community, issue_year, Credit_Rating) %>%
+  summarise(num_loans = n(), .groups = "drop") %>%
+  ggplot(aes(x = issue_year, y = num_loans, fill = Credit_Rating)) +
+  geom_col(position = "dodge") +  # side-by-side bars for each rating
+  facet_wrap(~ community, scales = "free_y") +
+  scale_x_continuous(breaks = seq(2012, 2022, 1)) +
+  labs(
+    title = "Number of Loans by Year and Community (1-4), Differentiated by Credit Rating",
+    x = "Issuance Year",
+    y = "Count of Loans",
+    fill = "Credit Rating"
+  ) +
+  theme_classic(base_size = 11) +
+  theme(
+    plot.title      = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.text      = element_text(size = 10),
+    axis.text.x     = element_text(size = 9),
+    axis.text.y     = element_text(size = 9),
+    panel.spacing   = unit(1, "lines"),
+    plot.margin     = unit(c(10, 10, 10, 10), "pt"),
+    legend.position = "bottom"
+  )
+```
+
+```{r}
+df_sample %>%
+  filter(community %in% 5:7) %>%
+  mutate(issue_year = year(date.start)) %>%
+  group_by(community, issue_year, Credit_Rating) %>%
+  summarise(num_loans = n(), .groups = "drop") %>%
+  ggplot(aes(x = issue_year, y = num_loans, fill = Credit_Rating)) +
+  geom_col(position = "dodge") +
+  facet_wrap(~ community, scales = "free_y") +
+  scale_x_continuous(breaks = seq(2012, 2022, 1)) +  # Adjust year range if needed
+  labs(
+    title = "Number of Loans by Year and Community (5-7), Differentiated by Credit Rating",
+    x = "Issuance Year",
+    y = "Count of Loans",
+    fill = "Credit Rating"
+  ) +
+  theme_classic(base_size = 11) +
+  theme(
+    plot.title      = element_text(size = 12, face = "bold", hjust = 0.5),
+    strip.text      = element_text(size = 10),
+    axis.text.x     = element_text(size = 9, angle = 45, hjust = 1),  # Rotate and adjust text
+    axis.text.y     = element_text(size = 9),
+    panel.spacing   = unit(1, "lines"),
+    plot.margin     = unit(c(10, 10, 10, 10), "pt"),
+    legend.position = "bottom"
+  )
+```
+
+### Two step Model (Set up): (Default\~Interest + Control Full Set Up)
+
+```{r}
+############################################################
+# R CODE: Logistic Regression (Non-Standardized Predictors) for Economic Interpretability
+# Including a Time Effect via Yearly Dummy Fixed Effects and an Interaction with Interest Rate
+# Now using a two-step post-selection approach (LASSO selection then unpenalized logistic regression)
+############################################################
+
+# A) Function to generate the model formula without an intercept
+generate_formula <- function(target_var, main_effects, interaction_terms = NULL) {
+  if (!is.null(interaction_terms)) {
+    all_terms <- c(main_effects, interaction_terms)
+  } else {
+    all_terms <- main_effects
+  }
+  formula_text <- paste(target_var, "~ 0 +", paste(all_terms, collapse = " + "))
+  as.formula(formula_text)
+}
+
+# B) Define Regression Setup
+
+## 1) Define Target Variable and Main Effects
+target_var <- "default"   # Binary 0/1 outcome
+
+# Apply log transformation to loan_amount (adding 1 to avoid log(0) issue)
+df_sample <- df_sample %>%
+  mutate(log_loan_amount = log(loan_amount + 1))
+
+# Create a new factor variable for issuance year based on date.start
+df_sample <- df_sample %>%
+  mutate(issue_year = factor(year(date.start)))
+
+# Define main effects: include Credit_Rating and issue_year (yearly dummies) along with other predictors.
+main_effects <- c(
+  "Interest", "inc.total", "MonthlyPayment", "log_loan_amount", "NoOfPreviousLoansBeforeLoan",
+  "DebtToIncome", "Age", "Maturity", "FreeCash.l", "liab.l", "issue_year"
+)
+
+# Define Interaction Term: (if desired, e.g., you could add "Interest * issue_year")
+interaction_terms <- c()
+
+# We use raw (non-standardized) predictors for interpretability.
+df_sample_scaled <- df_sample
+
+# Store results for post-selection models per community
+post_models <- list()
+post_robust_summaries <- list()
+post_model_metrics <- data.frame(Community = character(), McFadden_R2 = numeric(), 
+                                 AIC = numeric(), BIC = numeric(), LogLikelihood = numeric(), 
+                                 stringsAsFactors = FALSE)
+post_selected_vars <- list()  # To record selected predictors
+```
+
+### Two step Model (Uniform): (Default\~Interest + Control Full Set Up)
+
+```{r}
+##############################################
+# 1) RUN POST-SELECTION LOGISTIC REGRESSION ON FULL DATASET (Non-Standardized)
+##############################################
+
+cat("\n### Post-Selection Logistic Regression Results: Full Dataset (Non-Standardized) ###\n")
+
+# Generate the full model formula using all predictors
+logit_formula <- generate_formula(target_var, main_effects, interaction_terms)
+
+# Create design matrix and response for full dataset
+X_full <- model.matrix(logit_formula, data = df_sample_scaled)
+y_full <- df_sample_scaled[[target_var]]
+
+# Step 1: Run LASSO logistic regression (alpha = 1) with cross-validation to select predictors
+cv_lasso_full <- cv.glmnet(X_full, y_full, family = "binomial", alpha = 1, standardize = FALSE)
+lasso_full <- glmnet(X_full, y_full, family = "binomial", alpha = 1, lambda = cv_lasso_full$lambda.min, standardize = FALSE)
+
+# Extract nonzero coefficients (excluding intercept)
+lasso_coefs_full <- coef(lasso_full)
+selected_vars_full <- rownames(lasso_coefs_full)[lasso_coefs_full[,1] != 0]
+selected_vars_full <- selected_vars_full[selected_vars_full != "(Intercept)"]
+cat("\n### LASSO Selected Predictors (Full Dataset):\n")
+print(selected_vars_full)
+
+# Record the selected predictors
+post_selected_vars[["Full_Dataset"]] <- selected_vars_full
+
+# Create a data frame from the design matrix (so that the dummy variable names exist)
+df_post_full <- as.data.frame(X_full)
+df_post_full[[target_var]] <- y_full
+
+# Step 2: Post-selection: Run standard logistic regression using only selected predictors
+post_formula_full <- as.formula(paste(target_var, "~ 0 +", paste(selected_vars_full, collapse = " + ")))
+cat("\nPost-selection model formula (Full Dataset):\n")
+print(post_formula_full)
+
+post_model_full <- glm(post_formula_full, data = df_post_full, family = binomial(link = "logit"))
+vcov_robust_post_full <- vcovHC(post_model_full, type = "HC1")
+post_summary_full <- coeftest(post_model_full, vcov = vcov_robust_post_full)
+
+cat("\n#### Post-Selection Robust Standard Errors (Full Dataset) ####\n")
+print(post_summary_full)
+
+pseudo_r2_post_full <- pR2(post_model_full)
+cat("\nMcFadden's Pseudo R-squared (Full Dataset Post-Selection):", pseudo_r2_post_full["McFadden"], "\n")
+```
+
+### Two step Model (per Community): (Default\~Interest + Control Full Set Up)
+
+```{r}
+##############################################
+# 2) RUN POST-SELECTION LOGISTIC REGRESSION PER COMMUNITY (Non-Standardized)
+##############################################
+for (comm in unique(df_sample$community)) {
+  
+  # Subset data for the given community and drop unused factor levels
+  df_comm <- droplevels(df_sample_scaled %>% filter(community == comm))
+  
+  # Create local copies of main_effects and interaction_terms
+  local_main_effects <- main_effects
+  local_interaction_terms <- interaction_terms
+  
+  # Check if issue_year has at least two levels in this community
+  if (n_distinct(df_comm$issue_year) < 2) {
+    cat("\nCommunity", comm, ": issue_year has less than 2 levels. Removing issue_year and related interactions from the model.\n")
+    local_main_effects <- local_main_effects[local_main_effects != "issue_year"]
+    local_interaction_terms <- local_interaction_terms[!grepl("issue_year", local_interaction_terms)]
+  }
+  
+  # Loop over each variable in local_main_effects to check for factor variables with < 2 levels
+  for (var in local_main_effects) {
+    if (var %in% names(df_comm) && is.factor(df_comm[[var]])) {
+      if (nlevels(df_comm[[var]]) < 2) {
+        cat("\nCommunity", comm, ": Variable", var, "has less than 2 levels. Removing it from the model.\n")
+        local_main_effects <- local_main_effects[local_main_effects != var]
+        if (length(local_interaction_terms) > 0) {
+          local_interaction_terms <- local_interaction_terms[!grepl(var, local_interaction_terms)]
+        }
+      }
+    }
+  }
+  
+  # Generate model formula without intercept using the local variables
+  model_formula <- generate_formula(target_var, local_main_effects, local_interaction_terms)
+  
+  cat("\n### Post-Selection Logistic Regression Results for Community:", comm, "\n")
+  
+  # Step 1: Run LASSO for this community
+  X_comm <- model.matrix(model_formula, data = df_comm)
+  y_comm <- df_comm[[target_var]]
+  
+  cv_lasso_comm <- cv.glmnet(X_comm, y_comm, family = "binomial", alpha = 1, standardize = FALSE)
+  lasso_comm <- glmnet(X_comm, y_comm, family = "binomial", alpha = 1, lambda = cv_lasso_comm$lambda.min, standardize = FALSE)
+  
+  # Extract nonzero coefficients (excluding intercept)
+  lasso_coefs_comm <- coef(lasso_comm)
+  selected_vars_comm <- rownames(lasso_coefs_comm)[lasso_coefs_comm[,1] != 0]
+  selected_vars_comm <- selected_vars_comm[selected_vars_comm != "(Intercept)"]
+  
+  cat("\nLASSO Selected Predictors for Community", comm, ":\n")
+  print(selected_vars_comm)
+  post_selected_vars[[as.character(comm)]] <- selected_vars_comm
+  
+  # Step 2: Post-selection: Run unpenalized logistic regression using only selected predictors
+  # If no predictors are selected, skip the community.
+  if (length(selected_vars_comm) == 0) {
+    cat("\nCommunity", comm, ": No predictors selected by LASSO. Skipping post-selection regression.\n")
+    next
+  }
+  
+    # IMPORTANT: Prepend "0 +" to remove the intercept
+  post_formula_comm <- as.formula(paste(target_var, "~ 0 +", paste(selected_vars_comm, collapse = " + ")))
+  cat("\nPost-selection model formula for Community", comm, ":\n")
+  print(post_formula_comm)
+  
+  # Create a data frame from the design matrix so that the dummy variable columns exist.
+  df_post_comm <- as.data.frame(X_comm)
+  df_post_comm[[target_var]] <- y_comm
+  
+  post_model_comm <- glm(post_formula_comm, data = df_post_comm, family = binomial(link = "logit"))
+  post_models[[as.character(comm)]] <- post_model_comm  # Store the model for later use.
+  
+  vcov_robust_post_comm <- vcovHC(post_model_comm, type = "HC1")
+  post_summary_comm <- coeftest(post_model_comm, vcov = vcov_robust_post_comm)
+  
+  cat("\n#### Post-Selection Robust Standard Errors for Community", comm, "####\n")
+  print(post_summary_comm)
+  
+  pseudo_r2_post_comm <- pR2(post_model_comm)
+  log_likelihood_comm <- logLik(post_model_comm)
+  aic_val_comm <- AIC(post_model_comm)
+  bic_val_comm <- BIC(post_model_comm)
+  
+  cat("\n#### Model Performance Metrics for Community", comm, "####\n")
+  cat("McFadden's Pseudo R-squared:", pseudo_r2_post_comm["McFadden"], "\n")
+  cat("Log-Likelihood:", log_likelihood_comm, "\n")
+  cat("AIC:", aic_val_comm, "\n")
+  cat("BIC:", bic_val_comm, "\n")
+  
+  # Optionally, store these metrics
+  # (Be careful with rbind here to avoid overwriting; use a separate data frame to accumulate)
+}
+```
+
+```{r}
+# Calculate counts per community and issue_year
+time_counts <- df_sample %>%
+  group_by(community, issue_year) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  arrange(community, issue_year)
+
+print(time_counts)
+```
+
+```{r}
+# Compute 1 Standard Deviation change in the interest rate per community to the increase of the log odds of default.
+
+# 1. Compute summary statistics for the Interest rate per community.
+interest_summary <- df_sample %>%
+  group_by(community) %>%
+  summarise(
+    n = n(),
+    mean_interest = mean(Interest, na.rm = TRUE),
+    sd_interest = sd(Interest, na.rm = TRUE),
+    median_interest = median(Interest, na.rm = TRUE),
+    min_interest = min(Interest, na.rm = TRUE),
+    max_interest = max(Interest, na.rm = TRUE)
+  )
+
+print(interest_summary)
+
+# 2. Extract the "Interest" coefficient from community-specific post-selection logistic regression models.
+#    We ignore the "Full_Dataset" model here.
+interest_coefs <- lapply(names(post_models), function(comm) {
+  coef_val <- coef(post_models[[comm]])["Interest"]
+  data.frame(community = comm, beta_interest = coef_val)
+})
+interest_coefs <- do.call(rbind, interest_coefs)
+interest_coefs$community <- as.character(interest_coefs$community)
+
+# 3. Merge the summary statistics with the regression coefficients.
+interest_summary <- interest_summary %>%
+  mutate(community = as.character(community)) %>%
+  left_join(interest_coefs, by = "community")
+
+# 4. Compute the percentage change in odds for a one standard deviation increase in Interest.
+interest_summary <- interest_summary %>%
+  mutate(perc_change_odds = (exp(beta_interest * sd_interest) - 1) * 100)
+
+print(interest_summary)
+```
+
+```{r}
+# we can see that bondora hits the correctly priced interest rate only for certain community segments where as for others they seem to be off. A one standard deviation increase in the ineterest rate leads to heterogenous increase in the likelihood of default across the communities. This enforces the underlying that the platform's uniform pricing approach poorly reflects the associated risk of certain customer/community segments from a risk pricing perspective. This asks for a community-based mispricing classification to further invetsigate the issue. With reduced-form model the picture becomes more evident that the impact of the ineterst rate on the overall loan performance in terms of pricing is not uniform and seems to be segement specific enforcing the view that Bondora is not equally matching the credit risk of all its loans. See Di Maggio and Yao 2021 and Vallee and Zheng 2019 for more insights.)
+```
+
+## Regression Interest (Bondora) on Credit Rating plus controls
+
+### Pooled Regression (Set up): Interest\~Credit Rating
+
+```{r}
+############################################################
+# R CODE: Linear Regression (Non-Standardized Predictors)
+# for Economic Interpretability
+############################################################
+
+# A) Function to Generate the Model Formula Without an Intercept
+generate_formula <- function(target_var, main_effects, interaction_terms = NULL) {
+  if (!is.null(interaction_terms)) {
+    all_terms <- c(main_effects, interaction_terms)
+  } else {
+    all_terms <- main_effects
+  }
+  formula_text <- paste(target_var, "~ 0 +", paste(all_terms, collapse = " + "))  # Removes intercept
+  as.formula(formula_text)
+}
+
+# B) Define Regression Setup
+
+## 1) Define Target Variable and Main Effects
+target_var <- "Interest"   # Continuous outcome: Interest Rate
+
+# (Optional) Apply log transformation to loan_amount (Adding 1 to avoid log(0) issue)
+#df_sample <- df_sample %>%
+#  mutate(log_loan_amount = log(loan_amount + 1))
+
+# Define the main effects based on credit rating, credit term variables, and important borrower variables.
+# For example:
+# - Credit term variables: Maturity, log_loan_amount
+# - Important borrower variables: inc.total, DebtToIncome, Age, FreeCash.l, liab.l
+# - Credit Rating included explicitly
+main_effects <- c("Credit_Rating", "Maturity", "log_loan_amount", "inc.total", "DebtToIncome", "Age", "FreeCash.l", "liab.l")
+
+# (Optional) Define Interaction Terms (set to NULL if none are specified)
+interaction_terms <- NULL
+
+# C) Prepare Data (Non-Standardized Predictors for Economic Interpretability)
+# For linear regression, we use the raw values.
+#df_sample_scaled <- df_sample
+
+# D) Storage for Model Results
+linear_models <- list()
+robust_summaries_lin <- list()
+model_metrics_lin <- data.frame(Community = character(), R_squared = numeric(), Adj_R_squared = numeric(),
+                                AIC = numeric(), BIC = numeric(), stringsAsFactors = FALSE)
+```
+
+### Pooled Regression (Uniform): Interest\~Credit Rating
+
+```{r}
+############################################################
+# 1) RUN LINEAR REGRESSION ON THE FULL DATASET (Non-Standardized)
+############################################################
+
+cat("\n### Linear Regression Results: Full Dataset (Non-Standardized) ###\n")
+
+# Generate model formula without intercept
+pooled_formula <- generate_formula(target_var, main_effects, interaction_terms)
+
+# Fit Linear Regression Model on full dataset
+linear_models[["Full_Dataset"]] <- lm(pooled_formula, data = df_sample_scaled)
+
+# Compute Robust Standard Errors using HC1
+vcov_robust_lin <- vcovHC(linear_models[["Full_Dataset"]], type = "HC1")
+robust_summaries_lin[["Full_Dataset"]] <- coeftest(linear_models[["Full_Dataset"]], vcov = vcov_robust_lin)
+
+# Print Robust Standard Errors
+cat("\n#### Robust Standard Errors: Full Dataset ####\n")
+print(robust_summaries_lin[["Full_Dataset"]])
+
+# Compute Model Performance Metrics
+model_summary <- summary(linear_models[["Full_Dataset"]])
+r2 <- model_summary$r.squared
+adj_r2 <- model_summary$adj.r.squared
+aic_val <- AIC(linear_models[["Full_Dataset"]])
+bic_val <- BIC(linear_models[["Full_Dataset"]])
+
+cat("\n#### Model Performance Metrics: Full Dataset ####\n")
+cat("R-squared:", r2, "\n")
+cat("Adjusted R-squared:", adj_r2, "\n")
+cat("AIC:", aic_val, "\n")
+cat("BIC:", bic_val, "\n")
+
+model_metrics_lin <- rbind(model_metrics_lin, data.frame(Community = "Full_Dataset",
+                                                         R_squared = r2,
+                                                         Adj_R_squared = adj_r2,
+                                                         AIC = aic_val,
+                                                         BIC = bic_val))
+```
+
+### Pooled Regression (per Community): Interest\~Credit Rating
+
+```{r}
+############################################################
+# 2) RUN LINEAR REGRESSION PER COMMUNITY (Non-Standardized)
+############################################################
+
+for (comm in unique(df_sample$community)) {
+  
+  # Subset data for the given community
+  df_comm <- df_sample_scaled %>% filter(community == comm)
+  
+  # Generate model formula without intercept
+  model_formula <- generate_formula(target_var, main_effects, interaction_terms)
+  
+  cat("\n### Linear Regression Results for Community:", comm, "\n")
+  
+  # Fit Linear Regression Model (No Intercept) for the community
+  linear_models[[as.character(comm)]] <- lm(model_formula, data = df_comm)
+  
+  # Compute Robust Standard Errors (HC1)
+  vcov_robust_lin <- vcovHC(linear_models[[as.character(comm)]], type = "HC1")
+  robust_summaries_lin[[as.character(comm)]] <- coeftest(linear_models[[as.character(comm)]], vcov = vcov_robust_lin)
+  
+  cat("\n#### Robust Standard Errors for Community:", comm, "\n")
+  print(robust_summaries_lin[[as.character(comm)]])
+  
+  # Compute Model Performance Metrics
+  model_summary <- summary(linear_models[[as.character(comm)]])
+  r2 <- model_summary$r.squared
+  adj_r2 <- model_summary$adj.r.squared
+  aic_val <- AIC(linear_models[[as.character(comm)]])
+  bic_val <- BIC(linear_models[[as.character(comm)]])
+  
+  cat("\n#### Model Performance Metrics for Community:", comm, "\n")
+  cat("R-squared:", r2, "\n")
+  cat("Adjusted R-squared:", adj_r2, "\n")
+  cat("AIC:", aic_val, "\n")
+  cat("BIC:", bic_val, "\n")
+  
+  model_metrics_lin <- rbind(model_metrics_lin, data.frame(Community = comm,
+                                                           R_squared = r2,
+                                                           Adj_R_squared = adj_r2,
+                                                           AIC = aic_val,
+                                                           BIC = bic_val))
+}
+
+############################################################
+# KEY DIFFERENCES FROM THE LOGIT MODEL:
+# 1) The dependent variable is now the continuous Interest rate.
+# 2) The model is estimated via OLS (lm) rather than a logistic regression.
+# 3) The predictors include credit rating, credit term variables, and key borrower variables.
+# 4) No standardization is applied to retain economic interpretability.
+############################################################
+```
+
+## Further details
+
+```{r}
+# Specify the duration columns you have in your dataframe
+duration_cols <- c("duration.06", "duration.09", "duration.12", 
+                   "duration.18", "duration.24", "duration.36", 
+                   "duration.48", "duration.60")
+
+sample_duration_summary <- df_sample %>%
+  group_by(community) %>%
+  summarize(
+    across(
+      all_of(duration_cols),
+      ~ sum(. == 1, na.rm = TRUE),
+      .names = "count_{.col}"
+    )
+  )
+
+print(sample_duration_summary)
+
+```
+
+```{r}
+# Specify the duration columns you have in your dataframe
+
+mispriced_duration_summary <- mispriced_loans %>%
+  group_by(community) %>%
+  summarize(
+    across(
+      all_of(duration_cols),
+      ~ sum(. == 1, na.rm = TRUE),
+      .names = "count_{.col}"
+    )
+  )
+
+print(mispriced_duration_summary)
+```
+
+```{r}
+properly_duration_summary <- properly_priced_data %>%
+  group_by(community) %>%
+  summarize(
+    across(
+      all_of(duration_cols),
+      ~ sum(. == 1, na.rm = TRUE),
+      .names = "count_{.col}"
+    )
+  )
+
+print(properly_duration_summary)
+```
