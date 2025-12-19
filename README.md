@@ -54,3 +54,7 @@ pip install -r requirements.txt
 ## Usage
 
 See the repository contents for usage examples.
+
+---
+
+(c) Joerg Osterrieder 2025
