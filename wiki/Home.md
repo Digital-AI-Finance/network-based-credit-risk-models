@@ -190,3 +190,7 @@ The team has applied to and acquired several large national and international re
 ---
 
 *Content scraped from [digital-finance-msca.com](https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf)*
+
+---
+
+(c) Joerg Osterrieder 2025
