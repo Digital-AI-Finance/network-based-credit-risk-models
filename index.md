@@ -657,3 +657,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/visualizations.js"></script>
+
+---
+
+(c) Joerg Osterrieder 2025
