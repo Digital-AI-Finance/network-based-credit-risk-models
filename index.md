@@ -75,6 +75,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#publications">Publications</a></li>
+    <li><a href="#research-outputs">Research Outputs</a></li>
     <li><a href="#analytics">Analytics</a></li>
     <div class="nav-section">Resources</div>
     <li><a href="#resources">Datasets & Code</a></li>
@@ -99,6 +100,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#publications">Publications</a></li>
+    <li><a href="#research-outputs">Outputs</a></li>
     <li><a href="#analytics">Analytics</a></li>
     <li><a href="#resources">Resources</a></li>
     <li><a href="#news">News</a></li>
@@ -299,6 +301,31 @@ By providing more reliable credit risk models, this project will strengthen the 
 <script>
   publicationsData = {{ site.data.publications | jsonify }};
 </script>
+
+</section>
+
+---
+
+<section id="research-outputs">
+
+<h2>Research Outputs</h2>
+
+<p>Datasets, code, and supplementary materials deposited on Zenodo.</p>
+
+<div class="outputs-grid">
+{% for output in site.data.research_outputs %}
+  <div class="output-card">
+    <span class="output-type-badge">{{ output.resource_type }}</span>
+    <h3><a href="{{ output.doi }}" target="_blank">{{ output.title }}</a></h3>
+    <p class="output-creators">{{ output.creators | join: ", " }}</p>
+    <p class="output-description">{{ output.description | truncate: 200 }}</p>
+    <div class="output-meta">
+      <span class="output-date">{{ output.publication_date }}</span>
+      <a href="{{ output.doi }}" class="doi-badge" target="_blank">DOI</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
 
 </section>
 
