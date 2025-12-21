@@ -84,7 +84,7 @@ The project trained two PhD researchers, Lennart John Baals and Yiting Liu, who 
 
 **Open Science Contribution:** All 12 Zenodo deposits are 100% open access, ensuring complete reproducibility of our findings. The deposits include LaTeX manuscript sources, Jupyter notebooks implementing the complete analysis pipeline from data preprocessing through model training and evaluation, Python and R scripts for network construction and centrality computation, and comprehensive documentation enabling other researchers to validate, extend, and build upon our work. The curated Bondora dataset is archived at the Open Science Framework (OSF) at https://osf.io/jnpfs/.
 
-**Capacity Building:** Two PhD researchers were trained in cutting-edge methods at the intersection of network science, machine learning, and finance, developing skills directly relevant to the growing fintech sector. Knowledge transfer activities included an Open Day workshop at FINMA (Swiss financial regulator) in May 2024, presenting research findings to financial supervisory staff, and presentations at international research events in eight countries: Switzerland, Germany, Turkey, Netherlands, Hong Kong, China, Czech Republic, and UAE.
+**Capacity Building:** Two PhD researchers were trained in cutting-edge methods at the intersection of network science, machine learning, and finance, developing skills directly relevant to the growing fintech sector. Knowledge transfer activities included presentations at international research events in eight countries: Switzerland, Germany, Turkey, Netherlands, Hong Kong, China, Czech Republic, and UAE.
 
 **Research Network Leadership:** The PI's roles as COST Action CA19130 Chair and MSCA Digital Finance Network Coordinator enabled broad dissemination of project findings across 40+ European institutions, creating lasting infrastructure for fintech research collaboration that extends well beyond this individual project. The COST Action facilitated policy discussions at EU level including events in Brussels addressing AI in finance implications for financial regulation.
 
@@ -102,7 +102,7 @@ The project trained two PhD researchers, Lennart John Baals and Yiting Liu, who 
 
 **Social Impact:** Improved credit risk models contribute to financial inclusion by enabling P2P platforms to serve borrowers who may be underserved by traditional banking. More accurate risk assessment reduces adverse selection problems, protecting retail investors who fund P2P loans from excessive default losses. The transparency framework enhances borrower trust in automated credit decisions by providing explanations for lending outcomes.
 
-**Policy Impact:** The project engaged directly with financial regulators through the Open Day workshop at FINMA in May 2024, presenting research findings to Swiss financial supervisory staff and discussing implications for fintech regulation. The PI's leadership of COST Action CA19130 facilitated policy discussions at EU level, including events in Brussels addressing AI in finance policy implications and contributing to the broader discourse on responsible AI adoption in financial services.
+**Policy Impact:** The PI's leadership of COST Action CA19130 facilitated policy discussions at EU level, including events in Brussels addressing AI in finance policy implications and contributing to the broader discourse on responsible AI adoption in financial services.
 
 **Educational Impact:** The project trained two PhD researchers in cutting-edge methods at the intersection of network science, machine learning, and finance. The publication "Towards a new PhD Curriculum for Digital Finance" (Open Research Europe, 2024, DOI: 10.12688/openreseurope.16513.1) disseminates best practices for doctoral training in this emerging field, contributing to curriculum development beyond this specific project.
 
@@ -134,7 +134,7 @@ Submitted: Baals, L.J., et al. (2025). Network Evidence on Credit-Risk Pricing i
 
 ### Appendix C: Academic Events
 
-December 2024: 4th International Symposium on Big Data and AI, Hong Kong (Systematic Literature Review on Graph-Based Credit Models). September 2024: 8th Bern Conference on Fintech and AI in Finance, Switzerland. September 2024: AI Finance Insights: Pioneering the Future of Fintech, Istanbul. May 2024: COST FinAI Meets Istanbul Conference, Turkey. May 2024: Open Day Workshop, FINMA Campus, Bern. December 2023: 16th ERCIM Conference on Computational and Methodological Statistics, Berlin. September 2023: 8th European COST Conference on AI in Finance, Bern. September 2023: European Summer School in Financial Mathematics, Delft.
+December 2024: 4th International Symposium on Big Data and AI, Hong Kong (Systematic Literature Review on Graph-Based Credit Models). September 2024: 8th Bern Conference on Fintech and AI in Finance, Switzerland. September 2024: AI Finance Insights: Pioneering the Future of Fintech, Istanbul. May 2024: COST FinAI Meets Istanbul Conference, Turkey. December 2023: 16th ERCIM Conference on Computational and Methodological Statistics, Berlin. September 2023: 8th European COST Conference on AI in Finance, Bern. September 2023: European Summer School in Financial Mathematics, Delft.
 
 ### Appendix D: Dataset
 
