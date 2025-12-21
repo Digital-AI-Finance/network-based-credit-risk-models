@@ -1,0 +1,332 @@
+{
+  "review_date": "2025-12-21",
+  "review_version": "1.0",
+  "site_url": "https://digital-ai-finance.github.io/network-based-credit-risk-models/",
+  "summary": {
+    "critical": 4,
+    "warning": 19,
+    "improvement": 6,
+    "total": 29
+  },
+  "findings": [
+    {
+      "id": "CRITICAL-01",
+      "severity": "critical",
+      "category": "CSS",
+      "title": "Undefined CSS variable --navy-secondary",
+      "description": "CSS uses undefined variable --navy-secondary in gradient for .output-type-badge",
+      "file": "assets/css/style.scss",
+      "line": 530,
+      "fix": "Add --navy-secondary: #2d4a7c to :root block",
+      "status": "resolved"
+    },
+    {
+      "id": "CRITICAL-02",
+      "severity": "critical",
+      "category": "Assets",
+      "title": "Inconsistent image path naming",
+      "description": "Team member images use underscore-encoded spaces (e.g., Hadji_20Misheva.jpg)",
+      "file": "_data/team.json",
+      "line": null,
+      "fix": "Verify all image files exist with correct paths",
+      "status": "resolved"
+    },
+    {
+      "id": "CRITICAL-03",
+      "severity": "critical",
+      "category": "Assets",
+      "title": "URL-encoded WhatsApp image filename",
+      "description": "Image filename contains URL-encoded spaces which may break on some systems",
+      "file": "index.md",
+      "line": 485,
+      "fix": "Rename file to use hyphens or underscores consistently",
+      "status": "resolved"
+    },
+    {
+      "id": "CRITICAL-04",
+      "severity": "critical",
+      "category": "JavaScript",
+      "title": "Citation count shows placeholder",
+      "description": "Total Citations displays '--' instead of actual count, indicating data binding issue",
+      "file": "index.md",
+      "line": 132,
+      "fix": "Debug updateCitationMetrics() function in main.js",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-01",
+      "severity": "warning",
+      "category": "Data",
+      "title": "Funding amount mismatch in config",
+      "description": "_config.yml shows 90,000 CHF but actual total is 297,028 CHF",
+      "file": "_config.yml",
+      "line": 67,
+      "fix": "Update total_funding to 297,028 CHF",
+      "status": "resolved"
+    },
+    {
+      "id": "WARNING-02",
+      "severity": "warning",
+      "category": "Data",
+      "title": "Empty abstracts in publications",
+      "description": "Multiple publications have empty abstract fields",
+      "file": "_data/publications.json",
+      "line": null,
+      "fix": "Fetch missing abstracts from OpenAlex or flag as unavailable",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-03",
+      "severity": "warning",
+      "category": "Data",
+      "title": "Missing ORCIDs for team members",
+      "description": "Lennart John Baals and Dr. Yiting Liu have empty ORCID fields",
+      "file": "_data/team.json",
+      "line": null,
+      "fix": "Add ORCIDs or mark as pending registration",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-04",
+      "severity": "warning",
+      "category": "Assets",
+      "title": "SVG logo paths need verification",
+      "description": "Logo files referenced in index.md should be verified to exist",
+      "file": "index.md",
+      "line": 117,
+      "fix": "Verify assets/images/logos/snsf-logo.svg and bfh-logo.svg exist",
+      "status": "resolved"
+    },
+    {
+      "id": "WARNING-05",
+      "severity": "warning",
+      "category": "CSS",
+      "title": "Fixed chart height limits responsiveness",
+      "description": "Chart container uses fixed 200px height with !important",
+      "file": "assets/css/style.scss",
+      "line": 884,
+      "fix": "Use max-height or aspect-ratio for better responsiveness",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-06",
+      "severity": "warning",
+      "category": "JavaScript",
+      "title": "Publication filters may return empty results",
+      "description": "Topic filter keywords may not match actual publication content",
+      "file": "assets/js/main.js",
+      "line": 180,
+      "fix": "Improve filter matching or add fallback message",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-07",
+      "severity": "warning",
+      "category": "CSS",
+      "title": "Dark mode --gold-light semantic issue",
+      "description": "Variable named 'light' becomes dark gray in dark mode, semantically confusing",
+      "file": "assets/css/style.scss",
+      "line": 24,
+      "fix": "Rename to --gold-surface or use separate dark mode variable",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-08",
+      "severity": "warning",
+      "category": "Content",
+      "title": "Project end date has passed",
+      "description": "Grant period shows end date of August 2025, but current date is December 2025",
+      "file": "index.md",
+      "line": 559,
+      "fix": "Update project status or extend end date if applicable",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-09",
+      "severity": "warning",
+      "category": "Data",
+      "title": "Stale publication count in config",
+      "description": "_config.yml shows publications: 2 but actual count is 50+",
+      "file": "_config.yml",
+      "line": 68,
+      "fix": "Update publications count or remove static count",
+      "status": "resolved"
+    },
+    {
+      "id": "WARNING-10",
+      "severity": "warning",
+      "category": "Accessibility",
+      "title": "Color contrast in dark mode placeholders",
+      "description": "Input placeholder at 50% white opacity may not meet WCAG AA standards",
+      "file": "assets/css/style.scss",
+      "line": 284,
+      "fix": "Increase placeholder opacity to 70%",
+      "status": "resolved"
+    },
+    {
+      "id": "WARNING-11",
+      "severity": "warning",
+      "category": "Accessibility",
+      "title": "Missing focus indicators",
+      "description": "Buttons and interactive elements lack visible :focus styles",
+      "file": "assets/css/style.scss",
+      "line": null,
+      "fix": "Add :focus and :focus-visible styles with clear outlines",
+      "status": "resolved"
+    },
+    {
+      "id": "WARNING-12",
+      "severity": "warning",
+      "category": "Accessibility",
+      "title": "Hamburger menu icon semantic",
+      "description": "Icon uses CSS pseudo-elements which may be inaccessible on older browsers",
+      "file": "index.md",
+      "line": 59,
+      "fix": "Has aria-label - acceptable but could use SVG icon",
+      "status": "resolved"
+    },
+    {
+      "id": "WARNING-13",
+      "severity": "warning",
+      "category": "CSS",
+      "title": "Unused CSS class .publication-card",
+      "description": "CSS defines .publication-card but index.md uses .pub-item",
+      "file": "assets/css/style.scss",
+      "line": 755,
+      "fix": "Remove unused class or use consistently",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-14",
+      "severity": "warning",
+      "category": "Performance",
+      "title": "D3 network graph may lag on slow devices",
+      "description": "Force simulation with aggressive forces may cause jank",
+      "file": "assets/js/visualizations.js",
+      "line": 98,
+      "fix": "Optimize alpha target and alphaDecay values",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-15",
+      "severity": "warning",
+      "category": "Security",
+      "title": "External links missing referrer policy",
+      "description": "External links have noopener but no referrerpolicy attribute",
+      "file": "index.md",
+      "line": null,
+      "fix": "Add referrerpolicy='no-referrer' to external links",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-16",
+      "severity": "warning",
+      "category": "Functionality",
+      "title": "Formspree form needs testing",
+      "description": "Contact form endpoint exposed in HTML, functionality unverified",
+      "file": "index.md",
+      "line": 631,
+      "fix": "Test form submission to verify endpoint works",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-17",
+      "severity": "warning",
+      "category": "JavaScript",
+      "title": "Citation count does not refresh after filter",
+      "description": "updateCitationMetrics() called once, not after filtering",
+      "file": "assets/js/main.js",
+      "line": 214,
+      "fix": "Call updateCitationMetrics() after filterPublications()",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-18",
+      "severity": "warning",
+      "category": "JavaScript",
+      "title": "Year filter may show years with no publications",
+      "description": "Year dropdown generated from data may include years with filtered-out publications",
+      "file": "assets/js/main.js",
+      "line": 145,
+      "fix": "Filter dropdown to only show years with matching publications",
+      "status": "pending"
+    },
+    {
+      "id": "WARNING-19",
+      "severity": "warning",
+      "category": "Data",
+      "title": "Network graph uses hard-coded co-authorship data",
+      "description": "D3 visualization has static links array instead of computed from publications",
+      "file": "assets/js/visualizations.js",
+      "line": 86,
+      "fix": "Calculate co-authorship from publicationsData dynamically",
+      "status": "pending"
+    },
+    {
+      "id": "IMPROVE-01",
+      "severity": "improvement",
+      "category": "Architecture",
+      "title": "Navigation menu duplicated in HTML",
+      "description": "Sidebar and top nav maintained separately, increasing maintenance burden",
+      "file": "index.md",
+      "line": 63,
+      "fix": "Consider using Jekyll data file for navigation items",
+      "status": "pending"
+    },
+    {
+      "id": "IMPROVE-02",
+      "severity": "improvement",
+      "category": "JavaScript",
+      "title": "Hard-coded team members in D3 visualization",
+      "description": "Network graph nodes list doesn't update when team.json changes",
+      "file": "assets/js/visualizations.js",
+      "line": 75,
+      "fix": "Inject team data from Jekyll or fetch team.json",
+      "status": "pending"
+    },
+    {
+      "id": "IMPROVE-03",
+      "severity": "improvement",
+      "category": "JavaScript",
+      "title": "Lunr.js search index not persistent",
+      "description": "Search index rebuilt on every page load with hard-coded section data",
+      "file": "assets/js/main.js",
+      "line": 239,
+      "fix": "Generate search index at Jekyll build time",
+      "status": "pending"
+    },
+    {
+      "id": "IMPROVE-04",
+      "severity": "improvement",
+      "category": "SEO",
+      "title": "Missing Schema.org types for publications",
+      "description": "Individual publications could use ScholarlyArticle schema",
+      "file": "index.md",
+      "line": null,
+      "fix": "Add itemtype='https://schema.org/ScholarlyArticle' to publication items",
+      "status": "pending"
+    },
+    {
+      "id": "IMPROVE-05",
+      "severity": "improvement",
+      "category": "CSS",
+      "title": "Mobile breakpoint mismatch between CSS and JS",
+      "description": "CSS uses 64em (1024px) but JS checks window.innerWidth < 1024",
+      "file": "assets/css/style.scss",
+      "line": 60,
+      "fix": "Sync breakpoints: use 65em in CSS or 1040px in JS",
+      "status": "pending"
+    },
+    {
+      "id": "IMPROVE-06",
+      "severity": "improvement",
+      "category": "UX",
+      "title": "No loading states for async operations",
+      "description": "Functions like filterPublications() lack visual feedback",
+      "file": "assets/js/main.js",
+      "line": null,
+      "fix": "Add spinner or toast notifications for user feedback",
+      "status": "pending"
+    }
+  ]
+}

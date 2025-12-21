@@ -64,14 +64,14 @@ project:
   name: Network-Based Credit Risk Models in P2P Lending Markets
   funder: Swiss National Science Foundation (SNSF)
   grant_number: "100018E_205487"
-  total_funding: "90,000 CHF"
-  publications: 2
+  total_funding: "297,028 CHF"
+  publications: 52
   collaborations: 6
   team_size: 4
 
 # Footer
 footer:
-  copyright: "2024 Digital AI Finance Research Group"
+  copyright: "2025 Digital AI Finance Research Group"
   links:
     - title: GitHub
       url: https://github.com/Digital-AI-Finance/network-based-credit-risk-models
