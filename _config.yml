@@ -63,11 +63,12 @@ navigation:
 project:
   name: Network-Based Credit Risk Models in P2P Lending Markets
   funder: Swiss National Science Foundation (SNSF)
-  grant_number: "100018E_205487"
-  total_funding: "297,028 CHF"
+  grant_number: "205487"
+  total_funding: "387,836 CHF"
+  status: "Completed"
   publications: 52
-  collaborations: 6
-  team_size: 4
+  collaborations: 3
+  team_size: 5
 
 # Footer
 footer:

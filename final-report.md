@@ -231,7 +231,11 @@ description: SNSF Final Scientific Report for Project 205487 - Network-Based Cre
 </div>
 <div>
 <dt>Approved Amount</dt>
-<dd>CHF 207,028</dd>
+<dd>CHF 387,836</dd>
+</div>
+<div>
+<dt>Status</dt>
+<dd style="color: #22c55e; font-weight: 600;">Completed</dd>
 </div>
 </dl>
 </div>
@@ -505,6 +509,52 @@ Website: <a href="https://www.ai-in-finance.eu" target="_blank" rel="noopener">w
 Role: Coordinator (Joerg Osterrieder)<br>
 Website: <a href="https://www.digital-finance-msca.com" target="_blank" rel="noopener">www.digital-finance-msca.com</a></li>
 </ul>
+
+<h3>H. Knowledge Transfer Events</h3>
+
+<ul class="event-list">
+<li>
+<span class="date">May 2024</span>
+<div class="details">
+<strong>Expert Day Workshop</strong><br>
+<span class="location">FHNW Campus Brugg-Windisch, Switzerland</span>
+</div>
+</li>
+<li>
+<span class="date">Sep 2023</span>
+<div class="details">
+<strong>International Week, Shenzhen Technology University</strong><br>
+<span class="location">Shenzhen, China</span>
+</div>
+</li>
+</ul>
+
+<h3>I. Public Communication</h3>
+
+<ul>
+<li><strong>Shenzhen Technology University - International Week</strong> (2024) - Talks/Events, International</li>
+<li><strong>MSCA Digital Finance</strong> (2024) - Webpage, New Media, International</li>
+<li><strong>Shenzhen Technology University - International Week</strong> (2023) - Talks/Events, International</li>
+</ul>
+
+<h3>J. Use-Inspired Outputs</h3>
+
+<ul>
+<li><strong>REA Expert Reviewer</strong> (2023) - Expert reviewer for the Research Executive Agency under the European Commission's EISMEA programme</li>
+<li><strong>EIC Accelerator Expert</strong> (2022) - Expert evaluator for the European Innovation Council Work Programme</li>
+</ul>
+
+<h3>K. Official Dataset</h3>
+
+<div class="pub-item">
+<h4>LoanData - Bondora P2P Lending Dataset</h4>
+<p class="pub-meta">
+<strong>Curator:</strong> Liu Yiting<br>
+<strong>Repository:</strong> Open Science Framework (OSF)<br>
+<strong>URL:</strong> <a href="https://osf.io/jnpfs/" target="_blank" rel="noopener">https://osf.io/jnpfs/</a><br>
+<strong>Description:</strong> European P2P lending platform data with loan performance metrics
+</p>
+</div>
 
 </div>
 

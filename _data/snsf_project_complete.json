@@ -3,13 +3,13 @@
     "title": "Network-based credit risk models in P2P lending markets",
     "grant_number": "205487",
     "funding_scheme": "Weave/Lead Agency",
-    "call": "Project funding in humanities and social sciences (Division II) 2021 - October",
-    "approved_amount_chf": 207028,
+    "call": "Project funding in humanities and social sciences (Division I) 2021 Oktober",
+    "approved_amount_chf": 387836,
     "duration": {
       "start": "2022-10-01",
       "end": "2025-08-31"
     },
-    "status": "Active",
+    "status": "Completed",
     "research_institution": "Bern University of Applied Sciences - BFH",
     "institute": "Berner Fachhochschule BFH Bern",
     "disciplines": ["Economics"],
@@ -102,6 +102,7 @@
     "datasets": 1,
     "collaborations": 3,
     "academic_events": 8,
+    "knowledge_transfer_events": 2,
     "public_communications": 3,
     "use_inspired_outputs": 2
   },
@@ -310,10 +311,11 @@
   "funding_grants": [
     {
       "title": "SNSF Project Funding - Main Grant",
-      "amount_chf": 207028,
+      "amount_chf": 387836,
       "proposal_number": "205487",
       "grant_period": "2022-10-01 to 2025-08-31",
-      "funding_scheme": "Weave/Lead Agency"
+      "funding_scheme": "Weave/Lead Agency",
+      "note": "Includes Swiss and Czech partner funding (Weave/Lead Agency)"
     },
     {
       "title": "Leading House Asia: 2023 Call for Applied Research Partnerships, ETH",

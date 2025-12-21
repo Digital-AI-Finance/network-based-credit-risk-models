@@ -123,9 +123,13 @@ image: /images/Osterrieder.jpg
   <button onclick="window.print()" class="btn-pdf">Print / Save PDF</button>
 </div>
 
+<div class="project-status-badge" style="text-align: center; margin-bottom: 1rem;">
+  <span style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem;">PROJECT COMPLETED</span>
+</div>
+
 <div class="stats-banner">
   <div class="stat-item">
-    <span class="stat-number">297,028</span>
+    <span class="stat-number">387,836</span>
     <span class="stat-label">CHF Funding</span>
   </div>
   <div class="stat-item">
@@ -415,9 +419,10 @@ By providing more reliable credit risk models, this project will strengthen the 
     </div>
   </div>
   <div class="resource-card">
-    <h4>Bondora P2P Dataset</h4>
-    <p>European P2P lending platform data (2009-2023) with loan performance metrics</p>
+    <h4>Bondora P2P Dataset (LoanData)</h4>
+    <p>European P2P lending platform data (2009-2023) with loan performance metrics. Curated by Liu Yiting.</p>
     <div class="resource-links">
+      <a href="https://osf.io/jnpfs/" class="resource-link external-link" target="_blank" rel="noopener">OSF Repository</a>
       <a href="https://www.bondora.com/en/public-reports" class="resource-link external-link" target="_blank" rel="noopener">Data Source</a>
       <a href="https://doi.org/10.1016/j.frl.2024.105308" class="resource-link external-link" target="_blank" rel="noopener">Documentation</a>
     </div>
@@ -505,6 +510,43 @@ By providing more reliable credit risk models, this project will strengthen the 
     <tr><td><strong>8th European COST Conference on AI in Finance</strong></td><td>Sep 2023</td><td>Bern, Switzerland</td><td>Predicting Loan Default in P2P Lending</td></tr>
     <tr><td><strong>European Summer School in Financial Mathematics</strong></td><td>Sep 2023</td><td>Delft, Netherlands</td><td>Poster Presentation</td></tr>
     <tr><td><strong>COST Action Training School</strong></td><td>Jun 2023</td><td>Enschede, Netherlands</td><td>Workshop Organization</td></tr>
+  </tbody>
+</table>
+
+<h3>Knowledge Transfer Events</h3>
+
+<table>
+  <thead>
+    <tr><th>Event</th><th>Date</th><th>Location</th><th>Type</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Expert Day Workshop</strong></td><td>May 2024</td><td>FHNW Campus Brugg-Windisch, Switzerland</td><td>Workshop</td></tr>
+    <tr><td><strong>International Week, Shenzhen Technology University</strong></td><td>Sep 2023</td><td>Shenzhen, China</td><td>Talk</td></tr>
+  </tbody>
+</table>
+
+<h3>Public Communication</h3>
+
+<table>
+  <thead>
+    <tr><th>Activity</th><th>Year</th><th>Type</th><th>Reach</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Shenzhen Technology University - International Week</strong></td><td>2024</td><td>Talks/Events</td><td>International</td></tr>
+    <tr><td><strong>MSCA Digital Finance</strong></td><td>2024</td><td>Webpage, New Media</td><td>International</td></tr>
+    <tr><td><strong>Shenzhen Technology University - International Week</strong></td><td>2023</td><td>Talks/Events</td><td>International</td></tr>
+  </tbody>
+</table>
+
+<h3>Use-Inspired Outputs</h3>
+
+<table>
+  <thead>
+    <tr><th>Activity</th><th>Year</th><th>Sector</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>REA Expert Reviewer</strong></td><td>2023</td><td>European Commission</td><td>Expert reviewer for EISMEA programme</td></tr>
+    <tr><td><strong>EIC Accelerator Expert</strong></td><td>2022</td><td>European Commission</td><td>EIC Work Programme evaluator</td></tr>
   </tbody>
 </table>
 
