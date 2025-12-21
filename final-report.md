@@ -12,6 +12,9 @@ description: SNSF Final Scientific Report for Project 205487 - Network-Based Cre
 .report-content h3 { margin-top: 1.5rem; }
 .report-content table { margin: 1rem auto; }
 .report-content hr { margin: 2rem 0; }
+.download-btn { display: inline-block; background: #1e3a5f; color: white; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; margin: 1rem 0; }
+.download-btn:hover { background: #2d4a7c; color: white; }
+.download-container { text-align: center; margin: 1rem 0; }
 </style>
 
 <div class="report-content" markdown="1">
@@ -19,6 +22,10 @@ description: SNSF Final Scientific Report for Project 205487 - Network-Based Cre
 # Final Scientific Report
 
 Network-Based Credit Risk Models in P2P Lending Markets
+
+<div class="download-container">
+<a href="{{ site.baseurl }}/assets/downloads/SNSF_Report_205487.docx" class="download-btn">Download Word Document (.docx)</a>
+</div>
 
 | | |
 |---|---|
