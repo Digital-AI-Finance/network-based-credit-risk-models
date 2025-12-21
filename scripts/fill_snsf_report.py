@@ -63,6 +63,88 @@ Capacity Building: Two PhD researchers were trained in cutting-edge methods at t
 
 Research Network Leadership: The PI's roles as COST Action CA19130 Chair and MSCA Digital Finance Network Coordinator enabled broad dissemination of project findings across 40+ European institutions, creating lasting infrastructure for fintech research collaboration that extends well beyond this individual project. The COST Action facilitated policy discussions at EU level including events in Brussels addressing AI in finance implications for financial regulation."""
 
+EXTENDED_INFO = """Extended Project Information
+
+Project Statistics: Six core publications with 28+ total citations received, 12 Zenodo deposits ensuring reproducibility, 8 conference presentations across 8 countries, 2 PhD researchers trained, and CHF 90,000 in additional funding secured.
+
+1.4 Impact Statement
+
+Scientific Impact: Our publications have received 28+ citations within 12 months of publication, indicating rapid adoption by the research community. The two-step machine learning methodology combining network centrality with traditional credit features has been referenced in subsequent studies on P2P lending risk assessment, and the systematic literature review provides a foundational reference for researchers entering the field of graph-based credit modeling.
+
+Economic Impact: The developed models and open-source code are directly applicable to P2P lending platforms for improved credit risk assessment. By enabling more accurate default prediction, platforms can better price loans to reflect true risk, reduce losses from defaults, and offer more competitive rates to creditworthy borrowers. The interpretability framework addresses regulatory requirements, reducing compliance costs for platforms adopting automated credit decisions.
+
+Social Impact: Improved credit risk models contribute to financial inclusion by enabling P2P platforms to serve borrowers who may be underserved by traditional banking. More accurate risk assessment reduces adverse selection problems, protecting retail investors who fund P2P loans from excessive default losses. The transparency framework enhances borrower trust in automated credit decisions by providing explanations for lending outcomes.
+
+Policy Impact: The PI's leadership of COST Action CA19130 facilitated policy discussions at EU level, including events in Brussels addressing AI in finance policy implications and contributing to the broader discourse on responsible AI adoption in financial services.
+
+Educational Impact: The project trained two PhD researchers in cutting-edge methods at the intersection of network science, machine learning, and finance. The publication "Towards a new PhD Curriculum for Digital Finance" (Open Research Europe, 2024, DOI: 10.12688/openreseurope.16513.1) disseminates best practices for doctoral training in this emerging field, contributing to curriculum development beyond this specific project.
+
+1.5 Sustainability Plan
+
+Data Preservation: Twelve Zenodo deposits are archived with persistent DOIs ensuring permanent accessibility and citability through CERN's infrastructure. The curated Bondora P2P lending dataset is archived at the Open Science Framework (OSF). Code repositories are maintained under the Digital-AI-Finance organization on GitHub. All outputs are released under Creative Commons Attribution 4.0 (CC-BY 4.0) licensing, enabling unrestricted reuse with attribution.
+
+Code Maintainability: All Jupyter notebooks and Python/R scripts include dependency specifications (requirements.txt, environment files) enabling reproduction with specified package versions. Reproducibility has been verified through independent testing. Documentation is embedded in code through comments and supplementary README files.
+
+Knowledge Transfer Continuation: COST Action CA19130 (Fintech and AI in Finance) continues beyond project end with the PI serving as Action Chair. The MSCA Industrial Doctoral Network on Digital Finance continues training next-generation researchers with the PI as Coordinator. Digital finance research continues at Bern University of Applied Sciences building on this project's foundations.
+
+Appendix A: Peer-Reviewed Publications
+
+Liu, Y., Baals, L.J., Osterrieder, J., Hadji-Misheva, B. (2024). Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning. Expert Systems with Applications, 252(B), 124100. DOI: 10.1016/j.eswa.2024.124100. 17 citations.
+
+Liu, Y., Baals, L.J., Osterrieder, J., Hadji-Misheva, B. (2024). Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics. Finance Research Letters, 63, 105308. DOI: 10.1016/j.frl.2024.105308. 11 citations.
+
+Baumohl, E., Lyocsa, S., Vasanicova, P. (2024). Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms. International Review of Financial Analysis, 95, 103416. DOI: 10.1016/j.irfa.2024.103416.
+
+Baals, L.J., Osterrieder, J., Hadji-Misheva, B., Liu, Y. (2024). Towards a new PhD Curriculum for Digital Finance. Open Research Europe, 4, 16513. DOI: 10.12688/openreseurope.16513.1.
+
+Submitted: Baals, L.J., et al. (2025). Network Evidence on Credit-Risk Pricing in P2P Lending. SSRN 5276337. Baals, L.J., et al. (2025). State-Dependent Pricing in FinTech Credit: Evidence from P2P Lending. SSRN 5421207.
+
+Appendix B: Open Science Deposits (Zenodo)
+
+1. COST FinAI Meets Istanbul Conference Event May 20-21, 2024. Baals, Lennart John (2024). Presentation. https://zenodo.org/records/17964900
+
+2. State-Dependent Pricing in FinTech Credit: Evidence from P2P Lending. Baals, Lennart John (2025). Working paper. https://zenodo.org/records/17990398
+
+3. Network Evidence on Credit-Risk Pricing in P2P Lending. Baals, Lennart John (2025). Working paper. https://zenodo.org/records/17990873
+
+4. Leveraging Network Topology for Credit Risk Assessment in P2P Lending: A Comparative Study under the Lens of Machine Learning. Baals, Lennart John (2025). Journal article. https://zenodo.org/records/17991107
+
+5. PhD Qualifier Report and Presentation delivered by Lennart John Baals at the University of Twente. Baals, Lennart John (2025). Proposal. https://zenodo.org/records/17992215
+
+6. A Systematic Literature Review on Graph-Based Models in Credit Risk Assessment. Baals, Lennart John (2025). Presentation. https://zenodo.org/records/17992322
+
+7. Leveraging Network Topology for Credit Risk Assessment in P2P Lending (Bern Conference 2023). Baals, Lennart John (2025). Presentation. https://zenodo.org/records/17992484
+
+8. Identifying Mispriced Loans through Interest Rate-Based Network Analysis and Clustering in P2P Lending Markets. Baals, Lennart John (2025). Presentation. https://zenodo.org/records/17992591
+
+9. Data and Code to reproduce results in paper "Network centrality and credit risk". Liu, Yiting (2024). Computational notebook. https://zenodo.org/records/17989119
+
+10. Data and Code to reproduce results in paper "Credit Risk Prediction via Graph Neural Networks with Homophily-Guided Graph Construction". Liu, Yiting (2026). Computational notebook. https://zenodo.org/records/17990002
+
+11. Data and Code to reproduce results in paper "Explaining Regime Dynamics: A Tree-based Interpretation Framework for R2-RD Models". Liu, Yiting (2026). Computational notebook. https://zenodo.org/records/17990140
+
+12. Data and Code to reproduce results in paper "Leveraging network topology for credit risk assessment in P2P lending". Liu, Yiting (2024). Computational notebook. https://zenodo.org/records/17990581
+
+Appendix C: Academic Events
+
+December 2024: 4th International Symposium on Big Data and AI, Hong Kong (Systematic Literature Review on Graph-Based Credit Models). September 2024: 8th Bern Conference on Fintech and AI in Finance, Switzerland. September 2024: AI Finance Insights: Pioneering the Future of Fintech, Istanbul. May 2024: COST FinAI Meets Istanbul Conference, Turkey. December 2023: 16th ERCIM Conference on Computational and Methodological Statistics, Berlin. September 2023: 8th European COST Conference on AI in Finance, Bern. September 2023: European Summer School in Financial Mathematics, Delft.
+
+Appendix D: Dataset
+
+Bondora P2P Lending Dataset. Coverage: June 2009 - April 2022. Sample: 231,039 borrowers, 112 variables. DOI: 10.21227/33kz-0s65. License: CC-BY 4.0.
+
+Appendix E: International Collaborations
+
+Masaryk University (Czech Republic), Columbia University (USA), American University of Sharjah (UAE), Renmin University of China (China), University of Manchester (UK).
+
+Appendix F: PhD Researchers
+
+Lennart John Baals: PhD In Progress, BFH/University of Twente, Graph-based credit models and network analysis for credit risk assessment.
+
+Yiting Liu: PhD In Progress, BFH/University of Twente, P2P lending risk modeling and network topology for credit risk.
+
+Report submitted to: Swiss National Science Foundation (SNSF). Report date: December 2025. Data source: https://data.snf.ch/grants/grant/205487"""
+
 
 def find_table_cell_after(doc, search_text):
     """Find the table cell that comes after the cell containing search_text."""
@@ -267,6 +349,39 @@ def main():
                 else:
                     new_para.add_run(para_text)
         print("Added Section 1.3 content")
+
+    # Add Extended Project Information after Section 1.3
+    if section_1_3_heading:
+        # Find the last paragraph we added (prev still points to it)
+        extended_headings = [
+            "Extended Project Information", "Project Statistics", "1.4 Impact Statement",
+            "Scientific Impact", "Economic Impact", "Social Impact", "Policy Impact", "Educational Impact",
+            "1.5 Sustainability Plan", "Data Preservation", "Code Maintainability", "Knowledge Transfer Continuation",
+            "Appendix A", "Appendix B", "Appendix C", "Appendix D", "Appendix E", "Appendix F",
+            "Report submitted to"
+        ]
+        for para_text in EXTENDED_INFO.strip().split('\n\n'):
+            if para_text.strip():
+                new_para = doc.add_paragraph()
+                prev._element.addnext(new_para._element)
+                prev = new_para
+
+                # Check if it's a heading or section title
+                first_part = para_text.split(':')[0].strip()
+                is_heading = any(h in first_part for h in extended_headings)
+
+                if is_heading and ':' in para_text:
+                    parts = para_text.split(':', 1)
+                    run = new_para.add_run(parts[0] + ':')
+                    run.bold = True
+                    if len(parts) > 1:
+                        new_para.add_run(parts[1])
+                elif is_heading:
+                    run = new_para.add_run(para_text)
+                    run.bold = True
+                else:
+                    new_para.add_run(para_text)
+        print("Added Extended Project Information")
 
     # Save
     doc.save(OUTPUT_PATH)
