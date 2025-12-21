@@ -171,10 +171,10 @@ image: /images/Osterrieder.jpg
   <p class="institution" itemprop="affiliation">{{ member.institution }}{% if member.institution2 %}<br>{{ member.institution2 }}{% endif %}</p>
   <p class="bio" itemprop="description">{{ member.bio }}</p>
   <div class="profile-links">
-    {% if member.orcid %}<a href="https://orcid.org/{{ member.orcid }}" target="_blank" rel="noopener" title="ORCID" class="orcid-link external-link"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" loading="lazy"> ORCID</a>{% endif %}
-    {% if member.google_scholar %}<a href="{{ member.google_scholar }}" target="_blank" rel="noopener" title="Google Scholar" class="external-link">Scholar</a>{% endif %}
-    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" rel="noopener" title="LinkedIn" class="external-link">LinkedIn</a>{% endif %}
-    {% if member.website %}<a href="{{ member.website }}" target="_blank" rel="noopener" title="Website" class="external-link">Web</a>{% endif %}
+    {% if member.orcid and member.orcid != "pending" %}<a href="https://orcid.org/{{ member.orcid }}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" title="ORCID" class="orcid-link external-link"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" alt="ORCID" loading="lazy"> ORCID</a>{% endif %}
+    {% if member.google_scholar %}<a href="{{ member.google_scholar }}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" title="Google Scholar" class="external-link">Scholar</a>{% endif %}
+    {% if member.linkedin %}<a href="{{ member.linkedin }}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" title="LinkedIn" class="external-link">LinkedIn</a>{% endif %}
+    {% if member.website %}<a href="{{ member.website }}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" title="Website" class="external-link">Web</a>{% endif %}
   </div>
 </div>
 {% endfor %}
@@ -231,7 +231,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <h2>Scientific Publications</h2>
 
-<em>Auto-updated from <a href="https://openalex.org" target="_blank" rel="noopener" class="external-link">OpenAlex.org</a> - {{ site.data.publications | size }} publications</em>
+<em>Auto-updated from <a href="https://openalex.org" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="external-link">OpenAlex.org</a> - {{ site.data.publications | size }} publications</em>
 
 <!-- Citation Metrics Summary -->
 <div class="citation-metrics" id="citationMetrics">
@@ -288,11 +288,11 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <div class="publication-list" id="publicationList">
 {% for pub in site.data.publications %}
-<div class="pub-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-open="{{ pub.open_access }}">
+<div class="pub-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-abstract="{{ pub.abstract | downcase | default: '' }}" data-open="{{ pub.open_access }}">
   <div class="pub-title">{{ pub.title }}</div>
   <div class="pub-meta">{{ pub.authors }} ({{ pub.year }}) - <em>{{ pub.journal }}</em></div>
   <div class="pub-badges">
-    {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}" class="doi-link external-link" target="_blank" rel="noopener">DOI</a>{% endif %}
+    {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}" class="doi-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">DOI</a>{% endif %}
     {% if pub.citations > 0 %}<span class="citations-badge">{{ pub.citations }} citations</span>{% endif %}
     {% if pub.open_access %}<span class="oa-badge">Open Access</span>{% endif %}
     <button onclick="copyBibtex({{ forloop.index0 }})" data-bibtex-index="{{ forloop.index0 }}" class="btn-bibtex">BibTeX</button>
@@ -323,12 +323,12 @@ By providing more reliable credit risk models, this project will strengthen the 
 {% for output in site.data.research_outputs %}
   <div class="output-card">
     <span class="output-type-badge">{{ output.resource_type }}</span>
-    <h3><a href="{{ output.doi }}" target="_blank">{{ output.title }}</a></h3>
+    <h3><a href="{{ output.doi }}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{{ output.title }}</a></h3>
     <p class="output-creators">{{ output.creators | join: ", " }}</p>
     <p class="output-description">{{ output.description | truncate: 200 }}</p>
     <div class="output-meta">
       <span class="output-date">{{ output.publication_date }}</span>
-      <a href="{{ output.doi }}" class="doi-badge" target="_blank">DOI</a>
+      <a href="{{ output.doi }}" class="doi-badge" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">DOI</a>
     </div>
   </div>
 {% endfor %}
@@ -415,37 +415,37 @@ By providing more reliable credit risk models, this project will strengthen the 
     <h4>P2P Network Analysis Code</h4>
     <p>Python implementation of network feature extraction and credit risk modeling</p>
     <div class="resource-links">
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" class="resource-link external-link" target="_blank" rel="noopener">GitHub Repository</a>
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" class="resource-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">GitHub Repository</a>
     </div>
   </div>
   <div class="resource-card">
     <h4>Bondora P2P Dataset (LoanData)</h4>
     <p>European P2P lending platform data (2009-2023) with loan performance metrics. Curated by Liu Yiting.</p>
     <div class="resource-links">
-      <a href="https://osf.io/jnpfs/" class="resource-link external-link" target="_blank" rel="noopener">OSF Repository</a>
-      <a href="https://www.bondora.com/en/public-reports" class="resource-link external-link" target="_blank" rel="noopener">Data Source</a>
-      <a href="https://doi.org/10.1016/j.frl.2024.105308" class="resource-link external-link" target="_blank" rel="noopener">Documentation</a>
+      <a href="https://osf.io/jnpfs/" class="resource-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">OSF Repository</a>
+      <a href="https://www.bondora.com/en/public-reports" class="resource-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Data Source</a>
+      <a href="https://doi.org/10.1016/j.frl.2024.105308" class="resource-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Documentation</a>
     </div>
   </div>
   <div class="resource-card">
     <h4>Network Centrality Toolkit</h4>
     <p>Implementation of degree, betweenness, and eigenvector centrality for credit scoring</p>
     <div class="resource-links">
-      <a href="https://doi.org/10.1016/j.eswa.2024.124100" class="resource-link external-link" target="_blank" rel="noopener">Related Paper</a>
+      <a href="https://doi.org/10.1016/j.eswa.2024.124100" class="resource-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Related Paper</a>
     </div>
   </div>
   <div class="resource-card">
     <h4>LendingClub Dataset</h4>
     <p>US P2P lending data for comparative analysis and model validation</p>
     <div class="resource-links">
-      <a href="https://www.kaggle.com/datasets/wordsforthewise/lending-club" class="resource-link external-link" target="_blank" rel="noopener">Kaggle Dataset</a>
+      <a href="https://www.kaggle.com/datasets/wordsforthewise/lending-club" class="resource-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Kaggle Dataset</a>
     </div>
   </div>
   <div class="resource-card">
     <h4>Publications Data (JSON)</h4>
     <p>Auto-updated publication metadata from OpenAlex API</p>
     <div class="resource-links">
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/blob/main/_data/publications.json" class="resource-link external-link" target="_blank" rel="noopener">View JSON</a>
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/blob/main/_data/publications.json" class="resource-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">View JSON</a>
       <button onclick="downloadAllBibtex()" class="resource-link">Download BibTeX</button>
     </div>
   </div>
@@ -453,7 +453,7 @@ By providing more reliable credit risk models, this project will strengthen the 
     <h4>Project Documentation</h4>
     <p>Wiki with detailed methodology, results, and supplementary materials</p>
     <div class="resource-links">
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki" class="resource-link external-link" target="_blank" rel="noopener">Project Wiki</a>
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki" class="resource-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Project Wiki</a>
     </div>
   </div>
 </div>
@@ -466,7 +466,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 <h2>News & Updates</h2>
 
-<p class="rss-link"><a href="{{ site.baseurl }}/feed.xml" class="external-link" target="_blank" rel="noopener">Subscribe via RSS</a></p>
+<p class="rss-link"><a href="{{ site.baseurl }}/feed.xml" class="external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Subscribe via RSS</a></p>
 
 <div class="news-list">
 {% for item in site.data.news %}
@@ -709,12 +709,12 @@ By providing more reliable credit risk models, this project will strengthen the 
   <div class="footer-content">
     <div>
       <p>&copy; 2025 Digital AI Finance Research Group</p>
-      <p>Source: <a href="https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf" target="_blank" rel="noopener" class="external-link">digital-finance-msca.com</a></p>
+      <p>Source: <a href="https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="external-link">digital-finance-msca.com</a></p>
     </div>
     <div class="footer-links">
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" target="_blank" rel="noopener" class="external-link">GitHub</a>
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki" target="_blank" rel="noopener" class="external-link">Wiki</a>
-      <a href="{{ site.baseurl }}/feed.xml" target="_blank" rel="noopener">RSS Feed</a>
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="external-link">GitHub</a>
+      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="external-link">Wiki</a>
+      <a href="{{ site.baseurl }}/feed.xml" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">RSS Feed</a>
     </div>
   </div>
 </footer>

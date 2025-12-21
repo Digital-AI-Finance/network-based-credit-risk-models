@@ -10,6 +10,7 @@
   --navy-dark: #0f2942;
   --gold-accent: #c9a227;
   --gold-light: #f4e4bc;
+  --gold-surface: #f4e4bc;  // Semantic name for surfaces (same as gold-light in light mode)
   --text-dark: #2d3748;
   --text-light: #718096;
   --bg-light: #f7fafc;
@@ -18,13 +19,14 @@
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-// Dark Mode Colors
+// Dark Mode Colors - WARNING-07 fix: renamed --gold-light to --gold-surface for semantic clarity
 [data-theme="dark"] {
   --navy-primary: #4a90d9;
   --navy-secondary: #5a9fe8;
   --navy-dark: #1a365d;
   --gold-accent: #f4d03f;
-  --gold-light: #3d3d3d;
+  --gold-light: #3d3d3d;  // Kept for backwards compatibility
+  --gold-surface: #3d3d3d;  // Semantic name for dark mode surfaces
   --text-dark: #e2e8f0;
   --text-light: #a0aec0;
   --bg-light: #1a202c;
@@ -919,13 +921,19 @@ table {
   @media screen and (max-width: 42em) { grid-template-columns: 1fr; }
 }
 
+// WARNING-05 fix: Use max-height and aspect-ratio for better responsiveness
 .chart-container {
   background: var(--bg-white);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 0.75rem;
   h3 { font-size: 0.85rem; margin: 0 0 0.5rem 0; color: var(--navy-primary); }
-  canvas, #networkGraph { width: 100% !important; height: 200px !important; }
+  canvas, #networkGraph {
+    width: 100% !important;
+    max-height: 200px;
+    min-height: 150px;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 // Timeline

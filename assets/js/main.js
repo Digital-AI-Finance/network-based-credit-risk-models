@@ -141,17 +141,30 @@ function initBackToTop() {
   }
 }
 
-// Publication Filters
+// Publication Filters - WARNING-18 fix: dynamic year filter based on visible publications
 function initPublicationFilters() {
   const yearSelect = document.getElementById('yearFilter');
-  if (!yearSelect || !publicationsData.length) return;
+  if (!yearSelect) return;
 
-  // Populate year filter
-  const years = [...new Set(publicationsData.map(p => p.year).filter(Boolean))].sort((a, b) => b - a);
+  // Wait for publicationsData if not ready
+  if (!publicationsData || !publicationsData.length) {
+    setTimeout(initPublicationFilters, 200);
+    return;
+  }
+
+  // Populate year filter with count of publications per year
+  const yearCounts = {};
+  publicationsData.forEach(p => {
+    if (p.year) {
+      yearCounts[p.year] = (yearCounts[p.year] || 0) + 1;
+    }
+  });
+
+  const years = Object.keys(yearCounts).sort((a, b) => b - a);
   years.forEach(year => {
     const option = document.createElement('option');
     option.value = year;
-    option.textContent = year;
+    option.textContent = `${year} (${yearCounts[year]})`;
     yearSelect.appendChild(option);
   });
 }
@@ -162,10 +175,13 @@ function filterPublications() {
   const accessFilter = document.getElementById('accessFilter')?.value || 'all';
 
   const pubItems = document.querySelectorAll('.pub-item');
+  let visibleCount = 0;
 
   pubItems.forEach(item => {
     const year = item.dataset.year;
     const title = item.dataset.title || '';
+    const abstract = item.dataset.abstract || '';
+    const searchText = (title + ' ' + abstract).toLowerCase();
     const isOpen = item.dataset.open === 'true';
 
     let show = true;
@@ -175,17 +191,17 @@ function filterPublications() {
       show = false;
     }
 
-    // Topic filter
+    // Topic filter - search in title AND abstract for better matching
     if (topicFilter !== 'all') {
       const topicKeywords = {
-        'credit': ['credit', 'risk', 'default', 'loan'],
-        'network': ['network', 'graph', 'centrality', 'topology'],
-        'machine': ['machine learning', 'deep learning', 'neural', 'ai', 'artificial'],
-        'p2p': ['p2p', 'peer-to-peer', 'lending', 'platform'],
-        'crypto': ['crypto', 'bitcoin', 'blockchain', 'digital asset']
+        'credit': ['credit', 'risk', 'default', 'loan', 'lending', 'borrower'],
+        'network': ['network', 'graph', 'centrality', 'topology', 'node', 'edge'],
+        'machine': ['machine learning', 'deep learning', 'neural', 'ai', 'artificial', 'algorithm', 'model'],
+        'p2p': ['p2p', 'peer-to-peer', 'lending', 'platform', 'crowdfunding'],
+        'crypto': ['crypto', 'bitcoin', 'blockchain', 'digital asset', 'cryptocurrency', 'defi']
       };
       const keywords = topicKeywords[topicFilter] || [];
-      if (!keywords.some(kw => title.includes(kw))) {
+      if (!keywords.some(kw => searchText.includes(kw))) {
         show = false;
       }
     }
@@ -196,7 +212,28 @@ function filterPublications() {
     }
 
     item.classList.toggle('hidden', !show);
+    if (show) visibleCount++;
   });
+
+  // Show/hide no results message
+  let noResultsEl = document.getElementById('noFilterResults');
+  if (visibleCount === 0) {
+    if (!noResultsEl) {
+      noResultsEl = document.createElement('div');
+      noResultsEl.id = 'noFilterResults';
+      noResultsEl.className = 'pub-item';
+      noResultsEl.style.textAlign = 'center';
+      noResultsEl.style.color = 'var(--text-light)';
+      noResultsEl.innerHTML = '<em>No publications match the selected filters. Try adjusting your criteria.</em>';
+      document.getElementById('publicationList')?.appendChild(noResultsEl);
+    }
+    noResultsEl.style.display = 'block';
+  } else if (noResultsEl) {
+    noResultsEl.style.display = 'none';
+  }
+
+  // Update citation metrics for visible publications (WARNING-17 fix)
+  updateFilteredCitationMetrics();
 }
 
 function resetFilters() {
@@ -211,13 +248,18 @@ function resetFilters() {
   filterPublications();
 }
 
-// Citation Metrics
+// Citation Metrics - CRITICAL-04 fix: ensure proper initialization
 function updateCitationMetrics() {
-  if (!publicationsData.length) return;
+  // Wait for publicationsData to be available
+  if (!publicationsData || !publicationsData.length) {
+    // Retry after a short delay if data not ready
+    setTimeout(updateCitationMetrics, 200);
+    return;
+  }
 
-  const totalCitations = publicationsData.reduce((sum, p) => sum + (p.citations || 0), 0);
-  const avgCitations = (totalCitations / publicationsData.length).toFixed(1);
-  const openAccessCount = publicationsData.filter(p => p.open_access).length;
+  const totalCitations = publicationsData.reduce((sum, p) => sum + (parseInt(p.citations) || 0), 0);
+  const avgCitations = publicationsData.length > 0 ? (totalCitations / publicationsData.length).toFixed(1) : '0';
+  const openAccessCount = publicationsData.filter(p => p.open_access === true || p.open_access === 'true').length;
 
   // Update stats banner
   const totalCitationsEl = document.querySelector('#totalCitations .stat-number');
@@ -235,14 +277,96 @@ function updateCitationMetrics() {
   if (metricOpenAccess) metricOpenAccess.textContent = openAccessCount;
 }
 
-// Search Functionality using Lunr.js
+// WARNING-17 fix: Update metrics based on currently visible publications
+function updateFilteredCitationMetrics() {
+  if (!publicationsData || !publicationsData.length) return;
+
+  const visibleItems = document.querySelectorAll('.pub-item:not(.hidden):not(#noFilterResults)');
+  const visibleIndices = new Set();
+
+  visibleItems.forEach(item => {
+    // Get index from the data attributes on bibtex button
+    const bibtexBtn = item.querySelector('[data-bibtex-index]');
+    if (bibtexBtn) {
+      visibleIndices.add(parseInt(bibtexBtn.dataset.bibtexIndex));
+    }
+  });
+
+  let totalCitations = 0;
+  let openAccessCount = 0;
+  let count = 0;
+
+  publicationsData.forEach((pub, idx) => {
+    if (visibleIndices.has(idx)) {
+      totalCitations += parseInt(pub.citations) || 0;
+      if (pub.open_access === true || pub.open_access === 'true') openAccessCount++;
+      count++;
+    }
+  });
+
+  const avgCitations = count > 0 ? (totalCitations / count).toFixed(1) : '0';
+
+  // Update metric cards with filtered values
+  const metricTotalCitations = document.getElementById('metricTotalCitations');
+  const metricAvgCitations = document.getElementById('metricAvgCitations');
+  const metricOpenAccess = document.getElementById('metricOpenAccess');
+
+  if (metricTotalCitations) metricTotalCitations.textContent = totalCitations.toLocaleString();
+  if (metricAvgCitations) metricAvgCitations.textContent = avgCitations;
+  if (metricOpenAccess) metricOpenAccess.textContent = openAccessCount;
+}
+
+// Search Functionality using Lunr.js - IMPROVE-03: Now uses generated search index
 function initSearch() {
   if (typeof lunr === 'undefined') return;
 
-  // Build search index
+  // Try to fetch pre-generated search index, fallback to inline generation
+  fetch('assets/js/search-index.json')
+    .then(response => response.ok ? response.json() : Promise.reject('Not found'))
+    .then(data => {
+      buildSearchIndex(data.sections, data.publications || []);
+    })
+    .catch(() => {
+      // Fallback to inline index if generated file not available
+      buildSearchIndexFallback();
+    });
+}
+
+function buildSearchIndex(sections, publications) {
   const searchData = [];
 
-  // Add sections
+  // Add sections from generated index
+  sections.forEach(s => {
+    searchData.push({ ...s, section: s.id });
+  });
+
+  // Add publications from generated index
+  publications.forEach((pub, idx) => {
+    searchData.push({
+      id: pub.id || `pub-${idx}`,
+      title: pub.title || '',
+      content: `${pub.authors || ''} ${pub.journal || ''} ${pub.year || ''} ${pub.abstract || ''}`,
+      section: 'publications'
+    });
+  });
+
+  searchIndex = lunr(function() {
+    this.ref('id');
+    this.field('title', { boost: 10 });
+    this.field('content');
+
+    searchData.forEach(doc => {
+      this.add(doc);
+    });
+  });
+
+  window.searchData = searchData;
+}
+
+function buildSearchIndexFallback() {
+  const searchData = [];
+
+  // Fallback sections
   const sections = [
     { id: 'home', title: 'Home', content: 'SNSF credit risk models P2P lending network analysis machine learning' },
     { id: 'team', title: 'Team', content: 'Joerg Osterrieder Lennart Baals Branka Hadji Misheva Yiting Liu researchers' },
@@ -257,15 +381,17 @@ function initSearch() {
     { id: 'contact', title: 'Contact', content: 'email form Bern Switzerland address' }
   ];
 
-  // Add publications
-  publicationsData.forEach((pub, idx) => {
-    searchData.push({
-      id: `pub-${idx}`,
-      title: pub.title || '',
-      content: `${pub.authors || ''} ${pub.journal || ''} ${pub.year || ''}`,
-      section: 'publications'
+  // Add publications from global publicationsData
+  if (typeof publicationsData !== 'undefined') {
+    publicationsData.forEach((pub, idx) => {
+      searchData.push({
+        id: `pub-${idx}`,
+        title: pub.title || '',
+        content: `${pub.authors || ''} ${pub.journal || ''} ${pub.year || ''} ${pub.abstract || ''}`,
+        section: 'publications'
+      });
     });
-  });
+  }
 
   sections.forEach(s => searchData.push({ ...s, section: s.id }));
 
@@ -279,7 +405,6 @@ function initSearch() {
     });
   });
 
-  // Store data for results display
   window.searchData = searchData;
 }
 

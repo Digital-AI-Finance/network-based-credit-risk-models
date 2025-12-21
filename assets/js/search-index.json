@@ -1,0 +1,31 @@
+---
+layout: null
+---
+{
+  "sections": [
+    {"id": "home", "title": "Home", "content": "SNSF credit risk models P2P lending network analysis machine learning project overview"},
+    {"id": "team", "title": "Team", "content": "Joerg Osterrieder Lennart Baals Branka Hadji Misheva Yiting Liu researchers principal investigator"},
+    {"id": "research", "title": "Research", "content": "P2P lending credit risk network topology machine learning methods objectives peer-to-peer borrowers lenders"},
+    {"id": "publications", "title": "Publications", "content": "papers journals DOI citations OpenAlex academic research articles"},
+    {"id": "research-outputs", "title": "Research Outputs", "content": "Zenodo datasets code supplementary materials deposits"},
+    {"id": "analytics", "title": "Analytics", "content": "charts graphs timeline publications year visualization co-authorship network"},
+    {"id": "resources", "title": "Datasets & Code", "content": "GitHub Bondora LendingClub data Python code network analysis toolkit"},
+    {"id": "news", "title": "News", "content": "updates announcements latest project developments"},
+    {"id": "events", "title": "Events", "content": "conferences presentations workshops COST Fintech AI finance"},
+    {"id": "collaborations", "title": "Collaborations", "content": "Columbia Manchester Renmin Sharjah universities partners international"},
+    {"id": "funding", "title": "Funding", "content": "SNSF grants CHF money ETH Leading House mobility grants"},
+    {"id": "contact", "title": "Contact", "content": "email form Bern Switzerland address principal investigator"}
+  ],
+  "publications": [
+    {% for pub in site.data.publications %}
+    {
+      "id": "pub-{{ forloop.index0 }}",
+      "title": {{ pub.title | jsonify }},
+      "authors": {{ pub.authors | jsonify }},
+      "journal": {{ pub.journal | jsonify }},
+      "year": {{ pub.year | jsonify }},
+      "abstract": {{ pub.abstract | default: "" | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}

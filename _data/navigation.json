@@ -1,0 +1,23 @@
+{
+  "main": [
+    {"id": "home", "label": "Home", "icon": null},
+    {"id": "team", "label": "Team", "icon": null},
+    {"id": "research", "label": "Research", "icon": null},
+    {"id": "publications", "label": "Publications", "icon": null},
+    {"id": "research-outputs", "label": "Research Outputs", "short_label": "Outputs", "icon": null},
+    {"id": "analytics", "label": "Analytics", "icon": null}
+  ],
+  "resources": [
+    {"id": "resources", "label": "Datasets & Code", "short_label": "Resources", "icon": null},
+    {"id": "news", "label": "News", "icon": null},
+    {"id": "events", "label": "Events", "icon": null}
+  ],
+  "network": [
+    {"id": "collaborations", "label": "Collaborations", "icon": null},
+    {"id": "funding", "label": "Funding", "icon": null},
+    {"id": "contact", "label": "Contact", "icon": null}
+  ],
+  "reports": [
+    {"id": "final-report", "label": "Final Scientific Report", "short_label": "Final Report", "url": "/final-report/", "highlight": true}
+  ]
+}

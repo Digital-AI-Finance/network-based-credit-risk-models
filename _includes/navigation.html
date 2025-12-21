@@ -1,0 +1,57 @@
+{% comment %}
+Navigation include - generates both sidebar and top nav from _data/navigation.json
+Usage: {% include navigation.html type="sidebar" %} or {% include navigation.html type="topnav" %}
+{% endcomment %}
+
+{% if include.type == "sidebar" %}
+<nav class="sidebar-nav" id="sidebarNav">
+  <div class="sidebar-header">
+    <div class="sidebar-title">SNSF Project</div>
+    <div class="sidebar-subtitle">Credit Risk Models</div>
+  </div>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="performSearch(this.value)">
+    <div id="searchResults" class="search-results"></div>
+  </div>
+  <ul>
+    {% for item in site.data.navigation.main %}
+    <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
+    {% endfor %}
+    <div class="nav-section">Resources</div>
+    {% for item in site.data.navigation.resources %}
+    <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
+    {% endfor %}
+    <div class="nav-section">Network</div>
+    {% for item in site.data.navigation.network %}
+    <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
+    {% endfor %}
+    <div class="nav-section">Reports</div>
+    {% for item in site.data.navigation.reports %}
+    <li><a href="{{ site.baseurl }}{{ item.url }}" {% if item.highlight %}class="nav-report-link"{% endif %}>{{ item.label }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="theme-toggle-container">
+    <button class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+      <span class="theme-icon">&#9790;</span> Dark Mode
+    </button>
+  </div>
+</nav>
+
+{% elsif include.type == "topnav" %}
+<nav class="nav-container">
+  <ul class="nav-menu">
+    {% for item in site.data.navigation.main %}
+    <li><a href="#{{ item.id }}">{{ item.short_label | default: item.label }}</a></li>
+    {% endfor %}
+    {% for item in site.data.navigation.resources %}
+    <li><a href="#{{ item.id }}">{{ item.short_label | default: item.label }}</a></li>
+    {% endfor %}
+    {% for item in site.data.navigation.network %}
+    <li><a href="#{{ item.id }}">{{ item.short_label | default: item.label }}</a></li>
+    {% endfor %}
+    {% for item in site.data.navigation.reports %}
+    <li><a href="{{ site.baseurl }}{{ item.url }}" {% if item.highlight %}class="nav-report-link"{% endif %}>{{ item.short_label | default: item.label }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
