@@ -1,0 +1,49 @@
+name: Sync SNSF Grant Data
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  sync-snsf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+
+      - name: Install Playwright browsers
+        run: playwright install chromium
+
+      - name: Sync SNSF data
+        run: python scripts/sync_snsf.py
+        continue-on-error: true
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet _config.yml _data/snsf_project_complete.json _data/snsf_fetched.json 2>/dev/null; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _config.yml _data/snsf_project_complete.json _data/snsf_fetched.json
+          git commit -m "Auto-sync SNSF grant data [skip ci]"
+          git push
