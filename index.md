@@ -23,7 +23,7 @@ image: /images/Osterrieder.jpg
     "identifier": "205487",
     "amount": {
       "@type": "MonetaryAmount",
-      "value": 297028,
+      "value": 387836,
       "currency": "CHF"
     }
   },
