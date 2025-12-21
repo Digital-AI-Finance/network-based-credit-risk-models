@@ -50,6 +50,8 @@ def clean_html(text: str) -> str:
     clean = re.sub(r"<[^>]+>", "", text)
     clean = html.unescape(clean)
     clean = re.sub(r"\s+", " ", clean).strip()
+    # Add space after "Overview" if missing
+    clean = re.sub(r"^Overview(?=[A-Z])", "Overview ", clean)
     return clean
 
 
