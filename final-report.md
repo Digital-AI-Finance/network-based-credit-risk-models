@@ -5,9 +5,18 @@ permalink: /final-report/
 description: SNSF Final Scientific Report for Project 205487 - Network-Based Credit Risk Models in P2P Lending Markets
 ---
 
-<div style="max-width:800px; margin:0 auto; font-size:0.95rem; line-height:1.6;">
+<style>
+.report-content { max-width: 800px; margin: 0 auto; font-size: 0.95rem; line-height: 1.6; }
+.report-content h1 { text-align: center; margin-bottom: 0.5rem; }
+.report-content h2 { margin-top: 2rem; border-bottom: 2px solid #c5a028; padding-bottom: 0.3rem; }
+.report-content h3 { margin-top: 1.5rem; }
+.report-content table { margin: 1rem auto; }
+.report-content hr { margin: 2rem 0; }
+</style>
 
-**Final Scientific Report**
+<div class="report-content" markdown="1">
+
+# Final Scientific Report
 
 Network-Based Credit Risk Models in P2P Lending Markets
 
@@ -18,37 +27,37 @@ Network-Based Credit Risk Models in P2P Lending Markets
 
 ---
 
-**1.1 Achievement of research objectives (mandatory)**
+## 1.1 Achievement of research objectives (mandatory)
 
 **Main Objective:** To advance our understanding of credit risk modeling in P2P lending markets by designing and empirically verifying new network-based credit risk models. This project has attributes of a methodological and empirical project with practical impact, addressing information asymmetry inherent in P2P lending through network analysis. The main objective has been fully achieved through five distinct contributions that delivered novel methodology, rigorous empirical validation, and practical tools for interpretable credit risk assessment.
 
-**Contribution 1 (Methodological): Supervised Network-Based Credit Risk Models**
+### Contribution 1 (Methodological): Supervised Network-Based Credit Risk Models
 
 Previous methods in the literature (Ahelegbey et al., 2019; Giudici et al., 2019, 2020) ignored loan status when constructing borrower networks, leading to unsupervised network-based learning approaches. Our approach fundamentally differs by utilizing class information (loan default status) to construct supervised networks, recognizing that supervised learning algorithms generally outperform unsupervised approaches for prediction tasks. We developed a two-step machine learning methodology that first constructs borrower similarity graphs using mixed-type distance measures (Gower distance for handling both continuous and categorical borrower attributes) and then extracts multiple network centrality measures as predictive features. The centrality measures include PageRank, betweenness centrality, closeness centrality, Katz centrality, and hub/authority scores, each capturing different aspects of a borrower's position within the similarity network. Graph construction employed k-nearest-neighbor connection rules combined with similarity threshold-based edge selection to ensure network connectivity while maintaining meaningful structure. This contribution has been fully achieved. Evidence: Liu et al. (2024), "Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning," Expert Systems with Applications, Vol. 252, Article 124100 (DOI: 10.1016/j.eswa.2024.124100), with 17 citations in Scopus demonstrating rapid adoption by the research community.
 
-**Contribution 2 (Methodological): Cross-Validation for Network Hyperparameters**
+### Contribution 2 (Methodological): Cross-Validation for Network Hyperparameters
 
 In contrast to previous studies that used fixed, ad-hoc parameter choices, our work explicitly acknowledges that network creation and feature extraction depend on a set of hyperparameters whose optimal values vary depending on the specific dataset and network construction approach. We implemented systematic cross-validation to tune network hyperparameters and resulting features. The hyperparameter search space included similarity thresholds ranging from 0.1 to 0.9, k values for k-nearest-neighbor graphs ranging from 5 to 50, and different configurations of centrality measure computation. We employed 5-fold cross-validation throughout the model development process to ensure that hyperparameter selection was not overfit to a specific data split. This systematic approach to hyperparameter optimization represents a methodological advance over prior work and ensures reproducibility across different P2P lending contexts. This contribution has been fully achieved. Evidence: Methods sections in Liu et al. (2024) Expert Systems with Applications and Finance Research Letters publications document the complete hyperparameter tuning methodology; Zenodo deposits provide code for reproducible hyperparameter sensitivity analysis.
 
-**Contribution 3 (Methodological): Multiple Networks with Bootstrap Aggregation**
+### Contribution 3 (Methodological): Multiple Networks with Bootstrap Aggregation
 
 Previous studies in the literature created only one network representation. We designed methods to create multiple networks that differ in two key aspects: (i) they utilize different random subsets of variables for similarity computation, and (ii) they rely on bootstrap aggregation (bagging) to combine predictions from models trained on different network representations. This approach directly addresses data noisiness, which is ignored in the existing literature on network-based credit scoring. The ensemble methodology was validated using four machine learning models: Elastic Net regression, Random Forest, Multi-Layer Perceptron (MLP) neural networks, and XGBoost gradient boosting. To verify that network features contain genuine predictive signal rather than spurious correlations, we conducted robustness checks using shuffled centrality features where network positions were randomly permuted across borrowers. When centrality features were shuffled, predictive power dropped substantially, confirming that the network topology captures genuine information about default risk rather than acting as a proxy for other features. This contribution has been fully achieved. Evidence: Ensemble methodology and robustness validation results are documented in the published papers and reproducible through Zenodo deposit 17991107.
 
-**Contribution 4 (Empirical): Validation Across Multiple P2P Datasets**
+### Contribution 4 (Empirical): Validation Across Multiple P2P Datasets
 
 We enriched the empirical literature, where most studies have used fewer than two P2P market datasets, by validating our models across different market platforms to observe credit drivers and method usefulness across diverse contexts. Primary empirical analysis used the Bondora dataset, a leading European P2P lending platform, containing 231,039 individual borrowers characterized through 112 categorical and continuous variables, with loan origination dates spanning from June 16, 2009 to April 21, 2022. The dataset includes detailed borrower demographics, financial attributes, and past credit market interactions. Comparative validation using LendingClub data from the United States market confirmed cross-market validity of our methodology. This geographic and regulatory diversity (European vs. US markets) strengthens the generalizability of our findings. A notable empirical finding was that degree centrality alone provides substantial predictive power for default risk, sometimes matching or exceeding more complex centrality measures like PageRank or betweenness centrality, suggesting that simpler network metrics may suffice for practical credit risk applications. This contribution has been fully achieved. Evidence: Liu et al. (2024), "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics," Finance Research Letters, Vol. 63, Article 105308 (DOI: 10.1016/j.frl.2024.105308), with 11 citations.
 
-**Contribution 5 (Practical): Explainable AI for Interpretable Credit Risk Models**
+### Contribution 5 (Practical): Explainable AI for Interpretable Credit Risk Models
 
 We investigated the applicability of existing XAI methods to credit scoring models, enabling the development of interpretable credit risk models that address regulatory requirements for explainable automated lending decisions. SHAP (SHapley Additive exPlanations) values were computed for all features including network centrality measures, providing both global feature importance (expected effect of each variable on the outcome across all loans) and local explanations (expected effect of each variable for a specific individual loan application). LIME (Local Interpretable Model-agnostic Explanations) was implemented for complementary local interpretability. Beyond standard XAI techniques, we developed surrogate decision trees for regime detection model interpretability and a manual tree-based interpretation framework for understanding macro-regime classification in credit markets. These interpretability tools address the regulatory requirements emphasized by policymakers concerning automatized lending solutions, including GDPR requirements for explanation of automated decisions. This contribution has been fully achieved. Evidence: SHAP explainability notebooks in Zenodo deposit 17991107 (journal article reproducibility); tree-based interpretation framework in Zenodo deposit 17990398 (state-dependent pricing interpretability); all 12 Zenodo deposits ensure complete reproducibility of interpretability analyses.
 
-**Additional Project Outcomes**
+### Additional Project Outcomes
 
 The project trained two PhD researchers, Lennart John Baals and Yiting Liu, who developed expertise in digital finance, network modeling, machine learning, and explainable AI. Both researchers are progressing toward completion of their doctoral theses at the University of Twente in collaboration with Bern University of Applied Sciences. We established substantive research collaborations with five international institutions across four continents: Masaryk University (Czech Republic) for joint publications and in-depth methodological exchanges; Columbia University (USA) for method exchanges and personnel exchange visits; American University of Sharjah (UAE) for joint publications and personnel exchange; Renmin University of China (China) for method exchanges and collaborative publications; and University of Manchester (UK) for joint publications. The PI serves as Action Chair of COST Action CA19130 (Fintech and AI in Finance), coordinating research collaboration across 40+ European institutions, and as Coordinator of the MSCA Industrial Doctoral Network on Digital Finance. Additional funding secured totaling CHF 90,000 includes two SNSF Mobility Grants (CHF 20,000 each) supporting researcher exchanges and a Leading House Asia grant (CHF 50,000) for related digital assets research.
 
 ---
 
-**1.2 Challenges, negative results and unexpected outcomes**
+## 1.2 Challenges, negative results and unexpected outcomes
 
 **Data Access Challenges:** The original proposal planned validation across seven P2P platforms: Lending Club, Prosper, Zopa, Mintos, Bondora, Home Credit, and Kiva. Due to evolving data access restrictions, platform terms of service, and proprietary data policies, the scope of empirical validation was refined during project execution. Bondora's terms of service (Section 13.4) prevent redistribution of downloaded data, limiting our ability to share raw datasets while maintaining compliance. Similar restrictions applied to other planned platforms. We therefore focused primary empirical analysis on Bondora (European market) with comparative validation using LendingClub (US market), providing both geographic and regulatory diversity. This constraint led us to emphasize reproducible code and comprehensive documentation in our Zenodo deposits, ensuring that researchers with legitimate data access can replicate our methodology.
 
@@ -60,7 +69,7 @@ The project trained two PhD researchers, Lennart John Baals and Yiting Liu, who 
 
 ---
 
-**1.3 Contribution to knowledge advancement**
+## 1.3 Contribution to knowledge advancement
 
 **Methodological Contribution:** We established network topology as a viable and valuable feature source for credit risk modeling in P2P lending, demonstrating that borrower position within similarity-based networks contains predictive information about default risk beyond what is captured by traditional borrower-level attributes alone. Our two-step machine learning approach (network construction followed by centrality-based feature extraction) provides a replicable framework for combining structural and attribute-based predictors. The systematic literature review conducted as part of this project analyzed 78 articles selected from 1,066 initially retrieved records through structured screening in Scopus and Web of Science, employing double-blind coding to ensure consistency. This review provides a comprehensive synthesis of graph-based credit modeling approaches across P2P lending and banking network applications, identifying research gaps and methodological best practices.
 
@@ -74,31 +83,31 @@ The project trained two PhD researchers, Lennart John Baals and Yiting Liu, who 
 
 ---
 
-**Extended Project Information**
+## Extended Project Information
 
 **Project Statistics:** Six core publications with 28+ total citations received, 12 Zenodo deposits ensuring reproducibility, 8 conference presentations across 8 countries, 2 PhD researchers trained, and CHF 90,000 in additional funding secured.
 
-**1.4 Impact Statement**
+### 1.4 Impact Statement
 
-Scientific Impact: Our publications have received 28+ citations within 12 months of publication, indicating rapid adoption by the research community. The two-step machine learning methodology combining network centrality with traditional credit features has been referenced in subsequent studies on P2P lending risk assessment, and the systematic literature review provides a foundational reference for researchers entering the field of graph-based credit modeling.
+**Scientific Impact:** Our publications have received 28+ citations within 12 months of publication, indicating rapid adoption by the research community. The two-step machine learning methodology combining network centrality with traditional credit features has been referenced in subsequent studies on P2P lending risk assessment, and the systematic literature review provides a foundational reference for researchers entering the field of graph-based credit modeling.
 
-Economic Impact: The developed models and open-source code are directly applicable to P2P lending platforms for improved credit risk assessment. By enabling more accurate default prediction, platforms can better price loans to reflect true risk, reduce losses from defaults, and offer more competitive rates to creditworthy borrowers. The interpretability framework addresses regulatory requirements, reducing compliance costs for platforms adopting automated credit decisions.
+**Economic Impact:** The developed models and open-source code are directly applicable to P2P lending platforms for improved credit risk assessment. By enabling more accurate default prediction, platforms can better price loans to reflect true risk, reduce losses from defaults, and offer more competitive rates to creditworthy borrowers. The interpretability framework addresses regulatory requirements, reducing compliance costs for platforms adopting automated credit decisions.
 
-Social Impact: Improved credit risk models contribute to financial inclusion by enabling P2P platforms to serve borrowers who may be underserved by traditional banking. More accurate risk assessment reduces adverse selection problems, protecting retail investors who fund P2P loans from excessive default losses. The transparency framework enhances borrower trust in automated credit decisions by providing explanations for lending outcomes.
+**Social Impact:** Improved credit risk models contribute to financial inclusion by enabling P2P platforms to serve borrowers who may be underserved by traditional banking. More accurate risk assessment reduces adverse selection problems, protecting retail investors who fund P2P loans from excessive default losses. The transparency framework enhances borrower trust in automated credit decisions by providing explanations for lending outcomes.
 
-Policy Impact: The project engaged directly with financial regulators through the Open Day workshop at FINMA in May 2024, presenting research findings to Swiss financial supervisory staff and discussing implications for fintech regulation. The PI's leadership of COST Action CA19130 facilitated policy discussions at EU level, including events in Brussels addressing AI in finance policy implications and contributing to the broader discourse on responsible AI adoption in financial services.
+**Policy Impact:** The project engaged directly with financial regulators through the Open Day workshop at FINMA in May 2024, presenting research findings to Swiss financial supervisory staff and discussing implications for fintech regulation. The PI's leadership of COST Action CA19130 facilitated policy discussions at EU level, including events in Brussels addressing AI in finance policy implications and contributing to the broader discourse on responsible AI adoption in financial services.
 
-Educational Impact: The project trained two PhD researchers in cutting-edge methods at the intersection of network science, machine learning, and finance. The publication "Towards a new PhD Curriculum for Digital Finance" (Open Research Europe, 2024, DOI: 10.12688/openreseurope.16513.1) disseminates best practices for doctoral training in this emerging field, contributing to curriculum development beyond this specific project.
+**Educational Impact:** The project trained two PhD researchers in cutting-edge methods at the intersection of network science, machine learning, and finance. The publication "Towards a new PhD Curriculum for Digital Finance" (Open Research Europe, 2024, DOI: 10.12688/openreseurope.16513.1) disseminates best practices for doctoral training in this emerging field, contributing to curriculum development beyond this specific project.
 
-**1.5 Sustainability Plan**
+### 1.5 Sustainability Plan
 
-Data Preservation: Twelve Zenodo deposits are archived with persistent DOIs ensuring permanent accessibility and citability through CERN's infrastructure. The curated Bondora P2P lending dataset is archived at the Open Science Framework (OSF). Code repositories are maintained under the Digital-AI-Finance organization on GitHub. All outputs are released under Creative Commons Attribution 4.0 (CC-BY 4.0) licensing, enabling unrestricted reuse with attribution.
+**Data Preservation:** Twelve Zenodo deposits are archived with persistent DOIs ensuring permanent accessibility and citability through CERN's infrastructure. The curated Bondora P2P lending dataset is archived at the Open Science Framework (OSF). Code repositories are maintained under the Digital-AI-Finance organization on GitHub. All outputs are released under Creative Commons Attribution 4.0 (CC-BY 4.0) licensing, enabling unrestricted reuse with attribution.
 
-Code Maintainability: All Jupyter notebooks and Python/R scripts include dependency specifications (requirements.txt, environment files) enabling reproduction with specified package versions. Reproducibility has been verified through independent testing. Documentation is embedded in code through comments and supplementary README files.
+**Code Maintainability:** All Jupyter notebooks and Python/R scripts include dependency specifications (requirements.txt, environment files) enabling reproduction with specified package versions. Reproducibility has been verified through independent testing. Documentation is embedded in code through comments and supplementary README files.
 
-Knowledge Transfer Continuation: COST Action CA19130 (Fintech and AI in Finance) continues beyond project end with the PI serving as Action Chair. The MSCA Industrial Doctoral Network on Digital Finance continues training next-generation researchers with the PI as Coordinator. Digital finance research continues at Bern University of Applied Sciences building on this project's foundations.
+**Knowledge Transfer Continuation:** COST Action CA19130 (Fintech and AI in Finance) continues beyond project end with the PI serving as Action Chair. The MSCA Industrial Doctoral Network on Digital Finance continues training next-generation researchers with the PI as Coordinator. Digital finance research continues at Bern University of Applied Sciences building on this project's foundations.
 
-**Appendix A: Peer-Reviewed Publications**
+### Appendix A: Peer-Reviewed Publications
 
 Liu, Y., Baals, L.J., Osterrieder, J., Hadji-Misheva, B. (2024). Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning. Expert Systems with Applications, 252(B), 124100. DOI: 10.1016/j.eswa.2024.124100. 17 citations.
 
@@ -110,25 +119,25 @@ Baals, L.J., Osterrieder, J., Hadji-Misheva, B., Liu, Y. (2024). Towards a new P
 
 Submitted: Baals, L.J., et al. (2025). Network Evidence on Credit-Risk Pricing in P2P Lending. SSRN 5276337. Baals, L.J., et al. (2025). State-Dependent Pricing in FinTech Credit: Evidence from P2P Lending. SSRN 5421207.
 
-**Appendix B: Open Science Deposits (Zenodo)**
+### Appendix B: Open Science Deposits (Zenodo)
 
 {% for output in site.data.research_outputs %}
 {{ output.title }}. {{ output.creators | join: ", " }} ({{ output.publication_date | slice: 0, 4 }}). {{ output.resource_type }}. [Zenodo]({{ output.zenodo_url }})
 {% endfor %}
 
-**Appendix C: Academic Events**
+### Appendix C: Academic Events
 
 December 2024: 4th International Symposium on Big Data and AI, Hong Kong (Systematic Literature Review on Graph-Based Credit Models). September 2024: 8th Bern Conference on Fintech and AI in Finance, Switzerland. September 2024: AI Finance Insights: Pioneering the Future of Fintech, Istanbul. May 2024: COST FinAI Meets Istanbul Conference, Turkey. May 2024: Open Day Workshop, FINMA Campus, Bern. December 2023: 16th ERCIM Conference on Computational and Methodological Statistics, Berlin. September 2023: 8th European COST Conference on AI in Finance, Bern. September 2023: European Summer School in Financial Mathematics, Delft.
 
-**Appendix D: Dataset**
+### Appendix D: Dataset
 
 Bondora P2P Lending Dataset. Coverage: June 2009 - April 2022. Sample: 231,039 borrowers, 112 variables. DOI: 10.21227/33kz-0s65. License: CC-BY 4.0.
 
-**Appendix E: International Collaborations**
+### Appendix E: International Collaborations
 
 Masaryk University (Czech Republic), Columbia University (USA), American University of Sharjah (UAE), Renmin University of China (China), University of Manchester (UK).
 
-**Appendix F: PhD Researchers**
+### Appendix F: PhD Researchers
 
 Lennart John Baals: PhD In Progress, BFH/University of Twente, Graph-based credit models and network analysis for credit risk assessment.
 
