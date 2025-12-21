@@ -85,6 +85,8 @@ image: /images/Osterrieder.jpg
     <li><a href="#collaborations">Collaborations</a></li>
     <li><a href="#funding">Funding</a></li>
     <li><a href="#contact">Contact</a></li>
+    <div class="nav-section">Reports</div>
+    <li><a href="{{ site.baseurl }}/final-report/" class="nav-report-link">Final Scientific Report</a></li>
   </ul>
   <!-- Dark Mode Toggle -->
   <div class="theme-toggle-container">
@@ -108,6 +110,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#collaborations">Collaborations</a></li>
     <li><a href="#funding">Funding</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="{{ site.baseurl }}/final-report/" class="nav-report-link">Final Report</a></li>
   </ul>
 </nav>
 

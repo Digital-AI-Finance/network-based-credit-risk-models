@@ -180,6 +180,15 @@ a:focus-visible {
   &:hover, &.active { background: var(--navy-primary); color: var(--bg-white); }
 }
 
+.nav-menu .nav-report-link {
+  background: linear-gradient(135deg, $gold-accent, darken($gold-accent, 10%));
+  color: $navy-primary;
+  &:hover {
+    background: linear-gradient(135deg, lighten($gold-accent, 5%), $gold-accent);
+    color: $navy-primary;
+  }
+}
+
 // Left Sidebar Navigation
 .sidebar-nav {
   display: none;
@@ -281,6 +290,21 @@ a:focus-visible {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
+  }
+
+  .nav-report-link {
+    background: linear-gradient(135deg, $gold-accent, darken($gold-accent, 10%)) !important;
+    color: $navy-primary !important;
+    font-weight: 600 !important;
+    border-radius: 4px;
+    margin: 0.25rem 0.5rem;
+    padding: 0.5rem 0.75rem !important;
+    display: inline-block;
+
+    &:hover {
+      background: linear-gradient(135deg, lighten($gold-accent, 5%), $gold-accent) !important;
+      transform: translateX(2px);
+    }
   }
 }
 
