@@ -74,7 +74,6 @@ image: /images/Osterrieder.jpg
     <li><a href="#home">Home</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#publications">Publications</a></li>
     <li><a href="#phd-publications">PhD Publications</a></li>
     <li><a href="#research-outputs">Research Outputs</a></li>
     <li><a href="#analytics">Analytics</a></li>
@@ -86,6 +85,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#collaborations">Collaborations</a></li>
     <li><a href="#funding">Funding</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#publications">All Pubs</a></li>
     <div class="nav-section">Reports</div>
     <li><a href="{{ site.baseurl }}/final-report/" class="nav-report-link">Final Scientific Report</a></li>
   </ul>
@@ -102,7 +102,6 @@ image: /images/Osterrieder.jpg
     <li><a href="#home">Home</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#publications">Publications</a></li>
     <li><a href="#phd-publications">PhD Pubs</a></li>
     <li><a href="#research-outputs">Outputs</a></li>
     <li><a href="#analytics">Analytics</a></li>
@@ -229,123 +228,9 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ---
 
-<section id="publications">
-
-<h2>Scientific Publications</h2>
-
-<em>Auto-updated from <a href="https://openalex.org" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="external-link">OpenAlex.org</a> - {{ site.data.publications | size }} publications</em>
-
-<!-- Citation Metrics Summary -->
-<div class="citation-metrics" id="citationMetrics">
-  <div class="metric-card">
-    <span class="metric-value" id="metricTotalPubs">{{ site.data.publications | size }}</span>
-    <span class="metric-label">Publications</span>
-  </div>
-  <div class="metric-card">
-    <span class="metric-value" id="metricTotalCitations">--</span>
-    <span class="metric-label">Total Citations</span>
-  </div>
-  <div class="metric-card">
-    <span class="metric-value" id="metricAvgCitations">--</span>
-    <span class="metric-label">Avg. Citations</span>
-  </div>
-  <div class="metric-card">
-    <span class="metric-value" id="metricOpenAccess">--</span>
-    <span class="metric-label">Open Access</span>
-  </div>
-</div>
-
-<!-- Publication Filters -->
-<div class="pub-filters">
-  <div class="filter-group">
-    <label for="yearFilter">Year:</label>
-    <select id="yearFilter" onchange="filterPublications()">
-      <option value="all">All Years</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label for="topicFilter">Topic:</label>
-    <select id="topicFilter" onchange="filterPublications()">
-      <option value="all">All Topics</option>
-      <option value="credit">Credit Risk</option>
-      <option value="network">Network Analysis</option>
-      <option value="machine">Machine Learning</option>
-      <option value="p2p">P2P Lending</option>
-      <option value="crypto">Cryptocurrency</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label for="accessFilter">Access:</label>
-    <select id="accessFilter" onchange="filterPublications()">
-      <option value="all">All</option>
-      <option value="open">Open Access</option>
-    </select>
-  </div>
-  <button onclick="resetFilters()" class="btn-reset">Reset</button>
-</div>
-
-<div class="pub-actions">
-  <button onclick="downloadAllBibtex()" class="btn-download">Download All BibTeX (.bib)</button>
-</div>
-
-<div class="publication-list" id="publicationList">
-{% for pub in site.data.publications %}
-<div class="pub-item" data-year="{{ pub.year }}" data-title="{{ pub.title | downcase }}" data-abstract="{{ pub.abstract | downcase | default: '' }}" data-open="{{ pub.open_access }}">
-  <div class="pub-title">{{ pub.title }}</div>
-  <div class="pub-meta">{{ pub.authors }} ({{ pub.year }}) - <em>{{ pub.journal }}</em></div>
-  <div class="pub-badges">
-    {% if pub.doi %}<a href="https://doi.org/{{ pub.doi }}" class="doi-link external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">DOI</a>{% endif %}
-    {% if pub.citations > 0 %}<span class="citations-badge">{{ pub.citations }} citations</span>{% endif %}
-    {% if pub.open_access %}<span class="oa-badge">Open Access</span>{% endif %}
-    <button onclick="copyBibtex({{ forloop.index0 }})" data-bibtex-index="{{ forloop.index0 }}" class="btn-bibtex">BibTeX</button>
-    {% if pub.abstract and pub.abstract != "" %}<button onclick="toggleAbstract({{ forloop.index0 }})" data-abstract-btn="{{ forloop.index0 }}" class="btn-abstract">Show Abstract</button>{% endif %}
-  </div>
-  {% if pub.abstract and pub.abstract != "" %}
-  <div class="pub-abstract" data-abstract-index="{{ forloop.index0 }}" style="display: none;">{{ pub.abstract }}</div>
-  {% endif %}
-</div>
-{% endfor %}
-</div>
-
-<script>
-  publicationsData = {{ site.data.publications | jsonify }};
-</script>
-
-</section>
-
----
-
 <section id="phd-publications">
 <h2>PhD Publications (ORCID 2024-2025)</h2>
-<p style="font-size:0.85rem;line-height:1.4;margin:0;">
-<strong>Osterrieder, J.</strong> <a href="https://orcid.org/0000-0003-0189-8636" target="_blank">[ORCID]</a><br>
-Osterrieder, J. (2024). How can artificial intelligence help customer intelligence for credit portfolio management? <em>Int. J. Inf. Manag. Data Insights</em>. <a href="https://doi.org/10.1016/j.jjimei.2024.100234">doi:10.1016/j.jjimei.2024.100234</a><br>
-Osterrieder, J. (2024). Stylized facts of metaverse non-fungible tokens. <em>Physica A</em>. <a href="https://doi.org/10.1016/j.physa.2024.130103">doi:10.1016/j.physa.2024.130103</a><br>
-Liu, Y., Baals, L.J., Osterrieder, J., & Hadji-Misheva, B. (2024). Leveraging network topology for credit risk assessment in P2P lending. <em>Expert Syst. Appl.</em>, 252, 124100. <a href="https://doi.org/10.1016/j.eswa.2024.124100">doi:10.1016/j.eswa.2024.124100</a><br>
-Liu, Y., Baals, L.J., Osterrieder, J., & Hadji-Misheva, B. (2024). Network centrality and credit risk. <em>Finance Res. Lett.</em>, 63, 105308. <a href="https://doi.org/10.1016/j.frl.2024.105308">doi:10.1016/j.frl.2024.105308</a><br>
-Baals, L.J., Osterrieder, J., Hadji-Misheva, B., & Liu, Y. (2024). Towards a new PhD curriculum for digital finance. <em>Open Res. Europe</em>. <a href="https://doi.org/10.12688/openreseurope.16513.1">doi:10.12688/openreseurope.16513.1</a><br>
-Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.10934115">doi:10.5281/zenodo.10934115</a><br>
-Osterrieder, J. (2024). A discussion paper for possible approaches to building a statistically valid backtesting framework. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4893677">doi:10.2139/ssrn.4893677</a><br>
-Osterrieder, J. (2024). Enhancing security in blockchain networks. <em>arXiv</em>. <a href="https://doi.org/10.48550/arxiv.2402.11231">doi:10.48550/arxiv.2402.11231</a><br>
-Osterrieder, J. (2024). Ethical AI, fintech and data protection. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4885037">doi:10.2139/ssrn.4885037</a><br>
-Osterrieder, J. (2024). Forecasting commercial customers credit risk through early warning signals. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4754568">doi:10.2139/ssrn.4754568</a><br>
-Osterrieder, J. (2024). Consumers without credit history and ML tools. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730445">doi:10.2139/ssrn.4730445</a><br>
-Osterrieder, J. (2024). Multimodal influence on financial instrument pricing. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4698153">doi:10.2139/ssrn.4698153</a><br>
-Osterrieder, J. (2024). Integrating early warning systems with customer segmentation. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4779632">doi:10.2139/ssrn.4779632</a><br>
-Osterrieder, J. (2024). Early warning systems and customer segmentation: A systematic literature review. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730479">doi:10.2139/ssrn.4730479</a><br>
-Osterrieder, J. (2024). Metaverse non-fungible tokens. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4733153">doi:10.2139/ssrn.4733153</a><br>
-Osterrieder, J. (2024). Modeling commodity price co-movement. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730474">doi:10.2139/ssrn.4730474</a><br>
-Osterrieder, J. (2024). Predicting retail customers' distress. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730470">doi:10.2139/ssrn.4730470</a><br>
-<strong>Lyocsa, S.</strong> <a href="https://orcid.org/0000-0002-8380-181X" target="_blank">[ORCID]</a><br>
-Baumohl, E., Lyocsa, S., & Vasanicova, P. (2024). Macroeconomic environment and future loan performance. <em>Int. Rev. Financ. Anal.</em>, 95, 103416. <a href="https://doi.org/10.1016/j.irfa.2024.103416">doi:10.1016/j.irfa.2024.103416</a><br>
-Lyocsa, S. et al. (2024). What drives uranium sector risk? <em>Energy Econ.</em>, 107980. <a href="https://doi.org/10.1016/j.eneco.2024.107980">doi:10.1016/j.eneco.2024.107980</a><br>
-Lyocsa, S. et al. (2024). Forecasting clean energy market volatility. <em>Energy Econ.</em>, 107451. <a href="https://doi.org/10.1016/j.eneco.2024.107451">doi:10.1016/j.eneco.2024.107451</a><br>
-Lyocsa, S. et al. (2025). A fuzzy framework for realized volatility prediction. <em>J. Forecasting</em>. <a href="https://doi.org/10.1002/for.70082">doi:10.1002/for.70082</a><br>
-Lyocsa, S. et al. (2025). Alpha-threshold networks in credit risk models. <em>Quant. Finance</em>. <a href="https://doi.org/10.1080/14697688.2025.2465697">doi:10.1080/14697688.2025.2465697</a><br>
-Lyocsa, S. et al. (2025). Do hurricanes cause storm on the stock market? <em>Int. Rev. Financ. Anal.</em>. <a href="https://doi.org/10.1016/j.irfa.2024.103816">doi:10.1016/j.irfa.2024.103816</a><br>
-<strong>Baals, L.J.</strong> <a href="https://orcid.org/0000-0002-7737-9675" target="_blank">[ORCID]</a> Co-author on Liu et al. (2024) ESA, FRL; Baals et al. (2024) ORE.<br>
-<strong>Liu, Y.</strong> <a href="https://orcid.org/0009-0006-9554-8205" target="_blank">[ORCID]</a> Co-author on Liu et al. (2024) ESA, FRL; Baals et al. (2024) ORE.
-</p>
+<p style="font-size:0.75rem;line-height:1.2;margin:0;"><strong>Osterrieder, J.</strong> <a href="https://orcid.org/0000-0003-0189-8636">[O]</a>: (2024) AI for credit portfolio management, <em>IJIMDI</em> <a href="https://doi.org/10.1016/j.jjimei.2024.100234">[doi]</a> | NFT stylized facts, <em>Physica A</em> <a href="https://doi.org/10.1016/j.physa.2024.130103">[doi]</a> | Network topology P2P credit risk, <em>ESA</em> <a href="https://doi.org/10.1016/j.eswa.2024.124100">[doi]</a> | Network centrality credit risk, <em>FRL</em> <a href="https://doi.org/10.1016/j.frl.2024.105308">[doi]</a> | PhD curriculum digital finance, <em>ORE</em> <a href="https://doi.org/10.12688/openreseurope.16513.1">[doi]</a> | Visual XAI, <em>Zenodo</em> <a href="https://doi.org/10.5281/zenodo.10934115">[doi]</a> | Backtesting framework <a href="https://doi.org/10.2139/ssrn.4893677">[ssrn]</a> | Blockchain security <a href="https://doi.org/10.48550/arxiv.2402.11231">[arxiv]</a> | Ethical AI fintech <a href="https://doi.org/10.2139/ssrn.4885037">[ssrn]</a> | Commercial credit risk <a href="https://doi.org/10.2139/ssrn.4754568">[ssrn]</a> | Consumers without credit history <a href="https://doi.org/10.2139/ssrn.4730445">[ssrn]</a> | Multimodal pricing <a href="https://doi.org/10.2139/ssrn.4698153">[ssrn]</a> | EWS customer segmentation <a href="https://doi.org/10.2139/ssrn.4779632">[ssrn]</a> | EWS SLR <a href="https://doi.org/10.2139/ssrn.4730479">[ssrn]</a> | Metaverse NFT <a href="https://doi.org/10.2139/ssrn.4733153">[ssrn]</a> | Commodity co-movement <a href="https://doi.org/10.2139/ssrn.4730474">[ssrn]</a> | Retail distress <a href="https://doi.org/10.2139/ssrn.4730470">[ssrn]</a><br><strong>Lyocsa, S.</strong> <a href="https://orcid.org/0000-0002-8380-181X">[O]</a>: (2024) Macro P2P loans, <em>IRFA</em> <a href="https://doi.org/10.1016/j.irfa.2024.103416">[doi]</a> | Uranium risk <a href="https://doi.org/10.1016/j.eneco.2024.107980">[doi]</a> | Clean energy volatility <a href="https://doi.org/10.1016/j.eneco.2024.107451">[doi]</a> | (2025) Fuzzy volatility, <em>JoF</em> <a href="https://doi.org/10.1002/for.70082">[doi]</a> | Alpha-threshold networks, <em>QF</em> <a href="https://doi.org/10.1080/14697688.2025.2465697">[doi]</a> | Hurricanes stocks <a href="https://doi.org/10.1016/j.irfa.2024.103816">[doi]</a><br><strong>Baals, L.J.</strong> <a href="https://orcid.org/0000-0002-7737-9675">[O]</a> <strong>Liu, Y.</strong> <a href="https://orcid.org/0009-0006-9554-8205">[O]</a>: Co-authors ESA, FRL, ORE above.</p>
 </section>
 
 ---
@@ -742,6 +627,14 @@ Lyocsa, S. et al. (2025). Do hurricanes cause storm on the stock market? <em>Int
 
 ---
 
+<section id="publications">
+<h2>All Publications ({{ site.data.publications | size }})</h2>
+<p style="font-size:0.7rem;line-height:1.15;margin:0;"><em>Auto-updated from <a href="https://openalex.org">OpenAlex</a></em> | <button onclick="downloadAllBibtex()" style="font-size:0.7rem;padding:2px 6px;">BibTeX</button><br>
+{% for pub in site.data.publications %}{{ pub.authors | truncate: 30 }} ({{ pub.year }}). {{ pub.title | truncate: 60 }}. <em>{{ pub.journal | truncate: 25 }}</em>{% if pub.doi %} <a href="https://doi.org/{{ pub.doi }}">[doi]</a>{% endif %}{% if pub.citations > 0 %} [{{ pub.citations }}cit]{% endif %}<br>{% endfor %}</p>
+<script>publicationsData = {{ site.data.publications | jsonify }};</script>
+</section>
+
+---
 
 <!-- Back to Top Button -->
 <button id="backToTop" class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
