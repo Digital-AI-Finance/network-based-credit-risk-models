@@ -76,7 +76,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#phd-publications">PhD Publications</a></li>
-    <li><a href="#research-outputs">Research Outputs</a></li>
+    <li><a href="#research-outputs">Zenodo (12)</a></li>
     <li><a href="#analytics">Analytics</a></li>
     <div class="nav-section">Resources</div>
     <li><a href="#resources">Datasets & Code</a></li>
@@ -105,7 +105,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#phd-publications">PhD Pubs</a></li>
-    <li><a href="#research-outputs">Outputs</a></li>
+    <li><a href="#research-outputs">Zenodo</a></li>
     <li><a href="#analytics">Analytics</a></li>
     <li><a href="#resources">Resources</a></li>
     <li><a href="#news">News</a></li>
@@ -144,12 +144,12 @@ image: /images/Osterrieder.jpg
     <span class="stat-label">Total Citations</span>
   </div>
   <div class="stat-item">
-    <span class="stat-number">5</span>
-    <span class="stat-label">Collaborations</span>
+    <span class="stat-number"><a href="#research-outputs" style="color:inherit;text-decoration:none;">12</a></span>
+    <span class="stat-label"><a href="#research-outputs" style="color:inherit;text-decoration:none;">Zenodo Deposits</a></span>
   </div>
   <div class="stat-item">
     <span class="stat-number">5</span>
-    <span class="stat-label">Researchers</span>
+    <span class="stat-label">Collaborations</span>
   </div>
 </div>
 
@@ -280,23 +280,40 @@ Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.o
 
 <section id="research-outputs">
 
-<h2>Research Outputs</h2>
+<h2>Open Access Research Outputs (Zenodo)</h2>
 
-<p>Datasets, code, and supplementary materials deposited on Zenodo.</p>
+<div style="background:linear-gradient(135deg,#1e3a5f,#2d5a8f);color:white;padding:1rem;border-radius:8px;margin-bottom:1rem;">
+<p style="margin:0;font-size:0.85rem;"><strong>12 Open-Access Deposits</strong> | All research materials freely available under CC-BY or MIT license</p>
+</div>
 
-<div class="outputs-grid">
-{% for output in site.data.research_outputs %}
-  <div class="output-card">
-    <span class="output-type-badge">{{ output.resource_type }}</span>
-    <h3><a href="{{ output.doi }}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{{ output.title }}</a></h3>
-    <p class="output-creators">{{ output.creators | join: ", " }}</p>
-    <p class="output-description">{{ output.description | truncate: 200 }}</p>
-    <div class="output-meta">
-      <span class="output-date">{{ output.publication_date }}</span>
-      <a href="{{ output.doi }}" class="doi-badge" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">DOI</a>
-    </div>
-  </div>
-{% endfor %}
+<div style="font-size:0.75rem;line-height:1.4;">
+<p style="margin:0.5rem 0;"><strong>Working Papers & Journal Articles:</strong></p>
+<ol style="margin:0;padding-left:1.5rem;">
+<li><a href="https://zenodo.org/records/17991107" target="_blank">Leveraging Network Topology for Credit Risk Assessment in P2P Lending</a> - Expert Systems with Applications code/data <a href="https://doi.org/10.5281/zenodo.17991107">[DOI]</a></li>
+<li><a href="https://zenodo.org/records/17990873" target="_blank">Network Evidence on Credit-Risk Pricing in P2P Lending</a> - PhD Chapter 4 <a href="https://doi.org/10.5281/zenodo.17990873">[DOI]</a></li>
+<li><a href="https://zenodo.org/records/17990398" target="_blank">State-Dependent Pricing in FinTech Credit: Evidence from P2P Lending</a> - PhD Chapter 5 <a href="https://doi.org/10.5281/zenodo.17990398">[DOI]</a></li>
+</ol>
+
+<p style="margin:0.5rem 0;"><strong>Reproducible Code & Data (Yiting Liu):</strong></p>
+<ol start="4" style="margin:0;padding-left:1.5rem;">
+<li><a href="https://zenodo.org/records/17989119" target="_blank">Code: Network centrality and credit risk (Finance Research Letters)</a> <a href="https://doi.org/10.5281/zenodo.17989119">[DOI]</a></li>
+<li><a href="https://zenodo.org/records/17990581" target="_blank">Code: Leveraging network topology (Expert Systems with Applications)</a> <a href="https://doi.org/10.5281/zenodo.17990581">[DOI]</a></li>
+<li><a href="https://zenodo.org/records/17990002" target="_blank">Code: Credit Risk via GNN with Homophily-Guided Graph Construction</a> <a href="https://doi.org/10.5281/zenodo.17990002">[DOI]</a></li>
+<li><a href="https://zenodo.org/records/17990140" target="_blank">Code: Tree-based Interpretation Framework for R2-RD Models</a> <a href="https://doi.org/10.5281/zenodo.17990140">[DOI]</a></li>
+</ol>
+
+<p style="margin:0.5rem 0;"><strong>Conference Presentations (Lennart John Baals):</strong></p>
+<ol start="8" style="margin:0;padding-left:1.5rem;">
+<li><a href="https://zenodo.org/records/17964900" target="_blank">COST FinAI Meets Istanbul Conference (May 2024)</a> <a href="https://doi.org/10.5281/zenodo.17964900">[DOI]</a></li>
+<li><a href="https://zenodo.org/records/17992322" target="_blank">4th Int'l Symposium on Big Data and AI, Hong Kong (Dec 2024)</a> - SLR on Graph-Based Credit Models <a href="https://doi.org/10.5281/zenodo.17992322">[DOI]</a></li>
+<li><a href="https://zenodo.org/records/17992484" target="_blank">Bern Conference 2023</a> - Network Topology for Credit Risk <a href="https://doi.org/10.5281/zenodo.17992484">[DOI]</a></li>
+<li><a href="https://zenodo.org/records/17992591" target="_blank">BFH Doctoral Seminar (Nov 2023)</a> - Identifying Mispriced Loans <a href="https://doi.org/10.5281/zenodo.17992591">[DOI]</a></li>
+</ol>
+
+<p style="margin:0.5rem 0;"><strong>Academic Records:</strong></p>
+<ol start="12" style="margin:0;padding-left:1.5rem;">
+<li><a href="https://zenodo.org/records/17992215" target="_blank">PhD Qualifier Report and Presentation</a> - University of Twente <a href="https://doi.org/10.5281/zenodo.17992215">[DOI]</a></li>
+</ol>
 </div>
 
 </section>
