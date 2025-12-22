@@ -147,7 +147,7 @@ image: /images/Osterrieder.jpg
     <span class="stat-label">Collaborations</span>
   </div>
   <div class="stat-item">
-    <span class="stat-number">6</span>
+    <span class="stat-number">5</span>
     <span class="stat-label">Researchers</span>
   </div>
 </div>

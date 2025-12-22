@@ -17,7 +17,7 @@
     "institution": "Bern Business School, Switzerland",
     "institution2": "University of Twente, Netherlands",
     "image": "images/Baals_JPG.jpg",
-    "orcid": "pending",
+    "orcid": "0000-0002-7737-9675",
     "bio": "PhD researcher in Quantitative Finance focusing on credit risk assessment through graph-based models and network analysis in P2P lending markets.",
     "google_scholar": "",
     "linkedin": "https://www.linkedin.com/in/lennart-john-baals-a621aa193/",
@@ -41,10 +41,22 @@
     "institution": "Bern Business School, Switzerland",
     "institution2": "University of Twente, Netherlands",
     "image": "images/Liu_20Yiting.jpg",
-    "orcid": "0000-0002-6020-3702",
+    "orcid": "0009-0006-9554-8205",
     "bio": "PhD researcher specializing in P2P lending risk modelling using graph-based approaches. Research interests include credit risk, digital finance, and network theory.",
     "google_scholar": "",
     "linkedin": "https://www.linkedin.com/in/yiting-liu-313587266/",
     "website": "https://people.utwente.nl/yiting.liu"
+  },
+  {
+    "name": "Dr. Stefan Lyocsa",
+    "role": "Researcher",
+    "institution": "Masaryk University, Czech Republic",
+    "institution2": "",
+    "image": "https://ui-avatars.com/api/?name=Stefan+Lyocsa&background=1e3a5f&color=fff&size=200",
+    "orcid": "0000-0002-8380-181X",
+    "bio": "Senior researcher in financial econometrics and risk modeling. Expert in P2P lending, volatility forecasting, and network-based credit risk analysis.",
+    "google_scholar": "https://scholar.google.com/citations?user=xGmK_PIAAAAJ",
+    "linkedin": "",
+    "website": ""
   }
 ]
