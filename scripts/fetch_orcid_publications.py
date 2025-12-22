@@ -8,11 +8,15 @@ import json
 import requests
 from pathlib import Path
 
-# ORCID identifiers for PhD researchers
+# ORCID identifiers for researchers
 ORCIDS = {
+    "Joerg Osterrieder": "0000-0003-0189-8636",
     "Lennart John Baals": "0000-0002-7737-9675",
     "Yiting Liu": "0009-0006-9554-8205"
 }
+
+# Filter years (None = all years)
+FILTER_YEARS = ["2024", "2025"]
 
 OUTPUT_PATH = Path(__file__).parent.parent / "_data" / "phd_publications.json"
 
@@ -126,9 +130,13 @@ def main():
                 pub["abstract"] = abstract
                 del pub["put_code"]  # Remove put_code from output
 
+            # Filter by year if specified
+            if FILTER_YEARS and pub.get("year") not in FILTER_YEARS:
+                continue
+
             pub["citation"] = format_citation(pub, author)
             all_publications.append(pub)
-            print(f"  - {pub['title'][:60]}...")
+            print(f"  - [{pub.get('year', '?')}] {pub['title'][:55]}...")
 
     # Deduplicate by DOI (co-authored papers appear for both authors)
     unique_pubs = {}
