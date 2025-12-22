@@ -1,0 +1,64 @@
+[
+  {
+    "title": "Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning",
+    "year": "2024",
+    "type": "journal-article",
+    "journal": "Expert Systems with Applications",
+    "doi": "10.1016/j.eswa.2024.124100",
+    "doi_url": "https://doi.org/10.1016/j.eswa.2024.124100",
+    "author": "Lennart John Baals",
+    "orcid": "0000-0002-7737-9675",
+    "abstract": "",
+    "citation": "Lennart John Baals, Yiting Liu. (2024). \"Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning\". Expert Systems with Applications. DOI: 10.1016/j.eswa.2024.124100.",
+    "authors": [
+      "Lennart John Baals",
+      "Yiting Liu"
+    ]
+  },
+  {
+    "title": "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics",
+    "year": "2024",
+    "type": "journal-article",
+    "journal": "Finance Research Letters",
+    "doi": "10.1016/j.frl.2024.105308",
+    "doi_url": "https://doi.org/10.1016/j.frl.2024.105308",
+    "author": "Lennart John Baals",
+    "orcid": "0000-0002-7737-9675",
+    "abstract": "",
+    "citation": "Lennart John Baals, Yiting Liu. (2024). \"Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics\". Finance Research Letters. DOI: 10.1016/j.frl.2024.105308.",
+    "authors": [
+      "Lennart John Baals",
+      "Yiting Liu"
+    ]
+  },
+  {
+    "title": "Towards a new PhD Curriculum for Digital Finance",
+    "year": "2024",
+    "type": "journal-article",
+    "journal": "Open Research Europe",
+    "doi": "10.12688/openreseurope.16513.1",
+    "doi_url": "https://doi.org/10.12688/openreseurope.16513.1",
+    "author": "Yiting Liu",
+    "orcid": "0009-0006-9554-8205",
+    "abstract": "",
+    "citation": "Yiting Liu. (2024). \"Towards a new PhD Curriculum for Digital Finance\". Open Research Europe. DOI: 10.12688/openreseurope.16513.1.",
+    "authors": [
+      "Yiting Liu"
+    ]
+  },
+  {
+    "title": "Navigating the Environmental, Social, and Governance (ESG) landscape: constructing a robust and reliable scoring engine - insights into Data Source Selection, Indicator Determination, Weighting and Aggregation Techniques, and Validation Processes for Comprehensive ESG Scoring Systems",
+    "year": "2023",
+    "type": "journal-article",
+    "journal": "Open Research Europe",
+    "doi": "10.12688/openreseurope.16278.1",
+    "doi_url": "https://doi.org/10.12688/openreseurope.16278.1",
+    "author": "Yiting Liu",
+    "orcid": "0009-0006-9554-8205",
+    "abstract": "",
+    "citation": "Yiting Liu. (2023). \"Navigating the Environmental, Social, and Governance (ESG) landscape: constructing a robust and reliable scoring engine - insights into Data Source Selection, Indicator Determination, Weighting and Aggregation Techniques, and Validation Processes for Comprehensive ESG Scoring Systems\". Open Research Europe. DOI: 10.12688/openreseurope.16278.1.",
+    "authors": [
+      "Yiting Liu"
+    ]
+  }
+]

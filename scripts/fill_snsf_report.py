@@ -10,7 +10,7 @@ from pathlib import Path
 import re
 
 # Paths
-TEMPLATE_PATH = Path(__file__).parent.parent / "final_scientific_report" / "Form_Scientific_Report_Projects.docx"
+TEMPLATE_PATH = Path(__file__).parent.parent / "final_scientific_report" / "ScientificReport_Osterrieder.docx"
 OUTPUT_PATH = Path(__file__).parent.parent / "SNSF_Report_205487.docx"
 
 # Content for the report
@@ -98,6 +98,20 @@ Baumohl, E., Lyocsa, S., Vasanicova, P. (2024). Macroeconomic environment and th
 Baals, L.J., Osterrieder, J., Hadji-Misheva, B., Liu, Y. (2024). Towards a new PhD Curriculum for Digital Finance. Open Research Europe, 4, 16513. DOI: 10.12688/openreseurope.16513.1.
 
 Submitted: Baals, L.J., et al. (2025). Network Evidence on Credit-Risk Pricing in P2P Lending. SSRN 5276337. Baals, L.J., et al. (2025). State-Dependent Pricing in FinTech Credit: Evidence from P2P Lending. SSRN 5421207.
+
+Main Publication Output - PhD Researchers (ORCID)
+
+The following publications are registered in ORCID for the project's PhD researchers:
+
+Lennart John Baals (ORCID: 0000-0002-7737-9675):
+- Baals, L.J., Liu, Y. et al. (2024). "Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning". Expert Systems with Applications, 252, 124100. DOI: https://doi.org/10.1016/j.eswa.2024.124100
+- Baals, L.J., Liu, Y. et al. (2024). "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics". Finance Research Letters, 63, 105308. DOI: https://doi.org/10.1016/j.frl.2024.105308
+
+Yiting Liu (ORCID: 0009-0006-9554-8205):
+- Liu, Y., Baals, L.J. et al. (2024). "Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning". Expert Systems with Applications, 252, 124100. DOI: https://doi.org/10.1016/j.eswa.2024.124100
+- Liu, Y., Baals, L.J. et al. (2024). "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics". Finance Research Letters, 63, 105308. DOI: https://doi.org/10.1016/j.frl.2024.105308
+- Liu, Y. et al. (2024). "Towards a new PhD Curriculum for Digital Finance". Open Research Europe, 4, 16513. DOI: https://doi.org/10.12688/openreseurope.16513.1
+- Liu, Y. et al. (2023). "Navigating the Environmental, Social, and Governance (ESG) landscape: constructing a robust and reliable scoring engine". Open Research Europe. DOI: https://doi.org/10.12688/openreseurope.16278.1
 
 Appendix B: Open Science Deposits (Zenodo)
 
@@ -357,8 +371,9 @@ def main():
             "Extended Project Information", "Project Statistics", "1.4 Impact Statement",
             "Scientific Impact", "Economic Impact", "Social Impact", "Policy Impact", "Educational Impact",
             "1.5 Sustainability Plan", "Data Preservation", "Code Maintainability", "Knowledge Transfer Continuation",
-            "Appendix A", "Appendix B", "Appendix C", "Appendix D", "Appendix E", "Appendix F",
-            "Report submitted to"
+            "Appendix A", "Main Publication Output", "Lennart John Baals", "Yiting Liu",
+            "Appendix B", "Appendix C", "Appendix D", "Appendix E", "Appendix F",
+            "Report submitted to", "The following publications"
         ]
         for para_text in EXTENDED_INFO.strip().split('\n\n'):
             if para_text.strip():
