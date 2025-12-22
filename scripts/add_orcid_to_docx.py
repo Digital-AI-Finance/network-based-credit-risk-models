@@ -58,11 +58,11 @@ Stefan Lyocsa (ORCID: 0000-0002-8380-181X):
 
 20. "Forecasting of clean energy market volatility: The role of oil and the technology sector". Energy Economics. DOI: 10.1016/j.eneco.2024.107451
 
-21. "A Fuzzy Framework for Realized Volatility Prediction" (2025). SSRN.
+21. "A Fuzzy Framework for Realized Volatility Prediction" (2025). Journal of Forecasting. DOI: 10.1002/for.70082
 
-22. "Alpha-threshold networks in credit risk models" (2025). SSRN.
+22. "Alpha-threshold networks in credit risk models" (2025). Quantitative Finance. DOI: 10.1080/14697688.2025.2465697
 
-23. "Do hurricanes cause storm on the stock market?" (2025). SSRN.
+23. "Do hurricanes cause storm on the stock market?" (2025). International Review of Financial Analysis. DOI: 10.1016/j.irfa.2024.103816
 
 Lennart John Baals (ORCID: 0000-0002-7737-9675): Co-author on publications 3, 4 above.
 

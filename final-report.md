@@ -168,17 +168,17 @@ The following publications are registered in ORCID for the project researchers (
 
 **Stefan Lyocsa** (ORCID: [0000-0002-8380-181X](https://orcid.org/0000-0002-8380-181X)):
 
-18. "Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms". International Review of Financial Analysis. [DOI: 10.1016/j.irfa.2024.103416](https://doi.org/10.1016/j.irfa.2024.103416)
+18. "Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms" (2024). International Review of Financial Analysis. [DOI: 10.1016/j.irfa.2024.103416](https://doi.org/10.1016/j.irfa.2024.103416)
 
-19. "What drives the uranium sector risk? The role of attention, economic and geopolitical uncertainty". Energy Economics. [DOI: 10.1016/j.eneco.2024.107980](https://doi.org/10.1016/j.eneco.2024.107980)
+19. "What drives the uranium sector risk? The role of attention, economic and geopolitical uncertainty" (2024). Energy Economics. [DOI: 10.1016/j.eneco.2024.107980](https://doi.org/10.1016/j.eneco.2024.107980)
 
-20. "Forecasting of clean energy market volatility: The role of oil and the technology sector". Energy Economics. [DOI: 10.1016/j.eneco.2024.107451](https://doi.org/10.1016/j.eneco.2024.107451)
+20. "Forecasting of clean energy market volatility: The role of oil and the technology sector" (2024). Energy Economics. [DOI: 10.1016/j.eneco.2024.107451](https://doi.org/10.1016/j.eneco.2024.107451)
 
-21. "A Fuzzy Framework for Realized Volatility Prediction" (2025). SSRN.
+21. "A Fuzzy Framework for Realized Volatility Prediction: Empirical Evidence From Equity Markets" (2025). Journal of Forecasting. [DOI: 10.1002/for.70082](https://doi.org/10.1002/for.70082)
 
-22. "Alpha-threshold networks in credit risk models" (2025). SSRN.
+22. "Alpha-threshold networks in credit risk models" (2025). Quantitative Finance. [DOI: 10.1080/14697688.2025.2465697](https://doi.org/10.1080/14697688.2025.2465697)
 
-23. "Do hurricanes cause storm on the stock market?" (2025). SSRN.
+23. "Do hurricanes cause storm on the stock market? The case of US energy companies" (2025). International Review of Financial Analysis. [DOI: 10.1016/j.irfa.2024.103816](https://doi.org/10.1016/j.irfa.2024.103816)
 
 **Lennart John Baals** (ORCID: [0000-0002-7737-9675](https://orcid.org/0000-0002-7737-9675)):
 - Co-author on publications 3, 4 above
