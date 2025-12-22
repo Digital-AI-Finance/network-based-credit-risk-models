@@ -72,6 +72,7 @@ image: /images/Osterrieder.jpg
   </div>
   <ul>
     <li><a href="#home">Home</a></li>
+    <li><a href="#announcement">Announcement</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#phd-publications">PhD Publications</a></li>
@@ -100,6 +101,7 @@ image: /images/Osterrieder.jpg
 <nav class="nav-container">
   <ul class="nav-menu">
     <li><a href="#home">Home</a></li>
+    <li><a href="#announcement">Announcement</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#phd-publications">PhD Pubs</a></li>
@@ -153,6 +155,23 @@ image: /images/Osterrieder.jpg
 
 > This SNSF-funded project develops advanced, interpretable credit risk models tailored specifically to the needs of Peer-to-Peer (P2P) lending markets using network analysis and machine learning.
 
+</section>
+
+---
+
+<section id="announcement">
+<h2>Project Completion Announcement</h2>
+<div style="background:#f8f9fa;border-left:4px solid #0a66c2;padding:1rem;font-size:0.85rem;line-height:1.4;">
+<p><strong>PROJECT COMPLETED: Network-Based Credit Risk Models in P2P Lending Markets</strong></p>
+<p>I am delighted to announce the successful completion of our SNSF-funded research project (Grant 205487) on network-based credit risk models in peer-to-peer lending markets.</p>
+<p><strong>What we achieved:</strong> Over three years (Oct 2022 - Aug 2025), we developed novel machine learning methodologies that leverage network topology to assess credit risk in P2P lending. Our supervised network-based approach fundamentally advances how we understand borrower relationships and default prediction.</p>
+<p><strong>Key outcomes:</strong> 52+ scientific publications | 23 ORCID-registered publications (2024-2025) in Expert Systems with Applications, Finance Research Letters, Quantitative Finance, Energy Economics | 12 open-access Zenodo deposits | 2 PhD researchers trained | CHF 387,836 total funding</p>
+<p><strong>Core team:</strong> <a href="https://www.linkedin.com/in/lennart-john-baals-a621aa193/">@Lennart John Baals</a> | <a href="https://www.linkedin.com/in/yiting-liu-313587266/">@Yiting Liu</a> | <a href="https://www.linkedin.com/in/hadjimisheva/">@Branka Hadji Misheva</a> | @Stefan Lyocsa</p>
+<p><strong>International collaborators:</strong> @Ali Hirsa (Columbia) | @Stephen Chan (AUS) | @Jeffrey Chu (Renmin) | @Yuanyuan Zhang (Manchester) | @Blanka Stadler (Masaryk)</p>
+<p><strong>Institutions:</strong> <a href="https://www.bfh.ch">@BFH</a> | <a href="https://www.utwente.nl">@University of Twente</a> | <a href="https://www.snf.ch">@SNSF</a> | <a href="https://www.cost.eu">@COST Association</a></p>
+<p>Our research demonstrates that network position contains genuine predictive signal for default risk. A key finding: simple degree centrality often matches complex metrics like PageRank, offering practitioners an accessible entry point to network-based credit assessment.</p>
+<p><em>#CreditRisk #P2PLending #MachineLearning #NetworkAnalysis #FinTech #OpenScience #SNSF #DigitalFinance #AI #XAI</em></p>
+</div>
 </section>
 
 ---
