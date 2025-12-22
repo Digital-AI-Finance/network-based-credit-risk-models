@@ -166,6 +166,20 @@ The following publications are registered in ORCID for the project researchers (
 
 17. "Predicting Retail Customers' Distress: Early Warning Systems and Machine Learning Applications". SSRN. [DOI: 10.2139/ssrn.4730470](https://doi.org/10.2139/ssrn.4730470)
 
+**Stefan Lyocsa** (ORCID: [0000-0002-8380-181X](https://orcid.org/0000-0002-8380-181X)):
+
+18. "Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms". International Review of Financial Analysis. [DOI: 10.1016/j.irfa.2024.103416](https://doi.org/10.1016/j.irfa.2024.103416)
+
+19. "What drives the uranium sector risk? The role of attention, economic and geopolitical uncertainty". Energy Economics. [DOI: 10.1016/j.eneco.2024.107980](https://doi.org/10.1016/j.eneco.2024.107980)
+
+20. "Forecasting of clean energy market volatility: The role of oil and the technology sector". Energy Economics. [DOI: 10.1016/j.eneco.2024.107451](https://doi.org/10.1016/j.eneco.2024.107451)
+
+21. "A Fuzzy Framework for Realized Volatility Prediction" (2025). SSRN.
+
+22. "Alpha-threshold networks in credit risk models" (2025). SSRN.
+
+23. "Do hurricanes cause storm on the stock market?" (2025). SSRN.
+
 **Lennart John Baals** (ORCID: [0000-0002-7737-9675](https://orcid.org/0000-0002-7737-9675)):
 - Co-author on publications 3, 4 above
 

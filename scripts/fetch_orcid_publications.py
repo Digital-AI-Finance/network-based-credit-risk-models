@@ -11,6 +11,7 @@ from pathlib import Path
 # ORCID identifiers for researchers
 ORCIDS = {
     "Joerg Osterrieder": "0000-0003-0189-8636",
+    "Stefan Lyocsa": "0000-0002-8380-181X",
     "Lennart John Baals": "0000-0002-7737-9675",
     "Yiting Liu": "0009-0006-9554-8205"
 }
@@ -136,7 +137,9 @@ def main():
 
             pub["citation"] = format_citation(pub, author)
             all_publications.append(pub)
-            print(f"  - [{pub.get('year', '?')}] {pub['title'][:55]}...")
+            # Handle Unicode in print
+            title_safe = pub['title'][:55].encode('ascii', 'replace').decode('ascii')
+            print(f"  - [{pub.get('year', '?')}] {title_safe}...")
 
     # Deduplicate by DOI (co-authored papers appear for both authors)
     unique_pubs = {}

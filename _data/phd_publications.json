@@ -1,5 +1,50 @@
 [
   {
+    "title": "A Fuzzy Framework for Realized Volatility Prediction: Empirical Evidence From Equity Markets",
+    "year": "2025",
+    "type": "journal-article",
+    "journal": "Journal of Forecasting",
+    "doi": "10.1002/for.70082",
+    "doi_url": "https://doi.org/10.1002/for.70082",
+    "author": "Stefan Lyocsa",
+    "orcid": "0000-0002-8380-181X",
+    "abstract": "",
+    "citation": "Stefan Lyocsa. (2025). \"A Fuzzy Framework for Realized Volatility Prediction: Empirical Evidence From Equity Markets\". Journal of Forecasting. DOI: 10.1002/for.70082.",
+    "authors": [
+      "Stefan Lyocsa"
+    ]
+  },
+  {
+    "title": "α -threshold networks in credit risk models",
+    "year": "2025",
+    "type": "journal-article",
+    "journal": "Quantitative Finance",
+    "doi": "10.1080/14697688.2025.2465697",
+    "doi_url": "https://doi.org/10.1080/14697688.2025.2465697",
+    "author": "Stefan Lyocsa",
+    "orcid": "0000-0002-8380-181X",
+    "abstract": "",
+    "citation": "Stefan Lyocsa. (2025). \"α -threshold networks in credit risk models\". Quantitative Finance. DOI: 10.1080/14697688.2025.2465697.",
+    "authors": [
+      "Stefan Lyocsa"
+    ]
+  },
+  {
+    "title": "Do hurricanes cause storm on the stock market? The case of US energy companies",
+    "year": "2025",
+    "type": "journal-article",
+    "journal": "International Review of Financial Analysis",
+    "doi": "10.1016/j.irfa.2024.103816",
+    "doi_url": "https://doi.org/10.1016/j.irfa.2024.103816",
+    "author": "Stefan Lyocsa",
+    "orcid": "0000-0002-8380-181X",
+    "abstract": "",
+    "citation": "Stefan Lyocsa. (2025). \"Do hurricanes cause storm on the stock market? The case of US energy companies\". International Review of Financial Analysis. DOI: 10.1016/j.irfa.2024.103816.",
+    "authors": [
+      "Stefan Lyocsa"
+    ]
+  },
+  {
     "title": "How can artificial intelligence help customer intelligence for credit portfolio management? A systematic literature review",
     "year": "2024",
     "type": "journal-article",
@@ -302,6 +347,51 @@
     "authors": [
       "Joerg Osterrieder",
       "Yiting Liu"
+    ]
+  },
+  {
+    "title": "What drives the uranium sector risk? The role of attention, economic and geopolitical uncertainty",
+    "year": "2024",
+    "type": "journal-article",
+    "journal": "Energy Economics",
+    "doi": "10.1016/j.eneco.2024.107980",
+    "doi_url": "https://doi.org/10.1016/j.eneco.2024.107980",
+    "author": "Stefan Lyocsa",
+    "orcid": "0000-0002-8380-181X",
+    "abstract": "",
+    "citation": "Stefan Lyocsa. (2024). \"What drives the uranium sector risk? The role of attention, economic and geopolitical uncertainty\". Energy Economics. DOI: 10.1016/j.eneco.2024.107980.",
+    "authors": [
+      "Stefan Lyocsa"
+    ]
+  },
+  {
+    "title": "Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms",
+    "year": "2024",
+    "type": "journal-article",
+    "journal": "International Review of Financial Analysis",
+    "doi": "10.1016/j.irfa.2024.103416",
+    "doi_url": "https://doi.org/10.1016/j.irfa.2024.103416",
+    "author": "Stefan Lyocsa",
+    "orcid": "0000-0002-8380-181X",
+    "abstract": "",
+    "citation": "Stefan Lyocsa. (2024). \"Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms\". International Review of Financial Analysis. DOI: 10.1016/j.irfa.2024.103416.",
+    "authors": [
+      "Stefan Lyocsa"
+    ]
+  },
+  {
+    "title": "Forecasting of clean energy market volatility: The role of oil and the technology sector",
+    "year": "2024",
+    "type": "journal-article",
+    "journal": "Energy Economics",
+    "doi": "10.1016/j.eneco.2024.107451",
+    "doi_url": "https://doi.org/10.1016/j.eneco.2024.107451",
+    "author": "Stefan Lyocsa",
+    "orcid": "0000-0002-8380-181X",
+    "abstract": "",
+    "citation": "Stefan Lyocsa. (2024). \"Forecasting of clean energy market volatility: The role of oil and the technology sector\". Energy Economics. DOI: 10.1016/j.eneco.2024.107451.",
+    "authors": [
+      "Stefan Lyocsa"
     ]
   }
 ]

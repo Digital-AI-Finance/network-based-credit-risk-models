@@ -705,19 +705,6 @@ By providing more reliable credit risk models, this project will strengthen the 
 
 ---
 
-<footer class="site-footer">
-  <div class="footer-content">
-    <div>
-      <p>&copy; 2025 Digital AI Finance Research Group</p>
-      <p>Source: <a href="https://www.digital-finance-msca.com/network-based-credit-risk-models-snsf" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="external-link">digital-finance-msca.com</a></p>
-    </div>
-    <div class="footer-links">
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="external-link">GitHub</a>
-      <a href="https://github.com/Digital-AI-Finance/network-based-credit-risk-models/wiki" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="external-link">Wiki</a>
-      <a href="{{ site.baseurl }}/feed.xml" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">RSS Feed</a>
-    </div>
-  </div>
-</footer>
 
 <!-- Back to Top Button -->
 <button id="backToTop" class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
@@ -730,6 +717,3 @@ By providing more reliable credit risk models, this project will strengthen the 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/visualizations.js"></script>
 
----
-
-(c) Joerg Osterrieder 2025
