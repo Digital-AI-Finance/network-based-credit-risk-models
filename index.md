@@ -77,7 +77,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#research">Research</a></li>
     <li><a href="#phd-publications">PhD Publications</a></li>
     <li><a href="#research-outputs">Zenodo (12)</a></li>
-    <li><a href="#analytics">Analytics</a></li>
+    <li><a href="#analytics">Timeline</a></li>
     <div class="nav-section">Resources</div>
     <li><a href="#resources">Datasets & Code</a></li>
     <li><a href="#news">News</a></li>
@@ -106,7 +106,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#research">Research</a></li>
     <li><a href="#phd-publications">PhD Pubs</a></li>
     <li><a href="#research-outputs">Zenodo</a></li>
-    <li><a href="#analytics">Analytics</a></li>
+    <li><a href="#analytics">Timeline</a></li>
     <li><a href="#resources">Resources</a></li>
     <li><a href="#news">News</a></li>
     <li><a href="#events">Events</a></li>
@@ -322,64 +322,136 @@ Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.o
 
 <section id="analytics">
 
-<h2>Research Analytics</h2>
+<h2>Project Timeline</h2>
 
-<div class="analytics-section">
-  <div class="chart-container">
-    <h3>Publications by Year</h3>
-    <canvas id="pubsChart"></canvas>
-  </div>
-  <div class="chart-container">
-    <h3>Co-authorship Network</h3>
-    <div id="networkGraph"></div>
-  </div>
+<div style="overflow-x:auto;padding:1rem 0;">
+<div style="display:flex;min-width:2400px;position:relative;">
+<!-- Timeline line -->
+<div style="position:absolute;top:50%;left:0;right:0;height:3px;background:linear-gradient(90deg,#1e3a5f,#c5a028);z-index:0;"></div>
+
+<!-- 2022 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:12px;height:12px;background:#1e3a5f;border-radius:50%;margin:0 auto;border:2px solid #c5a028;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Oct 2022</strong><br>Project Launch<br><span style="color:#666;">SNSF CHF 207k</span></div>
 </div>
 
-<h3>Project Timeline</h3>
+<!-- Jun 2023 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Jun 2023</strong><br>Training School<br><span style="color:#666;">Enschede</span></div>
+</div>
 
-<div class="timeline">
-  <div class="timeline-item">
-    <span class="timeline-date">Oct 2022</span>
-    <div class="timeline-content">
-      <strong>Project Launch</strong>
-      <p>SNSF grant 205487 awarded - CHF 207,028 for network-based credit risk research</p>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <span class="timeline-date">2023</span>
-    <div class="timeline-content">
-      <strong>Network Analysis Framework</strong>
-      <p>Development of graph-based credit risk assessment methodology using Bondora P2P data</p>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <span class="timeline-date">Feb 2024</span>
-    <div class="timeline-content">
-      <strong>Mobility Grants</strong>
-      <p>Two SNSF mobility grants (CHF 40,000 total) for international collaboration</p>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <span class="timeline-date">Jun 2024</span>
-    <div class="timeline-content">
-      <strong>Leading House Asia Grant</strong>
-      <p>ETH funding (CHF 50,000) for digital assets research partnership</p>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <span class="timeline-date">2024</span>
-    <div class="timeline-content">
-      <strong>Key Publications</strong>
-      <p>Papers published in Finance Research Letters and Expert Systems with Applications</p>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <span class="timeline-date">Aug 2025</span>
-    <div class="timeline-content">
-      <strong>Project Completion</strong>
-      <p>Final deliverables and knowledge transfer to industry partners</p>
-    </div>
-  </div>
+<!-- Sep 2023 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Sep 2023</strong><br>COST Conference<br><span style="color:#666;">Bern</span></div>
+</div>
+
+<!-- Sep 2023 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Sep 2023</strong><br>Summer School<br><span style="color:#666;">Delft</span></div>
+</div>
+
+<!-- Nov 2023 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Nov 2023</strong><br>BFH Seminar<br><span style="color:#666;"><a href="https://zenodo.org/records/17992591">Zenodo</a></span></div>
+</div>
+
+<!-- Dec 2023 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Dec 2023</strong><br>ERCIM/CFE<br><span style="color:#666;">Berlin</span></div>
+</div>
+
+<!-- Feb 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:12px;height:12px;background:#c5a028;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Feb 2024</strong><br>Mobility Grants<br><span style="color:#666;">CHF 40k</span></div>
+</div>
+
+<!-- Mar 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#22c55e;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Mar 2024</strong><br>Zenodo: FRL Code<br><span style="color:#666;"><a href="https://zenodo.org/records/17989119">Liu</a></span></div>
+</div>
+
+<!-- May 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>May 2024</strong><br>PhD School<br><span style="color:#666;">Treviso</span></div>
+</div>
+
+<!-- May 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#d62728;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>May 2024</strong><br>FRL Paper<br><span style="color:#666;"><a href="https://doi.org/10.1016/j.frl.2024.105308">DOI</a></span></div>
+</div>
+
+<!-- May 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#22c55e;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>May 2024</strong><br>Zenodo: ESWA<br><span style="color:#666;"><a href="https://zenodo.org/records/17990581">Liu</a></span></div>
+</div>
+
+<!-- Jun 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:12px;height:12px;background:#c5a028;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Jun 2024</strong><br>Asia Grant<br><span style="color:#666;">CHF 50k</span></div>
+</div>
+
+<!-- Sep 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Sep 2024</strong><br>AI Finance<br><span style="color:#666;">Istanbul</span></div>
+</div>
+
+<!-- Oct 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#d62728;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Oct 2024</strong><br>ESWA Paper<br><span style="color:#666;"><a href="https://doi.org/10.1016/j.eswa.2024.124100">DOI</a></span></div>
+</div>
+
+<!-- Oct 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#22c55e;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Oct 2024</strong><br>Zenodo: Istanbul<br><span style="color:#666;"><a href="https://zenodo.org/records/17964900">Baals</a></span></div>
+</div>
+
+<!-- Dec 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Dec 2024</strong><br>Big Data & AI<br><span style="color:#666;">Hong Kong</span></div>
+</div>
+
+<!-- Dec 2024 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#22c55e;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Dec 2024</strong><br>Zenodo: 8 deposits<br><span style="color:#666;"><a href="#research-outputs">View all</a></span></div>
+</div>
+
+<!-- 2025 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:10px;height:10px;background:#d62728;border-radius:50%;margin:0 auto;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>2025</strong><br>Quant Finance<br><span style="color:#666;"><a href="https://doi.org/10.1080/14697688.2025.2465697">DOI</a></span></div>
+</div>
+
+<!-- Aug 2025 -->
+<div style="flex:1;text-align:center;position:relative;z-index:1;">
+<div style="width:14px;height:14px;background:#22c55e;border-radius:50%;margin:0 auto;border:2px solid #1e3a5f;"></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Aug 2025</strong><br>PROJECT COMPLETE<br><span style="color:#666;">52+ pubs, 12 Zenodo</span></div>
+</div>
+
+</div>
+</div>
+
+<div style="display:flex;gap:1rem;justify-content:center;font-size:0.7rem;margin-top:0.5rem;">
+<span><span style="display:inline-block;width:10px;height:10px;background:#1e3a5f;border-radius:50%;"></span> Milestone</span>
+<span><span style="display:inline-block;width:10px;height:10px;background:#c5a028;border-radius:50%;"></span> Funding</span>
+<span><span style="display:inline-block;width:10px;height:10px;background:#d62728;border-radius:50%;"></span> Publication</span>
+<span><span style="display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:50%;"></span> Zenodo</span>
+<span><span style="display:inline-block;width:10px;height:10px;background:#2d5a8f;border-radius:50%;"></span> Conference</span>
 </div>
 
 </section>
