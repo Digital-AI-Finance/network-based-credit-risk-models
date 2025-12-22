@@ -316,142 +316,36 @@ By providing more reliable credit risk models, this project will strengthen the 
 ---
 
 <section id="phd-publications">
-
 <h2>PhD Publications (ORCID 2024-2025)</h2>
-
-<p>The following publications are registered in ORCID for the project researchers (2024-2025):</p>
-
-<h3>Joerg Osterrieder <a href="https://orcid.org/0000-0003-0189-8636" target="_blank" rel="noopener noreferrer">(ORCID)</a></h3>
-
-<div class="publication-list">
-<div class="pub-item">
-  <div class="pub-title">How can artificial intelligence help customer intelligence for credit portfolio management? A systematic literature review</div>
-  <div class="pub-meta">(2024) - <em>International Journal of Information Management Data Insights</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1016/j.jjimei.2024.100234" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Stylized facts of metaverse non-fungible tokens</div>
-  <div class="pub-meta">(2024) - <em>Physica A: Statistical Mechanics and its Applications</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1016/j.physa.2024.130103" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Leveraging network topology for credit risk assessment in P2P lending</div>
-  <div class="pub-meta">with Baals, Liu (2024) - <em>Expert Systems with Applications</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1016/j.eswa.2024.124100" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics</div>
-  <div class="pub-meta">with Baals, Liu (2024) - <em>Finance Research Letters</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1016/j.frl.2024.105308" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Towards a new PhD Curriculum for Digital Finance</div>
-  <div class="pub-meta">with Liu (2024) - <em>Open Research Europe</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.12688/openreseurope.16513.1" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Visual XAI tool</div>
-  <div class="pub-meta">(2024) - <em>Zenodo</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.5281/zenodo.10934115" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">A discussion paper for possible approaches to building a statistically valid backtesting framework</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4893677" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Enhancing Security in Blockchain Networks: Anomalies, Frauds, and Advanced Detection Techniques</div>
-  <div class="pub-meta">(2024) - <em>arXiv</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.48550/arxiv.2402.11231" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Ethical Artificial Intelligence, Fintech and Data Protection: A Path Forward for Training in Europe</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4885037" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Forecasting Commercial Customers Credit Risk Through Early Warning Signals Data</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4754568" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">How can Consumers Without Credit History Benefit from Information Processing and Machine Learning Tools by Financial Institutions?</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4730445" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Hypothesizing Multimodal Influence: Assessing the Impact of Textual and Non-Textual Data on Financial Instrument Pricing Using NLP and Generative AI</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4698153" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Integrating Early Warning Systems with Customer Segmentation</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4779632" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Integration of Early Warning Systems and Customer Segmentation Methods in the Financial Industry - A Systematic Literature Review</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4730479" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Metaverse Non Fungible Tokens</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4733153" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Modeling Commodity Price Co-Movement: Building on Traditional Methods & Exploring Applications of Machine Learning Models</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4730474" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Predicting Retail Customers' Distress: Early Warning Systems and Machine Learning Applications</div>
-  <div class="pub-meta">(2024) - <em>SSRN</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.2139/ssrn.4730470" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-</div>
-
-<h3>Stefan Lyocsa <a href="https://orcid.org/0000-0002-8380-181X" target="_blank" rel="noopener noreferrer">(ORCID)</a></h3>
-
-<div class="publication-list">
-<div class="pub-item">
-  <div class="pub-title">Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms</div>
-  <div class="pub-meta">(2024) - <em>International Review of Financial Analysis</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1016/j.irfa.2024.103416" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">What drives the uranium sector risk? The role of attention, economic and geopolitical uncertainty</div>
-  <div class="pub-meta">(2024) - <em>Energy Economics</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1016/j.eneco.2024.107980" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Forecasting of clean energy market volatility: The role of oil and the technology sector</div>
-  <div class="pub-meta">(2024) - <em>Energy Economics</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1016/j.eneco.2024.107451" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">A Fuzzy Framework for Realized Volatility Prediction</div>
-  <div class="pub-meta">(2025) - <em>Journal of Forecasting</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1002/for.70082" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Alpha-threshold networks in credit risk models</div>
-  <div class="pub-meta">(2025) - <em>Quantitative Finance</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1080/14697688.2025.2465697" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-<div class="pub-item">
-  <div class="pub-title">Do hurricanes cause storm on the stock market?</div>
-  <div class="pub-meta">(2025) - <em>International Review of Financial Analysis</em></div>
-  <div class="pub-badges"><a href="https://doi.org/10.1016/j.irfa.2024.103816" class="doi-link external-link" target="_blank">DOI</a></div>
-</div>
-</div>
-
-<h3>Lennart John Baals <a href="https://orcid.org/0000-0002-7737-9675" target="_blank" rel="noopener noreferrer">(ORCID)</a></h3>
-<p>Co-author on: "Leveraging network topology for credit risk assessment in P2P lending" and "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics"</p>
-
-<h3>Yiting Liu <a href="https://orcid.org/0009-0006-9554-8205" target="_blank" rel="noopener noreferrer">(ORCID)</a></h3>
-<p>Co-author on: "Leveraging network topology for credit risk assessment in P2P lending", "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics", and "Towards a new PhD Curriculum for Digital Finance"</p>
-
+<p style="font-size:0.85rem;line-height:1.4;margin:0;">
+<strong>Osterrieder, J.</strong> <a href="https://orcid.org/0000-0003-0189-8636" target="_blank">[ORCID]</a><br>
+Osterrieder, J. (2024). How can artificial intelligence help customer intelligence for credit portfolio management? <em>Int. J. Inf. Manag. Data Insights</em>. <a href="https://doi.org/10.1016/j.jjimei.2024.100234">doi:10.1016/j.jjimei.2024.100234</a><br>
+Osterrieder, J. (2024). Stylized facts of metaverse non-fungible tokens. <em>Physica A</em>. <a href="https://doi.org/10.1016/j.physa.2024.130103">doi:10.1016/j.physa.2024.130103</a><br>
+Liu, Y., Baals, L.J., Osterrieder, J., & Hadji-Misheva, B. (2024). Leveraging network topology for credit risk assessment in P2P lending. <em>Expert Syst. Appl.</em>, 252, 124100. <a href="https://doi.org/10.1016/j.eswa.2024.124100">doi:10.1016/j.eswa.2024.124100</a><br>
+Liu, Y., Baals, L.J., Osterrieder, J., & Hadji-Misheva, B. (2024). Network centrality and credit risk. <em>Finance Res. Lett.</em>, 63, 105308. <a href="https://doi.org/10.1016/j.frl.2024.105308">doi:10.1016/j.frl.2024.105308</a><br>
+Baals, L.J., Osterrieder, J., Hadji-Misheva, B., & Liu, Y. (2024). Towards a new PhD curriculum for digital finance. <em>Open Res. Europe</em>. <a href="https://doi.org/10.12688/openreseurope.16513.1">doi:10.12688/openreseurope.16513.1</a><br>
+Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.10934115">doi:10.5281/zenodo.10934115</a><br>
+Osterrieder, J. (2024). A discussion paper for possible approaches to building a statistically valid backtesting framework. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4893677">doi:10.2139/ssrn.4893677</a><br>
+Osterrieder, J. (2024). Enhancing security in blockchain networks. <em>arXiv</em>. <a href="https://doi.org/10.48550/arxiv.2402.11231">doi:10.48550/arxiv.2402.11231</a><br>
+Osterrieder, J. (2024). Ethical AI, fintech and data protection. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4885037">doi:10.2139/ssrn.4885037</a><br>
+Osterrieder, J. (2024). Forecasting commercial customers credit risk through early warning signals. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4754568">doi:10.2139/ssrn.4754568</a><br>
+Osterrieder, J. (2024). Consumers without credit history and ML tools. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730445">doi:10.2139/ssrn.4730445</a><br>
+Osterrieder, J. (2024). Multimodal influence on financial instrument pricing. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4698153">doi:10.2139/ssrn.4698153</a><br>
+Osterrieder, J. (2024). Integrating early warning systems with customer segmentation. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4779632">doi:10.2139/ssrn.4779632</a><br>
+Osterrieder, J. (2024). Early warning systems and customer segmentation: A systematic literature review. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730479">doi:10.2139/ssrn.4730479</a><br>
+Osterrieder, J. (2024). Metaverse non-fungible tokens. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4733153">doi:10.2139/ssrn.4733153</a><br>
+Osterrieder, J. (2024). Modeling commodity price co-movement. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730474">doi:10.2139/ssrn.4730474</a><br>
+Osterrieder, J. (2024). Predicting retail customers' distress. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730470">doi:10.2139/ssrn.4730470</a><br>
+<strong>Lyocsa, S.</strong> <a href="https://orcid.org/0000-0002-8380-181X" target="_blank">[ORCID]</a><br>
+Baumohl, E., Lyocsa, S., & Vasanicova, P. (2024). Macroeconomic environment and future loan performance. <em>Int. Rev. Financ. Anal.</em>, 95, 103416. <a href="https://doi.org/10.1016/j.irfa.2024.103416">doi:10.1016/j.irfa.2024.103416</a><br>
+Lyocsa, S. et al. (2024). What drives uranium sector risk? <em>Energy Econ.</em>, 107980. <a href="https://doi.org/10.1016/j.eneco.2024.107980">doi:10.1016/j.eneco.2024.107980</a><br>
+Lyocsa, S. et al. (2024). Forecasting clean energy market volatility. <em>Energy Econ.</em>, 107451. <a href="https://doi.org/10.1016/j.eneco.2024.107451">doi:10.1016/j.eneco.2024.107451</a><br>
+Lyocsa, S. et al. (2025). A fuzzy framework for realized volatility prediction. <em>J. Forecasting</em>. <a href="https://doi.org/10.1002/for.70082">doi:10.1002/for.70082</a><br>
+Lyocsa, S. et al. (2025). Alpha-threshold networks in credit risk models. <em>Quant. Finance</em>. <a href="https://doi.org/10.1080/14697688.2025.2465697">doi:10.1080/14697688.2025.2465697</a><br>
+Lyocsa, S. et al. (2025). Do hurricanes cause storm on the stock market? <em>Int. Rev. Financ. Anal.</em>. <a href="https://doi.org/10.1016/j.irfa.2024.103816">doi:10.1016/j.irfa.2024.103816</a><br>
+<strong>Baals, L.J.</strong> <a href="https://orcid.org/0000-0002-7737-9675" target="_blank">[ORCID]</a> Co-author on Liu et al. (2024) ESA, FRL; Baals et al. (2024) ORE.<br>
+<strong>Liu, Y.</strong> <a href="https://orcid.org/0009-0006-9554-8205" target="_blank">[ORCID]</a> Co-author on Liu et al. (2024) ESA, FRL; Baals et al. (2024) ORE.
+</p>
 </section>
 
 ---
