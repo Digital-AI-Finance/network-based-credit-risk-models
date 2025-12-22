@@ -80,7 +80,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#analytics">Timeline</a></li>
     <div class="nav-section">Resources</div>
     <li><a href="#resources">Datasets & Code</a></li>
-    <li><a href="#news">News</a></li>
+    <li><a href="{{ site.baseurl }}/news/">News</a></li>
     <li><a href="#events">Events</a></li>
     <div class="nav-section">Network</div>
     <li><a href="#collaborations">Collaborations</a></li>
@@ -108,7 +108,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#research-outputs">Zenodo</a></li>
     <li><a href="#analytics">Timeline</a></li>
     <li><a href="#resources">Resources</a></li>
-    <li><a href="#news">News</a></li>
+    <li><a href="{{ site.baseurl }}/news/">News</a></li>
     <li><a href="#events">Events</a></li>
     <li><a href="#collaborations">Collaborations</a></li>
     <li><a href="#funding">Funding</a></li>
@@ -520,19 +520,18 @@ Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.o
 
 <h2>News & Updates</h2>
 
-<p class="rss-link"><a href="{{ site.baseurl }}/feed.xml" class="external-link" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Subscribe via RSS</a></p>
+<p><a href="{{ site.baseurl }}/news/" style="font-weight:600;">View All News (30+ items) &rarr;</a> | <a href="{{ site.baseurl }}/feed.xml">RSS</a></p>
 
-<div class="news-list">
-{% for item in site.data.news %}
-<div class="news-item" itemscope itemtype="https://schema.org/NewsArticle">
-  <span class="news-date" itemprop="datePublished">{{ item.date }}</span>
-  <div class="news-content">
-    <strong itemprop="headline">{{ item.title }}</strong>
-    <p itemprop="description">{{ item.description }}</p>
-  </div>
+<div style="font-size:0.8rem;">
+{% for item in site.data.news limit:3 %}
+<div style="border-left:3px solid #1e3a5f;padding-left:0.75rem;margin:0.5rem 0;">
+<strong>{{ item.date }}</strong> - {{ item.title }}<br>
+<span style="color:#666;">{{ item.description | truncate: 120 }}</span>
 </div>
 {% endfor %}
 </div>
+
+<p><a href="{{ site.baseurl }}/news/">See all news, publications, conferences, and Zenodo releases &rarr;</a></p>
 
 </section>
 
