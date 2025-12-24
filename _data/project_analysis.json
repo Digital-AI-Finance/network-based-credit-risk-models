@@ -1,0 +1,377 @@
+{
+  "analysis_date": "2025-12-22",
+  "analysis_version": "1.0",
+  "project_summary": {
+    "title": "Network-Based Credit Risk Models in P2P Lending Markets",
+    "grant_number": "205487",
+    "funder": "Swiss National Science Foundation (SNSF)",
+    "funding_scheme": "Weave/Lead Agency",
+    "status": "completed",
+    "start_date": "2022-10-01",
+    "end_date": "2025-08-31",
+    "duration_months": 35,
+    "total_funding_chf": 387836,
+    "main_grant_chf": 207028,
+    "additional_grants_chf": 180808,
+    "institution": "Bern University of Applied Sciences (BFH)",
+    "website": "https://digital-ai-finance.github.io/network-based-credit-risk-models/",
+    "github_repo": "https://github.com/Digital-AI-Finance/network-based-credit-risk-models"
+  },
+  "publication_metrics": {
+    "total_count": 52,
+    "orcid_registered_2024_2025": 23,
+    "by_type": {
+      "journal_articles": 45,
+      "preprints": 4,
+      "conference_papers": 3
+    },
+    "total_citations": 228,
+    "avg_citations_per_paper": 4.38,
+    "median_citations": 2,
+    "h_index_estimate": 8,
+    "by_year": {
+      "2022": 8,
+      "2023": 15,
+      "2024": 22,
+      "2025": 7
+    },
+    "top_cited_papers": [
+      {
+        "title": "Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning",
+        "authors": "Liu, Y., Baals, L.J., Osterrieder, J., Hadji-Misheva, B.",
+        "journal": "Expert Systems with Applications",
+        "year": 2024,
+        "doi": "10.1016/j.eswa.2024.124100",
+        "citations": 17
+      },
+      {
+        "title": "Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics",
+        "authors": "Liu, Y., Baals, L.J., Osterrieder, J., Hadji-Misheva, B.",
+        "journal": "Finance Research Letters",
+        "year": 2024,
+        "doi": "10.1016/j.frl.2024.105308",
+        "citations": 11
+      },
+      {
+        "title": "Alpha-threshold networks in credit risk models",
+        "authors": "Lyocsa, S. et al.",
+        "journal": "Quantitative Finance",
+        "year": 2025,
+        "doi": "10.1080/14697688.2025.2465697",
+        "citations": 3
+      },
+      {
+        "title": "A fuzzy framework for realized volatility prediction",
+        "authors": "Lyocsa, S. et al.",
+        "journal": "Journal of Forecasting",
+        "year": 2025,
+        "doi": "10.1002/for.70082",
+        "citations": 2
+      }
+    ],
+    "key_journals": [
+      "Expert Systems with Applications",
+      "Finance Research Letters",
+      "Quantitative Finance",
+      "Journal of Forecasting",
+      "Journal of Risk and Financial Management"
+    ]
+  },
+  "research_outputs": {
+    "zenodo_deposits": 12,
+    "total_views": 54,
+    "total_downloads": 59,
+    "by_type": {
+      "datasets_and_code": 6,
+      "presentations": 4,
+      "working_papers": 2
+    },
+    "deposits": [
+      {
+        "id": "17989119",
+        "title": "Network centrality and credit risk - Data and Code",
+        "doi": "10.5281/zenodo.17989119",
+        "type": "dataset",
+        "views": 5,
+        "downloads": 6
+      },
+      {
+        "id": "17990398",
+        "title": "State-dependent pricing in FinTech credit",
+        "doi": "10.5281/zenodo.17990398",
+        "type": "publication",
+        "views": 4,
+        "downloads": 5
+      },
+      {
+        "id": "17990581",
+        "title": "Expert Systems Code (Liu)",
+        "doi": "10.5281/zenodo.17990581",
+        "type": "software",
+        "views": 5,
+        "downloads": 6
+      },
+      {
+        "id": "17990873",
+        "title": "Network Evidence on Credit-Risk Pricing",
+        "doi": "10.5281/zenodo.17990873",
+        "type": "publication",
+        "views": 4,
+        "downloads": 5
+      },
+      {
+        "id": "17991107",
+        "title": "Expert Systems Full Code Release",
+        "doi": "10.5281/zenodo.17991107",
+        "type": "software",
+        "views": 5,
+        "downloads": 5
+      },
+      {
+        "id": "17992215",
+        "title": "PhD Qualifier Report",
+        "doi": "10.5281/zenodo.17992215",
+        "type": "publication",
+        "views": 4,
+        "downloads": 4
+      },
+      {
+        "id": "17992322",
+        "title": "SLR Graph-Based Credit Risk (Hong Kong)",
+        "doi": "10.5281/zenodo.17992322",
+        "type": "presentation",
+        "views": 5,
+        "downloads": 5
+      },
+      {
+        "id": "17992484",
+        "title": "Bern Conference 2023 Presentation",
+        "doi": "10.5281/zenodo.17992484",
+        "type": "presentation",
+        "views": 4,
+        "downloads": 5
+      },
+      {
+        "id": "17992591",
+        "title": "BFH Doctoral Seminar Presentation",
+        "doi": "10.5281/zenodo.17992591",
+        "type": "presentation",
+        "views": 5,
+        "downloads": 5
+      },
+      {
+        "id": "17964900",
+        "title": "COST FinAI Istanbul Presentation",
+        "doi": "10.5281/zenodo.17964900",
+        "type": "presentation",
+        "views": 5,
+        "downloads": 5
+      },
+      {
+        "id": "17989002",
+        "title": "PhD Chapter 3 Code",
+        "doi": "10.5281/zenodo.17989002",
+        "type": "software",
+        "views": 4,
+        "downloads": 4
+      },
+      {
+        "id": "17989500",
+        "title": "Bondora Dataset Processing",
+        "doi": "10.5281/zenodo.17989500",
+        "type": "dataset",
+        "views": 4,
+        "downloads": 4
+      }
+    ]
+  },
+  "team_analysis": {
+    "total_researchers": 5,
+    "phd_researchers_trained": 2,
+    "institutions": [
+      "Bern University of Applied Sciences (BFH)",
+      "University of Twente",
+      "Masaryk University"
+    ],
+    "countries": ["Switzerland", "Netherlands", "Czech Republic"],
+    "orcid_works_counts": {
+      "Joerg Osterrieder": {
+        "orcid": "0000-0003-0189-8636",
+        "total_works": 119,
+        "role": "Principal Investigator"
+      },
+      "Stefan Lyocsa": {
+        "orcid": "0000-0002-8380-181X",
+        "total_works": 63,
+        "role": "Researcher"
+      },
+      "Branka Hadji Misheva": {
+        "orcid": "0000-0001-7020-3469",
+        "total_works": 20,
+        "role": "Researcher"
+      },
+      "Lennart John Baals": {
+        "orcid": "0000-0002-7737-9675",
+        "total_works": 4,
+        "role": "PhD Researcher"
+      },
+      "Yiting Liu": {
+        "orcid": "0009-0006-9554-8205",
+        "total_works": 4,
+        "role": "PhD Researcher"
+      }
+    },
+    "team_total_orcid_works": 210,
+    "profile_completeness": {
+      "with_google_scholar": 3,
+      "with_linkedin": 4,
+      "with_personal_website": 5,
+      "with_orcid": 5,
+      "completeness_score": 0.85
+    }
+  },
+  "impact_assessment": {
+    "publications_per_100k_chf": 13.41,
+    "cost_per_publication_chf": 7458.38,
+    "citations_per_100k_chf": 58.78,
+    "zenodo_deposits_per_100k_chf": 3.09,
+    "countries_reached": 8,
+    "phd_trained": 2,
+    "conferences_presented": 10,
+    "international_collaborations": 5,
+    "collaboration_countries": [
+      "USA (Columbia University)",
+      "UAE (American University of Sharjah)",
+      "China (Renmin University)",
+      "UK (University of Manchester)",
+      "Czech Republic (Masaryk University)"
+    ],
+    "research_networks": [
+      {
+        "name": "COST Action CA19130 - Fintech and AI in Finance",
+        "role": "Action Chair"
+      },
+      {
+        "name": "MSCA Industrial Doctoral Network on Digital Finance",
+        "role": "Coordinator"
+      }
+    ],
+    "funding_sources": [
+      {
+        "name": "SNSF Project Funding (Main)",
+        "amount_chf": 207028,
+        "grant_number": "205487"
+      },
+      {
+        "name": "Leading House Asia (ETH)",
+        "amount_chf": 50000,
+        "grant_number": "FRG24-E-S25"
+      },
+      {
+        "name": "SNSF Mobility Grant 1",
+        "amount_chf": 20000,
+        "recipient": "Lennart John Baals"
+      },
+      {
+        "name": "SNSF Mobility Grant 2",
+        "amount_chf": 20000,
+        "recipient": "Yiting Liu"
+      }
+    ]
+  },
+  "data_quality": {
+    "overall_score": 0.82,
+    "publications_data": {
+      "total_entries": 52,
+      "with_doi": 51,
+      "missing_doi": 1,
+      "with_abstract": 20,
+      "missing_abstract": 32,
+      "doi_coverage": 0.98,
+      "abstract_coverage": 0.38
+    },
+    "team_data": {
+      "total_members": 5,
+      "with_complete_profile": 5,
+      "with_image": 5,
+      "with_bio": 5,
+      "completeness_score": 1.0
+    },
+    "zenodo_data": {
+      "total_deposits": 12,
+      "with_doi": 12,
+      "with_description": 12,
+      "completeness_score": 1.0
+    },
+    "news_data": {
+      "total_items": 30,
+      "with_links": 18,
+      "coverage_2022_2025": true,
+      "completeness_score": 0.9
+    },
+    "issues": [
+      {
+        "severity": "warning",
+        "category": "publications",
+        "description": "32 publications missing abstracts in OpenAlex data"
+      },
+      {
+        "severity": "info",
+        "category": "publications",
+        "description": "1 publication missing DOI (SSRN preprint)"
+      }
+    ],
+    "verified_links": {
+      "zenodo_dois": {
+        "total": 12,
+        "verified": 12,
+        "status": "all_valid"
+      },
+      "publication_dois": {
+        "total": 51,
+        "verified": 51,
+        "status": "all_valid"
+      },
+      "orcid_ids": {
+        "total": 5,
+        "verified": 5,
+        "status": "all_valid"
+      },
+      "github_repo": {
+        "verified": true,
+        "status": "valid"
+      }
+    }
+  },
+  "key_findings": {
+    "research_contribution": "Developed novel machine learning methodologies that leverage network topology to assess credit risk in P2P lending. Demonstrated that network position contains genuine predictive signal for default risk.",
+    "practical_insight": "Simple degree centrality often matches complex metrics like PageRank, offering practitioners an accessible entry point to network-based credit assessment.",
+    "dataset_used": {
+      "name": "Bondora P2P Lending Dataset",
+      "coverage": "June 2009 - April 2022",
+      "sample_size": "231,039 borrowers, 112 variables",
+      "source": "https://osf.io/jnpfs/",
+      "license": "CC-BY 4.0"
+    },
+    "methodological_advances": [
+      "Supervised network-based credit risk assessment",
+      "Alpha-threshold network construction for loan portfolios",
+      "Integration of network centrality metrics with ML classifiers",
+      "State-dependent pricing models for FinTech credit"
+    ]
+  },
+  "metadata": {
+    "generated_by": "Claude Code analysis",
+    "data_sources": [
+      "project-template.json",
+      "publications.json (OpenAlex)",
+      "research_outputs.json (Zenodo API)",
+      "team.json",
+      "news.json",
+      "ORCID API",
+      "Zenodo API"
+    ],
+    "last_api_fetch": "2025-12-22",
+    "notes": "Citation counts and download statistics are point-in-time snapshots and will change over time."
+  }
+}

@@ -65,7 +65,7 @@ Research Network Leadership: The PI's roles as COST Action CA19130 Chair and MSC
 
 EXTENDED_INFO = """Extended Project Information
 
-Project Statistics: Six core publications with 28+ total citations received, 12 Zenodo deposits ensuring reproducibility, 8 conference presentations across 8 countries, 2 PhD researchers trained, and CHF 90,000 in additional funding secured.
+Project Statistics: Eight core publications with 28+ total citations received, 12 Zenodo deposits ensuring reproducibility, 12 conference presentations across 8 countries, 2 PhD researchers trained, and CHF 90,000 in additional funding secured.
 
 1.4 Impact Statement
 
@@ -96,6 +96,10 @@ Liu, Y., Baals, L.J., Osterrieder, J., Hadji-Misheva, B. (2024). Network central
 Baumohl, E., Lyocsa, S., Vasanicova, P. (2024). Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms. International Review of Financial Analysis, 95, 103416. DOI: 10.1016/j.irfa.2024.103416.
 
 Baals, L.J., Osterrieder, J., Hadji-Misheva, B., Liu, Y. (2024). Towards a new PhD Curriculum for Digital Finance. Open Research Europe, 4, 16513. DOI: 10.12688/openreseurope.16513.1.
+
+Lyocsa, S., Todorovic, N., Baals, L.J., Gao, H. (2025). Alpha-threshold networks in credit risk models. Quantitative Finance. DOI: 10.1080/14697688.2025.2465697.
+
+Lyocsa, S., Plat, V., Gao, H. (2025). A fuzzy framework for realized volatility prediction. Journal of Forecasting. DOI: 10.1002/for.70082.
 
 Submitted: Baals, L.J., et al. (2025). Network Evidence on Credit-Risk Pricing in P2P Lending. SSRN 5276337. Baals, L.J., et al. (2025). State-Dependent Pricing in FinTech Credit: Evidence from P2P Lending. SSRN 5421207.
 
@@ -141,7 +145,29 @@ Appendix B: Open Science Deposits (Zenodo)
 
 Appendix C: Academic Events
 
-December 2024: 4th International Symposium on Big Data and AI, Hong Kong (Systematic Literature Review on Graph-Based Credit Models). September 2024: 8th Bern Conference on Fintech and AI in Finance, Switzerland. September 2024: AI Finance Insights: Pioneering the Future of Fintech, Istanbul. May 2024: COST FinAI Meets Istanbul Conference, Turkey. December 2023: 16th ERCIM Conference on Computational and Methodological Statistics, Berlin. September 2023: 8th European COST Conference on AI in Finance, Bern. September 2023: European Summer School in Financial Mathematics, Delft.
+December 17, 2024: 4th International Symposium on Big Data and AI, Hong Kong - Systematic Literature Review on Graph-Based Credit Models
+
+September 29, 2024: 8th Bern Conference on Fintech and AI in Finance, Bern, Switzerland
+
+September 2024: AI Finance Insights: Pioneering the Future of Fintech, Istanbul, Turkey
+
+May 20-21, 2024: COST FinAI Meets Istanbul Conference, Turkey
+
+May 2024: COST FinAI PhD School, Treviso, Italy
+
+May 2024: COST FinAI Brussels Conference, Belgium
+
+December 2023: 16th ERCIM WG / 17th CFE Conference, Berlin, Germany
+
+November 29, 2023: BFH Doctoral Seminar, Bern, Switzerland
+
+September 27-29, 2023: 8th European COST Conference on AI in Finance, Bern, Switzerland
+
+September 2023: European Summer School in Financial Mathematics, TU Delft, Netherlands
+
+September 2023: Shenzhen Technology University International Week, China
+
+June 2023: COST Action Training School, Enschede, Netherlands
 
 Appendix D: Dataset
 
