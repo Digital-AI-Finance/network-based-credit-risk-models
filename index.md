@@ -129,7 +129,7 @@ image: /images/Osterrieder.jpg
 
 <div class="stats-banner">
   <div class="stat-item">
-    <span class="stat-number">387,836</span>
+    <span class="stat-number">247,028</span>
     <span class="stat-label">CHF Funding</span>
   </div>
   <div class="stat-item" id="totalCitations">
@@ -158,7 +158,7 @@ image: /images/Osterrieder.jpg
 <p><strong>PROJECT COMPLETED: Network-Based Credit Risk Models in P2P Lending Markets</strong></p>
 <p>I am delighted to announce the successful completion of the SNSF-funded research project (Grant 205487) on network-based credit risk models in peer-to-peer lending markets.</p>
 <p><strong>What we achieved:</strong> Over three years (Oct 2022 - Aug 2025), the project developed novel machine learning methodologies that leverage network topology to assess credit risk in P2P lending. The supervised network-based approach fundamentally advances how we understand borrower relationships and default prediction.</p>
-<p><strong>Key outcomes:</strong> 12 open-access Zenodo deposits | 2 PhD researchers trained | CHF 387,836 total funding | Publications in Expert Systems with Applications, Finance Research Letters, Quantitative Finance, Energy Economics</p>
+<p><strong>Key outcomes:</strong> 12 open-access Zenodo deposits | 2 PhD researchers trained | CHF 247,028 total funding | Publications in Expert Systems with Applications, Finance Research Letters, Quantitative Finance, Energy Economics</p>
 <p><strong>Core team:</strong> <a href="https://www.linkedin.com/in/lennart-john-baals-a621aa193/">@Lennart John Baals</a> | <a href="https://www.linkedin.com/in/yiting-liu-313587266/">@Yiting Liu</a> | <a href="https://www.linkedin.com/in/hadjimisheva/">@Branka Hadji Misheva</a> | @Stefan Lyocsa</p>
 <p><strong>International collaborators:</strong> @Ali Hirsa (Columbia) | @Stephen Chan (AUS) | @Jeffrey Chu (Renmin) | @Yuanyuan Zhang (Manchester) | @Blanka Stadler (Masaryk)</p>
 <p><strong>Institutions:</strong> <a href="https://www.bfh.ch">@BFH</a> | <a href="https://www.utwente.nl">@University of Twente</a> | <a href="https://www.snf.ch">@SNSF</a> | <a href="https://www.cost.eu">@COST Association</a></p>
@@ -649,7 +649,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 </div>
 
 <div class="text-center mt-2">
-  <h3>Total Funding Secured: 297,028 CHF</h3>
+  <h3>Total Funding Secured: 247,028 CHF</h3>
 </div>
 
 </section>
