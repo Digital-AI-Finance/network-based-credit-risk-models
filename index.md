@@ -75,7 +75,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#announcement">Announcement</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#phd-publications">PhD Publications</a></li>
+    <li><a href="#phd-publications">Team Publications</a></li>
     <li><a href="#research-outputs">Zenodo (12)</a></li>
     <li><a href="#analytics">Timeline</a></li>
     <div class="nav-section">Resources</div>
@@ -104,7 +104,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#announcement">Announcement</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#phd-publications">PhD Pubs</a></li>
+    <li><a href="#phd-publications">Team Pubs</a></li>
     <li><a href="#research-outputs">Zenodo</a></li>
     <li><a href="#analytics">Timeline</a></li>
     <li><a href="#resources">Resources</a></li>
@@ -244,7 +244,7 @@ By providing more reliable credit risk models, this project will strengthen the 
 ---
 
 <section id="phd-publications">
-<h2>PhD Publications (ORCID 2024-2025)</h2>
+<h2>Team Publications (ORCID 2024-2025)</h2>
 <p style="font-size:0.72rem;line-height:1.25;margin:0;">
 Baals, L. J., Osterrieder, J., Hadji-Misheva, B., & Liu, Y. (2024). Towards a new PhD curriculum for digital finance. <em>Open Research Europe, 4</em>, 16513. <a href="https://doi.org/10.12688/openreseurope.16513.1">https://doi.org/10.12688/openreseurope.16513.1</a><br>
 Baumohl, E., Lyocsa, S., & Vasanicova, P. (2024). Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms. <em>International Review of Financial Analysis, 95</em>, 103416. <a href="https://doi.org/10.1016/j.irfa.2024.103416">https://doi.org/10.1016/j.irfa.2024.103416</a><br>

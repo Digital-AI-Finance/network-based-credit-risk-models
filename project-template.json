@@ -281,7 +281,7 @@
       {"id": "announcement", "label": "Announcement"},
       {"id": "team", "label": "Team"},
       {"id": "research", "label": "Research"},
-      {"id": "phd-publications", "label": "PhD Publications"},
+      {"id": "phd-publications", "label": "Team Publications"},
       {"id": "research-outputs", "label": "Research Outputs"},
       {"id": "analytics", "label": "Analytics"},
       {"id": "resources", "label": "Datasets & Code"},
