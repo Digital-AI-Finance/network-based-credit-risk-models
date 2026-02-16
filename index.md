@@ -75,7 +75,6 @@ image: /images/Osterrieder.jpg
     <li><a href="#announcement">Announcement</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#phd-publications">Team Publications</a></li>
     <li><a href="#research-outputs">Zenodo (12)</a></li>
     <li><a href="#analytics">Timeline</a></li>
     <div class="nav-section">Resources</div>
@@ -104,7 +103,6 @@ image: /images/Osterrieder.jpg
     <li><a href="#announcement">Announcement</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#research">Research</a></li>
-    <li><a href="#phd-publications">Team Pubs</a></li>
     <li><a href="#research-outputs">Zenodo</a></li>
     <li><a href="#analytics">Timeline</a></li>
     <li><a href="#resources">Resources</a></li>
@@ -242,35 +240,6 @@ By providing more reliable credit risk models, this project will strengthen the 
 </section>
 
 ---
-
-<section id="phd-publications">
-<h2>Team Publications (ORCID 2024-2025)</h2>
-<p style="font-size:0.72rem;line-height:1.25;margin:0;">
-Baals, L. J., Osterrieder, J., Hadji-Misheva, B., & Liu, Y. (2024). Towards a new PhD curriculum for digital finance. <em>Open Research Europe, 4</em>, 16513. <a href="https://doi.org/10.12688/openreseurope.16513.1">https://doi.org/10.12688/openreseurope.16513.1</a><br>
-Baumohl, E., Lyocsa, S., & Vasanicova, P. (2024). Macroeconomic environment and the future performance of loans: Evidence from three peer-to-peer platforms. <em>International Review of Financial Analysis, 95</em>, 103416. <a href="https://doi.org/10.1016/j.irfa.2024.103416">https://doi.org/10.1016/j.irfa.2024.103416</a><br>
-Liu, Y., Baals, L. J., Osterrieder, J., & Hadji-Misheva, B. (2024). Leveraging network topology for credit risk assessment in P2P lending: A comparative study under the lens of machine learning. <em>Expert Systems with Applications, 252</em>, 124100. <a href="https://doi.org/10.1016/j.eswa.2024.124100">https://doi.org/10.1016/j.eswa.2024.124100</a><br>
-Liu, Y., Baals, L. J., Osterrieder, J., & Hadji-Misheva, B. (2024). Network centrality and credit risk: A comprehensive analysis of peer-to-peer lending dynamics. <em>Finance Research Letters, 63</em>, 105308. <a href="https://doi.org/10.1016/j.frl.2024.105308">https://doi.org/10.1016/j.frl.2024.105308</a><br>
-Lyocsa, S., et al. (2024). Forecasting of clean energy market volatility: The role of oil and the technology sector. <em>Energy Economics</em>, 107451. <a href="https://doi.org/10.1016/j.eneco.2024.107451">https://doi.org/10.1016/j.eneco.2024.107451</a><br>
-Lyocsa, S., et al. (2024). What drives the uranium sector risk? The role of attention, economic and geopolitical uncertainty. <em>Energy Economics</em>, 107980. <a href="https://doi.org/10.1016/j.eneco.2024.107980">https://doi.org/10.1016/j.eneco.2024.107980</a><br>
-Lyocsa, S., et al. (2025). A fuzzy framework for realized volatility prediction. <em>Journal of Forecasting</em>. <a href="https://doi.org/10.1002/for.70082">https://doi.org/10.1002/for.70082</a><br>
-Lyocsa, S., et al. (2025). Alpha-threshold networks in credit risk models. <em>Quantitative Finance</em>. <a href="https://doi.org/10.1080/14697688.2025.2465697">https://doi.org/10.1080/14697688.2025.2465697</a><br>
-Lyocsa, S., et al. (2025). Do hurricanes cause storm on the stock market? <em>International Review of Financial Analysis</em>. <a href="https://doi.org/10.1016/j.irfa.2024.103816">https://doi.org/10.1016/j.irfa.2024.103816</a><br>
-Osterrieder, J. (2024). A discussion paper for possible approaches to building a statistically valid backtesting framework. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4893677">https://doi.org/10.2139/ssrn.4893677</a><br>
-Osterrieder, J. (2024). Consumers without credit history and ML tools. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730445">https://doi.org/10.2139/ssrn.4730445</a><br>
-Osterrieder, J. (2024). Early warning systems and customer segmentation: A systematic literature review. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730479">https://doi.org/10.2139/ssrn.4730479</a><br>
-Osterrieder, J. (2024). Enhancing security in blockchain networks: Anomalies, frauds, and advanced detection techniques. <em>arXiv</em>. <a href="https://doi.org/10.48550/arxiv.2402.11231">https://doi.org/10.48550/arxiv.2402.11231</a><br>
-Osterrieder, J. (2024). Ethical artificial intelligence, fintech and data protection. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4885037">https://doi.org/10.2139/ssrn.4885037</a><br>
-Osterrieder, J. (2024). Forecasting commercial customers credit risk through early warning signals data. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4754568">https://doi.org/10.2139/ssrn.4754568</a><br>
-Osterrieder, J. (2024). How can artificial intelligence help customer intelligence for credit portfolio management? <em>International Journal of Information Management Data Insights</em>. <a href="https://doi.org/10.1016/j.jjimei.2024.100234">https://doi.org/10.1016/j.jjimei.2024.100234</a><br>
-Osterrieder, J. (2024). Hypothesizing multimodal influence: Assessing the impact of textual and non-textual data on financial instrument pricing. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4698153">https://doi.org/10.2139/ssrn.4698153</a><br>
-Osterrieder, J. (2024). Integrating early warning systems with customer segmentation. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4779632">https://doi.org/10.2139/ssrn.4779632</a><br>
-Osterrieder, J. (2024). Metaverse non-fungible tokens. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4733153">https://doi.org/10.2139/ssrn.4733153</a><br>
-Osterrieder, J. (2024). Modeling commodity price co-movement. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730474">https://doi.org/10.2139/ssrn.4730474</a><br>
-Osterrieder, J. (2024). Predicting retail customers' distress. <em>SSRN</em>. <a href="https://doi.org/10.2139/ssrn.4730470">https://doi.org/10.2139/ssrn.4730470</a><br>
-Osterrieder, J. (2024). Stylized facts of metaverse non-fungible tokens. <em>Physica A: Statistical Mechanics and its Applications</em>. <a href="https://doi.org/10.1016/j.physa.2024.130103">https://doi.org/10.1016/j.physa.2024.130103</a><br>
-Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.org/10.5281/zenodo.10934115">https://doi.org/10.5281/zenodo.10934115</a>
-</p>
-</section>
 
 ---
 
