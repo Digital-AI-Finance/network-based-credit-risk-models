@@ -359,12 +359,6 @@ By providing more reliable credit risk models, this project will strengthen the 
 <div style="font-size:0.65rem;margin-top:0.3rem;"><strong>May 2024</strong><br>Zenodo: ESWA<br><span style="color:#666;"><a href="https://zenodo.org/records/17990581">Liu</a></span></div>
 </div>
 
-<!-- Jun 2024 -->
-<div style="flex:1;text-align:center;position:relative;z-index:1;">
-<div style="width:12px;height:12px;background:#c5a028;border-radius:50%;margin:0 auto;"></div>
-<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Jun 2024</strong><br>Asia Grant<br><span style="color:#666;">CHF 50k</span></div>
-</div>
-
 <!-- Sep 2024 -->
 <div style="flex:1;text-align:center;position:relative;z-index:1;">
 <div style="width:10px;height:10px;background:#2d5a8f;border-radius:50%;margin:0 auto;"></div>
