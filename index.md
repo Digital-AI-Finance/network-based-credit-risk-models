@@ -85,7 +85,6 @@ image: /images/Osterrieder.jpg
     <li><a href="#collaborations">Collaborations</a></li>
     <li><a href="#funding">Funding</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#publications">Related Pubs</a></li>
     <div class="nav-section">Reports</div>
     <li><a href="{{ site.baseurl }}/final-report/" class="nav-report-link">Final Scientific Report</a></li>
   </ul>
@@ -624,22 +623,6 @@ By providing more reliable credit risk models, this project will strengthen the 
   </dl>
 </div>
 
-<div class="funding-card">
-  <h3>Leading House Asia: 2023 Call for Applied Research Partnerships, ETH</h3>
-  <span class="funding-amount">50,000 CHF</span>
-  <dl class="funding-details">
-    <dt>Institution</dt>
-    <dd>Bern University of Applied Science, CH</dd>
-    <dt>Proposal Number</dt>
-    <dd>FRG24-E-S25</dd>
-    <dt>Grant Period</dt>
-    <dd>1 June 2024 - 31 May 2025</dd>
-    <dt>Title</dt>
-    <dd>From Digits to Dollars: The Evolution of Price Impact in Digital Assets</dd>
-    <dt>Team</dt>
-    <dd>Yiting Liu (PI); Joerg Osterrieder (Co-PI)</dd>
-  </dl>
-</div>
 
 <div class="funding-card">
   <h3>SNSF Mobility Grant 2024 / 1</h3>
@@ -716,13 +699,6 @@ By providing more reliable credit risk models, this project will strengthen the 
 </section>
 
 ---
-
-<section id="publications">
-<h2>Related Publications</h2>
-<p style="font-size:0.7rem;line-height:1.15;margin:0;"><em>Auto-updated from <a href="https://openalex.org">OpenAlex</a></em> | <button onclick="downloadAllBibtex()" style="font-size:0.7rem;padding:2px 6px;">BibTeX</button><br>
-{% for pub in site.data.publications %}{{ pub.authors | truncate: 30 }} ({{ pub.year }}). {{ pub.title | truncate: 60 }}. <em>{{ pub.journal | truncate: 25 }}</em>{% if pub.doi %} <a href="https://doi.org/{{ pub.doi }}">[doi]</a>{% endif %}{% if pub.citations > 0 %} [{{ pub.citations }}cit]{% endif %}<br>{% endfor %}</p>
-<script>publicationsData = {{ site.data.publications | jsonify }};</script>
-</section>
 
 ---
 
