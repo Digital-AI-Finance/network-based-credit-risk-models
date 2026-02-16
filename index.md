@@ -86,7 +86,7 @@ image: /images/Osterrieder.jpg
     <li><a href="#collaborations">Collaborations</a></li>
     <li><a href="#funding">Funding</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#publications">All Pubs</a></li>
+    <li><a href="#publications">Related Pubs</a></li>
     <div class="nav-section">Reports</div>
     <li><a href="{{ site.baseurl }}/final-report/" class="nav-report-link">Final Scientific Report</a></li>
   </ul>
@@ -135,10 +135,6 @@ image: /images/Osterrieder.jpg
     <span class="stat-number">387,836</span>
     <span class="stat-label">CHF Funding</span>
   </div>
-  <div class="stat-item">
-    <span class="stat-number">{{ site.data.publications | size }}</span>
-    <span class="stat-label">Publications</span>
-  </div>
   <div class="stat-item" id="totalCitations">
     <span class="stat-number">--</span>
     <span class="stat-label">Total Citations</span>
@@ -163,13 +159,13 @@ image: /images/Osterrieder.jpg
 <h2>Project Completion Announcement</h2>
 <div style="background:#f8f9fa;border-left:4px solid #0a66c2;padding:1rem;font-size:0.85rem;line-height:1.4;">
 <p><strong>PROJECT COMPLETED: Network-Based Credit Risk Models in P2P Lending Markets</strong></p>
-<p>I am delighted to announce the successful completion of our SNSF-funded research project (Grant 205487) on network-based credit risk models in peer-to-peer lending markets.</p>
-<p><strong>What we achieved:</strong> Over three years (Oct 2022 - Aug 2025), we developed novel machine learning methodologies that leverage network topology to assess credit risk in P2P lending. Our supervised network-based approach fundamentally advances how we understand borrower relationships and default prediction.</p>
-<p><strong>Key outcomes:</strong> 52+ scientific publications | 23 ORCID-registered publications (2024-2025) in Expert Systems with Applications, Finance Research Letters, Quantitative Finance, Energy Economics | 12 open-access Zenodo deposits | 2 PhD researchers trained | CHF 387,836 total funding</p>
+<p>I am delighted to announce the successful completion of the SNSF-funded research project (Grant 205487) on network-based credit risk models in peer-to-peer lending markets.</p>
+<p><strong>What we achieved:</strong> Over three years (Oct 2022 - Aug 2025), the project developed novel machine learning methodologies that leverage network topology to assess credit risk in P2P lending. The supervised network-based approach fundamentally advances how we understand borrower relationships and default prediction.</p>
+<p><strong>Key outcomes:</strong> 12 open-access Zenodo deposits | 2 PhD researchers trained | CHF 387,836 total funding | Publications in Expert Systems with Applications, Finance Research Letters, Quantitative Finance, Energy Economics</p>
 <p><strong>Core team:</strong> <a href="https://www.linkedin.com/in/lennart-john-baals-a621aa193/">@Lennart John Baals</a> | <a href="https://www.linkedin.com/in/yiting-liu-313587266/">@Yiting Liu</a> | <a href="https://www.linkedin.com/in/hadjimisheva/">@Branka Hadji Misheva</a> | @Stefan Lyocsa</p>
 <p><strong>International collaborators:</strong> @Ali Hirsa (Columbia) | @Stephen Chan (AUS) | @Jeffrey Chu (Renmin) | @Yuanyuan Zhang (Manchester) | @Blanka Stadler (Masaryk)</p>
 <p><strong>Institutions:</strong> <a href="https://www.bfh.ch">@BFH</a> | <a href="https://www.utwente.nl">@University of Twente</a> | <a href="https://www.snf.ch">@SNSF</a> | <a href="https://www.cost.eu">@COST Association</a></p>
-<p>Our research demonstrates that network position contains genuine predictive signal for default risk. A key finding: simple degree centrality often matches complex metrics like PageRank, offering practitioners an accessible entry point to network-based credit assessment.</p>
+<p>The research demonstrates that network position contains genuine predictive signal for default risk. A key finding: simple degree centrality often matches complex metrics like PageRank, offering practitioners an accessible entry point to network-based credit assessment.</p>
 <p><em>#CreditRisk #P2PLending #MachineLearning #NetworkAnalysis #FinTech #OpenScience #SNSF #DigitalFinance #AI #XAI</em></p>
 </div>
 </section>
@@ -440,7 +436,7 @@ Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.o
 <!-- Aug 2025 -->
 <div style="flex:1;text-align:center;position:relative;z-index:1;">
 <div style="width:14px;height:14px;background:#22c55e;border-radius:50%;margin:0 auto;border:2px solid #1e3a5f;"></div>
-<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Aug 2025</strong><br>PROJECT COMPLETE<br><span style="color:#666;">52+ pubs, 12 Zenodo</span></div>
+<div style="font-size:0.65rem;margin-top:0.3rem;"><strong>Aug 2025</strong><br>PROJECT COMPLETE<br><span style="color:#666;">12 Zenodo deposits</span></div>
 </div>
 
 </div>
@@ -462,7 +458,7 @@ Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.o
 
 <h2>Datasets & Code</h2>
 
-<em>Research materials and code repositories from our project</em>
+<em>Research materials and code repositories from the project</em>
 
 <div class="resource-grid">
   <div class="resource-card">
@@ -543,13 +539,7 @@ Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.o
 
 <em>The team has received invitations to numerous international conferences, serving roles as keynote speakers, session chairs, or organizing events.</em>
 
-<img src="images/WhatsApp_20Image_202023-09-29_20at_2015_45_edited.jpg" alt="8th Bern Conference 2024" class="event-image" loading="lazy">
-
-<h3>8th Bern Conference 2024</h3>
-
-<strong>September 29th, 2024</strong> - Dr. Hadji-Misheva was invited as a speaker at an inaugural research conference on Fintech and AI in Finance at the Department of Business, Bern University of Applied Science. The talk titled <em>"Leveraging Network Topology for Credit Risk Assessment"</em> explored graph-theoretical concepts and their applications for research initiatives, advancements, and innovations in credit risk scoring.
-
-<h3>Additional Conference Presentations</h3>
+<h3>Conference Presentations</h3>
 
 <table>
   <thead>
@@ -759,7 +749,7 @@ Osterrieder, J. (2024). Visual XAI tool. <em>Zenodo</em>. <a href="https://doi.o
 ---
 
 <section id="publications">
-<h2>All Publications ({{ site.data.publications | size }})</h2>
+<h2>Related Publications</h2>
 <p style="font-size:0.7rem;line-height:1.15;margin:0;"><em>Auto-updated from <a href="https://openalex.org">OpenAlex</a></em> | <button onclick="downloadAllBibtex()" style="font-size:0.7rem;padding:2px 6px;">BibTeX</button><br>
 {% for pub in site.data.publications %}{{ pub.authors | truncate: 30 }} ({{ pub.year }}). {{ pub.title | truncate: 60 }}. <em>{{ pub.journal | truncate: 25 }}</em>{% if pub.doi %} <a href="https://doi.org/{{ pub.doi }}">[doi]</a>{% endif %}{% if pub.citations > 0 %} [{{ pub.citations }}cit]{% endif %}<br>{% endfor %}</p>
 <script>publicationsData = {{ site.data.publications | jsonify }};</script>

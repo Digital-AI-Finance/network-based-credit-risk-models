@@ -23,8 +23,6 @@
     "data_portal_url": "https://data.snf.ch/grants/grant/205487"
   },
   "stats": {
-    "publications": 52,
-    "orcid_publications": 23,
     "zenodo_deposits": 12,
     "phd_researchers_trained": 2,
     "collaborations": 5,
@@ -194,12 +192,12 @@
     {
       "date": "2025-08-31",
       "title": "PROJECT COMPLETED: SNSF Grant 205487",
-      "description": "Successfully concluded our 3-year SNSF-funded research on network-based credit risk models. 52+ publications, 12 Zenodo deposits, 2 PhD researchers trained, CHF 387,836 total funding."
+      "description": "Successfully concluded the 3-year SNSF-funded research on network-based credit risk models. 12 Zenodo deposits, 2 PhD researchers trained, CHF 387,836 total funding."
     },
     {
       "date": "2024-10-15",
       "title": "New Publication in Expert Systems with Applications",
-      "description": "Our paper 'Leveraging network topology for credit risk assessment in P2P lending' has been published."
+      "description": "A related paper 'Leveraging network topology for credit risk assessment in P2P lending' has been published."
     },
     {
       "date": "2024-09-29",
@@ -267,16 +265,14 @@
   ],
   "announcement": {
     "title": "PROJECT COMPLETED: Network-Based Credit Risk Models in P2P Lending Markets",
-    "intro": "I am delighted to announce the successful completion of our SNSF-funded research project (Grant 205487) on network-based credit risk models in peer-to-peer lending markets.",
-    "achievements": "Over three years (Oct 2022 - Aug 2025), we developed novel machine learning methodologies that leverage network topology to assess credit risk in P2P lending. Our supervised network-based approach fundamentally advances how we understand borrower relationships and default prediction.",
+    "intro": "I am delighted to announce the successful completion of the SNSF-funded research project (Grant 205487) on network-based credit risk models in peer-to-peer lending markets.",
+    "achievements": "Over three years (Oct 2022 - Aug 2025), the project developed novel machine learning methodologies that leverage network topology to assess credit risk in P2P lending. The supervised network-based approach fundamentally advances how we understand borrower relationships and default prediction.",
     "key_outcomes": [
-      "52+ scientific publications",
-      "23 ORCID-registered publications (2024-2025)",
       "12 open-access Zenodo deposits",
       "2 PhD researchers trained",
       "CHF 387,836 total funding"
     ],
-    "key_finding": "Our research demonstrates that network position contains genuine predictive signal for default risk. A key finding: simple degree centrality often matches complex metrics like PageRank, offering practitioners an accessible entry point to network-based credit assessment.",
+    "key_finding": "The research demonstrates that network position contains genuine predictive signal for default risk. A key finding: simple degree centrality often matches complex metrics like PageRank, offering practitioners an accessible entry point to network-based credit assessment.",
     "hashtags": ["#CreditRisk", "#P2PLending", "#MachineLearning", "#NetworkAnalysis", "#FinTech", "#OpenScience", "#SNSF", "#DigitalFinance", "#AI", "#XAI"]
   },
   "navigation": {
@@ -294,7 +290,7 @@
       {"id": "collaborations", "label": "Collaborations"},
       {"id": "funding", "label": "Funding"},
       {"id": "contact", "label": "Contact"},
-      {"id": "publications", "label": "All Pubs"}
+      {"id": "publications", "label": "Related Pubs"}
     ],
     "external_links": [
       {"label": "Final Scientific Report", "url": "/final-report/"}

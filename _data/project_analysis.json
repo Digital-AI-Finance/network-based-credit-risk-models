@@ -18,8 +18,6 @@
     "github_repo": "https://github.com/Digital-AI-Finance/network-based-credit-risk-models"
   },
   "publication_metrics": {
-    "total_count": 52,
-    "orcid_registered_2024_2025": 23,
     "by_type": {
       "journal_articles": 45,
       "preprints": 4,
@@ -231,8 +229,6 @@
     }
   },
   "impact_assessment": {
-    "publications_per_100k_chf": 13.41,
-    "cost_per_publication_chf": 7458.38,
     "citations_per_100k_chf": 58.78,
     "zenodo_deposits_per_100k_chf": 3.09,
     "countries_reached": 8,
@@ -282,7 +278,6 @@
   "data_quality": {
     "overall_score": 0.82,
     "publications_data": {
-      "total_entries": 52,
       "with_doi": 51,
       "missing_doi": 1,
       "with_abstract": 20,

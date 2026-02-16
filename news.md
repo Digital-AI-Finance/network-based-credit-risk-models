@@ -25,7 +25,7 @@ description: Latest news, publications, and updates from the SNSF-funded researc
 
 <div style="border-left:3px solid #22c55e;padding-left:1rem;margin:1rem 0;">
 <strong>Aug 2025</strong> - PROJECT COMPLETED<br>
-Successfully concluded the 3-year SNSF-funded research project (Grant 205487). Final outcomes: 52+ publications, 12 Zenodo deposits, 2 PhD researchers trained, CHF 387,836 total funding secured.
+Successfully concluded the 3-year SNSF-funded research project (Grant 205487). Final outcomes: 12 Zenodo deposits, 2 PhD researchers trained, CHF 387,836 total funding secured.
 </div>
 
 <div style="border-left:3px solid #d62728;padding-left:1rem;margin:1rem 0;">
@@ -85,11 +85,6 @@ Presentation materials from COST FinAI Istanbul conference uploaded. <a href="ht
 </div>
 
 <h3>September 2024</h3>
-
-<div style="border-left:3px solid #2d5a8f;padding-left:1rem;margin:1rem 0;">
-<strong>Sep 29, 2024</strong> - Conference: 8th Bern Conference on Fintech and AI<br>
-Dr. Branka Hadji-Misheva presented "Leveraging Network Topology for Credit Risk Assessment" at Bern University of Applied Sciences.
-</div>
 
 <div style="border-left:3px solid #2d5a8f;padding-left:1rem;margin:1rem 0;">
 <strong>Sep 2024</strong> - Conference: AI Finance Insights, Istanbul<br>
